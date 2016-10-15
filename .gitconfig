@@ -1,18 +1,18 @@
 [user]
-	name = Harry Mahardhika
-	email = harrymahardhika@gmail.com
+    name = Harry Mahardhika
+    email = harrymahardhika@gmail.com
 [core]
-	excludesfile = /Users/harry/.gitignore_global
-	editor = /usr/bin/vim
+    excludesfile = /Users/harry/.gitignore_global
+    editor = /usr/bin/vim
 [alias]
-	c = commit
-	cm = commit -m
+    c = commit
+    cm = commit -m
     p = push
     co = checkout
-	st = status -sb
-	br = branch
-	amend = commit --amend -C HEAD
-	ds = diff --staged
+    st = status -sb
+    br = branch
+    amend = commit --amend -C HEAD
+    ds = diff --staged
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     lgg = log --graph --pretty='format:%C(red)%d%C(reset) %C(yellow)%h%C(reset) %ar %C(green)%aN%C(reset) %s'
     tlog = log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative
@@ -21,31 +21,31 @@
     wtf = git-wtf -r -A
     zip = archive --format zip --output archive.zip master
 [push]
-	default = simple
+    default = simple
 [color]
-	ui = true
+    ui = true
 [diff]
-	tool = opendiff
+    tool = opendiff
 [difftool "opendiff"]
     cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 [difftool "idea"]
     cmd = idea diff \"$LOCAL\" \"$REMOTE\"
 [merge]
-	tool = opendiff
+    tool = opendiff
 [mergetool "opendiff"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\" -merge \"$MERGED\"
+    cmd = opendiff \"$LOCAL\" \"$REMOTE\" -merge \"$MERGED\"
 [mergetool "idea"]
-    cmd = idea merge \"$LOCAL\" \"$REMOTE\" \"$MERGED\" 
-	trustExitCode = true
+    cmd = idea merge \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+    trustExitCode = true
 [mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+    cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+    trustExitCode = true
 [filter "media"]
-	clean = git-media-clean %f
-	smudge = git-media-smudge %f
+    clean = git-media-clean %f
+    smudge = git-media-smudge %f
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
+    clean = git-lfs clean %f
+    smudge = git-lfs smudge %f
+    required = true
 [merge "ours"]
-	driver = true
+    driver = true
