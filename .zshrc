@@ -5,9 +5,13 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-# ZSH_THEME="agnoster"
-ZSH_THEME="robbyrussell"
-# ZSH_THEME="avit-custom"
+# ZSH_THEME="agnoster-custom"
+# ZSH_THEME="robbyrussell"
+# ZSH_THEME="avit"
+# ZSH_THEME="harry"
+ZSH_THEME="harry-chevron"
+# ZSH_THEME="dracula"
+# ZSH_THEME="refined"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -15,23 +19,20 @@ ZSH_THEME="robbyrussell"
 #alias mtr="mtr -t"
 alias ww="cd ~/webserver"
 alias www="cd ~/webserver/www/"
-alias code="cd ~/Code/"
 alias profile="vim ~/.zshrc"
 alias l="ls -alh"
 alias home="cd ~"
 
 alias server1="python3 -m http.server 8001;"
 alias server2="python3 -m http.server 8002;"
-
 alias flushdns="sudo killall -HUP mDNSResponder"
-
 alias ddp="npm dedupe && npm prune"
-
-alias mgit="/usr/local/bin/git"
+alias ggpp="git up; ggpush"
+alias yrd="yarn run dev"
+alias yrp="yarn run production"
+alias yrw="yarn run watch"
 
 # php
-alias pa="php artisan"
-
 phpserver () {
     if [ ! -z $1 ]
     then
@@ -52,8 +53,10 @@ pas () {
     fi
 }
 alias pas=pas
+alias pa="php artisan"
 
-alias homestead='function __homestead() { (cd ~/Homestead && vagrant $*); unset -f __homestead; }; __homestead'
+# symfony
+alias sc="php bin/console"
 
 DEFAULT_USER="harry"
 
@@ -78,7 +81,8 @@ DEFAULT_USER="harry"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-flow osx brew z)
+
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -86,15 +90,14 @@ source $ZSH/oh-my-zsh.sh
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 #export DYLD_LIBRARY_PATH=/usr/local/mysql/lib/
 
-export PATH=$PATH:/Users/harry/phalcon-tools
-export PTOOLSPATH=/Users/harry/phalcon-tools
-
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 PATH=$PATH:$HOME/.composer/vendor/bin
+
+export PATH=$PATH:/Users/harry/phalcon-devtools
+export PTOOLSPATH=/Users/harry/phalcon-devtools
 
 PERL_MB_OPT="--install_base \"/Users/harry/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/Users/harry/perl5"; export PERL_MM_OPT;
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 . ~/z.sh
-

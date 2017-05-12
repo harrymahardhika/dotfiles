@@ -7,6 +7,10 @@ set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 
+syntax enable
+colorscheme solarized
+set background=dark
+
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
