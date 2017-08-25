@@ -8,7 +8,6 @@ set si "Smart indent
 set wrap "Wrap lines
 
 syntax enable
-colorscheme solarized
 set background=dark
 
 let g:ctrlp_map = '<c-p>'

@@ -58,6 +58,9 @@ alias pa="php artisan"
 # symfony
 alias sc="php bin/console"
 
+# git
+alias wip="git add . && git commit -m 'wip'"
+
 DEFAULT_USER="harry"
 
 # Set to this to use case-sensitive completion
@@ -82,22 +85,17 @@ DEFAULT_USER="harry"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 
-plugins=(git)
+plugins=(git composer)
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
-#export DYLD_LIBRARY_PATH=/usr/local/mysql/lib/
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-PATH=$PATH:$HOME/.composer/vendor/bin
+PATH=$PATH:$HOME/.config/composer/vendor/bin
+PATH=$PATH:$HOME/.rbenv/bin:$PATH
 
-export PATH=$PATH:/Users/harry/phalcon-devtools
-export PTOOLSPATH=/Users/harry/phalcon-devtools
-
-PERL_MB_OPT="--install_base \"/Users/harry/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/Users/harry/perl5"; export PERL_MM_OPT;
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 . ~/z.sh
+
