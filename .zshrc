@@ -12,6 +12,7 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="harry-chevron"
 # ZSH_THEME="dracula"
 # ZSH_THEME="refined"
+# ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -31,6 +32,7 @@ alias ggpp="git up; ggpush"
 alias yrd="yarn run dev"
 alias yrp="yarn run production"
 alias yrw="yarn run watch"
+alias merge="g co master; g merge develop; g co develop; g push --all"
 
 # php
 phpserver () {
@@ -61,22 +63,24 @@ alias sc="php bin/console"
 # git
 alias wip="git add . && git commit -m 'wip'"
 
+alias t="vendor/bin/phpunit"
+
 DEFAULT_USER="harry"
 
 # Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
+CASE_SENSITIVE="true"
 
 # Comment this out to disable bi-weekly auto-update checks
 # DISABLE_AUTO_UPDATE="true"
 
 # Uncomment to change how many often would you like to wait before auto-updates occur? (in days)
-# export UPDATE_ZSH_DAYS=1
+export UPDATE_ZSH_DAYS=1
 
 # Uncomment following line if you want to disable colors in ls
 # DISABLE_LS_COLORS="true"
 
 # Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 # COMPLETION_WAITING_DOTS="true"
@@ -85,7 +89,7 @@ DEFAULT_USER="harry"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 
-plugins=(git composer)
+plugins=(git composer wakatime)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -93,9 +97,18 @@ source $ZSH/oh-my-zsh.sh
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 
 PATH=$PATH:$HOME/.config/composer/vendor/bin
-PATH=$PATH:$HOME/.rbenv/bin:$PATH
+PATH=$PATH:$HOME/.composer/vendor/bin
+PATH=$PATH:/usr/local/opt/go/libexec/bin
+
+# PATH=$PATH:$HOME/.rbenv/bin:$PATH
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 . ~/z.sh
+. ~/.sshaliasesrc
 
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
+export PATH="/usr/local/opt/node@8/bin:$PATH"
