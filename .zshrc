@@ -13,6 +13,8 @@ ZSH_THEME="harry-chevron"
 # ZSH_THEME="dracula"
 # ZSH_THEME="refined"
 # ZSH_THEME="powerlevel9k/powerlevel9k"
+# ZSH_THEME="nicoulaj"
+# ZSH_THEME="agnoster"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -89,7 +91,7 @@ DISABLE_AUTO_TITLE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 
-plugins=(git composer wakatime)
+plugins=(git composer wakatime zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -100,15 +102,33 @@ PATH=$PATH:$HOME/.config/composer/vendor/bin
 PATH=$PATH:$HOME/.composer/vendor/bin
 PATH=$PATH:/usr/local/opt/go/libexec/bin
 
-# PATH=$PATH:$HOME/.rbenv/bin:$PATH
+PATH=$PATH:$HOME/.rbenv/bin:$PATH
 
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+eval "$(rbenv init -)"
 
 . ~/z.sh
-. ~/.sshaliasesrc
+#. ~/.sshaliasesrc
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+#source /usr/local/opt/powerlevel9k/powerlevel9k.zsh-theme
 
 export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
 export PATH="/usr/local/opt/node@8/bin:$PATH"
+export PATH="/usr/local/opt/node@8/bin:$PATH"
+
+# go
+export GOROOT=/usr/local/opt/go/libexec
+export GOPATH=$HOME/.go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+# android studio
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+# powerlevel9k
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
+POWERLEVEL9K_DISABLE_RPROMPT=true
