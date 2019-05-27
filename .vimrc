@@ -1,5 +1,6 @@
 execute pathogen#infect()
 
+set encoding=utf-8
 set nu
 set lbr
 set tw=500
@@ -15,3 +16,4 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 
+let g:NERDTreeDirArrows=0

@@ -1,8 +1,8 @@
 [user]
-    name = Harry Mahardhika
-    email = harrymahardhika@gmail.com
+	name = Harry Mahardhika
+	email = harrymahardhika@gmail.com
 [core]
-    excludesfile = /Users/harry/.gitignore_global
+	excludesfile = /Users/harry/.gitignore_global
     editor = /usr/bin/vim
 [alias]
     c = commit
@@ -38,8 +38,8 @@
     cmd = idea merge \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
     trustExitCode = true
 [mergetool "sourcetree"]
-    cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-    trustExitCode = true
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
 [filter "media"]
     clean = git-media-clean %f
     smudge = git-media-smudge %f
@@ -49,3 +49,8 @@
     required = true
 [merge "ours"]
     driver = true
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[commit]
+	template = /Users/harry/.stCommitMsg
