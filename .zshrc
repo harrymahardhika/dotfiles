@@ -6,9 +6,9 @@ ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 # ZSH_THEME="robbyrussell"
-ZSH_THEME="harry-chevron"
+# ZSH_THEME="harry-chevron"
 # ZSH_THEME="powerlevel9k/powerlevel9k"
-# ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 # ZSH_THEME="agnoster"
 # ZSH_THEME="ys"
 
@@ -24,6 +24,8 @@ alias home="cd ~"
 alias lll="colorls"
 alias llll="colorls -al"
 alias lc="colorls -lA --sd"
+alias kocheng="cat"
+alias kochenk="cat"
 
 alias server1="python3 -m http.server 8001;"
 alias server2="python3 -m http.server 8002;"
@@ -43,7 +45,9 @@ phpserver () {
     fi
 }
 alias sv=phpserver
-alias t="vendor/bin/phpunit"
+alias t="vendor/bin/phpunit --testdox"
+alias tf="vendor/bin/phpunit --testdox -v --filter"
+alias tg="vendor/bin/phpunit --testdox -v --group"
 
 # laravel
 pas () {
@@ -60,11 +64,13 @@ alias mig="pa migrate"
 alias miro="pa migrate:rollback"
 alias seed="pa d:s"
 alias tink="pa tinker"
+alias setup="sh /Users/harry/Tools/laravel-project-config/run.sh"
 
 # symfony
 alias sc="php bin/console"
 
 # git
+alias gcm="git commint -m"
 alias wip="git add . && git commit -m 'wip'"
 alias nah="git reset --hard;git clean -df"
 alias ggpp="git up; ggpush"
@@ -103,7 +109,7 @@ DISABLE_AUTO_TITLE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 
-plugins=(git composer ruby zsh-syntax-highlighting)
+plugins=(git composer ruby)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -122,12 +128,9 @@ eval "$(rbenv init -)"
 #. ~/.sshaliasesrc
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-# source /usr/local/opt/powerlevel9k/powerlevel9k.zsh-theme
+# source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
-export PATH="/usr/local/opt/node@8/bin:$PATH"
-export PATH="/usr/local/opt/node@8/bin:$PATH"
 
 # go
 export GOROOT=/usr/local/opt/go/libexec
@@ -141,15 +144,12 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
-# powerlevel9k
-POWERLEVEL9K_MODE=nerdfont-complete
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs laravel_version rbenv virtualenv)
-POWERLEVEL9K_DISABLE_RPROMPT=true
-# POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(time battery)
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
-POWERLEVEL9K_SHORTEN_DELIMITER=""
-POWERLEVEL9K_TIME_FORMAT="%D{%H:%M}"
-
-export LC_ALL=en_US.utf-8
+export LC_ALL=en_US.UTF-8
 export LANG="$LC_ALL"
-export HOMEBREW_GITHUB_API_TOKEN=a40c656fe1331a1de234febf27b8e80be604e8c1
+
+export HOMEBREW_GITHUB_API_TOKEN=2db8242ae3110d4b4d2ace9df6e8c6f1c1a186a8
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+eval $(thefuck --alias)
