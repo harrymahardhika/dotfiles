@@ -1,7 +1,8 @@
 #!/bin/bash
 
 cp ~/.gitconfig .
-cp ~/.config/tmux/.tmux.conf .
+cp ~/.tmux.conf .
+cp ~/.config/tmux/tmux.conf .
 cp ~/.vimrc .
 cp ~/.zshrc .
 git add .
