@@ -51,6 +51,13 @@
     driver = true
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[commit]
-	template = /Users/harry/.stCommitMsg
+	path =
+[init]
+	defaultBranch = main
+[pull]
+	rebase = false
+[cola]
+	spellcheck = false
+	fontdiff = MesloLGS NF,11,-1,5,50,0,0,0,0,0
+	icontheme = default
+	theme = default

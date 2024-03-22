@@ -10,7 +10,7 @@ set wrap "Wrap lines
 set tabstop=4
 
 syntax enable
-set background=dark
+set background=light
 
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
