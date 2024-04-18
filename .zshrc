@@ -46,6 +46,8 @@ alias nrf="npm run format"
 alias yrd="yarn run dev"
 alias yrp="yarn run production"
 alias yrw="yarn run watch"
+alias battery_stats="sudo tlp-stat -b"
+alias battery_health="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
 
 # php
 phpserver () {
