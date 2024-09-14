@@ -1,9 +1,6 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
 
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
@@ -13,14 +10,6 @@ ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 # ZSH_THEME="robbyrussell"
-# ZSH_THEME="awesomepanda"
-# ZSH_THEME="harry-chevron"
-# ZSH_THEME="powerlevel9k/powerlevel9k"
-# ZSH_THEME="powerlevel10k/powerlevel10k"
-# ZSH_THEME="agnoster"
-# ZSH_THEME="ys"
-# ZSH_THEME="powerlevel10k/powerlevel10k"
-
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -50,7 +39,11 @@ alias yrp="yarn run production"
 alias yrw="yarn run watch"
 alias battery_stats="sudo tlp-stat -b"
 alias battery_health="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
-alias pint="vendor/bin/pint"
+alias sapu="pint; jsf"
+alias gilelundro="sapu"
+alias jsf="npm run format; npm run lint; npm run type-check"
+alias cleanp="rm -r node_modules; rm package-lock.json; npm i"
+
 # php
 phpserver () {
     if [ ! -z $1 ]
@@ -61,10 +54,12 @@ phpserver () {
     fi
 }
 alias sv=phpserver
+alias pint="vendor/bin/pint"
 alias t="vendor/bin/phpunit"
 alias tf="vendor/bin/phpunit --filter"
 alias tg="vendor/bin/phpunit --group"
 alias tcov="php artisan test --coverage"
+
 # laravel
 alias pa="php artisan"
 alias mig="pa migrate"
@@ -128,7 +123,7 @@ DISABLE_AUTO_TITLE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 
-plugins=(git composer zsh-syntax-highlighting git-flow wakatime)
+plugins=(git composer git-flow)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -149,9 +144,13 @@ PATH=$PATH:/home/harry/.cargo/bin/
 . ~/z.sh
 #. ~/.sshaliasesrc
 
+# on ubuntu
 # source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+# on arch
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
 
 # go
