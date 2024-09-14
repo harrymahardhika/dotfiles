@@ -16,9 +16,11 @@ ZSH=$HOME/.oh-my-zsh
 # ZSH_THEME="awesomepanda"
 # ZSH_THEME="harry-chevron"
 # ZSH_THEME="powerlevel9k/powerlevel9k"
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="powerlevel10k/powerlevel10k"
 # ZSH_THEME="agnoster"
 # ZSH_THEME="ys"
+# ZSH_THEME="powerlevel10k/powerlevel10k"
+
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -34,7 +36,7 @@ alias llll="colorls -al"
 alias lc="colorls -lA --sd"
 alias kocheng="cat"
 alias kochenk="cat"
-alias nvim="flatpak run io.neovim.nvim"
+alias v="nvim"
 
 alias server1="python3 -m http.server 8001;"
 alias server2="python3 -m http.server 8002;"
@@ -48,7 +50,7 @@ alias yrp="yarn run production"
 alias yrw="yarn run watch"
 alias battery_stats="sudo tlp-stat -b"
 alias battery_health="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
-
+alias pint="vendor/bin/pint"
 # php
 phpserver () {
     if [ ! -z $1 ]
@@ -76,6 +78,7 @@ alias setup="sh /Users/harry/Tools/laravel-project-config/run.sh"
 alias php74="sudo update-alternatives --set php /usr/bin/php7.4; sudo systemctl stop php8.1-fpm.service; sudo systemctl stop php8.0-fpm.service; sudo systemctl start php7.4-fpm.service;"
 alias php80="sudo update-alternatives --set php /usr/bin/php8.0; sudo systemctl stop php8.1-fpm.service; sudo systemctl stop php7.4-fpm.service; sudo systemctl start php8.0-fpm.service;"
 alias php81="sudo update-alternatives --set php /usr/bin/php8.1; sudo systemctl stop php8.0-fpm.service; sudo systemctl stop php7.4-fpm.service; sudo systemctl start php8.1-fpm.service;"
+alias vendro="vendor/bin/pint && vendor/bin/pest"
 
 # symfony
 alias sc="php bin/console"
@@ -134,7 +137,7 @@ export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 
 PATH=$PATH:$HOME/.config/composer/vendor/bin
 PATH=$PATH:$HOME/.composer/vendor/bin
-# PATH=$PATH:/usr/local/go/bin
+PATH=$PATH:/usr/local/go/bin
 PATH=$PATH:/Users/harry/Library/Python/3.7/bin
 PATH=$PATH:/home/harry/.local/bin
 PATH=$PATH:$HOME/.rbenv/bin:$PATH
@@ -179,7 +182,8 @@ fpath+=${ZDOTDIR:-~}/.zsh_functions
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+eval "$(starship init zsh)"
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
