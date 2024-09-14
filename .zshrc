@@ -142,15 +142,33 @@ PATH=$PATH:/home/harry/.cargo/bin/
 # eval "$(rbenv init -)"
 
 . ~/z.sh
-#. ~/.sshaliasesrc
 
 # on ubuntu
 # source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # on arch
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+# source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+if [ -f /etc/os-release ]; then
+    . /etc/os-release
+    case "$ID" in
+      arch)
+          source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+          source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+          ;;
+      ubuntu)
+          source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+          source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+          ;;
+      pop)
+          source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+          source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+          ;;
+    esac
+fi
+
 export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
 
 # go
@@ -177,9 +195,6 @@ export HOMEBREW_GITHUB_API_TOKEN=2db8242ae3110d4b4d2ace9df6e8c6f1c1a186a8
 #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 fpath+=${ZDOTDIR:-~}/.zsh_functions
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 eval "$(starship init zsh)"
 
