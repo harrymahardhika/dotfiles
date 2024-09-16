@@ -98,6 +98,10 @@ alias sq="npx sequelize"
 
 alias clearswap="sudo swapoff -a && sudo swapon -a"
 
+# hyprland
+alias waybar_reload="pkill waybar && hyprctl dispatch exec waybar"
+
+
 DEFAULT_USER="harry"
 
 # Set to this to use case-sensitive completion
