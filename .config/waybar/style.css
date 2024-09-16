@@ -21,7 +21,7 @@
 #workspaces button {
   color: @lavender;
   border-radius: 1rem;
-  padding: 0.2rem 0.6rem;
+  padding: 0.2rem 1rem;
 }
 
 #workspaces button.active {
@@ -32,6 +32,13 @@
 #workspaces button:hover {
   color: @sapphire;
   border-radius: 1rem;
+}
+
+#window {
+  background-color: @surface0;
+  margin: 5px;
+  border-radius: 1em;
+  padding: 0.2rem 1rem;
 }
 
 #custom-music,
