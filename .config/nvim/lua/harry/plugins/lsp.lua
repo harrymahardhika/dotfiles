@@ -23,18 +23,24 @@ return {
 
       cmp.setup({
         sources = {
-          {name = 'nvim_lsp'},
+          { name = "path" },
+          { name = 'nvim_lsp' },
+          { name = 'luasnip', keyword_length = 2 },
+          { name = "buffer", keyword_length = 3 }
         },
+
         mapping = cmp.mapping.preset.insert({
+          ["<CR>"] = cmp.mapping.confirm({ select = true }),
           ['<C-Space>'] = cmp.mapping.complete(),
           ['<C-u>'] = cmp.mapping.scroll_docs(-4),
           ['<C-d>'] = cmp.mapping.scroll_docs(4),
         }),
+
         snippet = {
           expand = function(args)
-            vim.snippet.expand(args.body)
-          end,
-        },
+            require("luasnip").lsp_expand(args.body)
+          end
+        }
       })
     end
   },
