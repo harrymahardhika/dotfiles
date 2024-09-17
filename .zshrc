@@ -120,8 +120,7 @@ export UPDATE_ZSH_DAYS=1
 DISABLE_AUTO_TITLE="true"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
-
+COMPLETION_WAITING_DOTS="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -146,14 +145,6 @@ PATH=$PATH:/home/harry/.cargo/bin/
 # eval "$(rbenv init -)"
 
 . ~/z.sh
-
-# on ubuntu
-# source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-# on arch
-# source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 if [ -f /etc/os-release ]; then
     . /etc/os-release
@@ -193,10 +184,10 @@ export LANG="$LC_ALL"
 export HOMEBREW_GITHUB_API_TOKEN=2db8242ae3110d4b4d2ace9df6e8c6f1c1a186a8
 
 # tmux 256-color
-[[ -n $TMUX ]] && export TERM="xterm-256color"
+[[ -n $TMUX ]] && export TERM="screen-256color"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-#[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 
