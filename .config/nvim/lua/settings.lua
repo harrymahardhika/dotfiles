@@ -4,8 +4,8 @@ local g = vim.g
 o.encoding = "utf-8"
 o.fileencoding = "utf-8"
 
--- vim.opt.number = true
--- vim.opt.relativenumber = true
+o.number = true
+o.relativenumber = true
 o.title = true
 o.wrap = false
 o.tabstop = 2
