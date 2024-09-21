@@ -172,10 +172,10 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 # gaps
 gaps inner 4
 gaps outer 4
-gaps bottom 32
+gaps bottom 0
 
 bindsym $mod+Shift+d gaps inner all set 0; gaps outer all set 0
-bindsym $mod+Shift+t gaps inner all set 4; gaps outer all set 4; gaps bottom all set 32
+bindsym $mod+Shift+t gaps inner all set 4; gaps outer all set 4
 
 default_border pixel 0
 # for_window [class=".*"] border pixel 0
