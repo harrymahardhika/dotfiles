@@ -41,6 +41,9 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
+# Load screen settings
+exec --no-startup-id ~/.config/i3/screen-settings.sh
+
 # Load xinput settings
 exec --no-startup-id ~/.config/i3/xinput-settings.sh
 
@@ -52,9 +55,7 @@ exec --no-startup-id feh --bg-scale ~/.config/wallpapers/wallpaper-10.jpeg
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 # Configure monitors using xrandr
-# exec --no-startup-id xrandr --output HDMI-2 --primary --mode 1920x1080 --pos 0x0 --rotate normal
-# exec --no-startup-id xrandr --output HDMI-2 --mode 1920x1080 --pos 0x0 --rotate normal
-# exec --no-startup-id xrandr --output eDP-1 --mode 1366x768 --pos 1920x0 --rotate normal
+#exec --no-startup-id xrandr --output HDMI-2 --mode 1920x1080 --pos 0x0 --output eDP-1 --mode 1366x768 --pos 1920x312
 
 # start a terminal
 bindsym $mod+Return exec ~/.config/kitty/launch.sh
