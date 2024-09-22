@@ -5,7 +5,7 @@ return {
     local config = require("nvim-treesitter.configs")
 
     config.setup({
-      ensure_installed = { "lua", "php", "typescript", "javascript" },
+      ensure_installed = { "lua", "php", "typescript", "javascript", "vue" },
       sync_install = false,
       highlight = {
         enable = true,
