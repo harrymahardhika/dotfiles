@@ -1,7 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -46,12 +42,12 @@ alias cleanp="rm -r node_modules; rm package-lock.json; npm i"
 
 # php
 phpserver () {
-    if [ ! -z $1 ]
-    then
-        php -S localhost:800$1
-    else
-        php -S localhost:8000
-    fi
+  if [ ! -z $1 ]
+  then
+    php -S localhost:800$1
+  else
+    php -S localhost:8000
+  fi
 }
 alias sv=phpserver
 alias pint="vendor/bin/pint"
@@ -147,21 +143,21 @@ PATH=$PATH:/home/harry/.cargo/bin/
 . ~/z.sh
 
 if [ -f /etc/os-release ]; then
-    . /etc/os-release
-    case "$ID" in
-      arch)
-          source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-          source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-          ;;
-      ubuntu)
-          source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-          source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-          ;;
-      pop)
-          source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-          source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-          ;;
-    esac
+  . /etc/os-release
+  case "$ID" in
+    arch)
+      source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+      source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+      ;;
+    ubuntu)
+      source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+      source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+      ;;
+    pop)
+      source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+      source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+      ;;
+  esac
 fi
 
 export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
@@ -196,3 +192,4 @@ eval "$(starship init zsh)"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
