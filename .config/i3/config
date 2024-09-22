@@ -57,7 +57,8 @@ exec_always --no-startup-id ~/.config/polybar/launch.sh
 # exec --no-startup-id xrandr --output eDP-1 --mode 1366x768 --pos 1920x0 --rotate normal
 
 # start a terminal
-bindsym $mod+Return exec kitty -e tmux
+bindsym $mod+Return exec ~/.config/kitty/launch.sh
+# bindsym $mod+Return exec kitty -e tmux
 
 # kill focused window
 bindsym $mod+Shift+q kill
