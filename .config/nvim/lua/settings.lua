@@ -5,6 +5,7 @@ o.encoding = "utf-8"
 o.fileencoding = "utf-8"
 
 o.autoindent = true
+o.autoread = true
 o.backup = false
 o.backup = false
 o.breakindent = true
@@ -26,3 +27,4 @@ o.wrap = false
 g.netrw_browse_split = 0
 g.netrw_banner = 0
 g.netrw_winsize = 25
+
