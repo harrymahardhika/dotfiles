@@ -45,13 +45,14 @@ vimcmd_visual_symbol = '[ ](bold fg:lavender)'
 [git_branch]
 style = "bold mauve"
 symbol = ""
-#format = '$symbol $branch'
-format = '[[$symbol $branch ](fg:peach)]($style)'
+format = '[[$symbol $branch ](fg:sapphire)]($style)'
 
 [git_status]
 style = "bold red"
 format = '[[($all_status$ahead_behind )](fg:red)]($style)'
 
 [directory]
-truncation_length = 4
+truncation_length = 3
 style = "bold lavender"
+
+
