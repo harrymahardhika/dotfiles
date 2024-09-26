@@ -8,9 +8,13 @@ return {
   },
   config = function()
     require("neo-tree").setup({
+      close_if_last_window = true,
       log_level = "warn",
       window = {
-        position = "right"
+        position = "right",
+      },
+      filesystem = {
+        hijack_netrw_behavior = "disabled"
       }
     })
   end

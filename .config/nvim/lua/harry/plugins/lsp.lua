@@ -46,6 +46,9 @@ return {
     end
   },
 
+  -- Neoconf
+  { "folke/neoconf.nvim" },
+
   -- LSP
   {
     "neovim/nvim-lspconfig",
@@ -57,6 +60,8 @@ return {
       { "williamboman/mason-lspconfig.nvim" },
     },
     config = function()
+      require('neoconf').setup({})
+
       local lsp_zero = require("lsp-zero")
 
       -- lsp_attach is where you enable features that only work
@@ -87,8 +92,18 @@ return {
         handlers = {
           -- this first function is the "default handler"
           -- it applies to every language server without a "custom handler"
+
           function(server_name)
-            require("lspconfig")[server_name].setup({})
+            --require("lspconfig")[server_name].setup({})
+            local lspconfig = require('lspconfig')
+            local server_config = {}
+            if require("neoconf").get(server_name .. ".disable") then
+              return
+            end
+            if server_name == "volar" then
+              server_config.filetypes = { 'vue', 'typescript', 'javascript' }
+            end
+            lspconfig[server_name].setup(server_config)
           end,
         }
       })
