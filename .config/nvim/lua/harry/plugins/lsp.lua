@@ -46,9 +46,6 @@ return {
     end
   },
 
-  -- Neoconf
-  { "folke/neoconf.nvim" },
-
   -- LSP
   {
     "neovim/nvim-lspconfig",
@@ -60,8 +57,6 @@ return {
       { "williamboman/mason-lspconfig.nvim" },
     },
     config = function()
-      require('neoconf').setup({})
-
       local lsp_zero = require("lsp-zero")
 
       -- lsp_attach is where you enable features that only work
@@ -90,20 +85,24 @@ return {
       require("mason-lspconfig").setup({
         ensure_installed = {},
         handlers = {
-          -- this first function is the "default handler"
-          -- it applies to every language server without a "custom handler"
-
           function(server_name)
-            --require("lspconfig")[server_name].setup({})
+            require("lspconfig")[server_name].setup({})
+
+            local mason_registry = require('mason-registry')
+            local vue_lsp_path = mason_registry.get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language-server'
             local lspconfig = require('lspconfig')
-            local server_config = {}
-            if require("neoconf").get(server_name .. ".disable") then
-              return
-            end
-            if server_name == "volar" then
-              server_config.filetypes = { 'vue', 'typescript', 'javascript' }
-            end
-            lspconfig[server_name].setup(server_config)
+            lspconfig.ts_ls.setup {
+              init_options = {
+                plugins = {
+                  {
+                    name = '@vue/typescript-plugin',
+                    location = vue_lsp_path,
+                    languages = { 'vue' },
+                  },
+                },
+              },
+              filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+            }
           end,
         }
       })
