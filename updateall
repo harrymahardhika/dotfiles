@@ -7,6 +7,7 @@ if [ -f /etc/arch-release ]; then
     sudo pacman -Sc
 else
     # For Ubuntu/Pop!_OS-based systems
+    sudo systemctl stop packagekit.service
     sudo apt update
     sudo apt upgrade -y
     sudo apt autopurge -y && sudo apt autoremove -y && sudo apt clean
