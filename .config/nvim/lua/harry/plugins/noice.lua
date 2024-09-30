@@ -14,9 +14,6 @@ return {
       cmdline = {
         view = "cmdline_popup",
       },
-      messages = {
-        enabled = false,
-      },
     })
   end,
   dependencies = {

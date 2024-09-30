@@ -10,14 +10,14 @@ return {
       integrations = {
         cmp = true,
         gitsigns = true,
-        nvimtree = true,
-        treesitter = true,
-        noice = true,
-        notify = true,
         mini = {
           enabled = true,
           indentscope_color = "",
         },
+        noice = true,
+        notify = true,
+        nvimtree = true,
+        treesitter = true,
       }
     })
 
