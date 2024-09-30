@@ -13,13 +13,13 @@ DISTRO=$(detect_distro)
 
 case "$DISTRO" in
   ubuntu | pop)
-    kitty --config ~/.config/kitty/kitty.conf -o font_size=11.5 -e tmux &
+    kitty --config ~/.config/kitty/kitty.conf -o font_size=11.5 &
     ;;
   arch)
-    kitty --config ~/.config/kitty/kitty.conf -o font_size=10.5 -e tmux &
+    kitty --config ~/.config/kitty/kitty.conf -o font_size=10.5 &
     ;;
   *)
-    kitty --config ~/.config/kitty/kitty.conf -o font_size=11 -e tmux &
+    kitty --config ~/.config/kitty/kitty.conf -o font_size=11 &
     ;;
 esac
 
