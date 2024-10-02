@@ -10,15 +10,24 @@ control = oneshot(control)
 leftalt = oneshot(alt)
 rightalt = oneshot(meta)
 
-capslock = overload(control, esc)
+capslock = overload(ctrl_vim, esc)
 
-sysrq = layer(arrows)
+# ctrl_vim modifier layer; inherits from 'Ctrl' modifier layer
 
-[arrows]
-w = up
-a = left
-s = down
-d = right
+[ctrl_vim:C]
 
-sysrq = layer(main)
+space = swap(vim_mode)
+
+# vim_mode modifier layer; also inherits from 'Ctrl' modifier layer
+
+[vim_mode:C]
+
+h = left
+j = down
+k = up
+l = right
+# forward word
+w = C-right
+# backward word
+b = C-left
 
