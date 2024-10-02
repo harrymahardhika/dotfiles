@@ -24,7 +24,9 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 bindsym $mod+Return exec ~/.config/kitty/launch.sh
 bindsym $mod+Shift+q kill
-bindsym $mod+d exec --no-startup-id dmenu_run
+
+# Application launcher
+bindsym $mod+d exec --no-startup-id dmenu_run -fn 'JetBrainsMono Nerd Font-10'
 
 # Navigation
 bindsym $mod+j focus left
@@ -141,4 +143,6 @@ mode "resize" {
 
 # Uncomment to enable resize mode shortcut
 # bindsym $mod+r mode "resize"
+
+bindsym $mod+Shift+p exec --no-startup-id "killall picom && maim -s -u | xclip -selection clipboard -t image/png -i && ~/.config/picom/launch.sh"
 

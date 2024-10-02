@@ -12,3 +12,13 @@ rightalt = oneshot(meta)
 
 capslock = overload(control, esc)
 
+sysrq = layer(arrows)
+
+[arrows]
+w = up
+a = left
+s = down
+d = right
+
+sysrq = layer(main)
+
