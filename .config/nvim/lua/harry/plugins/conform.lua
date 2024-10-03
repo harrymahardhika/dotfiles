@@ -7,8 +7,9 @@ return {
       typescript = { "prettier" },
       vue = { "prettier" },
     },
+
     format_on_save = {
-      timeout_ms = 5000,
+      timeout_ms = 2500,
       lsp_fallback = true,
     },
   },

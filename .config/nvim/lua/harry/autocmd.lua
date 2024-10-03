@@ -7,8 +7,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     vim.api.nvim_exec([[
       %s/\s\+$//e
     ]], false)
-
-    require("conform").format({ bufnr = args.buf })
   end,
 })
 
