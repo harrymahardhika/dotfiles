@@ -23,7 +23,9 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 # Window management
 floating_modifier $mod
 bindsym $mod+Return exec ~/.config/kitty/launch.sh
+bindsym $mod+Shift+Return exec ~/.config/kitty/launch.sh --tmux
 bindsym $mod+Shift+q kill
+bindsym $mod+Shift+w exec --no-startup-id ~/.config/wallpapers/set_wallpaper.sh
 
 # Application launcher
 bindsym $mod+d exec --no-startup-id dmenu_run -fn 'JetBrainsMono Nerd Font-10'
@@ -144,5 +146,23 @@ mode "resize" {
 # Uncomment to enable resize mode shortcut
 # bindsym $mod+r mode "resize"
 
-bindsym $mod+Shift+p exec --no-startup-id "killall picom && maim -s -u | xclip -selection clipboard -t image/png -i && ~/.config/picom/launch.sh"
+# Assign apps to specific workspaces
+assign [class="Kitty"] 1
+assign [class="Kitty" instance="tmux"] 2
+assign [class="Brave-browser"] 3
+assign [class="Google-chrome"] 4
+assign [class="discord"] 5
+# assign [class="Spotify"] 6
+
+# Launch applications on startup
+exec --no-startup-id ~/.config/kitty/launch.sh
+exec --no-startup-id ~/.config/kitty/launch.sh --tmux
+exec --no-startup-id /usr/bin/brave
+exec --no-startup-id /usr/bin/google-chrome-stable
+exec --no-startup-id /usr/bin/discord
+# exec --no-startup-id /usr/bin/spotify
+
+# Screenshot thingy
+# bindsym $mod+Shift+p exec --no-startup-id "killall picom && maim -s -u | xclip -selection clipboard -t image/png -i && ~/.config/picom/launch.sh"
+bindsym $mod+Shift+p exec --no-startup-id "/usr/bin/flameshot gui"
 
