@@ -58,22 +58,35 @@ return {
     },
     config = function()
       local lsp_zero = require("lsp-zero")
-
       -- lsp_attach is where you enable features that only work
       -- if there is a language server active in the file
+      -- local lsp_attach = function(client, bufnr)
+      --   local opts = {buffer = bufnr}
+
+      --   vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+      --   vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+      --   vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+      --   vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+      --   vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
+      --   vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+      --   vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+      --   vim.keymap.set("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+      --   vim.keymap.set({ "n", "x" }, "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<CR>", opts)
+      --   vim.keymap.set("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+      -- end
       local lsp_attach = function(client, bufnr)
         local opts = {buffer = bufnr}
-
+        local telescope_builtin = require('telescope.builtin')
         vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-        vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+        vim.keymap.set("n", "gd", telescope_builtin.lsp_definitions, opts)
         vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-        vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-        vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-        vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+        vim.keymap.set("n", "gi", telescope_builtin.lsp_implementations, opts)
+        vim.keymap.set("n", "go", telescope_builtin.lsp_type_definitions, opts)
+        vim.keymap.set("n", "gr", telescope_builtin.lsp_references, opts)
         vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-        vim.keymap.set("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-        vim.keymap.set({ "n", "x" }, "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<CR>", opts)
-        vim.keymap.set("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+        vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+        vim.keymap.set("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+        vim.keymap.set({ "n", "x" }, "<leader>cf", "<cmd>lua vim.lsp.buf.format({async = true})<CR>", opts)
       end
 
       lsp_zero.extend_lspconfig({
@@ -87,7 +100,6 @@ return {
         handlers = {
           function(server_name)
             require("lspconfig")[server_name].setup({})
-
             local mason_registry = require('mason-registry')
             local vue_lsp_path = mason_registry.get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language-server'
             local lspconfig = require('lspconfig')
