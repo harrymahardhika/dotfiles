@@ -97,6 +97,8 @@ alias clearswap="sudo swapoff -a && sudo swapon -a"
 # hyprland
 alias waybar_reload="pkill waybar && hyprctl dispatch exec waybar"
 
+# nvim
+alias nvim-switch="$HOME/nvim-switch.sh"
 
 DEFAULT_USER="harry"
 

@@ -4,12 +4,12 @@ return {
   opts = {
     formatters_by_ft = {
       php = { "pint" },
-      typescript = { "prettier" },
-      vue = { "prettier" },
+      javascript = { "prettierd", "prettier", stop_after_first = true },
+      vue = { "prettierd", "prettier", stop_after_first = true },
     },
 
     format_on_save = {
-      timeout_ms = 2500,
+      timeout_ms = 10000,
       lsp_fallback = true,
     },
   },
