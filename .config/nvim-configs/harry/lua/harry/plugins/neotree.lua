@@ -8,14 +8,18 @@ return {
   },
   config = function()
     require("neo-tree").setup({
-      close_if_last_window = true,
+      close_if_last_window = false,
       log_level = "warn",
+      filesystem = {
+        hide_dotfiles = false,
+        hijack_netrw_behavior = "disabled"
+      },
+      follow_current_file = {
+        enabled = true,
+      },
       window = {
         position = "right",
       },
-      filesystem = {
-        hijack_netrw_behavior = "disabled"
-      }
     })
   end
 }
