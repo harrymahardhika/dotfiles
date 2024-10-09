@@ -13,7 +13,7 @@ return {
       vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Old Files" })
       vim.keymap.set("n", "<leader>fp", builtin.git_files, { desc = "Git Files" })
       vim.keymap.set("n", "<leader><leader>", builtin.git_files, { desc = "Git Files" })
+      vim.keymap.set("n", "<leader>rr", ":Telescope registers<CR>", { desc = "Git Files" })
     end
   }
 }
-

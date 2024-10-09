@@ -119,7 +119,7 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # Gaps
 gaps inner 4
-gaps outer 4
+gaps outer 0
 
 # Border settings
 default_border pixel 0
