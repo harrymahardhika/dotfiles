@@ -5,33 +5,33 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="robbyrussell"
 
 # Aliases
-alias ww="cd ~/webserver"
-alias www="cd ~/webserver/www/"
-alias profile="vim ~/.zshrc"
-alias l="lc"
+alias battery_health="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
+alias battery_stats="sudo tlp-stat -b"
+alias cleanp="rm -r node_modules; rm package-lock.json; npm i"
+alias ddp="npm dedupe && npm prune"
+alias flushdns="sudo systemd-resolve --flush-caches"
+alias gilelundro="sapu"
 alias home="cd ~"
-alias lll="colorls"
-alias llll="colorls -al"
-alias lc="colorls -lA --sd"
+alias jsf="npm run format; npm run lint; npm run type-check"
 alias kocheng="cat"
 alias kochenk="cat"
-alias v="nvim"
+alias l="lc"
+alias lc="colorls -lA --sd"
+alias lll="colorls"
+alias llll="colorls -al"
+alias nrb="npm run build"
+alias nrd="npm run dev"
+alias nrf="npm run format"
+alias profile="vim ~/.zshrc"
+alias sapu="pint; jsf"
 alias server1="python3 -m http.server 8001;"
 alias server2="python3 -m http.server 8002;"
-alias flushdns="sudo systemd-resolve --flush-caches"
-alias ddp="npm dedupe && npm prune"
-alias nrd="npm run dev"
-alias nrb="npm run build"
-alias nrf="npm run format"
+alias v="nvim"
+alias ww="cd ~/webserver"
+alias www="cd ~/webserver/www/"
 alias yrd="yarn run dev"
 alias yrp="yarn run production"
 alias yrw="yarn run watch"
-alias battery_stats="sudo tlp-stat -b"
-alias battery_health="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
-alias sapu="pint; jsf"
-alias gilelundro="sapu"
-alias jsf="npm run format; npm run lint; npm run type-check"
-alias cleanp="rm -r node_modules; rm package-lock.json; npm i"
 
 # PHP
 phpserver () {
@@ -44,23 +44,23 @@ phpserver () {
 alias sv=phpserver
 alias pint="vendor/bin/pint"
 alias t="vendor/bin/phpunit"
+alias tcov="php artisan test --coverage"
 alias tf="vendor/bin/phpunit --filter"
 alias tg="vendor/bin/phpunit --group"
-alias tcov="php artisan test --coverage"
 
 # Laravel
-alias pa="php artisan"
 alias mig="pa migrate"
 alias miro="pa migrate:rollback"
-alias seed="pa db:seed"
-alias tink="pa tinker"
 alias p="vendor/bin/pest"
+alias pa="php artisan"
 alias pf="vendor/bin/pest --filter"
 alias pg="vendor/bin/pest --group"
-alias setup="sh /Users/harry/Tools/laravel-project-config/run.sh"
 alias php74="sudo update-alternatives --set php /usr/bin/php7.4; sudo systemctl stop php8.1-fpm.service; sudo systemctl stop php8.0-fpm.service; sudo systemctl start php7.4-fpm.service;"
 alias php80="sudo update-alternatives --set php /usr/bin/php8.0; sudo systemctl stop php8.1-fpm.service; sudo systemctl stop php7.4-fpm.service; sudo systemctl start php8.0-fpm.service;"
 alias php81="sudo update-alternatives --set php /usr/bin/php8.1; sudo systemctl stop php8.0-fpm.service; sudo systemctl stop php7.4-fpm.service; sudo systemctl start php8.1-fpm.service;"
+alias seed="pa db:seed"
+alias setup="sh /Users/harry/Tools/laravel-project-config/run.sh"
+alias tink="pa tinker"
 alias vendro="vendor/bin/pint && vendor/bin/pest"
 
 # Symfony
@@ -68,15 +68,15 @@ alias sc="php bin/console"
 
 # Git
 alias gcm="git commit -m"
-alias wip="git add . && git commit -m 'wip'"
-alias nah="git reset --hard;git clean -df"
 alias ggpp="git up; ggpush"
 alias merge="g co master; g merge develop; g co develop; g push --all"
+alias nah="git reset --hard;git clean -df"
+alias wip="git add . && git commit -m 'wip'"
 
 # Python and Django
+alias dje="source ~/.virtualenvs/djangoenv/bin/activate"
 alias p3="python3"
 alias pm="python3 manage.py"
-alias dje="source ~/.virtualenvs/djangoenv/bin/activate"
 
 # Rails
 alias r="rails"
@@ -139,16 +139,17 @@ if [ -f /etc/os-release ]; then
 fi
 
 # Additional environment variables
-export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
-export GOPATH=$HOME/.go
-export PATH=$PATH:$GOPATH/bin
 export ANDROID_HOME=$HOME/Android/Sdk
+export GOPATH=$HOME/.go
+export LANG="$LC_ALL"
+export LC_ALL=en_US.UTF-8
+export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
 export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-export LC_ALL=en_US.UTF-8
-export LANG="$LC_ALL"
+export PATH=$PATH:$GOPATH/bin
+
 export HOMEBREW_GITHUB_API_TOKEN=2db8242ae3110d4b4d2ace9df6e8c6f1c1a186a8
 
 # Tmux 256-color

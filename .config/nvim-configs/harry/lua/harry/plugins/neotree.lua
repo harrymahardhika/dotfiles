@@ -21,5 +21,9 @@ return {
         position = "right",
       },
     })
+
+    vim.keymap.set("n", "<leader>e", ":Neotree focus<CR>")
+    vim.keymap.set("n", "<leader>n", ":Neotree toggle<CR>")
+    vim.keymap.set("n", "<leader>nf", ":Neotree float<CR>")
   end
 }
