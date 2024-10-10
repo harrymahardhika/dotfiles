@@ -6,6 +6,12 @@ return {
     "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
     "MunifTanjim/nui.nvim",
   },
+  keys = {
+    { "<leader>n",  ":Neotree focus<CR>" },
+    { "<leader>nr", ":Neotree reveal<CR>" },
+    -- { "<leader>n",  ":Neotree toggle<CR>" },
+    -- { "<leader>nf", ":Neotree float<CR>" },
+  },
   config = function()
     require("neo-tree").setup({
       close_if_last_window = false,
@@ -18,12 +24,8 @@ return {
         enabled = true,
       },
       window = {
-        position = "right",
+        position = "float",
       },
     })
-
-    vim.keymap.set("n", "<leader>e", ":Neotree focus<CR>")
-    vim.keymap.set("n", "<leader>n", ":Neotree toggle<CR>")
-    vim.keymap.set("n", "<leader>nf", ":Neotree float<CR>")
   end
 }
