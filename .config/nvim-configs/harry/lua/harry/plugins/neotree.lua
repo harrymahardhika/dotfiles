@@ -3,28 +3,19 @@ return {
   branch = "v3.x",
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+    "nvim-tree/nvim-web-devicons",
     "MunifTanjim/nui.nvim",
   },
   keys = {
-    { "<leader>n",  ":Neotree focus<CR>" },
-    { "<leader>nr", ":Neotree reveal<CR>" },
-    -- { "<leader>n",  ":Neotree toggle<CR>" },
+    -- { "<leader>n",  ":Neotree focus<CR>" },
     -- { "<leader>nf", ":Neotree float<CR>" },
+    -- { "<leader>nr", ":Neotree reveal<CR>" },
+    { "<leader>n", ":Neotree toggle<CR>" },
   },
   config = function()
     require("neo-tree").setup({
-      close_if_last_window = false,
-      log_level = "warn",
-      filesystem = {
-        hide_dotfiles = false,
-        hijack_netrw_behavior = "disabled"
-      },
-      follow_current_file = {
-        enabled = true,
-      },
       window = {
-        position = "float",
+        position = "right",
       },
     })
   end
