@@ -12,20 +12,21 @@ vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGai
 
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
+    -- Get the first argument passed to Neovim
     local arg = vim.fn.argv(0)
 
     -- If a file is passed as an argument (e.g., during `git commit`), do nothing
-    if arg ~= "" then
-      return
-    end
+    -- if arg ~= "" then
+    --   return
+    -- end
 
-    local is_git_repo = vim.fn.system("git rev-parse --is-inside-work-tree"):match("true")
+    -- Check if the current directory is a Git repository
+    local is_git_repo = vim.fn.trim(vim.fn.system("git rev-parse --is-inside-work-tree")) == "true"
 
+    -- If the directory is a Git repo, use git_files picker, otherwise use find_files
     if is_git_repo then
-      -- If it's a Git repo, use git_files picker
       require("telescope.builtin").git_files()
     else
-      -- If not a Git repo, use find_files picker
       require("telescope.builtin").find_files()
     end
   end
