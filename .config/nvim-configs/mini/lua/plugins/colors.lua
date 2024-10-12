@@ -12,7 +12,7 @@ return {
         gitsigns = true,
         mini = {
           enabled = true,
-          indentscope_color = "surface0",
+          indentscope_color = "lavender",
         },
         noice = true,
         notify = true,
