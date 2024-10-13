@@ -7,15 +7,20 @@ return {
     "MunifTanjim/nui.nvim",
   },
   keys = {
-    -- { "<leader>n",  ":Neotree focus<CR>" },
     -- { "<leader>nf", ":Neotree float<CR>" },
-    -- { "<leader>nr", ":Neotree reveal<CR>" },
-    { "<leader>n", ":Neotree toggle<CR>" },
+    { "<leader>e",  ":Neotree toggle<CR>",  { desc = "Toggle Neotree" } },
+    { "<leader>nc", ":Neotree current<CR>", { desc = "Neotree current" } },
+    { "<leader>nf", ":Neotree focus<CR>" },
+    { "<leader>nr", ":Neotree reveal<CR>" },
   },
   config = function()
     require("neo-tree").setup({
+      source_selector = {
+        winbar = true,
+        statusline = true,
+      },
       window = {
-        position = "right",
+        position = "float",
       },
     })
   end

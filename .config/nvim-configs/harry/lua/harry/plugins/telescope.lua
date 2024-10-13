@@ -7,6 +7,16 @@ return {
     config = function()
       require("telescope").load_extension("fzf")
 
+      require("telescope").setup({
+        defaults = {
+          layout_config = {
+            prompt_position = "top"
+          },
+          -- layout_strategy = "flex",
+          sorting_strategy = "ascending",
+        }
+      })
+
       local builtin = require("telescope.builtin")
       vim.keymap.set("n", "<leader>fe", builtin.buffers, { desc = "Buffers" })
       vim.keymap.set("n", "<leader>fa", builtin.find_files, { desc = "Find Files" })
