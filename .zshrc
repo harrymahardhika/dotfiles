@@ -118,6 +118,7 @@ alias sv=phpserver
 alias mig="pa migrate"
 alias miro="pa migrate:rollback"
 alias p="vendor/bin/pest"
+alias pstan="vendor/bin/phpstan analyse "
 alias pa="php artisan"
 alias pf="vendor/bin/pest --filter"
 alias pg="vendor/bin/pest --group"
