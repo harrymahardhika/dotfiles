@@ -162,6 +162,8 @@ alias clearswap="sudo swapoff -a && sudo swapon -a"
 # Hyprland
 alias waybar_reload="pkill waybar && hyprctl dispatch exec waybar"
 
-# Neovim
-alias nvim-switch="$HOME/nvim-switch.sh"
+# Custom Scripts
+alias nvim-switch="$HOME/scripts/nvim-switch.sh"
+alias change-wallpaper="$HOME/scripts/set-wallpaper.sh"
+
 
