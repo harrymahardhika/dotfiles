@@ -49,9 +49,9 @@ export PATH=$PATH:$GOPATH/bin
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 # Node Version Manager (NVM)
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # Initialize starship and zoxide
 eval "$(starship init zsh)"
@@ -118,6 +118,7 @@ alias sv=phpserver
 alias mig="pa migrate"
 alias miro="pa migrate:rollback"
 alias p="vendor/bin/pest"
+alias pcov="vendor/bin/pest --coverage"
 alias pstan="vendor/bin/phpstan analyse "
 alias pa="php artisan"
 alias pf="vendor/bin/pest --filter"
@@ -142,7 +143,7 @@ alias sc="php bin/console"
 alias gcm="git commit -m"
 alias ggpp="git up; ggpush"
 alias merge="g co master; g merge develop; g co develop; g push --all"
-alias nah="git reset --hard;git clean -df"
+alias nah="git reset --hard; git clean -df"
 alias wip="git add . && git commit -m 'wip'"
 
 # Python and Django
@@ -163,7 +164,7 @@ alias clearswap="sudo swapoff -a && sudo swapon -a"
 alias waybar_reload="pkill waybar && hyprctl dispatch exec waybar"
 
 # Custom Scripts
-alias nvim-switch="$HOME/scripts/nvim-switch.sh"
 alias change-wallpaper="$HOME/scripts/set-wallpaper.sh"
-
+alias nvim-switch="$HOME/scripts/nvim-switch.sh"
+alias updateall="$HOME/updateall"
 
