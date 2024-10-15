@@ -26,7 +26,7 @@ return {
           { name = "path" },
           { name = "nvim_lsp" },
           { name = "luasnip", keyword_length = 2 },
-          { name = "buffer", keyword_length = 3 },
+          { name = "buffer",  keyword_length = 3 },
         },
 
         mapping = cmp.mapping.preset.insert({
@@ -60,7 +60,7 @@ return {
       local lsp_zero = require("lsp-zero")
 
       local lsp_attach = function(client, bufnr)
-        local opts = {buffer = bufnr}
+        local opts = { buffer = bufnr }
         local telescope_builtin = require('telescope.builtin')
         vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
         vim.keymap.set("n", "gd", telescope_builtin.lsp_definitions, opts)
@@ -81,12 +81,15 @@ return {
       })
 
       require("mason-lspconfig").setup({
-        ensure_installed = {},
+        ensure_installed = {
+          "intelephense",
+        },
         handlers = {
           function(server_name)
             require("lspconfig")[server_name].setup({})
             local mason_registry = require('mason-registry')
-            local vue_lsp_path = mason_registry.get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language-server'
+            local vue_lsp_path = mason_registry.get_package('vue-language-server'):get_install_path() ..
+                '/node_modules/@vue/language-server'
             local lspconfig = require('lspconfig')
             lspconfig.ts_ls.setup {
               init_options = {
