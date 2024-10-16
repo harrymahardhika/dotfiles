@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONFIG_DIR="$HOME/.config/nvim-configs"
+CONFIG_DIR="$HOME/nvim-configs"
 TARGET_CONFIG="$1"  # The argument passed to the script is the desired config
 
 if [ -z "$TARGET_CONFIG" ]; then
