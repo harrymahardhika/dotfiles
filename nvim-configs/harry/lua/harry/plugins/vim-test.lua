@@ -9,10 +9,10 @@ return {
     { "<leader>g",  ":TestVisit<CR>" },
   },
   config = function()
-    vim.cmd("let test#strategy = 'neovim'")
-    vim.cmd("let g:test#neovim#start_normal = 1")
+    -- vim.cmd("let test#strategy = 'neovim'")
+    -- vim.cmd("let g:test#neovim#start_normal = 1")
 
-    -- vim.cmd("let test#strategy = 'kitty'")
+    vim.cmd("let test#strategy = 'kitty'")
 
     -- vim.keymap.set("n", "<leader>t", ":TestNearest<CR>", {})
     -- vim.keymap.set("n", "<leader>T", ":TestFile<CR>", {})
