@@ -1,15 +1,6 @@
 return {
-  {
-    "VonHeikemen/lsp-zero.nvim",
-    branch = "v4.x",
-    lazy = true,
-    config = false,
-  },
-  {
-    "williamboman/mason.nvim",
-    lazy = false,
-    config = true,
-  },
+  { "VonHeikemen/lsp-zero.nvim", branch = "v4.x", lazy = true,   config = false, },
+  { "williamboman/mason.nvim",   lazy = false,    config = true, },
 
   -- Autocompletion
   {
@@ -61,7 +52,7 @@ return {
 
       local lsp_attach = function(client, bufnr)
         local opts = { buffer = bufnr }
-        local telescope_builtin = require('telescope.builtin')
+        local telescope_builtin = require("telescope.builtin")
         vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
         vim.keymap.set("n", "gd", telescope_builtin.lsp_definitions, opts)
         vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
@@ -87,21 +78,88 @@ return {
         handlers = {
           function(server_name)
             require("lspconfig")[server_name].setup({})
-            local mason_registry = require('mason-registry')
-            local vue_lsp_path = mason_registry.get_package('vue-language-server'):get_install_path() ..
-                '/node_modules/@vue/language-server'
-            local lspconfig = require('lspconfig')
+
+            local mason_registry = require("mason-registry")
+            local lspconfig = require("lspconfig")
+
+            -- intelephense
+            lspconfig.intelephense.setup({
+              root_dir = function()
+                return vim.loop.cwd()
+              end,
+              settings = {
+                intelephense = {
+                  stubs = {
+                    "Core",
+                    "ctype",
+                    "curl",
+                    "date",
+                    "dom",
+                    "fileinfo",
+                    "filter",
+                    "gd",
+                    "hash",
+                    "iconv",
+                    "igbinary",
+                    "imagick",
+                    "json",
+                    "libxml",
+                    "mbstring",
+                    "mysqlnd",
+                    "openssl",
+                    "pcntl",
+                    "pcre",
+                    "PDO",
+                    "pdo_pgsql",
+                    "pdo_sqlite",
+                    "pgsql",
+                    "Phar",
+                    "posix",
+                    "random",
+                    "readline",
+                    "redis",
+                    "Reflection",
+                    "session",
+                    "SimpleXML",
+                    "SPL",
+                    "sqlite3",
+                    "standard",
+                    "tokenizer",
+                    "xml",
+                    "xmlreader",
+                    "xmlwriter",
+                    "Zend OPcache",
+                    "zip",
+                    "zlib",
+                  },
+                  -- environment = {
+                  --   includePaths = {
+                  --     "~/.composer/vendor/php-stubs/",
+                  --     "~/.composer/vendor/wpsyntex/"
+                  --   }
+                  -- },
+                  files = {
+                    maxSize = 5000000,
+                  },
+                }
+              }
+
+            })
+            -- vue/volar
+            local vue_lsp_path = mason_registry.get_package("vue-language-server"):get_install_path() ..
+                "/node_modules/@vue/language-server"
+
             lspconfig.ts_ls.setup {
               init_options = {
                 plugins = {
                   {
-                    name = '@vue/typescript-plugin',
+                    name = "@vue/typescript-plugin",
                     location = vue_lsp_path,
-                    languages = { 'vue' },
+                    languages = { "vue" },
                   },
                 },
               },
-              filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+              filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
             }
           end,
         }

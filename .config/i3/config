@@ -23,7 +23,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 # Window management
 floating_modifier $mod
 bindsym $mod+Return exec $HOME/.config/kitty/launch.sh
-bindsym $mod+Shift+Return exec $HOME/.config/kitty/launch.sh --tmux
+# bindsym $mod+Shift+Return exec $HOME/.config/kitty/launch.sh --tmux
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+w exec --no-startup-id ~/scripts/set-wallpaper.sh
 
@@ -155,15 +155,15 @@ mode "resize" {
 assign [class="Brave-browser"] 3
 assign [class="Google-chrome"] 4
 assign [class="discord"] 5
-# assign [class="Spotify"] 6
+assign [class="Spotify"] 6
 
 # Launch applications on startup
-exec --no-startup-id $HOME/.config/kitty/launch.sh
-exec --no-startup-id $HOME/.config/kitty/launch.sh --tmux
+# exec --no-startup-id $HOME/.config/kitty/launch.sh
+# exec --no-startup-id $HOME/.config/kitty/launch.sh --tmux
 exec --no-startup-id /usr/bin/brave
 exec --no-startup-id /usr/bin/google-chrome-stable
 exec --no-startup-id /usr/bin/discord
-# exec --no-startup-id /usr/bin/spotify
+exec --no-startup-id /usr/bin/spotify
 
 # Screenshot thingy
 # bindsym $mod+Shift+p exec --no-startup-id "killall picom && maim -s -u | xclip -selection clipboard -t image/png -i && $HOME/.config/picom/launch.sh"
