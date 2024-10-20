@@ -138,9 +138,9 @@ return {
                   --     "~/.composer/vendor/wpsyntex/"
                   --   }
                   -- },
-                  files = {
-                    maxSize = 5000000,
-                  },
+                  -- files = {
+                  --   maxSize = 5000000,
+                  -- },
                 }
               }
 
