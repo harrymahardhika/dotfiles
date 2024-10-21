@@ -15,6 +15,7 @@ map("n", "<leader>w", ":%s/\\s\\+$//e<CR>", opts)
 map("n", "<Tab>", ":bnext <CR>", opts)
 map("n", "<S-Tab>", ":bprevious <CR>", opts)
 map("n", "<leader>d", ":bd! <CR>", opts)
+map("n", "<leader>b", ":BufOnly <CR>", opts)
 
 -- map("n", "<leader>e", ":Neotree focus<CR>", opts)
 -- map("n", "<leader>h", ":Ex<CR>", opts)
