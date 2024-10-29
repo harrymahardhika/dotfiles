@@ -1,10 +1,7 @@
-import = ["~/.config/alacritty/catppuccin-mocha.toml"]
 
 [env]
 TERM = "xterm-256color"
-
-[shell]
-program = "/home/harry/.cargo/bin/zellij"
+# program = "/home/harry/.cargo/bin/zellij"
 
 [window]
 opacity = 0.97
@@ -29,5 +26,10 @@ style = "Medium Italic"
 [font.normal]
 family = "JetBrainsMono Nerd Font"
 style = "Medium"
+
+[general]
+import = ["~/.config/alacritty/catppuccin-mocha.toml"]
+
+[terminal]
 
 
