@@ -1,4 +1,3 @@
-
 [env]
 TERM = "xterm-256color"
 # program = "/home/harry/.cargo/bin/zellij"
