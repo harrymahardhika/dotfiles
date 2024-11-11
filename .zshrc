@@ -49,9 +49,9 @@ export PATH=$PATH:$GOPATH/bin
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 # Node Version Manager (NVM)
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # Initialize starship and zoxide
 eval "$(starship init zsh)"
@@ -167,4 +167,4 @@ alias waybar_reload="pkill waybar && hyprctl dispatch exec waybar"
 alias change-wallpaper="$HOME/scripts/set-wallpaper.sh"
 alias nvim-switch="$HOME/scripts/nvim-switch.sh"
 alias updateall="$HOME/updateall"
-
+alias changelog="$HOME/scripts/changelog.sh"
