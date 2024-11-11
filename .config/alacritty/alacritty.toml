@@ -3,12 +3,13 @@ TERM = "xterm-256color"
 # program = "/home/harry/.cargo/bin/zellij"
 
 [window]
-opacity = 0.97
+# opacity = 1
+opacity = 0.95
 decorations = "none"
 decorations_theme_variant = "Dark"
 
 [font]
-size = 10.5
+size = 8.75
 
 [font.bold]
 family = "JetBrainsMono Nerd Font"
