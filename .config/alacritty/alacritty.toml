@@ -9,7 +9,7 @@ decorations = "none"
 decorations_theme_variant = "Dark"
 
 [font]
-size = 8
+size = 7
 
 [font.bold]
 family = "JetBrainsMono Nerd Font"
