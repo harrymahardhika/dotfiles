@@ -157,7 +157,7 @@ mode "resize" {
 # Assign apps to specific workspaces
 assign [class="Brave-browser"] 3
 assign [class="Google-chrome"] 4
-assign [class="discord"] 5
+assign [class="vesktop"] 5
 assign [class="Spotify"] 6
 
 # Launch applications on startup
@@ -165,7 +165,7 @@ assign [class="Spotify"] 6
 # exec --no-startup-id $HOME/.config/kitty/launch.sh --tmux
 exec --no-startup-id /usr/bin/brave
 exec --no-startup-id /usr/bin/google-chrome-stable
-exec --no-startup-id /usr/bin/discord
+exec --no-startup-id /usr/bin/vesktop
 exec --no-startup-id /usr/bin/spotify
 
 # Screenshot thingy
