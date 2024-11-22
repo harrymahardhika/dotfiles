@@ -105,6 +105,7 @@ alias www="cd ~/webserver/www/"
 alias yrd="yarn run dev"
 alias yrp="yarn run production"
 alias yrw="yarn run watch"
+alias reload="source ~/.zshrc"
 
 # PHP/Laravel
 phpserver () {
@@ -121,6 +122,7 @@ alias p="vendor/bin/pest"
 alias pcov="vendor/bin/pest --coverage"
 alias pstan="vendor/bin/phpstan analyse "
 alias pa="php artisan"
+alias pc="vendor/bin/pest --coverage-html coverage-report"
 alias pf="vendor/bin/pest --filter"
 alias pg="vendor/bin/pest --group"
 alias php74="sudo update-alternatives --set php /usr/bin/php7.4; sudo systemctl stop php8.1-fpm.service; sudo systemctl stop php8.0-fpm.service; sudo systemctl start php7.4-fpm.service;"

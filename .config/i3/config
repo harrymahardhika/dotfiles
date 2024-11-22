@@ -163,7 +163,7 @@ assign [class="Spotify"] 6
 # Launch applications on startup
 # exec --no-startup-id $HOME/.config/kitty/launch.sh
 # exec --no-startup-id $HOME/.config/kitty/launch.sh --tmux
-exec --no-startup-id /usr/bin/brave
+exec --no-startup-id /usr/bin/brave-browser-stable
 exec --no-startup-id /usr/bin/google-chrome-stable
 exec --no-startup-id /usr/bin/vesktop
 exec --no-startup-id /usr/bin/spotify
