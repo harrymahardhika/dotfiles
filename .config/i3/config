@@ -158,14 +158,14 @@ mode "resize" {
 assign [class="Brave-browser"] 3
 assign [class="Google-chrome"] 4
 assign [class="vesktop"] 5
-assign [class="Spotify"] 6
+assign [class="Spotify"] 10
 
 # Launch applications on startup
 # exec --no-startup-id $HOME/.config/kitty/launch.sh
 # exec --no-startup-id $HOME/.config/kitty/launch.sh --tmux
 exec --no-startup-id /usr/bin/brave-browser-stable
 exec --no-startup-id /usr/bin/google-chrome-stable
-exec --no-startup-id /usr/bin/vesktop
+# exec --no-startup-id /usr/bin/vesktop
 exec --no-startup-id /usr/bin/spotify
 
 # Screenshot thingy
