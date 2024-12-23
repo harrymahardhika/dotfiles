@@ -2,9 +2,10 @@
 
 if [ -f /etc/arch-release ]; then
     # For Arch-based systems
-    sudo pacman -Syu
-    sudo pacman -Rns $(pacman -Qdtq)
-    sudo pacman -Sc
+    # sudo pacman -Syu
+    # sudo pacman -Rns $(pacman -Qdtq)
+    # sudo pacman -Sc
+    yay -Sua
 else
     # For Ubuntu/Pop!_OS-based systems
     sudo systemctl stop packagekit.service
