@@ -29,6 +29,7 @@ export PATH=$PATH:/home/harry/.local/bin
 export PATH=$PATH:$HOME/.rbenv/bin:$PATH
 export PATH=$PATH:/home/harry/Application/PhpStorm-221.5921.28/bin
 export PATH=$PATH:/home/harry/.cargo/bin/
+export PATH=$PATH:/var/lib/flatpak/exports/bin:~/.local/share/flatpak/exports/bin
 
 # Additional environment variables
 export ANDROID_HOME=$HOME/Android/Sdk
@@ -130,6 +131,8 @@ alias php74="sudo update-alternatives --set php /usr/bin/php7.4; sudo systemctl 
 alias php80="sudo update-alternatives --set php /usr/bin/php8.0; sudo systemctl stop php8.1-fpm.service; sudo systemctl stop php7.4-fpm.service; sudo systemctl start php8.0-fpm.service;"
 alias php81="sudo update-alternatives --set php /usr/bin/php8.1; sudo systemctl stop php8.0-fpm.service; sudo systemctl stop php7.4-fpm.service; sudo systemctl start php8.1-fpm.service;"
 alias pint="vendor/bin/pint"
+alias rekt="vendor/bin/rector"
+alias getrekt="vendor/bin/rector"
 alias seed="pa db:seed"
 alias setup="sh /Users/harry/Tools/laravel-project-config/run.sh"
 alias t="vendor/bin/phpunit"
