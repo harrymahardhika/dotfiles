@@ -79,6 +79,10 @@ fi
 
 # Aliases
 # General Aliases
+# alias l="lc"
+# alias lc="colorls -lA --sd"
+# alias lll="colorls"
+# alias llll="colorls -al"
 alias battery_health="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
 alias battery_stats="sudo tlp-stat -b"
 alias cleanp="rm -r node_modules; rm package-lock.json; npm i"
@@ -89,15 +93,14 @@ alias home="cd ~"
 alias jsf="npm run format; npm run lint; npm run type-check"
 alias kocheng="cat"
 alias kochenk="cat"
-# alias l="lc"
-# alias lc="colorls -lA --sd"
-# alias lll="colorls"
-# alias llll="colorls -al"
 alias npmi="npm install"
 alias nrb="npm run build"
 alias nrd="npm run dev"
 alias nrf="npm run format"
+alias php82="sudo update-alternatives --set php /usr/bin/php8.2"
+alias php83="sudo update-alternatives --set php /usr/bin/php8.3"
 alias profile="vim ~/.zshrc"
+alias reload="source ~/.zshrc"
 alias sapu="pint; jsf"
 alias server1="python3 -m http.server 8001;"
 alias server2="python3 -m http.server 8002;"
@@ -107,7 +110,6 @@ alias www="cd ~/webserver/www/"
 alias yrd="yarn run dev"
 alias yrp="yarn run production"
 alias yrw="yarn run watch"
-alias reload="source ~/.zshrc"
 
 # PHP/Laravel
 phpserver () {
