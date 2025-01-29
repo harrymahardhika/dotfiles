@@ -133,6 +133,6 @@ return {
       -- "echasnovski/mini.pick",       -- optional
     },
     config = true
-  }
-
+  },
+  { 'akinsho/git-conflict.nvim', version = "*", config = true }
 }
