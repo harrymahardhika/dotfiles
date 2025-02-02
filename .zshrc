@@ -58,6 +58,10 @@ export NVM_DIR="$HOME/.nvm"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 
+# Init fzf
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+source /usr/share/doc/fzf/examples/completion.zsh
+
 # OS-specific zsh plugins
 if [ -f /etc/os-release ]; then
   . /etc/os-release
@@ -97,8 +101,6 @@ alias npmi="npm install"
 alias nrb="npm run build"
 alias nrd="npm run dev"
 alias nrf="npm run format"
-alias php82="sudo update-alternatives --set php /usr/bin/php8.2"
-alias php83="sudo update-alternatives --set php /usr/bin/php8.3"
 alias profile="vim ~/.zshrc"
 alias reload="source ~/.zshrc"
 alias sapu="pint; jsf"
@@ -134,6 +136,8 @@ alias pp="vendor/bin/pest --parallel"
 alias php74="sudo update-alternatives --set php /usr/bin/php7.4; sudo systemctl stop php8.1-fpm.service; sudo systemctl stop php8.0-fpm.service; sudo systemctl start php7.4-fpm.service;"
 alias php80="sudo update-alternatives --set php /usr/bin/php8.0; sudo systemctl stop php8.1-fpm.service; sudo systemctl stop php7.4-fpm.service; sudo systemctl start php8.0-fpm.service;"
 alias php81="sudo update-alternatives --set php /usr/bin/php8.1; sudo systemctl stop php8.0-fpm.service; sudo systemctl stop php7.4-fpm.service; sudo systemctl start php8.1-fpm.service;"
+alias php82="sudo update-alternatives --set php /usr/bin/php8.2"
+alias php83="sudo update-alternatives --set php /usr/bin/php8.3"
 alias pint="vendor/bin/pint"
 alias rekt="vendor/bin/rector"
 alias getrekt="vendor/bin/rector"
