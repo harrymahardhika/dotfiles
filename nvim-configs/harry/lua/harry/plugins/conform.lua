@@ -6,7 +6,7 @@ return {
       php = { "pint" },
       javascript = { "prettierd", "prettier", stop_after_first = true },
       typescript = { "prettierd", "prettier", stop_after_first = true },
-      vue = { "prettierd", "prettier", stop_after_first = true },
+      vue = { "prettierd", "prettier", "eslint", stop_after_first = true },
     },
 
     format_on_save = {

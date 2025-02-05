@@ -4,9 +4,9 @@ return {
   opts = {
     formatters_by_ft = {
       php = { "pint" },
-      typescript = { "prettierd", "prettier", stop_after_first = true },
-      javascript = { "prettierd", "prettier", stop_after_first = true },
-      vue = { "prettierd", "prettier", stop_after_first = true },
+      typescript = { "prettierd", "prettier" },
+      javascript = { "prettierd", "prettier" },
+      vue = { "eslint_d", "eslint", "prettierd", "prettier" },
     },
 
     format_on_save = {

@@ -26,11 +26,19 @@ vim.api.nvim_create_autocmd("VimEnter", {
       local is_git_repo = vim.fn.trim(vim.fn.system("git rev-parse --is-inside-work-tree")) == "true"
 
       -- If the directory is a Git repo, use git_files picker, otherwise use find_files
-      if is_git_repo then
-        require("telescope.builtin").git_files()
-      else
-        require("telescope.builtin").find_files()
-      end
+      -- if is_git_repo then
+      --   require("telescope.builtin").git_files()
+      -- else
+      --   require("telescope.builtin").find_files()
+      -- end
+      require("telescope.builtin").find_files()
     end
   end
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "php",
+  callback = function()
+    vim.bo.commentstring = "// %s" -- Use double-slash comments by default
+  end,
 })

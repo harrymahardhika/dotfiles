@@ -2,14 +2,16 @@
 TERM = "xterm-256color"
 # program = "/home/harry/.cargo/bin/zellij"
 
+[general]
+import = ["~/.config/alacritty/catppuccin-mocha.toml"]
+
 [window]
-# opacity = 1
-opacity = 0.95
+opacity = 1
 decorations = "none"
 decorations_theme_variant = "Dark"
 
 [font]
-size = 8
+size=7
 
 [font.bold]
 family = "JetBrainsMono Nerd Font"
@@ -26,10 +28,4 @@ style = "Medium Italic"
 [font.normal]
 family = "JetBrainsMono Nerd Font"
 style = "Medium"
-
-[general]
-import = ["~/.config/alacritty/catppuccin-mocha.toml"]
-
-[terminal]
-
 

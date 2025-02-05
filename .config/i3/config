@@ -25,7 +25,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 
 # Window management
 floating_modifier $mod
-bindsym $mod+Return exec $HOME/.config/kitty/launch.sh
+bindsym $mod+Return exec kitty
 # bindsym $mod+Shift+Return exec $HOME/.config/kitty/launch.sh --tmux
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+w exec --no-startup-id ~/scripts/set-wallpaper.sh
