@@ -5,6 +5,7 @@ o.autoindent = true
 o.autoread = true
 o.backup = false
 o.breakindent = true
+o.clipboard = "unnamedplus"
 o.cmdheight = 1
 o.encoding = "utf-8"
 o.expandtab = true

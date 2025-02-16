@@ -29,18 +29,6 @@ return {
   {
     "JoosepAlviste/nvim-ts-context-commentstring",
     {
-      "nvim-treesitter/nvim-treesitter",
-      build = ":TSUpdate",
-      config = function()
-        require("nvim-treesitter.configs").setup {
-          ensure_installed = { "vim", "lua" },
-          highlight = {
-            enable = true,
-          },
-        }
-      end,
-    },
-    {
       "numToStr/Comment.nvim",
       config = function()
         require("Comment").setup {
@@ -50,5 +38,13 @@ return {
         }
       end,
     },
+  },
+  {
+    "danymat/neogen",
+    config = true, -- Load default configuration
+    keys = {
+      { "<leader>df", function() require("neogen").generate({ type = "func" }) end,  desc = "Generate Function Docblock" },
+      { "<leader>dc", function() require("neogen").generate({ type = "class" }) end, desc = "Generate Class Docblock" },
+    }
   }
 }

@@ -14,8 +14,8 @@ map("n", "<leader>w", ":%s/\\s\\+$//e<CR>", opts)
 -- buffer navigation
 -- map("n", "<Tab>", ":bnext <CR>", opts)
 -- map("n", "<S-Tab>", ":bprevious <CR>", opts)
-map("n", "<leader>n", ":bnext <CR>", opts)
-map("n", "<leader>p", ":bprevious <CR>", opts)
+-- map("n", "<leader>n", ":bnext <CR>", opts)
+-- map("n", "<leader>p", ":bprevious <CR>", opts)
 map("n", "<leader>d", ":bd! <CR>", opts)
 map("n", "<leader>b", ":BufOnly <CR>", opts)
 
@@ -26,3 +26,11 @@ map("n", "<leader>b", ":BufOnly <CR>", opts)
 
 map("n", "<leader>/", "gcc", opts) -- Toggle comment for the current line
 map("v", "<leader>/", "gc", opts)  -- Toggle comment for selected lines
+
+-- Yank to system clipboard
+map("n", "y", '"+y', { noremap = true, silent = true })
+map("v", "y", '"+y', { noremap = true, silent = true })
+
+-- Paste from system clipboard
+map("n", "p", '"+p', { noremap = true, silent = true })
+map("v", "p", '"+p', { noremap = true, silent = true })

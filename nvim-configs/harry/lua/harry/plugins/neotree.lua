@@ -8,10 +8,11 @@ return {
   },
   keys = {
     -- { "<leader>nf", ":Neotree float<CR>" },
-    { "<leader>e",  ":Neotree toggle<CR>",  { desc = "Toggle Neotree" } },
+    -- { "<leader>e",  ":Neotree toggle<CR>",  { desc = "Toggle Neotree" } },
     { "<leader>nc", ":Neotree current<CR>", { desc = "Neotree current" } },
     { "<leader>nf", ":Neotree focus<CR>" },
     { "<leader>nr", ":Neotree reveal<CR>" },
+    { "<leader>e",  ":Neotree reveal<CR>" },
   },
   config = function()
     require("neo-tree").setup({
