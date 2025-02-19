@@ -9,8 +9,8 @@ return {
           "bash",
           "javascript",
           "lua",
-          "php",
           "markdown",
+          "php",
           "regex",
           "typescript",
           "vue"
