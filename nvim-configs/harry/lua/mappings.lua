@@ -27,6 +27,9 @@ map("n", "<leader>b", ":BufOnly <CR>", opts)
 map("n", "<leader>/", "gcc", opts) -- Toggle comment for the current line
 map("v", "<leader>/", "gc", opts)  -- Toggle comment for selected lines
 
+map("n", "<leader>tn", ":tabnext<CR>", opts)
+map("n", "<leader>tp", ":tabprevious<CR>", opts)
+
 -- Yank to system clipboard
 map("n", "y", '"+y', { noremap = true, silent = true })
 map("v", "y", '"+y', { noremap = true, silent = true })
