@@ -85,16 +85,27 @@ set $ws9 "9"
 set $ws10 "10"
 
 # Assign workspaces to outputs
-workspace $ws1 output HDMI-2
-workspace $ws2 output HDMI-2
-workspace $ws3 output HDMI-2
-workspace $ws4 output HDMI-2
-workspace $ws5 output HDMI-2
-workspace $ws6 output HDMI-2
-workspace $ws7 output HDMI-2
-workspace $ws8 output HDMI-2
-workspace $ws9 output HDMI-2
-workspace $ws10 output eDP-1
+# workspace $ws1 output HDMI-2
+# workspace $ws2 output HDMI-2
+# workspace $ws3 output HDMI-2
+# workspace $ws4 output HDMI-2
+# workspace $ws5 output HDMI-2
+# workspace $ws6 output HDMI-2
+# workspace $ws7 output HDMI-2
+# workspace $ws8 output HDMI-2
+# workspace $ws9 output HDMI-2
+# workspace $ws10 output eDP-1
+
+workspace $ws1 output eDP-1
+workspace $ws2 output eDP-1
+workspace $ws3 output eDP-1
+workspace $ws4 output eDP-1
+workspace $ws5 output eDP-1
+workspace $ws6 output eDP-1
+workspace $ws7 output eDP-1
+workspace $ws8 output eDP-1
+workspace $ws9 output eDP-1
+workspace $ws10 output HDMI-2
 
 # Switch workspaces
 bindsym $mod+1 workspace number $ws1
@@ -126,6 +137,10 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 gaps inner 4
 gaps outer 0
 
+# Toggle gaps back and forth
+bindsym $mod+Shift+g gaps inner current set 0; gaps outer current set 0
+bindsym $mod+g gaps inner current plus 4;
+
 # Border settings
 default_border pixel 0
 
@@ -137,6 +152,9 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i
 # Lock Screen
 # bindsym $mod+Shift+x exec $HOME/.config/i3lock/lock.sh && systemctl suspend
 bindsym $mod+Shift+x exec systemctl suspend
+
+# Uncomment to enable resize mode shortcut
+# bindsym $mod+r mode "resize"
 
 # Resize mode
 mode "resize" {
@@ -151,9 +169,6 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-
-# Uncomment to enable resize mode shortcut
-# bindsym $mod+r mode "resize"
 
 # Assign apps to specific workspaces
 assign [class="Brave-browser"] 3

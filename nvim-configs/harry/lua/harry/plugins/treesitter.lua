@@ -11,6 +11,7 @@ return {
           "lua",
           "markdown",
           "php",
+          "python",
           "regex",
           "typescript",
           "vue"

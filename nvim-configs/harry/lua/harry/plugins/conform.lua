@@ -3,10 +3,12 @@ return {
   event = { "LspAttach", "BufReadPost", "BufNewFile" },
   opts = {
     formatters_by_ft = {
-      php = { "pint" },
       javascript = { "prettierd", "prettier", stop_after_first = true },
+      php = { "pint" },
+      python = { "black", "isort", "autopep8" },
       typescript = { "prettierd", "prettier", stop_after_first = true },
-      vue = { "prettierd", "prettier", "eslint_d" },
+      -- vue = { "prettierd", "prettier", "eslint_d" },
+      vue = { "prettierd", "eslint_d" },
     },
 
     format_on_save = {

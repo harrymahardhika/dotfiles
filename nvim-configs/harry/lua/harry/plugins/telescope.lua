@@ -14,6 +14,10 @@ return {
           },
           -- layout_strategy = "flex",
           sorting_strategy = "ascending",
+        },
+        pickers = {
+          hidden = true,
+          no_ignore = true,
         }
       })
 

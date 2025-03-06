@@ -75,7 +75,7 @@ return {
 
       require("mason-lspconfig").setup({
         ensure_installed = {
-          "intelephense",
+          "intelephense"
         },
         handlers = {
           function(server_name)

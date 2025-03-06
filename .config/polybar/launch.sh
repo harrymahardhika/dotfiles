@@ -8,9 +8,11 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 # Detect active monitors
 if xrandr | grep -q "HDMI-2 connected"; then
-  MONITOR=HDMI-2
+  # MONITOR=HDMI-2
+  MONITOR=eDP-1
 elif xrandr | grep -q "HDMI-1 connected"; then
-  MONITOR=HDMI-1
+  # MONITOR=HDMI-1
+  MONITOR=eDP-1
 else
   MONITOR=eDP-1
 fi
