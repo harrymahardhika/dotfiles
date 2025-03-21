@@ -1,16 +1,19 @@
 #!/bin/bash
+#
+# Get Mouse and Touchpad IDs dynamically
+MOUSE_ID=$(xinput list | grep -i "Logitech Wireless Mouse" | awk '{print $6}' | sed 's/id=//')
+TOUCHPAD_ID=$(xinput list | grep -i "SynPS/2 Synaptics TouchPad" | awk '{print $6}' | sed 's/id=//')
 
-MOUSE="pointer:Logitech Wireless Mouse"
-xinput set-prop "$MOUSE" "libinput Natural Scrolling Enabled" 1
-xinput set-prop "$MOUSE" "libinput Accel Speed" 0.5
+# Check if IDs are found before applying settings
+if [ -n "$MOUSE_ID" ]; then
+    xinput set-prop "$MOUSE_ID" "libinput Natural Scrolling Enabled" 1
+    xinput set-prop "$MOUSE_ID" "libinput Scroll Method Enabled" 0 0 1
+    xinput set-prop "$MOUSE_ID" "libinput Accel Speed" 0.5
+fi
 
-TOUCHPAD="SynPS/2 Synaptics TouchPad"
-xinput set-prop "$TOUCHPAD" "libinput Tapping Enabled" 1
-xinput set-prop "$TOUCHPAD" "libinput Natural Scrolling Enabled" 1
-xinput set-prop "$TOUCHPAD" "libinput Accel Speed" 0.5
-
-# Enable two-finger scrolling
-# Note: "libinput Scroll Method Enabled" takes an array of values
-# (0=two-finger, 1=edge, 2=on-button down)
-xinput set-prop "$TOUCHPAD" "libinput Scroll Method Enabled" 0, 0, 1
-
+if [ -n "$TOUCHPAD_ID" ]; then
+    xinput set-prop "$TOUCHPAD_ID" "libinput Tapping Enabled" 1
+    xinput set-prop "$TOUCHPAD_ID" "libinput Natural Scrolling Enabled" 1
+    xinput set-prop "$TOUCHPAD_ID" "libinput Accel Speed" 0.5
+    xinput set-prop "$TOUCHPAD_ID" "libinput Scroll Method Enabled" 0 0 1
+fi
