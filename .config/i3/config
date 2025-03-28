@@ -104,7 +104,7 @@ workspace $ws5 output eDP-1
 workspace $ws6 output eDP-1
 workspace $ws7 output eDP-1
 workspace $ws8 output eDP-1
-workspace $ws9 output eDP-1
+workspace $ws9 output HDMI-2
 workspace $ws10 output HDMI-2
 
 # Switch workspaces
