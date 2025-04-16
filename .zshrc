@@ -182,6 +182,7 @@ alias change-wallpaper="$HOME/scripts/set-wallpaper.sh"
 alias nvim-switch="$HOME/scripts/nvim-switch.sh"
 alias updateall="$HOME/updateall"
 alias changelog="$HOME/scripts/changelog.sh"
+alias battery_limit="$HOME/scripts/battery_limit.sh"
 
 bindkey '^W' backward-kill-word
 
