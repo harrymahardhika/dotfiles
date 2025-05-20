@@ -49,109 +49,70 @@ return {
     },
     config = function()
       local lsp_zero = require("lsp-zero")
+      local lspconfig = require("lspconfig")
+      local mason_registry = require("mason-registry")
 
-      local lsp_attach = function(client, bufnr)
+      local lsp_attach = function(_, bufnr)
         local opts = { buffer = bufnr }
         local telescope_builtin = require("telescope.builtin")
-        vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
         vim.keymap.set("n", "gd", telescope_builtin.lsp_definitions, opts)
-        -- vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-        vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
         vim.keymap.set("n", "gi", telescope_builtin.lsp_implementations, opts)
         vim.keymap.set("n", "go", telescope_builtin.lsp_type_definitions, opts)
         vim.keymap.set("n", "gr", telescope_builtin.lsp_references, opts)
-        -- vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-        vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-        vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-        vim.keymap.set("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-        vim.keymap.set({ "n", "x" }, "<leader>cf", "<cmd>lua vim.lsp.buf.format({async = true})<CR>", opts)
+        vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
+        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+        vim.keymap.set({ "n", "x" }, "<leader>cf", function()
+          vim.lsp.buf.format({ async = true })
+        end, opts)
       end
 
       lsp_zero.extend_lspconfig({
         sign_text = true,
         lsp_attach = lsp_attach,
-        capabilities = require("cmp_nvim_lsp").default_capabilities()
+        capabilities = require("cmp_nvim_lsp").default_capabilities(),
       })
 
       require("mason-lspconfig").setup({
         ensure_installed = {
-          "intelephense"
+          "intelephense",
+          "ts_ls",
+          "volar",
+          "lua_ls",
         },
         handlers = {
-          function(server_name)
-            require("lspconfig")[server_name].setup({})
-
-            local mason_registry = require("mason-registry")
-            local lspconfig = require("lspconfig")
-
-            -- intelephense
+          -- PHP
+          ["intelephense"] = function()
             lspconfig.intelephense.setup({
               root_dir = function()
                 return vim.loop.cwd()
               end,
               settings = {
                 intelephense = {
+                  files = { maxSize = 5000000 },
                   stubs = {
-                    "Core",
-                    "ctype",
-                    "curl",
-                    "date",
-                    "dom",
-                    "fileinfo",
-                    "filter",
-                    "gd",
-                    "hash",
-                    "iconv",
-                    "igbinary",
-                    "imagick",
-                    "json",
-                    "libxml",
-                    "mbstring",
-                    "mysqlnd",
-                    "openssl",
-                    "pcntl",
-                    "pcre",
-                    "PDO",
-                    "pdo_pgsql",
-                    "pdo_sqlite",
-                    "pgsql",
-                    "Phar",
-                    "posix",
-                    "random",
-                    "readline",
-                    "redis",
-                    "Reflection",
-                    "session",
-                    "SimpleXML",
-                    "SPL",
-                    "sqlite3",
-                    "standard",
-                    "tokenizer",
-                    "xml",
-                    "xmlreader",
-                    "xmlwriter",
-                    "Zend OPcache",
-                    "zip",
-                    "zlib",
+                    "Core", "ctype", "curl", "date", "dom", "fileinfo", "filter", "gd",
+                    "hash", "iconv", "igbinary", "imagick", "json", "libxml", "mbstring",
+                    "mysqlnd", "openssl", "pcntl", "pcre", "PDO", "pdo_pgsql",
+                    "pdo_sqlite", "pgsql", "Phar", "posix", "random", "readline",
+                    "redis", "Reflection", "session", "SimpleXML", "SPL", "sqlite3",
+                    "standard", "tokenizer", "xml", "xmlreader", "xmlwriter",
+                    "Zend OPcache", "zip", "zlib",
                   },
-                  -- environment = {
-                  --   includePaths = {
-                  --     "~/.composer/vendor/php-stubs/",
-                  --     "~/.composer/vendor/wpsyntex/"
-                  --   }
-                  -- },
-                  files = {
-                    maxSize = 5000000,
-                  },
-                }
-              }
-
+                },
+              },
             })
-            -- vue/volar
-            local vue_lsp_path = mason_registry.get_package("vue-language-server"):get_install_path() ..
-                "/node_modules/@vue/language-server"
+          end,
 
-            lspconfig.ts_ls.setup {
+          -- JS/TS + Vue
+          ["volar"] = function()
+            local vue_lsp_path = mason_registry.get_package("vue-language-server"):get_install_path()
+            .. "/node_modules/@vue/language-server"
+
+            lspconfig.tsserver.setup({
               init_options = {
                 plugins = {
                   {
@@ -161,10 +122,16 @@ return {
                   },
                 },
               },
-              filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-            }
+              filetypes = {
+                "typescript", "javascript",
+                "javascriptreact", "typescriptreact", "vue"
+              },
+            })
+          end,
 
-            lspconfig.lua_ls.setup {
+          -- Lua
+          ["lua_ls"] = function()
+            lspconfig.lua_ls.setup({
               on_init = function(client)
                 if client.workspace_folders then
                   local path = client.workspace_folders[1].name
@@ -173,37 +140,30 @@ return {
                   end
                 end
 
-                client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-                  runtime = {
-                    -- Tell the language server which version of Lua you're using
-                    -- (most likely LuaJIT in the case of Neovim)
-                    version = 'LuaJIT'
-                  },
-                  -- Make the server aware of Neovim runtime files
+                client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua or {}, {
+                  runtime = { version = "LuaJIT" },
                   workspace = {
                     checkThirdParty = false,
-                    library = {
-                      vim.env.VIMRUNTIME
-                      -- Depending on the usage, you might want to add additional paths here.
-                      -- "${3rd}/luv/library"
-                      -- "${3rd}/busted/library",
-                    }
-                    -- or pull in all of 'runtimepath'. NOTE: this is a lot slower and will cause issues when working on your own configuration (see https://github.com/neovim/nvim-lspconfig/issues/3189)
-                    -- library = vim.api.nvim_get_runtime_file("", true)
-                  }
+                    library = { vim.env.VIMRUNTIME },
+                  },
                 })
               end,
               settings = {
                 Lua = {
                   diagnostics = {
-                    globals = { 'vim' }
-                  }
-                }
-              }
-            }
+                    globals = { "vim" },
+                  },
+                },
+              },
+            })
           end,
-        }
+
+          -- fallback for others
+          function(server_name)
+            lspconfig[server_name].setup({})
+          end,
+        },
       })
-    end
+    end,
   }
 }

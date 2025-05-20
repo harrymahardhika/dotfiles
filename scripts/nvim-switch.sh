@@ -1,20 +1,23 @@
 #!/bin/bash
 
 CONFIG_DIR="$HOME/nvim-configs"
-TARGET_CONFIG="$1"  # The argument passed to the script is the desired config
 
-if [ -z "$TARGET_CONFIG" ]; then
-  echo "Usage: $0 <config-name>"
-  echo "Available configurations:"
-  ls "$CONFIG_DIR"
+# Get all available configurations
+configs=($(ls -1 "$CONFIG_DIR"))
+
+if [ ${#configs[@]} -eq 0 ]; then
+  echo "No configurations found in $CONFIG_DIR"
   exit 1
 fi
 
-# Check if the requested configuration exists
-if [ ! -d "$CONFIG_DIR/$TARGET_CONFIG" ]; then
-  echo "Configuration '$TARGET_CONFIG' not found!"
-  exit 1
-fi
+echo "Select a Neovim configuration:"
+select TARGET_CONFIG in "${configs[@]}"; do
+  if [ -n "$TARGET_CONFIG" ]; then
+    break
+  else
+    echo "Invalid selection."
+  fi
+done
 
 # Remove the current symlink or nvim directory
 if [ -L "$HOME/.config/nvim" ] || [ -d "$HOME/.config/nvim" ]; then
@@ -24,4 +27,3 @@ fi
 # Create the symlink to the selected configuration
 ln -s "$CONFIG_DIR/$TARGET_CONFIG" "$HOME/.config/nvim"
 echo "Switched to Neovim configuration: $TARGET_CONFIG"
-

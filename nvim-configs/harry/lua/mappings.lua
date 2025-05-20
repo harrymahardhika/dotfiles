@@ -20,11 +20,12 @@ map("n", "<leader>d", ":bd! <CR>", opts)
 map("n", "<leader>b", ":BufOnly <CR>", opts)
 
 -- map("n", "<leader>e", ":Neotree focus<CR>", opts)
+-- map("n", "<leader>e", ":Neotree toggle<CR>", opts)
 -- map("n", "<leader>h", ":Ex<CR>", opts)
 -- map("n", "<leader>n", ":Neotree toggle<CR>", opts)
 -- map("n", "<leader>pv", ":ex<CR>", opts)
 
-map('n', '<Leader>e', ':NvimTreeToggle<CR>', opts)
+-- map('n', '<Leader>e', ':NvimTreeToggle<CR>', opts)
 
 map("n", "<leader>/", "gcc", opts) -- Toggle comment for the current line
 map("v", "<leader>/", "gc", opts)  -- Toggle comment for selected lines

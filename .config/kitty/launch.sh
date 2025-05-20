@@ -16,7 +16,7 @@ DISTRO=$(detect_distro)
 # Set default font size based on distro
 case "$DISTRO" in
   ubuntu | pop)
-    FONT_SIZE="11.5"
+    FONT_SIZE="10.5"
     ;;
   arch)
     FONT_SIZE="10.5"
