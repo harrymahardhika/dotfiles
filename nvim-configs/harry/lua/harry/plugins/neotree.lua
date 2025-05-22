@@ -10,27 +10,16 @@ return {
   keys = {
     { "<leader>nf", ":Neotree float<CR>" },
     { "<leader>e",  ":Neotree toggle<CR>",  { desc = "Toggle Neotree" } },
-    -- { "<leader>e",  ":Neotree reveal<CR>",  { desc = "Toggle Neotree" } },
     { "<leader>nc", ":Neotree current<CR>", { desc = "Neotree current" } },
     { "<leader>nf", ":Neotree focus<CR>" },
     { "<leader>nr", ":Neotree reveal<CR>" },
-    -- { "<leader>e",  ":Neotree reveal<CR>" },
   },
   opts = {
     close_if_last_window = true,
-    window = {
-      position = "float",
-    }
+    source_selector = {
+      winbar = true,
+      statusline = true,
+    },
+    window = { position = "right", }
   },
-  -- config = function()
-  --   require("neo-tree").setup({
-  -- source_selector = {
-  --   winbar = true,
-  --   statusline = true,
-  -- },
-  -- window = {
-  --   position = "float",
-  -- },
-  --   })
-  -- end
 }
