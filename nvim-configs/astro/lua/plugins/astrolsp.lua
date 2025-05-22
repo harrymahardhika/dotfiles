@@ -32,7 +32,6 @@ return {
         -- "lua_ls",
         "intelephense",
         "typescript-language-server",
-        "vue-language-server",
         "volar",
       },
       timeout_ms = 30000, -- default format timeout
@@ -46,20 +45,63 @@ return {
     },
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
-    config = {
-      -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
-      volar = {
-        filetypes = { "vue" },
-        init_options = {
-          vue = {
-            hybridMode = false,
+    config = (function()
+      local vue_project_cache = {}
+
+      local function is_vue_project(fname)
+        local root = vim.fs.dirname(vim.fs.find(".git", { path = fname, upward = true })[1])
+        if not root then return false end
+        if vue_project_cache[root] ~= nil then return vue_project_cache[root] end
+
+        local files = vim.fn.glob(root .. "/**/*.vue", true, true)
+        for _, filepath in ipairs(files) do
+          if not filepath:match "node_modules" then
+            vue_project_cache[root] = true
+            return true
+          end
+        end
+
+        vue_project_cache[root] = false
+        return false
+      end
+
+      local ts_ls_filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact" }
+
+      local function get_ts_ls_config(fname)
+        local filetypes = ts_ls_filetypes
+        if is_vue_project(fname) then
+          local filtered = {}
+          for _, ft in ipairs(ts_ls_filetypes) do
+            if ft ~= "typescript" then table.insert(filtered, ft) end
+          end
+          filetypes = filtered
+        end
+        return {
+          filetypes = filetypes,
+        }
+      end
+
+      return {
+        volar = {
+          filetypes = {
+            "typescript",
+            "javascript",
+            "javascriptreact",
+            "typescriptreact",
+            "vue",
+          },
+          init_options = {
+            vue = {
+              hybridMode = false,
+            },
           },
         },
-      },
-      ts_ls = {
-        filetypes = { "typescript", "javascript" }, -- ⛔ exclude vue
-      },
-    },
+        ts_ls = (function()
+          local fname = vim.api.nvim_buf_get_name(0)
+          return get_ts_ls_config(fname)
+        end)(),
+      }
+    end)(),
     -- customize how language servers are attached
     handlers = {
       -- a function without a key is simply the default handler, functions take two parameters, the server name and the configured options table for that server
