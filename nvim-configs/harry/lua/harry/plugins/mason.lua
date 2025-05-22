@@ -1,0 +1,27 @@
+return {
+  -- {
+  --   "williamboman/mason.nvim",
+  --   build = ":MasonUpdate",
+  --   config = true,
+  -- },
+  --
+  -- {
+  --   "williamboman/mason-null-ls.nvim",
+  --   dependencies = {
+  --     "nvimtools/none-ls.nvim",
+  --     "williamboman/mason.nvim",
+  --   },
+  --   config = function()
+  --     require("mason-null-ls").setup({
+  --       ensure_installed = {
+  --         "stylua",
+  --         "eslint_d",
+  --         "pint",
+  --         "phpstan",
+  --         "prettier",
+  --       },
+  --       automatic_installation = true,
+  --     })
+  --   end,
+  -- },
+}

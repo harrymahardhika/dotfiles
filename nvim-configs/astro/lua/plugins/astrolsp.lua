@@ -1,5 +1,3 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
 -- AstroLSP allows you to customize the features in AstroNvim's LSP configuration engine
 -- Configuration documentation can be found with `:h astrolsp`
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
@@ -23,6 +21,7 @@ return {
         enabled = true, -- enable or disable format on save globally
         allow_filetypes = { -- enable format on save for specified filetypes only
           -- "go",
+          -- "php",
         },
         ignore_filetypes = { -- disable format on save for specified filetypes
           -- "python",
@@ -31,6 +30,10 @@ return {
       disabled = { -- disable formatting capabilities for the listed language servers
         -- disable lua_ls formatting capability if you want to use StyLua to format your lua code
         -- "lua_ls",
+        "intelephense",
+        "typescript-language-server",
+        "vue-language-server",
+        "volar",
       },
       timeout_ms = 30000, -- default format timeout
       -- filter = function(client) -- fully override the default formatting function
@@ -45,6 +48,17 @@ return {
     ---@diagnostic disable: missing-fields
     config = {
       -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
+      volar = {
+        filetypes = { "vue" },
+        init_options = {
+          vue = {
+            hybridMode = false,
+          },
+        },
+      },
+      ts_ls = {
+        filetypes = { "typescript", "javascript" }, -- ⛔ exclude vue
+      },
     },
     -- customize how language servers are attached
     handlers = {
@@ -54,6 +68,11 @@ return {
       -- the key is the server that is being setup with `lspconfig`
       -- rust_analyzer = false, -- setting a handler to false will disable the set up of that language server
       -- pyright = function(_, opts) require("lspconfig").pyright.setup(opts) end -- or a custom handler function can be passed
+      -- ts_ls = function(_, opts)
+      --   -- disable tsserver for vue files
+      --   opts.filetypes = { "typescript", "javascript" }
+      --   require("lspconfig").ts_ls.setup(opts)
+      -- end,
     },
     -- Configure buffer local auto commands to add when attaching a language server
     autocmds = {
