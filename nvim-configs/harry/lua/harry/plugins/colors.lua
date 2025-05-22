@@ -10,7 +10,9 @@ return {
         no_italic = true,
         integrations = {
           cmp = true,
+          copilot_vim = true,
           gitsigns = true,
+          grug_far = true,
           mini = {
             enabled = true,
             indentscope_color = "surface0",

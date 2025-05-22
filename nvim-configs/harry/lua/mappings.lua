@@ -40,3 +40,5 @@ map("v", "y", '"+y', { noremap = true, silent = true })
 -- Paste from system clipboard
 map("n", "p", '"+p', { noremap = true, silent = true })
 map("v", "p", '"+p', { noremap = true, silent = true })
+
+map("n", "<leader>ng", ":Neogit<CR>", opts)

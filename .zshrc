@@ -138,6 +138,7 @@ alias php80="sudo update-alternatives --set php /usr/bin/php8.0; sudo systemctl 
 alias php81="sudo update-alternatives --set php /usr/bin/php8.1; sudo systemctl stop php8.0-fpm.service; sudo systemctl stop php7.4-fpm.service; sudo systemctl start php8.1-fpm.service;"
 alias php82="sudo update-alternatives --set php /usr/bin/php8.2"
 alias php83="sudo update-alternatives --set php /usr/bin/php8.3"
+alias php84="sudo update-alternatives --set php /usr/bin/php8.4"
 alias pint="vendor/bin/pint"
 alias rekt="vendor/bin/rector"
 alias getrekt="vendor/bin/rector"
@@ -185,4 +186,4 @@ alias changelog="$HOME/scripts/changelog.sh"
 alias battery_limit="$HOME/scripts/battery_limit.sh"
 
 bindkey '^W' backward-kill-word
-
+bindkey '^U' backward-kill-line
