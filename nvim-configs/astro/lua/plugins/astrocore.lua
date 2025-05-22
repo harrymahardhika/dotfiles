@@ -77,6 +77,13 @@ return {
 
         -- setting a mapping to false will disable it
         -- ["<C-S>"] = false,
+        ["<C-j>"] = "10jzz", -- scroll down 10 lines
+        ["<C-k>"] = "10kzz", -- scroll up 10 lines
+      },
+    },
+    autocmds = {
+      disable_folding_ui = {
+        { event = { "BufEnter", "BufWinEnter" }, callback = function() vim.opt_local.foldcolumn = "0" end },
       },
     },
   },
