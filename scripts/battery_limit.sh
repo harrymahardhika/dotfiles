@@ -14,8 +14,8 @@ case "$1" in
     echo 60 | sudo tee "$THRESHOLD_FILE" > /dev/null
     ;;
   full)
-    echo "Setting battery charge limit to 100%"
-    echo 100 | sudo tee "$THRESHOLD_FILE" > /dev/null
+    echo "Setting battery charge limit to 95%"
+    echo 95 | sudo tee "$THRESHOLD_FILE" > /dev/null
     ;;
   status)
     echo "🔋 Battery Status:"

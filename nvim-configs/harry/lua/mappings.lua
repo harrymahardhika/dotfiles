@@ -42,3 +42,5 @@ map("n", "p", '"+p', { noremap = true, silent = true })
 map("v", "p", '"+p', { noremap = true, silent = true })
 
 map("n", "<leader>ng", ":Neogit<CR>", opts)
+map("n", "<leader>w", ":w<CR>", opts)
+map("n", "<leader>wa", ":wa<CR>", opts)

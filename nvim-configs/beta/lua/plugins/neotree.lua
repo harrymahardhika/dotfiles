@@ -8,7 +8,6 @@ return {
   },
   lazy = false,
   keys = {
-    { "<leader>nf", ":Neotree float<CR>",   { desc = "Neotree float" } },
     { "<leader>e",  ":Neotree toggle<CR>",  { desc = "Toggle Neotree" } },
     { "<leader>nc", ":Neotree current<CR>", { desc = "Neotree current" } },
     { "<leader>nf", ":Neotree focus<CR>",   { desc = "Neotree focus" } },
@@ -16,10 +15,6 @@ return {
   },
   opts = {
     close_if_last_window = true,
-    source_selector = {
-      winbar = true,
-      statusline = nil,
-    },
-    window = { position = "right", }
+    window = { position = "float", }
   },
 }

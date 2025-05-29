@@ -183,7 +183,7 @@ assign [class="Spotify"] 10
 exec --no-startup-id /usr/bin/brave-browser-stable
 exec --no-startup-id /usr/bin/google-chrome-stable
 # exec --no-startup-id /usr/bin/vesktop
-exec --no-startup-id /usr/bin/spotify
+# exec --no-startup-id /usr/bin/spotify
 
 # Screenshot thingy
 # bindsym $mod+Shift+p exec --no-startup-id "killall picom && maim -s -u | xclip -selection clipboard -t image/png -i && $HOME/.config/picom/launch.sh"

@@ -1,0 +1,8 @@
+{
+  "$schema": "/home/harry/lsp/phpactor/phpactor.schema.json",
+  "language_server_php_cs_fixer.enabled": false,
+  "language_server_phpstan.enabled": true,
+  "language_server_psalm.enabled": false,
+  "language_server_reference_reference_finder.reference_timeout": 60,
+  "language_server_worse_reflection.diagnostics.enable": false
+}
