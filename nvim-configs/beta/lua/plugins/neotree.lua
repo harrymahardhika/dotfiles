@@ -15,6 +15,14 @@ return {
   },
   opts = {
     close_if_last_window = true,
-    window = { position = "float", }
+    filesystem = {
+      filtered_items = {
+        visible = true,
+        hide_dotfiles = false,
+      },
+    },
+    window = {
+      position = "float",
+    }
   },
 }
