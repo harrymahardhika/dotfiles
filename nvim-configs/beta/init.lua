@@ -20,3 +20,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins")
+
+vim.api.nvim_create_user_command("BufOnly", function()
+  vim.cmd('silent! %bd | e# | bd#')
+end, {})

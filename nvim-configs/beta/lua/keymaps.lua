@@ -4,6 +4,7 @@ vim.g.maplocalleader = "\\"
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
+
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Exit terminal mode" })
 
@@ -12,17 +13,12 @@ map("n", "<C-k>", "10kzz", opts)
 map("n", "<C-d>", "<C-d>zz", opts)
 map("n", "<C-u>", "<C-u>zz", opts)
 
--- saving files
-map("n", "<leader>w", ":w<CR>", opts)
-map("n", "<leader>wa", ":wa<CR>", opts)
+map("n", "<leader>w", ":w<CR>", { desc = "Save current file", nowait = true })
 
 map("n", "<leader>l", ":Lazy<CR>", opts)
 
-map("n", "<leader>bd", ":bd! <CR>", opts)
-map("n", "<leader>bo", ":BufOnly <CR>", opts)
-
-map("n", "<leader>tn", ":tabnext<CR>", opts)
-map("n", "<leader>tp", ":tabprevious<CR>", opts)
+map("n", "<leader>bd", ":bd! <CR>", { desc = "Close current buffer" })
+map("n", "<leader>bo", ":BufOnly <CR>", { desc = "Close all other buffers" })
 
 -- Yank to system clipboard
 map("n", "y", '"+y', opts)

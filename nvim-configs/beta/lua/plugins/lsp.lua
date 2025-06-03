@@ -20,7 +20,7 @@ return {
       local lspconfig = require("lspconfig")
 
       lspconfig.lua_ls.setup({})
-      -- lspconfig.intelephense.setup({})
+      lspconfig.intelephense.setup({})
       lspconfig.phpactor.setup({})
 
       local vue_ls_path = vim.fn.expand("$HOME/.nvm/versions/node/v20.18.1/bin/vue-language-server")
