@@ -160,6 +160,7 @@ alias ggpp="git up; ggpush"
 alias merge="g co master; g merge develop; g co develop; g push --all"
 alias nah="git reset --hard; git clean -df"
 alias wip="git add . && git commit -m 'wip'"
+alias lg="lazygit"
 
 # Python and Django
 alias dje="source ~/.virtualenvs/djangoenv/bin/activate"
