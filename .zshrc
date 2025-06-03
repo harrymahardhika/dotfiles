@@ -43,6 +43,9 @@ export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$GOPATH/bin
 
+export EDITOR="nvim"
+export VISUAL="nvim"
+
 # Tmux 256-color
 [[ -n $TMUX ]] && export TERM="screen-256color"
 
