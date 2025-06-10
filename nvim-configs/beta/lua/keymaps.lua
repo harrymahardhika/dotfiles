@@ -27,3 +27,5 @@ map("v", "y", '"+y', opts)
 -- Paste from system clipboard
 map("n", "p", '"+p', opts)
 map("v", "p", '"+p', opts)
+
+map("n", "-", "<cmd>Oil<CR>", { desc = "Open file explorer" })

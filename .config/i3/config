@@ -26,6 +26,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 # Window management
 floating_modifier $mod
 bindsym $mod+Return exec kitty
+# bindsym $mod+Return exec ghostty
 # bindsym $mod+Shift+Return exec $HOME/.config/kitty/launch.sh --tmux
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+w exec --no-startup-id ~/scripts/set-wallpaper.sh
@@ -189,6 +190,9 @@ exec --no-startup-id /usr/bin/google-chrome-stable
 # bindsym $mod+Shift+p exec --no-startup-id "killall picom && maim -s -u | xclip -selection clipboard -t image/png -i && $HOME/.config/picom/launch.sh"
 bindsym $mod+Shift+p exec --no-startup-id "/usr/bin/flameshot gui"
 
+# polybar toggle
+bindsym $mod+b exec --no-startup-id "polybar-msg cmd toggle"
+
 # catppuccin theme
 set $rosewater #f5e0dc
 set $flamingo #f2cdcd
@@ -217,10 +221,10 @@ set $base #1e1e2e
 set $mantle #181825
 set $crust #11111b
 
-# target                 title     bg         text   indicator  border
-client.focused           $lavender $lavender  $base  $rosewater $lavender
-client.focused_inactive  $overlay0 $base      $text  $rosewater $base
-client.unfocused         $overlay0 $base      $text  $rosewater $base
-client.urgent            $peach    $base      $peach $overlay0  $peach
-client.placeholder       $overlay0 $base      $text  $overlay0  $base
+# target                 title     bg         text      indicator  border
+client.focused           $lavender $crust     $text     $rosewater $lavender
+client.focused_inactive  $overlay0 $base      $text     $rosewater $base
+client.unfocused         $overlay0 $base      $text     $rosewater $base
+client.urgent            $peach    $base      $peach    $overlay0  $peach
+client.placeholder       $overlay0 $base      $text     $overlay0  $base
 client.background        $base

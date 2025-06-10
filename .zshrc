@@ -97,7 +97,8 @@ alias ddp="npm dedupe && npm prune"
 alias flushdns="sudo systemd-resolve --flush-caches"
 alias gilelundro="sapu"
 alias home="cd ~"
-alias jsf="npm run format; npm run lint; npm run type-check"
+alias jsf="npm run format && npm run lint && npm run type-check"
+alias pjsf="pnpm format && pnpm lint && pnpm type-check"
 alias kocheng="cat"
 alias kochenk="cat"
 alias npmi="npm install"
@@ -191,3 +192,15 @@ alias battery_limit="$HOME/scripts/battery_limit.sh"
 
 bindkey '^W' backward-kill-word
 bindkey '^U' backward-kill-line
+
+# pnpm
+export PNPM_HOME="/home/harry/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+if [[ "$TERM_PROGRAM" == "ghostty" ]]; then
+    export TERM=xterm-256color
+fi

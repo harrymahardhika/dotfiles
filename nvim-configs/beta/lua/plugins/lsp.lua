@@ -23,24 +23,34 @@ return {
       lspconfig.intelephense.setup({})
       lspconfig.phpactor.setup({})
 
-      local vue_ls_path = vim.fn.expand("$HOME/.nvm/versions/node/v20.18.1/bin/vue-language-server")
-      lspconfig.ts_ls.setup {
-        init_options = {
-          plugins = {
-            {
-              name = '@vue/typescript-plugin',
-              location = vue_ls_path,
-              languages = { 'vue' },
-            },
-          },
-        },
-      }
+      -- local vue_ls_path = vim.fn.expand("$HOME/.nvm/versions/node/v20.18.1/bin/vue-language-server")
+      -- lspconfig.ts_ls.setup {
+      --   init_options = {
+      --     plugins = {
+      --       {
+      --         name = '@vue/typescript-plugin',
+      --         location = vue_ls_path,
+      --         languages = { 'javascript', 'typescript', 'vue' },
+      --       },
+      --     },
+      --   },
+      -- }
 
-      lspconfig.volar.setup {
+      lspconfig.volar.setup({
+        filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'vue', },
         init_options = {
-          vue = { hybridMode = false, },
+          vue = {
+            hybridMode = false,
+          },
+          typescript = {
+            tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib"
+          }
         },
-      }
+      })
+
+      lspconfig.tailwindcss.setup({
+        filetypes = { 'html', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue', 'svelte' },
+      })
 
       -- cmp setup
       local cmp = require("cmp")

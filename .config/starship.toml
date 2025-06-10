@@ -1,8 +1,8 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 add_newline = false
-scan_timeout = 100
-command_timeout = 1000
+scan_timeout = 30
+command_timeout = 500
 
 palette = "catppuccin_mocha"
 
@@ -54,11 +54,10 @@ style = "bold red"
 format = '[[($all_status$ahead_behind )](fg:red)]($style)'
 
 [directory]
-truncation_length = 3
 style = "bold lavender"
 
-[time]
-disabled = false
-format = '[$time]($style) '
-time_format = '%R'
-utc_time_offset = '+7'
+# [time]
+# disabled = false
+# format = '[$time]($style) '
+# time_format = '%R'
+# utc_time_offset = '+7'
