@@ -37,7 +37,7 @@ return {
       -- }
 
       lspconfig.volar.setup({
-        filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'vue', },
+        filetypes = { 'javascript', 'typescript', 'vue', },
         init_options = {
           vue = {
             hybridMode = false,
@@ -49,7 +49,7 @@ return {
       })
 
       lspconfig.tailwindcss.setup({
-        filetypes = { 'html', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue', 'svelte' },
+        filetypes = { 'javascript', 'typescript', 'vue', 'svelte' },
       })
 
       -- cmp setup

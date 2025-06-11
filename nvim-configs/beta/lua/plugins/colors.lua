@@ -11,6 +11,7 @@ return {
         integrations = {
           cmp = true,
           copilot_vim = true,
+          flash = true,
           gitsigns = true,
           grug_far = true,
           mini = {
@@ -22,28 +23,11 @@ return {
           nvimtree = true,
           neotree = true,
           treesitter = true,
+          which_key = true,
         }
       })
 
       vim.cmd("colorscheme catppuccin")
     end
-  },
-  {
-    "folke/tokyonight.nvim",
-    priority = 1000,
-    opts = {
-      style = "moon", -- "storm", "night", "day"
-      transparent = true,
-      terminal_colors = true,
-      styles = {
-        comments = {},
-        functions = {},
-        keywords = {},
-        variables = {},
-      },
-    },
-    config = function()
-      -- vim.cmd.colorscheme("tokyonight")
-    end
-  },
+  }
 }

@@ -9,6 +9,7 @@ return {
         component_separators = "",
         icons_enabled = true,
         section_separators = { left = "", right = "" },
+        theme = "catppuccin",
       },
       sections = {
         -- lualine_a = { "mode" },
