@@ -1,0 +1,4 @@
+#!/bin/bash
+
+nohup google-chrome-stable --app="https://github.com" >/dev/null 2>&1 &
+

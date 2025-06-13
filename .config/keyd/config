@@ -30,4 +30,3 @@ l = right
 w = C-right
 # backward word
 b = C-left
-

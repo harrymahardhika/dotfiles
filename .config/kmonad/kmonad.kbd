@@ -1,0 +1,56 @@
+;; ~/.config/kmonad/kmonad.kbd
+
+(defcfg
+  input  (device-file "/dev/input/event3")  ;; Update this to your keyboard device
+  output (uinput-sink "KMonad output")
+  cmp-seq ralt    ;; Set the compose key to `RightAlt'
+  cmp-seq-delay 5 ;; 5ms delay between each compose-key sequence press
+
+  ;; Comment this is you don't want any command run when kmonad exits
+  fallthrough true
+  allow-cmd false  ;; Disable external commands for now
+)
+
+(defsrc
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet cmp  rctl
+)
+
+(deflayer base
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  @cap a    s    d    f    g    h    j    k    l    ;    '    ret
+  @sft z    x    c    v    b    n    m    ,    .    /    @sft
+  @ctl @met @alt           spc            @alt @met cmp  @ctl
+)
+
+(deflayer vim
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    @fw  e    r    t    y    u    i    o    p    [    ]    \
+  @cap a    s    d    f    g    left down up   rght ;    '    ret
+  @sft z    x    c    v    @bw  n    m    ,    .    /    @sft
+  @ctl @met @alt           spc            @alt @met cmp  @ctl
+)
+
+;; Define aliases for cleaner configuration
+(defalias
+  ;; Oneshot modifiers (equivalent to keyd's oneshot)
+  sft (sticky-key 500 lsft)  ;; oneshot shift
+  ctl (sticky-key 500 lctl)  ;; oneshot control
+  met (sticky-key 500 lmet)  ;; oneshot meta
+  alt (sticky-key 500 lalt)  ;; oneshot alt
+  rmet (sticky-key 500 rmet) ;; oneshot right meta (fixed right alt mapping)
+
+  ;; Capslock as tap-hold: tap for escape, hold for control + vim layer access
+  cap (tap-hold-next-release 200 esc (layer-toggle vim))
+
+  ;; Vim navigation (with Ctrl held)
+  fw  C-rght  ;; forward word (Ctrl+Right)
+  bw  C-left  ;; backward word (Ctrl+Left)
+)

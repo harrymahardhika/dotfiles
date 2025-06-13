@@ -32,7 +32,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+Shift+w exec --no-startup-id ~/scripts/set-wallpaper.sh
 
 # Application launcher
-bindsym $mod+d exec --no-startup-id dmenu_run -fn 'JetBrainsMono Nerd Font-10'
+bindsym $mod+d exec --no-startup-id dmenu_run -fn 'JetBrainsMono Nerd Font-9'
 
 # Navigation
 bindsym $mod+h focus left
@@ -142,27 +142,28 @@ gaps outer 0
 bindsym $mod+Shift+g gaps inner current set 0; gaps outer current set 0
 bindsym $mod+g gaps inner current plus 4;
 
-# Border settings
-default_border pixel 0
+default_border none
+default_floating_border none
+hide_edge_borders smart
 
 # Reload and restart
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # Lock Screen
 # bindsym $mod+Shift+x exec $HOME/.config/i3lock/lock.sh && systemctl suspend
 bindsym $mod+Shift+x exec systemctl suspend
 
 # Uncomment to enable resize mode shortcut
-# bindsym $mod+r mode "resize"
+bindsym $mod+r mode "resize"
 
 # Resize mode
 mode "resize" {
-    bindsym j resize shrink width 10 px or 10 ppt
-    bindsym k resize grow height 10 px or 10 ppt
-    bindsym l resize shrink height 10 px or 10 ppt
-    bindsym semicolon resize grow width 10 px or 10 ppt
+    bindsym h resize shrink width 10 px or 10 ppt
+    bindsym j resize grow height 10 px or 10 ppt
+    bindsym k resize shrink height 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
     bindsym Left resize shrink width 10 px or 10 ppt
     bindsym Down resize grow height 10 px or 10 ppt
     bindsym Up resize shrink height 10 px or 10 ppt
@@ -173,6 +174,7 @@ mode "resize" {
 
 # Assign apps to specific workspaces
 assign [class="Brave-browser"] 3
+assign [class="firefox"] 3
 assign [class="Google-chrome"] 4
 assign [class="vesktop"] 5
 assign [class="Nautilus"] 6
@@ -221,10 +223,10 @@ set $base #1e1e2e
 set $mantle #181825
 set $crust #11111b
 
-# target                 title     bg         text      indicator  border
-client.focused           $lavender $crust     $text     $rosewater $lavender
-client.focused_inactive  $overlay0 $base      $text     $rosewater $base
-client.unfocused         $overlay0 $base      $text     $rosewater $base
-client.urgent            $peach    $base      $peach    $overlay0  $peach
-client.placeholder       $overlay0 $base      $text     $overlay0  $base
+# target                 title     bg         text        indicator  border
+client.focused           $overlay0 $base      $yellow     $rosewater $base
+client.focused_inactive  $overlay0 $base      $overlay0   $rosewater $base
+client.unfocused         $overlay0 $base      $overlay0   $rosewater $base
+client.urgent            $peach    $base      $peach      $overlay0  $peach
+client.placeholder       $overlay0 $base      $text       $overlay0  $base
 client.background        $base

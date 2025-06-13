@@ -1,0 +1,5 @@
+#!/bin/bash
+
+nohup google-chrome-stable --app="https://open.spotify.com" >/dev/null 2>&1 &
+
+
