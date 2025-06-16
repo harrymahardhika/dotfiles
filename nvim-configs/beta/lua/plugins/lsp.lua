@@ -22,6 +22,7 @@ return {
       lspconfig.lua_ls.setup({})
       lspconfig.intelephense.setup({})
       lspconfig.phpactor.setup({})
+      lspconfig.biome.setup({})
 
       -- local vue_ls_path = vim.fn.expand("$HOME/.nvm/versions/node/v20.18.1/bin/vue-language-server")
       -- lspconfig.ts_ls.setup {
@@ -51,6 +52,10 @@ return {
       lspconfig.tailwindcss.setup({
         filetypes = { 'javascript', 'typescript', 'vue', 'svelte' },
       })
+
+      -- mapping for LSP
+      local opts = { noremap = true, silent = true }
+      vim.api.nvim_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
 
       -- cmp setup
       local cmp = require("cmp")

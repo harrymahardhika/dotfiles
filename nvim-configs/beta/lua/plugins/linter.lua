@@ -5,11 +5,11 @@ return {
     local lint = require("lint")
 
     lint.linters_by_ft = {
-      javascript = { 'eslint_d' },
+      javascript = { 'biomejs' },
       json = { 'jsonlint' },
       php = { 'phpstan' },
-      typescript = { 'eslint_d' },
-      vue = { 'eslint_d' },
+      typescript = { 'biomejs' },
+      vue = { 'biomejs' },
     }
 
 

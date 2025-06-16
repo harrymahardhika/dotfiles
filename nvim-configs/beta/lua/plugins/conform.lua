@@ -1,14 +1,20 @@
 return {
   "stevearc/conform.nvim",
-  event = { "LspAttach", "BufReadPost", "BufNewFile" },
+  event = {
+    -- "LspAttach",
+    -- "BufReadPost",
+    -- "BufNewFile"
+    "BufWritePre",
+  },
+  cmd = { "ConformInfo", "ConformFormat" },
   opts = {
     formatters_by_ft = {
       lua = { "stylua" },
-      javascript = { "prettierd" },
+      javascript = { "biome" },
       php = { "pint" },
       python = { "black", "isort", "autopep8" },
-      typescript = { "prettierd" },
-      vue = { "prettierd" },
+      typescript = { "biome" },
+      vue = { "biome" },
     },
     format_on_save = {
       timeout_ms = 10000,

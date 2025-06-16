@@ -28,4 +28,7 @@ map("v", "y", '"+y', opts)
 map("n", "p", '"+p', opts)
 map("v", "p", '"+p', opts)
 
+map("n", "<leader>/", "gc", { desc = "Toggle comment" })
 map("n", "-", "<cmd>Oil<CR>", { desc = "Open file explorer" })
+
+map("i", "jk", "<Esc>", { noremap = true, silent = true })

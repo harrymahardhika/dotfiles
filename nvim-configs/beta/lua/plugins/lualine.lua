@@ -6,16 +6,16 @@ return {
       options = {
         component_separators = "",
         icons_enabled = true,
-        section_separators = "",
+        section_separators = { left = '', right = '' },
         theme = "catppuccin",
       },
       sections = {
-        lualine_a = {},
-        lualine_b = { "branch", "diff", "diagnostics" },
-        lualine_c = { "filename" },
+        lualine_a = { "branch" },
+        lualine_b = { "filename" },
+        lualine_c = { "diff", "diagnostics" },
         lualine_x = {},
         lualine_y = { "progress" },
-        lualine_z = { "location" }
+        lualine_z = { "location", }
       },
     })
   end
