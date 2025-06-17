@@ -2,7 +2,7 @@
 ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load
-# ZSH_THEME="robbyrussell"
+ZSH_THEME="robbyrussell"
 
 # Default User
 DEFAULT_USER="harry"
@@ -18,6 +18,10 @@ plugins=(git composer git-flow)
 
 # Source oh-my-zsh
 source $ZSH/oh-my-zsh.sh
+
+# Source antidote
+source $HOME/.antidote/antidote.zsh
+antidote load
 
 # PATH customizations
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
@@ -56,33 +60,34 @@ fpath+=${ZDOTDIR:-~}/.zsh_functions
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+source /usr/share/nvm/init-nvm.sh
 
 # Initialize starship and zoxide
-eval "$(starship init zsh)"
-eval "$(zoxide init zsh)"
+# eval "$(starship init zsh)"
+# eval "$(zoxide init zsh)"
 
 # Init fzf
-source /usr/share/doc/fzf/examples/key-bindings.zsh
-source /usr/share/doc/fzf/examples/completion.zsh
+# source /usr/share/doc/fzf/examples/key-bindings.zsh
+# source /usr/share/doc/fzf/examples/completion.zsh
 
 # OS-specific zsh plugins
-if [ -f /etc/os-release ]; then
-  . /etc/os-release
-  case "$ID" in
-    arch)
-      source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-      source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-      ;;
-    ubuntu)
-      source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-      source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-      ;;
-    pop)
-      source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-      source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-      ;;
-  esac
-fi
+# if [ -f /etc/os-release ]; then
+#   . /etc/os-release
+#   case "$ID" in
+#     arch)
+#       source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#       source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+#       ;;
+#     ubuntu)
+#       source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#       source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+#       ;;
+#     pop)
+#       source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#       source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+#       ;;
+#   esac
+# fi
 
 # Aliases
 # General Aliases

@@ -1,0 +1,3 @@
+getantidote/use-omz
+unixorn/fzf-zsh-plugin
+z-shell/zsh-zoxide
