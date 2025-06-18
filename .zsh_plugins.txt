@@ -1,3 +1,5 @@
 getantidote/use-omz
 unixorn/fzf-zsh-plugin
 z-shell/zsh-zoxide
+zsh-users/zsh-syntax-highlighting
+axieax/zsh-starship

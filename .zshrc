@@ -2,7 +2,7 @@
 ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
 
 # Default User
 DEFAULT_USER="harry"
@@ -142,12 +142,6 @@ alias pcp="vendor/bin/pest --coverage-html coverage-report --parallel"
 alias pf="vendor/bin/pest --filter"
 alias pg="vendor/bin/pest --group"
 alias pp="vendor/bin/pest --parallel"
-alias php74="sudo update-alternatives --set php /usr/bin/php7.4; sudo systemctl stop php8.1-fpm.service; sudo systemctl stop php8.0-fpm.service; sudo systemctl start php7.4-fpm.service;"
-alias php80="sudo update-alternatives --set php /usr/bin/php8.0; sudo systemctl stop php8.1-fpm.service; sudo systemctl stop php7.4-fpm.service; sudo systemctl start php8.0-fpm.service;"
-alias php81="sudo update-alternatives --set php /usr/bin/php8.1; sudo systemctl stop php8.0-fpm.service; sudo systemctl stop php7.4-fpm.service; sudo systemctl start php8.1-fpm.service;"
-alias php82="sudo update-alternatives --set php /usr/bin/php8.2"
-alias php83="sudo update-alternatives --set php /usr/bin/php8.3"
-alias php84="sudo update-alternatives --set php /usr/bin/php8.4"
 alias getrekt="vendor/bin/rector"
 alias pint="vendor/bin/pint"
 alias rekt="vendor/bin/rector"
@@ -160,6 +154,27 @@ alias tf="vendor/bin/phpunit --filter"
 alias tg="vendor/bin/phpunit --group"
 alias tink="pa tinker"
 alias vendro="vendor/bin/pint && vendor/bin/pest"
+if [ -f /etc/os-release ]; then
+  . /etc/os-release
+  case "$ID" in
+    ubuntu)
+      alias php74="sudo update-alternatives --set php /usr/bin/php7.4; sudo systemctl stop php8.1-fpm.service; sudo systemctl stop php8.0-fpm.service; sudo systemctl start php7.4-fpm.service;"
+      alias php80="sudo update-alternatives --set php /usr/bin/php8.0; sudo systemctl stop php8.1-fpm.service; sudo systemctl stop php7.4-fpm.service; sudo systemctl start php8.0-fpm.service;"
+      alias php81="sudo update-alternatives --set php /usr/bin/php8.1; sudo systemctl stop php8.0-fpm.service; sudo systemctl stop php7.4-fpm.service; sudo systemctl start php8.1-fpm.service;"
+      alias php82="sudo update-alternatives --set php /usr/bin/php8.2"
+      alias php83="sudo update-alternatives --set php /usr/bin/php8.3"
+      alias php84="sudo update-alternatives --set php /usr/bin/php8.4"
+      ;;
+    pop)
+      alias php74="sudo update-alternatives --set php /usr/bin/php7.4; sudo systemctl stop php8.1-fpm.service; sudo systemctl stop php8.0-fpm.service; sudo systemctl start php7.4-fpm.service;"
+      alias php80="sudo update-alternatives --set php /usr/bin/php8.0; sudo systemctl stop php8.1-fpm.service; sudo systemctl stop php7.4-fpm.service; sudo systemctl start php8.0-fpm.service;"
+      alias php81="sudo update-alternatives --set php /usr/bin/php8.1; sudo systemctl stop php8.0-fpm.service; sudo systemctl stop php7.4-fpm.service; sudo systemctl start php8.1-fpm.service;"
+      alias php82="sudo update-alternatives --set php /usr/bin/php8.2"
+      alias php83="sudo update-alternatives --set php /usr/bin/php8.3"
+      alias php84="sudo update-alternatives --set php /usr/bin/php8.4"
+      ;;
+  esac
+fi
 
 # Symfony
 alias sc="php bin/console"
@@ -192,6 +207,7 @@ alias waybar_reload="pkill waybar && hyprctl dispatch exec waybar"
 # Custom Scripts
 alias change-wallpaper="$HOME/scripts/set-wallpaper.sh"
 alias nvim-switch="$HOME/scripts/nvim-switch.sh"
+alias php-switch="$HOME/scripts/php-switch.sh"
 alias updateall="$HOME/updateall"
 alias changelog="$HOME/scripts/changelog.sh"
 alias battery_limit="$HOME/scripts/battery_limit.sh"
@@ -210,3 +226,10 @@ esac
 if [[ "$TERM_PROGRAM" == "ghostty" ]]; then
     export TERM=xterm-256color
 fi
+
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 \
+--color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC \
+--color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
+--color=selected-bg:#45475A \
+--color=border:#313244,label:#CDD6F4"

@@ -12,33 +12,33 @@
 }
 
 #workspaces {
-  border-radius: 1rem;
-  margin: 5px;
+  border-radius: 0.8rem;
+  margin: 4px;
   background-color: @surface0;
-  margin-left: 1rem;
+  margin-left: 0.8rem;
 }
 
 #workspaces button {
   color: @lavender;
-  border-radius: 1rem;
-  padding: 0.2rem 1rem;
+  border-radius: 0.8rem;
+  padding: 0.2rem 0.4rem;
 }
 
 #workspaces button.active {
   color: @sky;
-  border-radius: 1rem;
+  border-radius: 0.8rem;
 }
 
 #workspaces button:hover {
   color: @sapphire;
-  border-radius: 1rem;
+  border-radius: 0.8rem;
 }
 
 #window {
   background-color: @surface0;
-  margin: 5px;
-  border-radius: 1em;
-  padding: 0.2rem 1rem;
+  margin: 4px;
+  border-radius: 0.8rem;
+  padding: 0.2rem 0.8rem;
 }
 
 #custom-music,
@@ -46,23 +46,27 @@
 #backlight,
 #clock,
 #battery,
+#cpu,
+#memory,
 #pulseaudio,
+#network,
+#custom-cpu_temp,
 #custom-lock,
 #custom-power {
   background-color: @surface0;
-  padding: 0.2rem 1rem;
-  margin: 5px 0;
+  padding: 0.2rem 0.8rem;
+  margin: 4px 0;
 }
 
 #clock {
   color: @blue;
-  border-radius: 0px 1rem 1rem 0px;
-  margin-right: 1rem;
+  border-radius: 0px 0.8rem 0.8rem 0px;
+  margin-right: 0.8rem;
 }
 
 #battery {
   color: @green;
-  border-radius: 1rem 0 0 1rem;
+  border-radius: 0.8rem 0 0 0.8rem;
 }
 
 #battery.charging {
@@ -82,27 +86,55 @@
 
 #pulseaudio {
   color: @maroon;
-  border-radius: 1rem 0px 0px 1rem;
-  margin-left: 1rem;
+  border-radius: 0.8rem 0px 0px 0.8rem;
+  margin-left: 0.8rem;
 }
 
 #custom-music {
   color: @mauve;
-  border-radius: 1rem;
+  border-radius: 0.8rem;
 }
 
 #custom-lock {
-  border-radius: 1rem 0px 0px 1rem;
+  border-radius: 0.8rem 0px 0px 0.8rem;
   color: @lavender;
 }
 
 #custom-power {
-  margin-right: 1rem;
-  border-radius: 1rem;
+  margin-right: 0.8rem;
+  border-radius: 0.8rem;
   color: @red;
 }
 
 #tray {
-  margin-right: 1rem;
-  border-radius: 1rem;
+  margin-right: 0.8rem;
+  border-radius: 0.8rem;
+}
+
+#cpu {
+  color: @blue;
+  border-radius: 0.8rem;
+  margin-right: 0.8rem;
+}
+
+#memory {
+  color: @blue;
+  border-radius: 0.8rem;
+  margin-right: 0.8rem;
+}
+
+#network {
+  color: @blue;
+  border-radius: 0.8rem;
+  margin-right: 0.8rem;
+}
+
+#custom-cpu_temp {
+  color: @blue;
+  border-radius: 0.8rem;
+  margin-right: 0.8rem;
+}
+
+#customer-cpu_temp.critical {
+  color: @red;
 }
