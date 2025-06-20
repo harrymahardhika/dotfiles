@@ -23,6 +23,7 @@ return {
       lspconfig.intelephense.setup({})
       lspconfig.phpactor.setup({})
       lspconfig.biome.setup({})
+      lspconfig.gopls.setup({})
 
       -- local vue_ls_path = vim.fn.expand("$HOME/.nvm/versions/node/v20.18.1/bin/vue-language-server")
       -- lspconfig.ts_ls.setup {

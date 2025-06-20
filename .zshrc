@@ -60,11 +60,11 @@ fpath+=${ZDOTDIR:-~}/.zsh_functions
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-source /usr/share/nvm/init-nvm.sh
+# source /usr/share/nvm/init-nvm.sh
 
 # Initialize starship and zoxide
 # eval "$(starship init zsh)"
-# eval "$(zoxide init zsh)"
+eval "$(zoxide init zsh)"
 
 # Init fzf
 # source /usr/share/doc/fzf/examples/key-bindings.zsh
@@ -233,3 +233,15 @@ export FZF_DEFAULT_OPTS=" \
 --color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
 --color=selected-bg:#45475A \
 --color=border:#313244,label:#CDD6F4"
+
+if [ -f /etc/os-release ]; then
+  . /etc/os-release
+  case "$ID" in
+    ubuntu)
+      [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+      ;;
+    pop)
+      [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+      ;;
+  esac
+fi

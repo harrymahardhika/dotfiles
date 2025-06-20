@@ -1,21 +1,22 @@
 [global]
 monitor = 0
 
-font = JetBrainsMono Nerd Font 9
+alignment = left
 corner_radius = 8
-frame_width = 2
+font = JetBrainsMono Nerd Font 9
+format = "<b>%s</b>\n%b"
 frame_color = "#89b4fa"
-separator_color = frame
+frame_width = 2
 highlight = "#89b4fa"
-transparency = 10
-padding = 8
 horizontal_padding = 16
 icon_position = left
 markup = full
-format = "<b>%s</b>\n%b"
-alignment = left
+max_icon_size = 48
+padding = 8
+separator_color = frame
+transparency = 10
+width = (0, 380)
 word_wrap = yes
-width = 380
 
 [urgency_low]
 background = "#1e1e2e"
