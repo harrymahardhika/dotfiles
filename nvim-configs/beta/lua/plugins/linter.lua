@@ -6,10 +6,13 @@ return {
 
     lint.linters_by_ft = {
       javascript = { 'biomejs' },
-      json = { 'jsonlint' },
-      php = { 'phpstan' },
       typescript = { 'biomejs' },
       vue = { 'biomejs' },
+      -- javascript = { 'eslint_d' },
+      -- typescript = { 'eslint_d' },
+      -- vue = { 'eslint_d' },
+      json = { 'jsonlint' },
+      php = { 'phpstan' },
     }
 
 

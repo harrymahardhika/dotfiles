@@ -10,11 +10,14 @@ return {
   opts = {
     formatters_by_ft = {
       lua = { "stylua" },
-      javascript = { "biome" },
       php = { "pint" },
       python = { "black", "isort", "autopep8" },
-      typescript = { "biome" },
-      vue = { "biome" },
+      -- javascript = { "biome" },
+      -- typescript = { "biome" },
+      -- vue = { "biome" },
+      javascript = { "prettierd" },
+      typescript = { "prettierd" },
+      vue = { "prettierd" },
     },
     format_on_save = {
       timeout_ms = 10000,

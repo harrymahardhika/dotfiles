@@ -38,7 +38,7 @@ return {
       --   },
       -- }
 
-      lspconfig.volar.setup({
+      lspconfig.vue_ls.setup({
         filetypes = { 'javascript', 'typescript', 'vue', },
         init_options = {
           vue = {
