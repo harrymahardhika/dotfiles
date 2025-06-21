@@ -30,16 +30,16 @@ return {
       --   init_options = {
       --     plugins = {
       --       {
-      --         name = '@vue/typescript-plugin',
+      --         name = "@vue/typescript-plugin",
       --         location = vue_ls_path,
-      --         languages = { 'javascript', 'typescript', 'vue' },
+      --         languages = { "javascript", "typescript", "vue" },
       --       },
       --     },
       --   },
       -- }
 
       lspconfig.vue_ls.setup({
-        filetypes = { 'javascript', 'typescript', 'vue', },
+        filetypes = { "javascript", "typescript", "vue", },
         init_options = {
           vue = {
             hybridMode = false,
@@ -51,7 +51,7 @@ return {
       })
 
       lspconfig.tailwindcss.setup({
-        filetypes = { 'javascript', 'typescript', 'vue', 'svelte' },
+        filetypes = { "javascript", "typescript", "vue", "svelte" },
       })
 
       -- mapping for LSP

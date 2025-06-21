@@ -31,7 +31,7 @@ return {
       vim.keymap.set("n", "<leader>f/", builtin.current_buffer_fuzzy_find, { desc = "Fuzzy Find in Current Buffer" })
       vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Recent" })
 
-      vim.keymap.set("n", "<leader>c", builtin.commands, { desc = "Commands" })
+      vim.keymap.set("n", "<leader>C", builtin.commands, { desc = "Commands" })
       vim.keymap.set("n", "<leader>:", builtin.command_history, { desc = "Command History" })
       vim.keymap.set("n", "<leader>r", builtin.registers, { desc = "Registers" })
       vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Help Tags" })

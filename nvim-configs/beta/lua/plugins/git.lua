@@ -1,7 +1,7 @@
 return {
   {
     "lewis6991/gitsigns.nvim",
-    event = 'VeryLazy',
+    event = "VeryLazy",
     config = function()
       require("gitsigns").setup({
         current_line_blame = true,
@@ -73,7 +73,7 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
-    -- setting the keybinding for LazyGit with 'keys' is recommended in
+    -- setting the keybinding for LazyGit with "keys" is recommended in
     -- order to load the plugin when the command is run for the first time
     keys = {
       { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" }

@@ -9,7 +9,7 @@ return {
       options = {
         component_separators = "",
         icons_enabled = true,
-        section_separators = { left = '', right = '' },
+        section_separators = { left = "", right = "" },
         theme = "catppuccin",
       },
       sections = {

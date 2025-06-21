@@ -5,16 +5,15 @@ return {
     local lint = require("lint")
 
     lint.linters_by_ft = {
-      javascript = { 'biomejs' },
-      typescript = { 'biomejs' },
-      vue = { 'biomejs' },
-      -- javascript = { 'eslint_d' },
-      -- typescript = { 'eslint_d' },
-      -- vue = { 'eslint_d' },
-      json = { 'jsonlint' },
-      php = { 'phpstan' },
+      javascript = { "biomejs" },
+      typescript = { "biomejs" },
+      vue = { "biomejs" },
+      -- javascript = { "eslint_d" },
+      -- typescript = { "eslint_d" },
+      -- vue = { "eslint_d" },
+      json = { "jsonlint" },
+      php = { "phpstan" },
     }
-
 
     vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost" }, {
       callback = function()
