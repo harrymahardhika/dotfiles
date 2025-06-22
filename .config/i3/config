@@ -9,7 +9,7 @@ font pango:JetBrainsMono Nerd Font 8
 # Autostart applications
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-exec --no-startup-id nm-applet
+# exec --no-startup-id nm-applet
 exec --no-startup-id $HOME/.config/i3/screen-settings.sh
 exec --no-startup-id $HOME/.config/i3/xinput-settings.sh
 exec --no-startup-id $HOME/.config/picom/launch.sh
@@ -24,7 +24,8 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Variables
-set $terminal kitty
+# set $terminal kitty
+set $terminal kitty -o font_size=11.5
 set $browser firefox
 set $file_manager nautilus
 
@@ -94,18 +95,7 @@ set $ws9 "9"
 set $ws10 "10"
 
 # Assign workspaces to outputs
-workspace $ws1 output HDMI-2
-workspace $ws2 output HDMI-2
-workspace $ws3 output HDMI-2
-workspace $ws4 output HDMI-2
-workspace $ws5 output HDMI-2
-workspace $ws6 output HDMI-2
-workspace $ws7 output HDMI-2
-workspace $ws8 output HDMI-2
-workspace $ws9 output HDMI-2
-workspace $ws10 output eDP-1
-
-# workspace $ws1 output eDP-1
+# workspace $ws1 output HDMI-2
 # workspace $ws2 output HDMI-2
 # workspace $ws3 output HDMI-2
 # workspace $ws4 output HDMI-2
@@ -114,7 +104,18 @@ workspace $ws10 output eDP-1
 # workspace $ws7 output HDMI-2
 # workspace $ws8 output HDMI-2
 # workspace $ws9 output HDMI-2
-# workspace $ws10 output HDMI-2
+# workspace $ws10 output eDP-1
+
+workspace $ws1 output eDP-1
+workspace $ws2 output HDMI-2
+workspace $ws3 output HDMI-2
+workspace $ws4 output HDMI-2
+workspace $ws5 output HDMI-2
+workspace $ws6 output HDMI-2
+workspace $ws7 output HDMI-2
+workspace $ws8 output HDMI-2
+workspace $ws9 output HDMI-2
+workspace $ws10 output HDMI-2
 
 # Switch workspaces
 bindsym $mod+1 workspace number $ws1
@@ -188,11 +189,11 @@ assign [class="Nautilus"] 5
 assign [class="Spotify"] 10
 
 # Launch applications on startup
-exec --no-startup-id /usr/bin/kitty
+# exec --no-startup-id /usr/bin/kitty
 # exec --no-startup-id $HOME/.config/kitty/launch.sh --tmux
 # exec --no-startup-id /usr/bin/brave-browser-stable
 # exec --no-startup-id /usr/bin/firefox
-exec --no-startup-id /usr/bin/google-chrome-stable
+# exec --no-startup-id /usr/bin/google-chrome-stable
 # exec --no-startup-id /usr/bin/vesktop
 # exec --no-startup-id /usr/bin/spotify
 

@@ -66,29 +66,6 @@ export NVM_DIR="$HOME/.nvm"
 # eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 
-# Init fzf
-# source /usr/share/doc/fzf/examples/key-bindings.zsh
-# source /usr/share/doc/fzf/examples/completion.zsh
-
-# OS-specific zsh plugins
-# if [ -f /etc/os-release ]; then
-#   . /etc/os-release
-#   case "$ID" in
-#     arch)
-#       source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#       source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-#       ;;
-#     ubuntu)
-#       source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#       source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-#       ;;
-#     pop)
-#       source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#       source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-#       ;;
-#   esac
-# fi
-
 # Aliases
 # General Aliases
 # alias l="lc"
@@ -157,18 +134,7 @@ alias vendro="vendor/bin/pint && vendor/bin/pest"
 if [ -f /etc/os-release ]; then
   . /etc/os-release
   case "$ID" in
-    ubuntu)
-      alias php74="sudo update-alternatives --set php /usr/bin/php7.4; sudo systemctl stop php8.1-fpm.service; sudo systemctl stop php8.0-fpm.service; sudo systemctl start php7.4-fpm.service;"
-      alias php80="sudo update-alternatives --set php /usr/bin/php8.0; sudo systemctl stop php8.1-fpm.service; sudo systemctl stop php7.4-fpm.service; sudo systemctl start php8.0-fpm.service;"
-      alias php81="sudo update-alternatives --set php /usr/bin/php8.1; sudo systemctl stop php8.0-fpm.service; sudo systemctl stop php7.4-fpm.service; sudo systemctl start php8.1-fpm.service;"
-      alias php82="sudo update-alternatives --set php /usr/bin/php8.2"
-      alias php83="sudo update-alternatives --set php /usr/bin/php8.3"
-      alias php84="sudo update-alternatives --set php /usr/bin/php8.4"
-      ;;
-    pop)
-      alias php74="sudo update-alternatives --set php /usr/bin/php7.4; sudo systemctl stop php8.1-fpm.service; sudo systemctl stop php8.0-fpm.service; sudo systemctl start php7.4-fpm.service;"
-      alias php80="sudo update-alternatives --set php /usr/bin/php8.0; sudo systemctl stop php8.1-fpm.service; sudo systemctl stop php7.4-fpm.service; sudo systemctl start php8.0-fpm.service;"
-      alias php81="sudo update-alternatives --set php /usr/bin/php8.1; sudo systemctl stop php8.0-fpm.service; sudo systemctl stop php7.4-fpm.service; sudo systemctl start php8.1-fpm.service;"
+    debian|pop|ubuntu)
       alias php82="sudo update-alternatives --set php /usr/bin/php8.2"
       alias php83="sudo update-alternatives --set php /usr/bin/php8.3"
       alias php84="sudo update-alternatives --set php /usr/bin/php8.4"
@@ -223,9 +189,9 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-if [[ "$TERM_PROGRAM" == "ghostty" ]]; then
+# if [[ "$TERM_PROGRAM" == "ghostty" ]]; then
     export TERM=xterm-256color
-fi
+# fi
 
 export FZF_DEFAULT_OPTS=" \
 --color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 \
@@ -237,10 +203,7 @@ export FZF_DEFAULT_OPTS=" \
 if [ -f /etc/os-release ]; then
   . /etc/os-release
   case "$ID" in
-    ubuntu)
-      [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-      ;;
-    pop)
+    debian|pop|ubuntu)
       [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
       ;;
   esac

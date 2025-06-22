@@ -4,3 +4,4 @@ unixorn/fzf-zsh-plugin
 z-shell/zsh-zoxide
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-syntax-highlighting
+wbingli/zsh-wakatime

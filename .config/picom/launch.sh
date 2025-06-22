@@ -21,19 +21,9 @@ OS=$(get_os)
 # Launch picom with settings based on the detected distro
 case "$OS" in
   pop)
-    echo "Detected PopOS. Launching picom with Ubuntu-specific settings..."
     picom --config $HOME/.config/picom/picom.conf --experimental-backends &
     ;;
-  ubuntu)
-    echo "Detected Ubuntu. Launching picom with Ubuntu-specific settings..."
-    picom --config $HOME/.config/picom/picom.conf &
-    ;;
-  arch)
-    echo "Detected Arch Linux. Launching picom with Arch-specific settings..."
-    picom --config $HOME/.config/picom/picom.conf &
-    ;;
   *)
-    echo "Unknown or unsupported distro. Launching picom with default settings..."
     picom --config $HOME/.config/picom/picom.conf &
     ;;
 esac
