@@ -3,7 +3,7 @@
   email = harrymahardhika@gmail.com
 [core]
   excludesfile = /Users/harry/.gitignore_global
-  editor = /usr/bin/nvim
+  editor = /usr/local/bin/nvim
 [alias]
   c = commit
   cm = commit -m

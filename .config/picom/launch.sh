@@ -14,7 +14,7 @@ killall -q picom
 
 # Wait until the processes have been shut down
 # while pgrep -u $UID -x picom >/dev/null; do sleep 1; done
-sleep 1
+sleep 0.5
 
 OS=$(get_os)
 
@@ -24,7 +24,8 @@ case "$OS" in
     picom --config $HOME/.config/picom/picom.conf --experimental-backends &
     ;;
   *)
-    picom --config $HOME/.config/picom/picom.conf &
+    # picom --config $HOME/.config/picom/picom.conf &
+    picom --config ~/.config/picom/picom.conf --log-level=debug --log-file=~/.cache/picom.log &
     ;;
 esac
 

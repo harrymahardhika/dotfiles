@@ -8,7 +8,7 @@ if [ -f /etc/arch-release ]; then
     yay -Sua
 else
     # For Ubuntu/Pop!_OS-based systems
-    sudo systemctl stop packagekit.service
+    # sudo systemctl stop packagekit.service
     sudo apt update
     sudo apt upgrade -y
     sudo apt autopurge -y && sudo apt autoremove -y && sudo apt clean
@@ -17,5 +17,5 @@ fi
 # Common for both
 sudo composer global selfupdate
 composer global update -vv --profile
-sudo npm-check -gui
+npm-check -gui
 

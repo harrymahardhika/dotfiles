@@ -14,7 +14,7 @@ return {
             { path = "${3rd}/luv/library", words = { "vim%.uv" } },
           },
         },
-      }
+      },
     },
     config = function()
       local lspconfig = require("lspconfig")
@@ -39,14 +39,14 @@ return {
       -- }
 
       lspconfig.vue_ls.setup({
-        filetypes = { "javascript", "typescript", "vue", },
+        filetypes = { "javascript", "typescript", "vue" },
         init_options = {
           vue = {
             hybridMode = false,
           },
           typescript = {
-            tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib"
-          }
+            tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib",
+          },
         },
       })
 
@@ -80,5 +80,5 @@ return {
         },
       })
     end,
-  }
+  },
 }

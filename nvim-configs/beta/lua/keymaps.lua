@@ -5,7 +5,7 @@ local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 -- Command mode
-map("n", ";", ":", { desc = "CMD enter command mode" })
+-- map("n", ";", ":", { desc = "CMD enter command mode" })
 
 -- Terminal mode
 map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Exit terminal mode" })

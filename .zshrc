@@ -29,10 +29,10 @@ export PATH=$PATH:$HOME/.config/composer/vendor/bin
 export PATH=$PATH:$HOME/.composer/vendor/bin
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:/Users/harry/Library/Python/3.7/bin
-export PATH=$PATH:/home/harry/.local/bin
+export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/.rbenv/bin:$PATH
-export PATH=$PATH:/home/harry/Application/PhpStorm-221.5921.28/bin
-export PATH=$PATH:/home/harry/.cargo/bin/
+export PATH=$PATH:$HOME/Application/PhpStorm-221.5921.28/bin
+export PATH=$PATH:$HOME/.cargo/bin/
 export PATH=$PATH:/var/lib/flatpak/exports/bin:~/.local/share/flatpak/exports/bin
 
 # Additional environment variables
