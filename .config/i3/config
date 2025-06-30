@@ -1,36 +1,36 @@
 # i3 Config (v4)
 
-# Mod key
+### --- Mod key ---
 set $mod Mod4
 
-# Font
+### --- Font ---
 font pango:JetBrainsMono Nerd Font 8
 
-# Autostart applications
+### --- Variables ---
+set $terminal kitty -o font_size=10.5
+set $browser firefox
+set $file_manager nautilus
+
+### --- Autostart applications ---
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-# exec --no-startup-id nm-applet
 exec --no-startup-id $HOME/.config/i3/screen-settings.sh
 exec --no-startup-id $HOME/.config/i3/xinput-settings.sh
 exec --no-startup-id $HOME/.config/picom/launch.sh
 exec --no-startup-id feh --bg-scale --randomize ~/wallpapers
 exec --no-startup-id dunst
+exec --no-startup-id udiskie -n
+exec --no-startup-id dropbox start
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
-# Volume controls
+### --- Volume controls ---
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
-# Variables
-# set $terminal kitty
-set $terminal kitty -o font_size=10.5
-set $browser firefox
-set $file_manager nautilus
-
-# Window management
+### --- Window management ---
 floating_modifier $mod
 bindsym $mod+Return exec $terminal
 bindsym $mod+m exec $browser
@@ -39,8 +39,10 @@ bindsym $mod+Shift+w exec --no-startup-id ~/scripts/set-wallpaper.sh
 bindsym $mod+d exec --no-startup-id dmenu_run -fn 'JetBrainsMono Nerd Font-9'
 # bindsym $mod+d exec --no-startup-id rofi -show drun
 bindsym $mod+Shift+t exec --no-startup-id $HOME/.config/picom/toggle-transparency.sh
+bindsym $mod+a exec --no-startup-id google-chrome-stable --app=https://chatgpt.com
+bindsym $mod+Shift+a exec --no-startup-id google-chrome-stable --app=https://web.whatsapp.com
 
-# Navigation
+### --- Navigation (focus) ---
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
@@ -50,7 +52,7 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# Move windows
+### --- Move windows ---
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
@@ -60,26 +62,24 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# Split layout
+### --- Split layout ---
 bindsym $mod+Shift+b split h
 bindsym $mod+Shift+v split v
 
-# Fullscreen mode
+### --- Fullscreen & layout toggle ---
 bindsym $mod+f fullscreen toggle
-
-# Layout modes
-bindsym $mod+s layout stacking
+# bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
-# Floating windows toggle
+### --- Floating toggle ---
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
-# Focus parent/child containers
-bindsym $mod+a focus parent
+### --- Focus parent/child containers ---
+# bindsym $mod+a focus parent
 
-# Workspaces
+### --- Workspaces ---
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -91,18 +91,7 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-# Assign workspaces to outputs
-# workspace $ws1 output HDMI-2
-# workspace $ws2 output HDMI-2
-# workspace $ws3 output HDMI-2
-# workspace $ws4 output HDMI-2
-# workspace $ws5 output HDMI-2
-# workspace $ws6 output HDMI-2
-# workspace $ws7 output HDMI-2
-# workspace $ws8 output HDMI-2
-# workspace $ws9 output HDMI-2
-# workspace $ws10 output eDP-1
-
+### --- Assign workspaces to outputs ---
 workspace $ws1 output eDP-1
 workspace $ws2 output HDMI-2
 workspace $ws3 output HDMI-2
@@ -114,7 +103,7 @@ workspace $ws8 output HDMI-2
 workspace $ws9 output HDMI-2
 workspace $ws10 output HDMI-2
 
-# Switch workspaces
+### --- Switch workspaces ---
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
 bindsym $mod+3 workspace number $ws3
@@ -126,7 +115,7 @@ bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
 
-# Move windows to workspaces
+### --- Move windows to workspaces ---
 bindsym $mod+Shift+1 move container to workspace number $ws1
 bindsym $mod+Shift+2 move container to workspace number $ws2
 bindsym $mod+Shift+3 move container to workspace number $ws3
@@ -138,32 +127,33 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
+### --- Other workspace settings ---
 # workspace_auto_back_and_forth yes
+focus_follows_mouse yes
 
-# Gaps
+### --- Gaps ---
 gaps inner 4
 gaps outer 0
 
-# Toggle gaps back and forth
+### --- Toggle gaps ---
 bindsym $mod+Shift+g gaps inner current set 0; gaps outer current set 0
 bindsym $mod+g gaps inner current plus 4;
 
+### --- Borders ---
 default_border none
 default_floating_border none
 hide_edge_borders smart
 
-# Reload and restart
+### --- Reload, restart, exit ---
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
-# Lock Screen
+### --- Lock screen and suspend ---
 bindsym $mod+Shift+x exec systemctl suspend
 
-# Uncomment to enable resize mode shortcut
+### --- Resize mode ---
 bindsym $mod+r mode "resize"
-
-# Resize mode
 mode "resize" {
     bindsym h resize shrink width 10 px or 10 ppt
     bindsym j resize grow height 10 px or 10 ppt
@@ -177,15 +167,15 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 
-# Assign apps to specific workspaces
-assign [class="Brave-browser"] 2
-assign [class="firefox"] 2
-assign [class="Google-chrome"] 3
-assign [class="vesktop"] 4
-assign [class="Nautilus"] 5
-assign [class="Spotify"] 10
+### --- Assign apps to specific workspaces (commented) ---
+# assign [class="Brave-browser"] 2
+# assign [class="firefox"] 2
+# assign [class="Google-chrome"] 3
+# assign [class="vesktop"] 4
+# assign [class="Nautilus"] 5
+# assign [class="Spotify"] 10
 
-# Launch applications on startup
+### --- Launch applications on startup (commented) ---
 # exec --no-startup-id /usr/bin/kitty
 # exec --no-startup-id $HOME/.config/kitty/launch.sh --tmux
 # exec --no-startup-id /usr/bin/brave-browser-stable
@@ -194,42 +184,42 @@ assign [class="Spotify"] 10
 # exec --no-startup-id /usr/bin/vesktop
 # exec --no-startup-id /usr/bin/spotify
 
-# Screenshot thingy
+### --- Screenshot bindings ---
 # bindsym $mod+Shift+p exec --no-startup-id "/usr/bin/flameshot gui -c"
 bindsym $mod+Shift+p exec --no-startup-id "maim -s /tmp/screenshot.png && xclip -selection clipboard -t image/png -i /tmp/screenshot.png && rm /tmp/screenshot.png"
 
-# polybar toggle
+### --- Polybar toggle ---
 bindsym $mod+b exec --no-startup-id "polybar-msg cmd toggle"
 
-# catppuccin theme
-set $rosewater #f5e0dc
-set $flamingo #f2cdcd
-set $pink #f5c2e7
-set $mauve #cba6f7
-set $red #f38ba8
-set $maroon #eba0ac
-set $peach #fab387
-set $yellow #f9e2af
-set $green #a6e3a1
-set $teal #94e2d5
-set $sky #89dceb
-set $sapphire #74c7ec
-set $blue #89b4fa
-set $lavender #b4befe
-set $text #cdd6f4
-set $subtext1 #bac2de
-set $subtext0 #a6adc8
-set $overlay2 #9399b2
-set $overlay1 #7f849c
-set $overlay0 #6c7086
-set $surface2 #585b70
-set $surface1 #45475a
-set $surface0 #313244
-set $base #1e1e2e
-set $mantle #181825
-set $crust #11111b
+### --- Catppuccin theme colors ---
+set $rosewater   #f5e0dc
+set $flamingo    #f2cdcd
+set $pink       #f5c2e7
+set $mauve      #cba6f7
+set $red        #f38ba8
+set $maroon     #eba0ac
+set $peach      #fab387
+set $yellow     #f9e2af
+set $green      #a6e3a1
+set $teal       #94e2d5
+set $sky        #89dceb
+set $sapphire   #74c7ec
+set $blue       #89b4fa
+set $lavender   #b4befe
+set $text       #cdd6f4
+set $subtext1   #bac2de
+set $subtext0   #a6adc8
+set $overlay2   #9399b2
+set $overlay1   #7f849c
+set $overlay0   #6c7086
+set $surface2   #585b70
+set $surface1   #45475a
+set $surface0   #313244
+set $base       #1e1e2e
+set $mantle     #181825
+set $crust      #11111b
 
-# target                 title     bg         text        indicator  border
+### --- Client colors (for i3 windows) ---
 client.focused           $overlay0 $base      $yellow     $rosewater $base
 client.focused_inactive  $overlay0 $base      $overlay0   $rosewater $base
 client.unfocused         $overlay0 $base      $overlay0   $rosewater $base
