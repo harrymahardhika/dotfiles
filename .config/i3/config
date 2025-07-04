@@ -8,7 +8,7 @@ font pango:JetBrainsMono Nerd Font 8
 
 ### --- Variables ---
 set $terminal kitty -o font_size=10.5
-set $browser firefox
+set $browser brave-browser-stable
 set $file_manager nautilus
 
 ### --- Autostart applications ---
@@ -22,6 +22,7 @@ exec --no-startup-id dunst
 exec --no-startup-id udiskie -n
 exec --no-startup-id dropbox start
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id bash -c "while true; do \"$HOME/.config/i3/battery-warning.sh\"; sleep 60; done"
 
 ### --- Volume controls ---
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -39,8 +40,9 @@ bindsym $mod+Shift+w exec --no-startup-id ~/scripts/set-wallpaper.sh
 bindsym $mod+d exec --no-startup-id dmenu_run -fn 'JetBrainsMono Nerd Font-9'
 # bindsym $mod+d exec --no-startup-id rofi -show drun
 bindsym $mod+Shift+t exec --no-startup-id $HOME/.config/picom/toggle-transparency.sh
-bindsym $mod+a exec --no-startup-id google-chrome-stable --app=https://chatgpt.com
-bindsym $mod+Shift+a exec --no-startup-id google-chrome-stable --app=https://web.whatsapp.com
+bindsym $mod+a exec --no-startup-id brave-browser-stable --app=https://chatgpt.com
+bindsym $mod+Shift+a exec --no-startup-id brave-browser-stable --app=https://web.whatsapp.com
+bindsym $mod+t exec --no-startup-id brave-browser-stable --app=https://web.telegram.org
 
 ### --- Navigation (focus) ---
 bindsym $mod+h focus left
@@ -151,6 +153,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'This will end your X session
 
 ### --- Lock screen and suspend ---
 bindsym $mod+Shift+x exec systemctl suspend
+bindsym $mod+Escape exec --no-startup-id i3lock -i $HOME/wallpapers/wallpaper-12.png
 
 ### --- Resize mode ---
 bindsym $mod+r mode "resize"
@@ -168,10 +171,10 @@ mode "resize" {
 }
 
 ### --- Assign apps to specific workspaces (commented) ---
-# assign [class="Brave-browser"] 2
-# assign [class="firefox"] 2
+assign [class="Brave-browser"] 2
+assign [class="firefox"] 2
 # assign [class="Google-chrome"] 3
-# assign [class="vesktop"] 4
+assign [class="vesktop"] 4
 # assign [class="Nautilus"] 5
 # assign [class="Spotify"] 10
 
