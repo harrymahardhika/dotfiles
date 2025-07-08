@@ -49,6 +49,7 @@ export PATH=$PATH:$GOPATH/bin
 
 export EDITOR="nvim"
 export VISUAL="nvim"
+export PAGER="less"
 
 # Tmux 256-color
 [[ -n $TMUX ]] && export TERM="screen-256color"

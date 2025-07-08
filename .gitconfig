@@ -1,48 +1,107 @@
 [user]
   name = Harry Mahardhika
   email = harrymahardhika@gmail.com
+
 [core]
-  excludesfile = /Users/harry/.gitignore_global
+  autocrlf = input                # keep newlines as in input
+  compression = 9                 # trade CPU for network
   editor = /usr/local/bin/nvim
+  excludesfile = /Users/harry/.gitignore_global
+  fsync = none
+  preloadindex = true             # preload index for faster status
+  whitespace = error              # treat incorrect whitespace as errors
+
+[init]
+  defaultBranch = main
+
+[advice]                           # disable advices
+  addEmptyPathspec = false
+  pushNonFastForward = false
+  statusHints = false
+
 [alias]
+  amend = commit --amend -C HEAD
+  br = branch
   c = commit
   cm = commit -m
-  p = push
   co = checkout
-  st = status -sb
-  br = branch
-  amend = commit --amend -C HEAD
   ds = diff --staged
+  graph = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   lgg = log --graph --pretty='format:%C(red)%d%C(reset) %C(yellow)%h%C(reset) %ar %C(green)%aN%C(reset) %s'
-  tlog = log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative
+  p = push
+  st = status -sb
   standup = log --since '1 day ago' --oneline --author <harrymahardhika@gmail.com>
-  graph = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
+  tlog = log --stat --since='1 day ago' --graph --pretty=oneline --abbrev-commit --date=relative
   wtf = git-wtf -r -A
   zip = archive --format zip --output archive.zip master
-[push]
-  default = simple
-[color]
-  ui = true
+
+[blame]
+  coloring = highlightRecent
+  date = relative
+
+[color "blame"]
+  highlightRecent = black bold,1 year ago,white,1 month ago,default,7 days ago,blue
+
+[color "branch"]
+  current  = magenta
+  local    = default
+  plain    = blue
+  remote   = yellow
+  upstream = green
+
+[color "diff"]
+  context    = white
+  frag       = magenta
+  meta       = black bold
+  old        = red
+  whitespace = yellow reverse
+
+[color.decorate]
+  HEAD         = red
+  branch       = blue
+  remoteBranch = magenta
+  tag          = yellow
+
 [diff]
+  context = 3                        # less context in diffs
+  interHunkContext = 10              # merge near hunks in diffs
+  renames = copies                   # detect copies as renames in diffs
   tool = nvimdiff
+
 [merge]
   tool = nvimdiff
+
+[merge "ours"]
+  driver = true
+
 [filter "media"]
   clean = git-media-clean %f
   smudge = git-media-smudge %f
+
 [filter "lfs"]
   clean = git-lfs clean %f
   smudge = git-lfs smudge %f
   required = true
-[merge "ours"]
-  driver = true
-[init]
-  defaultBranch = main
+
+[interactive]
+  singlekey = true
+
+[log]
+  abbrevCommit = true                # short commits
+  graphColors = blue,yellow,cyan,magenta,green,red
+
 [pull]
   rebase = false
-[cola]
-  spellcheck = false
-  fontdiff = MesloLGS NF,11,-1,5,50,0,0,0,0,0
-  icontheme = default
-  theme = default
+
+[push]
+  autoSetupRemote = true             # easier to push new branches
+  default = current                  # push only current branch by default
+  followTags = true                  # push tags as well
+  gpgSign = false                    # remotes don't support signed pushes
+
+[status]
+  branch = true
+  short = true
+  showStash = true
+  showUntrackedFiles = all           # show individual untracked files

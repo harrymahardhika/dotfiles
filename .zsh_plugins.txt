@@ -1,7 +1,8 @@
 axieax/zsh-starship
 getantidote/use-omz
 unixorn/fzf-zsh-plugin
+wbingli/zsh-wakatime
 z-shell/zsh-zoxide
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-syntax-highlighting
-wbingli/zsh-wakatime
+

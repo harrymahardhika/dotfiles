@@ -17,42 +17,29 @@ return {
       },
     },
     config = function()
-      local lspconfig = require("lspconfig")
+      vim.lsp.enable("lua_ls")
+      vim.lsp.enable("intelephense")
+      vim.lsp.enable("phpactor")
+      vim.lsp.enable("biome")
+      vim.lsp.enable("gopls")
 
-      lspconfig.lua_ls.setup({})
-      lspconfig.intelephense.setup({})
-      lspconfig.phpactor.setup({})
-      lspconfig.biome.setup({})
-      lspconfig.gopls.setup({})
-
-      -- local vue_ls_path = vim.fn.expand("$HOME/.nvm/versions/node/v20.18.1/bin/vue-language-server")
-      -- lspconfig.ts_ls.setup {
-      --   init_options = {
-      --     plugins = {
-      --       {
-      --         name = "@vue/typescript-plugin",
-      --         location = vue_ls_path,
-      --         languages = { "javascript", "typescript", "vue" },
-      --       },
-      --     },
-      --   },
-      -- }
-
-      lspconfig.vue_ls.setup({
+      -- configuration for vue-language-server 2.2.x
+      vim.lsp.config("vue_ls", {
         filetypes = { "javascript", "typescript", "vue" },
         init_options = {
           vue = {
             hybridMode = false,
           },
-          typescript = {
-            tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib",
-          },
         },
       })
+      -- TODO: setup for vue-language-server 3.x
 
-      lspconfig.tailwindcss.setup({
+      vim.lsp.enable("vue_ls")
+
+      vim.lsp.config("tailwindcss", {
         filetypes = { "javascript", "typescript", "vue", "svelte" },
       })
+      vim.lsp.enable("tailwindcss")
 
       -- mapping for LSP
       local opts = { noremap = true, silent = true }

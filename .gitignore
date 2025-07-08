@@ -1,22 +1,22 @@
-.config/BraveSoftware
-.config/InputLeap
-.config/composer
-.config/conf
-.config/dconf
-.config/dolphinrc
-.config/fontconfig
-.config/github-copilot
-.config/go
-.config/google-chrome
-.config/htop
-.config/kde.org/
-.config/lnav
-.config/mimeapps.list
-.config/nvim
-.config/pavucontrol.ini
-.config/pgcli
-.config/pulse
-.config/session
-.config/trashrc
-.config/vesktop
-.local
+# .config/BraveSoftware
+# .config/InputLeap
+# .config/composer
+# .config/conf
+# .config/dconf
+# .config/dolphinrc
+# .config/fontconfig
+# .config/github-copilot
+# .config/go
+# .config/google-chrome
+# .config/htop
+# .config/kde.org/
+# .config/lnav
+# .config/mimeapps.list
+# .config/nvim
+# .config/pavucontrol.ini
+# .config/pgcli
+# .config/pulse
+# .config/session
+# .config/trashrc
+# .config/vesktop
+# .local
