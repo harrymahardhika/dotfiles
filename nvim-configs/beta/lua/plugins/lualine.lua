@@ -20,6 +20,14 @@ return {
         lualine_y = {},
         lualine_z = {}
       },
+      inactive_sections = {
+        lualine_a = { "fancy_branch" },
+        lualine_b = {},
+        lualine_c = { "filename" },
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {}
+      },
     })
   end
 }
