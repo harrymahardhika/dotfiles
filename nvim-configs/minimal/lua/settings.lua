@@ -1,0 +1,37 @@
+local o = vim.opt
+local g = vim.g
+
+o.autoindent = true
+o.autoread = true
+o.backup = false
+o.breakindent = true
+o.clipboard = "unnamedplus"
+o.cmdheight = 0
+o.encoding = "utf-8"
+o.expandtab = true
+o.fileencoding = "utf-8"
+o.foldcolumn = "0"
+o.foldenable = true
+o.foldlevel = 99
+o.foldlevelstart = 99
+o.foldmethod = "indent"
+o.hlsearch = false
+o.incsearch = true
+o.number = true
+o.relativenumber = true
+o.shiftwidth = 2
+o.smartindent = true
+o.smarttab = true
+o.splitbelow = true
+o.splitright = true
+o.swapfile = false
+o.tabstop = 2
+o.termguicolors = true
+o.title = true
+o.wrap = false
+
+g.netrw_browse_split = 0
+g.netrw_banner = 0
+g.netrw_winsize = 25
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1

@@ -1,71 +1,85 @@
 return {
-  {
-    "neovim/nvim-lspconfig",
-    event = "VeryLazy",
-    dependencies = {
-      { "hrsh7th/nvim-cmp" },
-      { "hrsh7th/cmp-nvim-lsp" },
-      { "L3MON4D3/LuaSnip" },
-      {
-        "folke/lazydev.nvim",
-        ft = "lua",
-        opts = {
-          library = {
-            { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-          },
+  "neovim/nvim-lspconfig",
+  event = "VeryLazy",
+  dependencies = {
+    {
+      "folke/lazydev.nvim",
+      ft = "lua",
+      opts = {
+        library = {
+          { path = "${3rd}/luv/library", words = { "vim%.uv" } },
         },
       },
     },
-    config = function()
-      vim.lsp.enable("lua_ls")
-      vim.lsp.enable("intelephense")
-      vim.lsp.enable("phpactor")
-      vim.lsp.enable("biome")
-      vim.lsp.enable("gopls")
+  },
+  config = function()
+    vim.lsp.enable("lua_ls")
+    vim.lsp.enable("intelephense")
+    vim.lsp.enable("phpactor")
+    -- vim.lsp.enable("biome")
+    vim.lsp.enable("gopls")
 
-      -- configuration for vue-language-server 2.2.x
-      vim.lsp.config("vue_ls", {
-        filetypes = { "javascript", "typescript", "vue" },
-        init_options = {
-          vue = {
-            hybridMode = false,
+    local vue_language_server_path = "/home/harry/.nvm/versions/node/v22.16.0/lib/node_modules/@vue/language-server"
+
+    local vue_plugin = {
+      name = "@vue/typescript-plugin",
+      location = vue_language_server_path,
+      languages = { "vue" },
+      configNamespace = "typescript",
+    }
+
+    local vtsls_config = {
+      settings = {
+        vtsls = {
+          tsserver = {
+            globalPlugins = {
+              vue_plugin,
+            },
           },
         },
-      })
-      -- TODO: setup for vue-language-server 3.x
+      },
+      filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+    }
 
-      vim.lsp.enable("vue_ls")
+    local vue_ls_config = {
+      on_init = function(client)
+        client.handlers["tsserver/request"] = function(_, result, context)
+          local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "vtsls" })
+          if #clients == 0 then
+            vim.notify("Could not find `vtsls` lsp client, `vue_ls` will not work.", vim.log.levels.ERROR)
+            return
+          end
 
-      vim.lsp.config("tailwindcss", {
-        filetypes = { "javascript", "typescript", "vue", "svelte" },
-      })
-      vim.lsp.enable("tailwindcss")
+          local ts_client = clients[1]
+          local param = unpack(result or {})
+          local id, command, payload = unpack(param or {})
 
-      -- mapping for LSP
-      local opts = { noremap = true, silent = true }
-      vim.api.nvim_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+          ts_client:exec_cmd({
+            title = "vue_request_forward",
+            command = "typescript.tsserverRequest",
+            arguments = { command, payload },
+          }, { bufnr = context.bufnr }, function(_, r)
+            if not r or not r.body then
+              vim.notify("vue_ls: failed to forward tsserverRequest", vim.log.levels.WARN)
+              return
+            end
+            client:notify("tsserver/response", { { id, r.body } })
+          end)
+        end
+      end,
+    }
 
-      -- cmp setup
-      local cmp = require("cmp")
-      local luasnip = require("luasnip")
+    vim.lsp.config("vtsls", vtsls_config)
+    vim.lsp.config("vue_ls", vue_ls_config)
+    vim.lsp.enable({ "vtsls", "vue_ls" })
 
-      cmp.setup({
-        snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
-          end,
-        },
-        mapping = cmp.mapping.preset.insert({
-          ["<CR>"] = cmp.mapping.confirm({ select = true }),
-          ["<C-Space>"] = cmp.mapping.complete(),
-        }),
-        sources = {
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
-          { name = "buffer" },
-          { name = "path" },
-        },
-      })
-    end,
-  },
+    vim.lsp.config("tailwindcss", {
+      filetypes = { "javascript", "typescript", "vue", "svelte" },
+    })
+    vim.lsp.enable("tailwindcss")
+
+    -- mapping for LSP
+    local opts = { noremap = true, silent = true }
+    vim.api.nvim_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+  end,
 }

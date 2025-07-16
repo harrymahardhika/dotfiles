@@ -2,8 +2,15 @@
 
 CONFIG_DIR="$HOME/nvim-configs"
 
-# Get all available configurations
-configs=($(ls -1 "$CONFIG_DIR"))
+# Get all available configurations and is directory
+# configs=($(ls -1 "$CONFIG_DIR"))
+
+configs=()
+for dir in "$CONFIG_DIR"/*; do
+  if [ -d "$dir" ]; then
+    configs+=("$(basename "$dir")")
+  fi
+done
 
 if [ ${#configs[@]} -eq 0 ]; then
   echo "No configurations found in $CONFIG_DIR"
