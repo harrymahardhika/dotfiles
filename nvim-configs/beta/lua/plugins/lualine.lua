@@ -18,16 +18,16 @@ return {
         lualine_c = { "filename" },
         lualine_x = { "fancy_macro", "location" },
         lualine_y = {},
-        lualine_z = {}
+        lualine_z = {},
       },
       inactive_sections = {
-        lualine_a = { "fancy_branch" },
+        lualine_a = {},
         lualine_b = {},
         lualine_c = { "filename" },
         lualine_x = {},
         lualine_y = {},
-        lualine_z = {}
+        lualine_z = {},
       },
     })
-  end
+  end,
 }

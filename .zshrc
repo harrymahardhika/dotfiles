@@ -2,7 +2,7 @@
 ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load
-# ZSH_THEME="robbyrussell"
+ZSH_THEME="robbyrussell"
 
 # Default User
 DEFAULT_USER="harry"
@@ -63,8 +63,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 # source /usr/share/nvm/init-nvm.sh
 
-# Initialize starship and zoxide
-# eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 
 # Aliases

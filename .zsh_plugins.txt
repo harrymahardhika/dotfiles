@@ -1,4 +1,3 @@
-axieax/zsh-starship
 getantidote/use-omz
 unixorn/fzf-zsh-plugin
 wbingli/zsh-wakatime

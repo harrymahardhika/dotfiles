@@ -81,5 +81,9 @@ return {
     -- mapping for LSP
     local opts = { noremap = true, silent = true }
     vim.api.nvim_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+
+    -- vim.diagnostic.config({
+    --   current_line = true,
+    -- })
   end,
 }

@@ -45,3 +45,29 @@ map("n", "<leader>cw", function()
   vim.cmd([[%s/\s\+$//e]])
   vim.api.nvim_win_set_cursor(0, pos)
 end, { desc = "Clean trailing whitespace" })
+
+local function copy_to_clipboard(label, value)
+  vim.fn.setreg("+", value)
+  vim.notify("📋 Copied " .. label .. ": " .. value, vim.log.levels.INFO, { title = "Copy Path" })
+end
+
+-- Actual key mappings
+vim.keymap.set("n", "<leader>cf", function()
+  copy_to_clipboard("full path", vim.fn.expand("%:p"))
+end, { desc = "Copy full file path" })
+
+vim.keymap.set("n", "<leader>cr", function()
+  copy_to_clipboard("relative path", vim.fn.expand("%"))
+end, { desc = "Copy relative file path" })
+
+vim.keymap.set("n", "<leader>cn", function()
+  copy_to_clipboard("file name", vim.fn.expand("%:t"))
+end, { desc = "Copy file name" })
+
+vim.keymap.set("n", "<leader>ce", function()
+  copy_to_clipboard("file name (no ext)", vim.fn.expand("%:t:r"))
+end, { desc = "Copy file name without extension" })
+
+vim.keymap.set("n", "<leader>cd", function()
+  copy_to_clipboard("directory", vim.fn.expand("%:p:h"))
+end, { desc = "Copy directory path" })
