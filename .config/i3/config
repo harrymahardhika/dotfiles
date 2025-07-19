@@ -7,7 +7,7 @@ set $mod Mod4
 font pango:JetBrainsMono Nerd Font 8
 
 ### --- Variables ---
-set $terminal kitty -o font_size=10.5
+set $terminal kitty
 set $browser brave-browser-stable
 set $file_manager nautilus
 
@@ -33,7 +33,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 
 ### --- Window management ---
 floating_modifier $mod
-bindsym $mod+Return exec $terminal
+bindsym $mod+Return exec $terminal -o font_size=10.5 -e tmux
 bindsym $mod+m exec $browser
 bindsym $mod+q kill
 bindsym $mod+Shift+w exec --no-startup-id ~/scripts/set-wallpaper.sh
@@ -41,8 +41,9 @@ bindsym $mod+d exec --no-startup-id dmenu_run -fn 'JetBrainsMono Nerd Font-9'
 # bindsym $mod+d exec --no-startup-id rofi -show drun
 bindsym $mod+Shift+t exec --no-startup-id $HOME/.config/picom/toggle-transparency.sh
 bindsym $mod+a exec --no-startup-id brave-browser-stable --app=https://chatgpt.com
-bindsym $mod+Shift+a exec --no-startup-id brave-browser-stable --app=https://web.whatsapp.com
-bindsym $mod+t exec --no-startup-id brave-browser-stable --app=https://web.telegram.org
+bindsym $mod+Shift+a exec --no-startup-id brave-browser-stable --app=https://ticktick.com/webapp
+bindsym $mod+s exec --no-startup-id brave-browser-stable --app=https://web.whatsapp.com
+bindsym $mod+Shift+s exec --no-startup-id brave-browser-stable --app=https://web.telegram.org
 
 ### --- Navigation (focus) ---
 bindsym $mod+h focus left
@@ -171,8 +172,8 @@ mode "resize" {
 }
 
 ### --- Assign apps to specific workspaces (commented) ---
-assign [class="Brave-browser"] 2
-assign [class="firefox"] 2
+# assign [class="Brave-browser"] 2
+# assign [class="firefox"] 2
 # assign [class="Google-chrome"] 3
 assign [class="vesktop"] 4
 # assign [class="Nautilus"] 5
