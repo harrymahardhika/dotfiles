@@ -1,9 +1,9 @@
 return {
   "stevearc/conform.nvim",
   event = {
-    -- "LspAttach",
-    -- "BufReadPost",
-    -- "BufNewFile"
+    "LspAttach",
+    "BufReadPost",
+    "BufNewFile",
     "BufWritePre",
   },
   cmd = { "ConformInfo", "ConformFormat" },
