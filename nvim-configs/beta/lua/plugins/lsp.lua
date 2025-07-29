@@ -11,6 +11,16 @@ return {
         },
       },
     },
+    {
+      "j-hui/fidget.nvim",
+      opts = {
+        notification = {
+          window = {
+            winblend = 0
+          }
+        }
+      },
+    }
   },
   config = function()
     vim.lsp.enable("lua_ls")
@@ -19,7 +29,7 @@ return {
     -- vim.lsp.enable("biome")
     vim.lsp.enable("gopls")
 
-    local vue_language_server_path = "/home/harry/.nvm/versions/node/v22.16.0/lib/node_modules/@vue/language-server"
+    local vue_language_server_path = "/home/harry/.nvm/versions/node/v22.17.1/lib/node_modules/@vue/language-server"
 
     local vue_plugin = {
       name = "@vue/typescript-plugin",

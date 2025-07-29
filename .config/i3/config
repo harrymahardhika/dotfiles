@@ -37,8 +37,8 @@ bindsym $mod+Return exec $terminal -o font_size=10.5 -e tmux
 bindsym $mod+m exec $browser
 bindsym $mod+q kill
 bindsym $mod+Shift+w exec --no-startup-id ~/scripts/set-wallpaper.sh
-bindsym $mod+d exec --no-startup-id dmenu_run -fn 'JetBrainsMono Nerd Font-9'
-# bindsym $mod+d exec --no-startup-id rofi -show drun
+# bindsym $mod+d exec --no-startup-id dmenu_run -fn 'JetBrainsMono Nerd Font-9'
+bindsym $mod+d exec --no-startup-id rofi -show drun
 bindsym $mod+Shift+t exec --no-startup-id $HOME/.config/picom/toggle-transparency.sh
 bindsym $mod+a exec --no-startup-id brave-browser-stable --app=https://chatgpt.com
 bindsym $mod+Shift+a exec --no-startup-id brave-browser-stable --app=https://ticktick.com/webapp
@@ -171,33 +171,19 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 
-### --- Assign apps to specific workspaces (commented) ---
-# assign [class="Brave-browser"] 2
-# assign [class="firefox"] 2
-# assign [class="Google-chrome"] 3
+### --- Assign apps to specific workspaces ---
 assign [class="vesktop"] 4
-# assign [class="Nautilus"] 5
-# assign [class="Spotify"] 10
-
-### --- Launch applications on startup (commented) ---
-# exec --no-startup-id /usr/bin/kitty
-# exec --no-startup-id $HOME/.config/kitty/launch.sh --tmux
-# exec --no-startup-id /usr/bin/brave-browser-stable
-# exec --no-startup-id /usr/bin/firefox
-# exec --no-startup-id /usr/bin/google-chrome-stable
-# exec --no-startup-id /usr/bin/vesktop
-# exec --no-startup-id /usr/bin/spotify
 
 ### --- Screenshot bindings ---
-# bindsym $mod+Shift+p exec --no-startup-id "/usr/bin/flameshot gui -c"
-bindsym $mod+Shift+p exec --no-startup-id "maim -s /tmp/screenshot.png && xclip -selection clipboard -t image/png -i /tmp/screenshot.png && rm /tmp/screenshot.png"
+bindsym $mod+Shift+p exec --no-startup-id "/usr/bin/flameshot gui -c"
+# bindsym $mod+Shift+p exec --no-startup-id "maim -s /tmp/screenshot.png && xclip -selection clipboard -t image/png -i /tmp/screenshot.png && rm /tmp/screenshot.png"
 
 ### --- Polybar toggle ---
 bindsym $mod+b exec --no-startup-id "polybar-msg cmd toggle"
 
 ### --- Catppuccin theme colors ---
-set $rosewater   #f5e0dc
-set $flamingo    #f2cdcd
+set $rosewater  #f5e0dc
+set $flamingo   #f2cdcd
 set $pink       #f5c2e7
 set $mauve      #cba6f7
 set $red        #f38ba8

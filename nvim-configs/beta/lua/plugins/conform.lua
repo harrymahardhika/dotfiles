@@ -11,7 +11,7 @@ return {
     formatters_by_ft = {
       lua = { "stylua" },
       php = { "pint" },
-      python = { "black", "isort", "autopep8" },
+      -- python = { "black", "isort", "autopep8" },
       -- javascript = { "biome" },
       -- typescript = { "biome" },
       -- vue = { "biome" },
