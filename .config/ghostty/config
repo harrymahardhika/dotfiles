@@ -1,11 +1,10 @@
-background-opacity = 0.95
 font-family = JetBrainsMono Nerd Font
-font-size = 11
+font-size = 10.8
 font-style = Medium
 gtk-titlebar = false
 shell-integration = zsh
 theme = catppuccin-mocha
-window-decoration = none
+window-decoration = server
 window-padding-balance = false
 window-padding-color = background
 window-padding-x = 0

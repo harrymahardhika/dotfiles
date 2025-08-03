@@ -143,7 +143,8 @@ bindsym $mod+Shift+g gaps inner current set 0; gaps outer current set 0
 bindsym $mod+g gaps inner current plus 4;
 
 ### --- Borders ---
-default_border none
+# default_border none
+default_border pixel 2
 default_floating_border none
 hide_edge_borders smart
 
@@ -210,7 +211,7 @@ set $mantle     #181825
 set $crust      #11111b
 
 ### --- Client colors (for i3 windows) ---
-client.focused           $overlay0 $base      $yellow     $rosewater $base
+client.focused           $overlay0 $base      $lavender   $rosewater $lavender
 client.focused_inactive  $overlay0 $base      $overlay0   $rosewater $base
 client.unfocused         $overlay0 $base      $overlay0   $rosewater $base
 client.urgent            $peach    $base      $peach      $overlay0  $peach

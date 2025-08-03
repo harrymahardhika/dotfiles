@@ -13,8 +13,6 @@ map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Exit terminal mode" })
 -- Scrolling with centering
 map("n", "<C-j>", "10jzz", opts)
 map("n", "<C-k>", "10kzz", opts)
-map("n", "<C-d>", "<C-d>zz", opts)
-map("n", "<C-u>", "<C-u>zz", opts)
 
 -- Save
 map("n", "<leader>w", ":w<CR>", { desc = "Save current file", silent = true })
@@ -39,19 +37,23 @@ map("n", "-", "<cmd>Oil<CR>", { desc = "Open file explorer" })
 -- jk to escape
 map("i", "jk", "<Esc>", opts)
 
--- 💡 Optional: Remove trailing whitespace manually
+-- Remove trailing whitespace manually
 map("n", "<leader>cw", function()
   local pos = vim.api.nvim_win_get_cursor(0)
   vim.cmd([[%s/\s\+$//e]])
   vim.api.nvim_win_set_cursor(0, pos)
 end, { desc = "Clean trailing whitespace" })
 
+-- Quickfix list navigation
+vim.keymap.set("n", "[q", "<cmd>cprev<CR>", { desc = "Previous Quickfix" })
+vim.keymap.set("n", "]q", "<cmd>cnext<CR>", { desc = "Next Quickfix" })
+
+-- Copy file paths to clipboard
 local function copy_to_clipboard(label, value)
   vim.fn.setreg("+", value)
   vim.notify("📋 Copied " .. label .. ": " .. value, vim.log.levels.INFO, { title = "Copy Path" })
 end
 
--- Actual key mappings
 vim.keymap.set("n", "<leader>cf", function()
   copy_to_clipboard("full path", vim.fn.expand("%:p"))
 end, { desc = "Copy full file path" })

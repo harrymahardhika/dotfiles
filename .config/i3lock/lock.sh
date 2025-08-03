@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set the image path
-IMAGE="$HOME/wallpapers/wallpaper-03.png"
+IMAGE="$HOME/wallpapers/wallpaper-12.png"
 
 # Get screen resolution (assumes single monitor setup)
 SCREEN_RES=$(xrandr | grep '*' | awk '{print $1}')
