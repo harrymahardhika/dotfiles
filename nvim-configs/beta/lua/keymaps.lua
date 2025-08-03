@@ -44,6 +44,14 @@ map("n", "<leader>cw", function()
   vim.api.nvim_win_set_cursor(0, pos)
 end, { desc = "Clean trailing whitespace" })
 
+vim.keymap.set("n", "]d", function()
+  vim.diagnostic.jump({ count = -1, float = true })
+end, { desc = "Next diagnostic" })
+
+vim.keymap.set("n", "[d", function()
+  vim.diagnostic.jump({ count = 1, float = true })
+end, { desc = "Previous diagnostic" })
+
 -- Quickfix list navigation
 vim.keymap.set("n", "[q", "<cmd>cprev<CR>", { desc = "Previous Quickfix" })
 vim.keymap.set("n", "]q", "<cmd>cnext<CR>", { desc = "Next Quickfix" })

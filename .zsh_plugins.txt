@@ -1,4 +1,4 @@
-Aloxaf/fzf-tab
+# Aloxaf/fzf-tab
 ohmyzsh/ohmyzsh path:plugins/common-aliases
 ohmyzsh/ohmyzsh path:plugins/git
 unixorn/fzf-zsh-plugin
@@ -8,3 +8,4 @@ zsh-users/zsh-autosuggestions
 zsh-users/zsh-completions
 zsh-users/zsh-syntax-highlighting
 
+romkatv/zsh-defer

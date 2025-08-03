@@ -5,9 +5,11 @@ export DEFAULT_USER="harry"
 source $HOME/.antidote/antidote.zsh
 antidote load < $HOME/.zsh_plugins.txt
 
-# Initialize Zsh completion system
-autoload -Uz compinit
-compinit
+# Async plugin loading (after prompt ready)
+zsh-defer source "${ANTIDOTE_CACHE_DIR:-$HOME/.cache/antidote}"/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+zsh-defer source "${ANTIDOTE_CACHE_DIR:-$HOME/.cache/antidote}"/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-completions/zsh-completions.plugin.zsh
+zsh-defer source "${ANTIDOTE_CACHE_DIR:-$HOME/.cache/antidote}"/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-autosuggestions/zsh-autosuggestions.zsh
+zsh-defer compinit -C
 
 # Load custom configuration
 for config_file in ~/.zsh/*.zsh; do

@@ -6,6 +6,8 @@ alias pint="vendor/bin/pint"
 alias seed="pa db:seed"
 alias tink="pa tinker"
 alias rl="php artisan route:list"
+alias pstan="vendor/bin/phpstan analyse"
+alias rekt="vendor/bin/rector"
 
 # PHP switchers
 alias php82="sudo update-alternatives --set php /usr/bin/php8.2"
