@@ -5,6 +5,10 @@ export DEFAULT_USER="harry"
 source $HOME/.antidote/antidote.zsh
 antidote load < $HOME/.zsh_plugins.txt
 
+# Initialize Zsh completion system
+autoload -Uz compinit
+compinit
+
 # Load custom configuration
 for config_file in ~/.zsh/*.zsh; do
   source "$config_file"

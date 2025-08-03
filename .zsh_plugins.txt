@@ -1,8 +1,10 @@
+Aloxaf/fzf-tab
+ohmyzsh/ohmyzsh path:plugins/common-aliases
+ohmyzsh/ohmyzsh path:plugins/git
 unixorn/fzf-zsh-plugin
 wbingli/zsh-wakatime
 z-shell/zsh-zoxide
 zsh-users/zsh-autosuggestions
+zsh-users/zsh-completions
 zsh-users/zsh-syntax-highlighting
-ohmyzsh/ohmyzsh path:plugins/git
-ohmyzsh/ohmyzsh path:plugins/common-aliases
 
