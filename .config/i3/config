@@ -7,7 +7,8 @@ set $mod Mod4
 font pango:JetBrainsMono Nerd Font 8
 
 ### --- Variables ---
-set $terminal kitty
+set $terminal kitty -o font_size=10.5 -e tmux
+# set $terminal ghostty
 set $browser brave-browser-stable
 set $file_manager nautilus
 
@@ -33,7 +34,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 
 ### --- Window management ---
 floating_modifier $mod
-bindsym $mod+Return exec $terminal -o font_size=10.5 -e tmux
+bindsym $mod+Return exec $terminal
 bindsym $mod+m exec $browser
 bindsym $mod+q kill
 bindsym $mod+Shift+w exec --no-startup-id ~/scripts/set-wallpaper.sh

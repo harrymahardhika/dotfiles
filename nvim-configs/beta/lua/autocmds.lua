@@ -1,6 +1,6 @@
 -- remove trailing whitespace and reformat before saving
 vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*",              -- Apply to all files
+  pattern = "*", -- Apply to all files
   command = ":%s/\\s\\+$//e", -- Remove trailing whitespace
 })
 
@@ -19,11 +19,15 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- set cmdheight to 1 when recording macros
--- vim.api.nvim_create_autocmd("RecordingEnter", {
---   callback = function() vim.opt.cmdheight = 1 end,
--- })
+vim.api.nvim_create_autocmd("RecordingEnter", {
+  callback = function()
+    vim.opt.cmdheight = 1
+  end,
+})
 
 -- set cmdheight to 0 when leaving recording macros
--- vim.api.nvim_create_autocmd("RecordingLeave", {
---   callback = function() vim.opt.cmdheight = 0 end,
--- })
+vim.api.nvim_create_autocmd("RecordingLeave", {
+  callback = function()
+    vim.opt.cmdheight = 0
+  end,
+})
