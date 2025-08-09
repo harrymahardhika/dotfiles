@@ -13,6 +13,9 @@ return {
         },
         no_italic = true,
         integrations = {
+          blink_cmp = {
+            style = "bordered",
+          },
           cmp = true,
           copilot_vim = true,
           flash = true,
