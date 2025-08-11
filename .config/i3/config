@@ -7,8 +7,7 @@ set $mod Mod4
 font pango:JetBrainsMono Nerd Font 8
 
 ### --- Variables ---
-set $terminal kitty -o font_size=10.5 -e tmux
-# set $terminal ghostty
+set $terminal kitty -e tmux
 set $browser brave-browser-stable
 set $file_manager nautilus
 
@@ -29,8 +28,8 @@ exec_always --no-startup-id bash -c "while true; do \"$HOME/.config/i3/battery-w
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute     exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 ### --- Window management ---
 floating_modifier $mod
@@ -38,7 +37,6 @@ bindsym $mod+Return exec $terminal
 bindsym $mod+m exec $browser
 bindsym $mod+q kill
 bindsym $mod+Shift+w exec --no-startup-id ~/scripts/set-wallpaper.sh
-# bindsym $mod+d exec --no-startup-id dmenu_run -fn 'JetBrainsMono Nerd Font-9'
 bindsym $mod+d exec --no-startup-id rofi -show drun
 bindsym $mod+Shift+t exec --no-startup-id $HOME/.config/picom/toggle-transparency.sh
 bindsym $mod+a exec --no-startup-id brave-browser-stable --app=https://chatgpt.com
@@ -46,14 +44,14 @@ bindsym $mod+Shift+a exec --no-startup-id brave-browser-stable --app=https://tic
 bindsym $mod+s exec --no-startup-id brave-browser-stable --app=https://web.whatsapp.com
 bindsym $mod+Shift+s exec --no-startup-id brave-browser-stable --app=https://web.telegram.org
 
-### --- Navigation (focus) ---
+### --- Navigation ---
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
+bindsym $mod+Left  focus left
+bindsym $mod+Down  focus down
+bindsym $mod+Up    focus up
 bindsym $mod+Right focus right
 
 ### --- Move windows ---
@@ -61,9 +59,9 @@ bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Left  move left
+bindsym $mod+Shift+Down  move down
+bindsym $mod+Shift+Up    move up
 bindsym $mod+Shift+Right move right
 
 ### --- Split layout ---
@@ -72,16 +70,12 @@ bindsym $mod+Shift+v split v
 
 ### --- Fullscreen & layout toggle ---
 bindsym $mod+f fullscreen toggle
-# bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 ### --- Floating toggle ---
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
-
-### --- Focus parent/child containers ---
-# bindsym $mod+a focus parent
 
 ### --- Workspaces ---
 set $ws1 "1"
@@ -132,19 +126,18 @@ bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
 ### --- Other workspace settings ---
-# workspace_auto_back_and_forth yes
 focus_follows_mouse yes
 
 ### --- Gaps ---
-gaps inner 4
+gaps inner 2
 gaps outer 0
+smart_gaps inverse_outer
 
 ### --- Toggle gaps ---
 bindsym $mod+Shift+g gaps inner current set 0; gaps outer current set 0
-bindsym $mod+g gaps inner current plus 4;
+bindsym $mod+g gaps inner current plus 2
 
 ### --- Borders ---
-# default_border none
 default_border pixel 2
 default_floating_border none
 hide_edge_borders smart
@@ -161,24 +154,23 @@ bindsym $mod+Escape exec --no-startup-id i3lock -i $HOME/wallpapers/wallpaper-12
 ### --- Resize mode ---
 bindsym $mod+r mode "resize"
 mode "resize" {
-    bindsym h resize shrink width 10 px or 10 ppt
-    bindsym j resize grow height 10 px or 10 ppt
-    bindsym k resize shrink height 10 px or 10 ppt
-    bindsym l resize grow width 10 px or 10 ppt
-    bindsym Left resize shrink width 10 px or 10 ppt
-    bindsym Down resize grow height 10 px or 10 ppt
-    bindsym Up resize shrink height 10 px or 10 ppt
-    bindsym Right resize grow width 10 px or 10 ppt
+    bindsym h      resize shrink width 10 px or 10 ppt
+    bindsym j      resize grow height 10 px or 10 ppt
+    bindsym k      resize shrink height 10 px or 10 ppt
+    bindsym l      resize grow width 10 px or 10 ppt
+    bindsym Left   resize shrink width 10 px or 10 ppt
+    bindsym Down   resize grow height 10 px or 10 ppt
+    bindsym Up     resize shrink height 10 px or 10 ppt
+    bindsym Right  resize grow width 10 px or 10 ppt
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 
-### --- Assign apps to specific workspaces ---
+### --- App assignments ---
 assign [class="vesktop"] 4
 
-### --- Screenshot bindings ---
+### --- Screenshot ---
 bindsym $mod+Shift+p exec --no-startup-id "/usr/bin/flameshot gui -c"
-# bindsym $mod+Shift+p exec --no-startup-id "maim -s /tmp/screenshot.png && xclip -selection clipboard -t image/png -i /tmp/screenshot.png && rm /tmp/screenshot.png"
 
 ### --- Polybar toggle ---
 bindsym $mod+b exec --no-startup-id "polybar-msg cmd toggle"
@@ -211,10 +203,10 @@ set $base       #1e1e2e
 set $mantle     #181825
 set $crust      #11111b
 
-### --- Client colors (for i3 windows) ---
-client.focused           $overlay0 $base      $lavender   $rosewater $lavender
-client.focused_inactive  $overlay0 $base      $overlay0   $rosewater $base
-client.unfocused         $overlay0 $base      $overlay0   $rosewater $base
-client.urgent            $peach    $base      $peach      $overlay0  $peach
-client.placeholder       $overlay0 $base      $text       $overlay0  $base
+### --- Client colors ---
+client.focused           $overlay0 $base $lavender $rosewater $lavender
+client.focused_inactive  $overlay0 $base $overlay0 $rosewater $base
+client.unfocused         $overlay0 $base $overlay0 $rosewater $base
+client.urgent            $peach    $base $peach    $overlay0  $peach
+client.placeholder       $overlay0 $base $text     $overlay0  $base
 client.background        $base
