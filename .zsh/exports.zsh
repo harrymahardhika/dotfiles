@@ -31,6 +31,9 @@ export PATH=$PATH:$GOPATH/bin
 export PNPM_HOME="$HOME/.local/share/pnpm"
 [[ ":$PATH:" != *":$PNPM_HOME:"* ]] && export PATH="$PNPM_HOME:$PATH"
 
+# opencode
+export PATH=/home/harry/.opencode/bin:$PATH
+
 # Terminal
 export TERM="xterm-256color"
 
