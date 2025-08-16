@@ -15,7 +15,7 @@ return {
         lualine_a = { "branch" },
         lualine_b = { "diff", "diagnostics" },
         lualine_c = { "filename" },
-        lualine_x = { "macro", "filetype", "location" },
+        lualine_x = { "filetype", "location" },
         lualine_y = {},
         lualine_z = {},
       },

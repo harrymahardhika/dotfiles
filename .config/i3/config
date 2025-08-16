@@ -7,7 +7,7 @@ set $mod Mod4
 font pango:JetBrainsMono Nerd Font 8
 
 ### --- Variables ---
-set $terminal kitty -e tmux
+set $terminal ghostty
 set $browser brave-browser-stable
 set $file_manager nautilus
 
@@ -148,8 +148,9 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 ### --- Lock screen and suspend ---
-bindsym $mod+Shift+x exec systemctl suspend
-bindsym $mod+Escape exec --no-startup-id i3lock -i $HOME/wallpapers/wallpaper-12.png
+# bindsym $mod+Shift+x exec systemctl suspend
+# bindsym $mod+Escape exec --no-startup-id i3lock -i $HOME/wallpapers/wallpaper-12.png
+bindsym $mod+Shift+x exec --no-startup-id i3lock -i $HOME/wallpapers/wallpaper-12.png
 
 ### --- Resize mode ---
 bindsym $mod+r mode "resize"

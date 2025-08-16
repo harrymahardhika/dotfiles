@@ -34,6 +34,3 @@ export PNPM_HOME="$HOME/.local/share/pnpm"
 # opencode
 export PATH=/home/harry/.opencode/bin:$PATH
 
-# Terminal
-export TERM="xterm-256color"
-
