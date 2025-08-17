@@ -5,16 +5,16 @@ gtk-titlebar = false
 shell-integration = zsh
 theme = catppuccin-mocha
 window-decoration = server
-window-padding-balance = false
+window-padding-balance = true
 window-padding-color = background
 window-padding-x = 0
 window-padding-y = 0
 window-save-state = always
 
-keybind = ctrl+h=goto_split:left
-keybind = ctrl+j=goto_split:bottom
-keybind = ctrl+k=goto_split:top
-keybind = ctrl+l=goto_split:right
+# keybind = ctrl+h=goto_split:left
+# keybind = ctrl+j=goto_split:bottom
+# keybind = ctrl+k=goto_split:top
+# keybind = ctrl+l=goto_split:right
 
 keybind = ctrl+a>h=new_split:left
 keybind = ctrl+a>j=new_split:down

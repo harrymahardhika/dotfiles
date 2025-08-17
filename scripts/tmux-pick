@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# List only windows (across all sessions)
+list() {
+  tmux list-windows -a -F $'W\t#{session_name}\t#{window_index}\t\t#{session_name}:#{window_index}  #{window_name}'
+}
+
+# Show labels (field 5) but keep raw row for parsing
+sel="$(list | fzf -e -d $'\t' --with-nth=5.. --prompt='❯ ' --reverse --height=100% || true)"
+[ -z "${sel:-}" ] && exit 0
+
+kind=$(printf '%s' "$sel" | cut -f1)
+sess=$(printf '%s' "$sel" | cut -f2)
+win=$( printf '%s' "$sel" | cut -f3)
+
+case "$kind" in
+  W) exec tmux switch-client -t "$sess:$win" ;;
+esac
