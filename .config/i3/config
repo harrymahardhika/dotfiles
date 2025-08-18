@@ -138,7 +138,8 @@ bindsym $mod+Shift+g gaps inner current set 0; gaps outer current set 0
 bindsym $mod+g gaps inner current plus 2
 
 ### --- Borders ---
-default_border pixel 2
+default_border none
+# default_border pixel 2
 default_floating_border none
 hide_edge_borders smart
 

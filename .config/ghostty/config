@@ -22,4 +22,4 @@ window-save-state = always
 # keybind = ctrl+a>f=toggle_split_zoom
 # keybind = ctrl+a>n=next_tab
 # keybind = ctrl+a>p=previous_tab
-keybind = super+r=reload_config
+# keybind = super+r=reload_config
