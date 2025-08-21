@@ -56,6 +56,7 @@ alias battery_limit="$HOME/scripts/battery_limit.sh"
 alias gcm="git commit -m"
 alias wip="git add . && git commit -m 'wip'"
 alias nah="git reset --hard; git clean -df"
+alias csd="gd --staged | xclip -sel clipboard"
 
 # Python/Django
 alias dje="source ~/.virtualenvs/djangoenv/bin/activate"
