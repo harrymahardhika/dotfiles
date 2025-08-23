@@ -16,4 +16,5 @@ if [ -n "$TOUCHPAD_ID" ]; then
     xinput set-prop "$TOUCHPAD_ID" "libinput Natural Scrolling Enabled" 1
     xinput set-prop "$TOUCHPAD_ID" "libinput Accel Speed" 0.5
     xinput set-prop "$TOUCHPAD_ID" "libinput Scroll Method Enabled" 0 0 1
+    xinput set-prop "$TOUCHPAD_ID" "libinput Disable While Typing Enabled" 1
 fi

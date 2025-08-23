@@ -1,5 +1,6 @@
-font-family = JetBrainsMono Nerd Font
-font-size = 10.8
+font-family = JetBrainsMono NFM
+# font-family = RobotoMono Nerd Font Md
+font-size = 10.5
 font-style = Medium
 gtk-titlebar = false
 shell-integration = zsh
