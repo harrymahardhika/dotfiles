@@ -1,3 +1,6 @@
+# General
+alias cl="clear"
+
 # Laravel
 alias getrekt="vendor/bin/rector"
 alias mig="pa migrate"

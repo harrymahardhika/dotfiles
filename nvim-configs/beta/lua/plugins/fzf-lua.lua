@@ -8,6 +8,10 @@ return {
       fzf.setup({
         winopts = {
           border = "rounded",
+          height = 0.5, -- 50% of total height
+          width = 1.0, -- full width
+          row = 1.0, -- align to bottom
+          col = 0.5, -- center horizontally
           preview = {
             layout = "flex",
             scrollbar = false,
