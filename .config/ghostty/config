@@ -1,7 +1,9 @@
 font-family = JetBrainsMono NFM
-# font-family = RobotoMono Nerd Font Md
+# font-family = RobotoMono Nerd Font
+# font-family = CommitMono Nerd Font
 font-size = 10.5
 font-style = Medium
+adjust-cell-height = 5%
 gtk-titlebar = false
 shell-integration = zsh
 theme = catppuccin-mocha
