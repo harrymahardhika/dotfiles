@@ -1,44 +1,44 @@
 @import "mocha.css";
 
 * {
-  font-family: JetbrainsMono Nerd Font;
+  font-family: JetBrainsMono Nerd Font Propo;
   font-size: 0.8rem;
   min-height: 0;
 }
 
 #waybar {
-  background: transparent;
+  background: @base;
   color: @text;
 }
 
 #workspaces {
-  border-radius: 0.8rem;
-  margin: 4px;
-  background-color: @surface0;
-  margin-left: 0.8rem;
+  border-radius: 0.4rem;
+  margin: 0;
+  margin-left: 0.4rem;
 }
 
 #workspaces button {
-  color: @lavender;
-  border-radius: 0.8rem;
+  color: @text;
+  border: none;
   padding: 0.2rem 0.4rem;
+  background: transparent;
 }
 
 #workspaces button.active {
-  color: @sky;
-  border-radius: 0.8rem;
+  color: @blue;
+  border-radius: 0.4rem;
 }
 
 #workspaces button:hover {
-  color: @sapphire;
-  border-radius: 0.8rem;
+  border: none;
+  background: transparent;
+  box-shadow: none;
 }
 
 #window {
-  background-color: @surface0;
-  margin: 4px;
-  border-radius: 0.8rem;
-  padding: 0.2rem 0.8rem;
+  margin: 0;
+  border-radius: 0.4rem;
+  padding: 0.2rem 0.4rem;
 }
 
 #custom-music,
@@ -53,20 +53,19 @@
 #custom-cpu_temp,
 #custom-lock,
 #custom-power {
-  background-color: @surface0;
   padding: 0.2rem 0.8rem;
-  margin: 4px 0;
+  margin: 0;
 }
 
 #clock {
   color: @blue;
-  border-radius: 0px 0.8rem 0.8rem 0px;
-  margin-right: 0.8rem;
+  border-radius: 0px 0.4rem 0.4rem 0px;
+  margin-right: 0.4rem;
 }
 
 #battery {
   color: @green;
-  border-radius: 0.8rem 0 0 0.8rem;
+  border-radius: 0.4rem 0 0 0.4rem;
 }
 
 #battery.charging {
@@ -86,53 +85,53 @@
 
 #pulseaudio {
   color: @maroon;
-  border-radius: 0.8rem 0px 0px 0.8rem;
-  margin-left: 0.8rem;
+  border-radius: 0.4rem 0px 0px 0.4rem;
+  margin-left: 0.4rem;
 }
 
 #custom-music {
   color: @mauve;
-  border-radius: 0.8rem;
+  border-radius: 0.4rem;
 }
 
 #custom-lock {
-  border-radius: 0.8rem 0px 0px 0.8rem;
+  border-radius: 0.4rem 0px 0px 0.4rem;
   color: @lavender;
 }
 
 #custom-power {
-  margin-right: 0.8rem;
-  border-radius: 0.8rem;
+  margin-right: 0.4rem;
+  border-radius: 0.4rem;
   color: @red;
 }
 
 #tray {
-  margin-right: 0.8rem;
-  border-radius: 0.8rem;
+  margin-right: 0.4rem;
+  border-radius: 0.4rem;
 }
 
 #cpu {
   color: @blue;
-  border-radius: 0.8rem;
-  margin-right: 0.8rem;
+  border-radius: 0.4rem;
+  margin-right: 0.4rem;
 }
 
 #memory {
   color: @blue;
-  border-radius: 0.8rem;
-  margin-right: 0.8rem;
+  border-radius: 0.4rem;
+  margin-right: 0.4rem;
 }
 
 #network {
   color: @blue;
-  border-radius: 0.8rem;
-  margin-right: 0.8rem;
+  border-radius: 0.4rem;
+  margin-right: 0.4rem;
 }
 
 #custom-cpu_temp {
   color: @blue;
-  border-radius: 0.8rem;
-  margin-right: 0.8rem;
+  border-radius: 0.4rem;
+  margin-right: 0.4rem;
 }
 
 #customer-cpu_temp.critical {

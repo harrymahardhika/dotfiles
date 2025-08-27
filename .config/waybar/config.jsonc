@@ -29,7 +29,8 @@
     ]
   },
   "clock": {
-    "format-alt": "{:%a, %d. %b  %H:%M}"
+    "format-alt": "{:%a, %d %b %H:%M}",
+    "tooltip-format": "{:%A, %d %B %Y}"
   },
   "hyprland/workspaces": {
     "format": "{icon}",
@@ -41,8 +42,7 @@
   },
   "cpu": {
     "format": "󰍛 {usage}%",
-    "tooltip": true,
-    "max-length": 8
+    "tooltip": true
   },
   "memory": {
     "format": " {used:0.1f}G/{total:0.1f}G",

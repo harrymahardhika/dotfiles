@@ -20,5 +20,6 @@
 # .config/trashrc
 # .config/vesktop
 # .local
-.config/btop
+.config/btop/*.conf
 nvim-configs/*/lazy-lock.json
+*.log
