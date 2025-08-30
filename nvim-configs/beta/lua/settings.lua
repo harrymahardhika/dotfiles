@@ -34,7 +34,9 @@ o.splitright = true
 o.swapfile = false
 o.tabstop = 2
 o.termguicolors = true
+o.timeoutlen = 500
 o.title = true
+o.ttimeoutlen = 0
 o.wrap = false
 
 g.netrw_browse_split = 0
