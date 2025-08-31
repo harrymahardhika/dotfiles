@@ -22,7 +22,16 @@ map("n", "<leader>l", ":Lazy<CR>", opts)
 
 -- Buffers
 map("n", "<leader>bd", ":bd!<CR>", { desc = "Close current buffer", silent = true })
-map("n", "<leader>bo", ":BufOnly<CR>", { desc = "Close all other buffers", silent = true })
+map("n", "<leader>bo", function()
+  local current = vim.api.nvim_get_current_buf()
+  local bufs = vim.api.nvim_list_bufs()
+
+  for _, buf in ipairs(bufs) do
+    if vim.api.nvim_buf_is_loaded(buf) and buf ~= current and vim.bo[buf].buftype ~= "terminal" then
+      vim.api.nvim_buf_delete(buf, { force = true })
+    end
+  end
+end, { desc = "Close all other buffers except terminals", silent = true })
 
 -- Yank and paste with system clipboard
 map({ "n", "v" }, "y", '"+y', opts)

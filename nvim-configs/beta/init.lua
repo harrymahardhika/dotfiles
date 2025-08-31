@@ -4,6 +4,11 @@ require("autocmds")
 require("float-term")
 -- require("float-notify")
 
+if vim.loader then
+  pcall(vim.loader.reset) -- drop stale index
+  pcall(vim.loader.enable, true)
+end
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -21,7 +26,3 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins")
-
-vim.api.nvim_create_user_command("BufOnly", function()
-  vim.cmd("silent! %bd | e# | bd#")
-end, {})

@@ -12,11 +12,11 @@ return {
         theme = "catppuccin",
       },
       sections = {
-        lualine_a = { "branch" },
-        lualine_b = { "diff", "diagnostics" },
-        lualine_c = { "filename" },
-        lualine_x = { "filetype", "location" },
-        lualine_y = {},
+        lualine_a = {},
+        lualine_b = { "branch", "diff" },
+        lualine_c = { "diagnostics" },
+        lualine_x = { "filename" },
+        lualine_y = { "filetype", "location" },
         lualine_z = {},
       },
       inactive_sections = {

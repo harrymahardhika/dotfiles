@@ -66,4 +66,3 @@ alias dje="source ~/.virtualenvs/djangoenv/bin/activate"
 alias p3="python3"
 alias pm="python3 manage.py"
 
-alias clear_nvim_cache="rm -rf $HOME/.local/share/nvim && rm -rf "$HOME/.local/state/nvim && rm -rf "$HOME/.cache/nvim"

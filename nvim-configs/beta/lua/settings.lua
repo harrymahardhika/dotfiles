@@ -9,7 +9,6 @@ o.backup = false
 o.breakindent = true
 o.clipboard = "unnamedplus"
 o.cmdheight = 0
-o.cursorline = true
 o.encoding = "utf-8"
 o.errorbells = false
 o.expandtab = true

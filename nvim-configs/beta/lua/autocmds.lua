@@ -31,3 +31,7 @@ vim.api.nvim_create_autocmd("RecordingLeave", {
     vim.opt.cmdheight = 0
   end,
 })
+
+vim.api.nvim_create_user_command("BufOnly", function()
+  vim.cmd("silent! %bd | e# | bd#")
+end, {})
