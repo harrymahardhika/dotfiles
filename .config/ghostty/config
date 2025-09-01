@@ -1,9 +1,9 @@
-font-family = JetBrainsMono Nerd Font
 # font-family = FiraCode Nerd Font
 # font-family = RobotoMono Nerd Font
+adjust-cell-height = 5%
+font-family = JetBrainsMono Nerd Font
 font-size = 10.5
 font-style = Medium
-adjust-cell-height = 5%
 gtk-titlebar = false
 shell-integration = zsh
 theme = catppuccin-mocha
@@ -14,15 +14,3 @@ window-padding-x = 0
 window-padding-y = 0
 window-save-state = always
 
-# keybind = ctrl+h=goto_split:left
-# keybind = ctrl+j=goto_split:bottom
-# keybind = ctrl+k=goto_split:top
-# keybind = ctrl+l=goto_split:right
-# keybind = ctrl+a>h=new_split:left
-# keybind = ctrl+a>j=new_split:down
-# keybind = ctrl+a>k=new_split:up
-# keybind = ctrl+a>l=new_split:right
-# keybind = ctrl+a>f=toggle_split_zoom
-# keybind = ctrl+a>n=next_tab
-# keybind = ctrl+a>p=previous_tab
-# keybind = super+r=reload_config
