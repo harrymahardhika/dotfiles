@@ -17,6 +17,7 @@ return {
       -- vue = { "biome" },
       javascript = { "prettierd" },
       typescript = { "prettierd" },
+      css = { "prettierd" },
       vue = { "prettierd" },
     },
     format_on_save = {

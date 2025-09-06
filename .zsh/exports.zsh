@@ -2,6 +2,7 @@
 export EDITOR="nvim"
 export VISUAL="nvim"
 export PAGER="less"
+export XDG_CONFIG_HOME="$HOME/.config"
 
 # Language/Locale
 export LANG="$LC_ALL"

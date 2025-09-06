@@ -13,6 +13,6 @@ configuration{
     sidebar-mode: true;
 }
 
-//@theme "catppuccin-mocha"
+@theme "catppuccin-mocha"
 
-@theme "/home/harry/.local/share/rofi/themes/catppuccin-mocha.rasi"
+// @theme "/home/harry/.local/share/rofi/themes/catppuccin-mocha.rasi"

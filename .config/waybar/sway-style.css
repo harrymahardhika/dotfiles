@@ -1,0 +1,70 @@
+@import "mocha.css";
+
+* {
+  font-family: "JetBrainsMono Nerd Font Propo", monospace;
+  font-size: 0.9rem;
+  border: none;
+  min-height: 0;
+}
+
+#waybar {
+  /* background: @base; */
+  background: transparent;
+  color: @text;
+}
+
+#clock,
+#battery,
+#cpu,
+#custom-cpu_temp,
+#memory,
+#pulseaudio,
+#network,
+#workspaces,
+#window {
+  padding: 0.2rem 0.6rem;
+  margin: 0.2rem;
+  background: @surface0;
+  border-radius: 0.4rem;
+}
+
+#workspaces {
+  padding-left: 0.4rem;
+  padding-right: 0;
+  margin-right: 0;
+  border-radius: 0.4rem 0 0 0.4rem;
+}
+
+#workspaces button {
+  color: @text;
+  border: none;
+  padding: 0.2rem 0.4rem;
+}
+
+#workspaces button.focused,
+#workspaces button.active {
+  color: @blue;
+}
+
+#workspaces button:hover {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+#window {
+  margin-left: 0;
+  border-radius: 0 0.4rem 0.4rem 0;
+  color: @blue;
+}
+
+#cpu {
+  border-radius: 0.4rem 0 0 0.4rem;
+  margin-right: 0;
+}
+
+#custom-cpu_temp {
+  border-radius: 0 0.4rem 0.4rem 0;
+  margin-left: 0;
+  padding-left: 0;
+}
