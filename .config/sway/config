@@ -17,6 +17,9 @@ exec --no-startup-id dropbox start
 exec_always pkill waybar
 exec_always waybar -c $HOME/.config/waybar/sway-config.jsonc -s $HOME/.config/waybar/sway-style.css
 
+# Set XDG desktop portal
+exec_always $HOME/scripts/set-xdg-desktop-portal.sh
+
 ### --- Idle settings ---
 exec_always swayidle -w \
     timeout 300 '$HOME/.config/sway/lock.sh' \

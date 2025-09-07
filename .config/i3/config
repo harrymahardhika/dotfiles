@@ -21,8 +21,12 @@ exec --no-startup-id feh --bg-scale --randomize ~/wallpapers
 exec --no-startup-id dunst
 exec --no-startup-id udiskie -n
 exec --no-startup-id dropbox start
+
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id bash -c "while true; do \"$HOME/.config/i3/battery-warning.sh\"; sleep 60; done"
+
+# Set XDG desktop portal
+exec_always --no-startup-id $HOME/scripts/set-xdg-desktop-portal.sh
 
 ### --- Volume controls ---
 set $refresh_i3status killall -SIGUSR1 i3status
