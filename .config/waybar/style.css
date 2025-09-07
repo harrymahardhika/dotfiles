@@ -4,29 +4,46 @@
   font-family: JetBrainsMono Nerd Font Propo;
   font-size: 0.8rem;
   min-height: 0;
+  border: none;
 }
 
 #waybar {
-  background: @base;
+  /* backgrounw: @base; */
+  background: transparent;
   color: @text;
 }
 
-#workspaces {
+#clock,
+#battery,
+#cpu,
+#custom-cpu_temp,
+#memory,
+#pulseaudio,
+#network,
+#workspaces,
+#window {
+  padding: 0.2rem 0.6rem;
+  margin: 0.2rem;
+  background: @surface0;
   border-radius: 0.4rem;
-  margin: 0;
-  margin-left: 0.4rem;
+}
+
+#workspaces {
+  padding-left: 0.4rem;
+  padding-right: 0;
+  margin-right: 0;
+  border-radius: 0.4rem 0 0 0.4rem;
 }
 
 #workspaces button {
   color: @text;
   border: none;
   padding: 0.2rem 0.4rem;
-  background: transparent;
 }
 
+#workspaces button.focused,
 #workspaces button.active {
   color: @blue;
-  border-radius: 0.4rem;
 }
 
 #workspaces button:hover {
@@ -36,102 +53,20 @@
 }
 
 #window {
-  margin: 0;
-  border-radius: 0.4rem;
-  padding: 0.2rem 0.4rem;
-}
-
-#custom-music,
-#tray,
-#backlight,
-#clock,
-#battery,
-#cpu,
-#memory,
-#pulseaudio,
-#network,
-#custom-cpu_temp,
-#custom-lock,
-#custom-power {
-  padding: 0.2rem 0.8rem;
-  margin: 0;
-}
-
-#clock {
+  margin-left: 0;
+  border-radius: 0 0.4rem 0.4rem 0;
   color: @blue;
-  border-radius: 0px 0.4rem 0.4rem 0px;
-  margin-right: 0.4rem;
-}
-
-#battery {
-  color: @green;
-  border-radius: 0.4rem 0 0 0.4rem;
-}
-
-#battery.charging {
-  color: @green;
-}
-
-#battery.warning:not(.charging) {
-  color: @red;
-}
-
-#backlight {
-  color: @yellow;
-}
-
-#backlight, #battery {
-}
-
-#pulseaudio {
-  color: @maroon;
-  border-radius: 0.4rem 0px 0px 0.4rem;
-  margin-left: 0.4rem;
-}
-
-#custom-music {
-  color: @mauve;
-  border-radius: 0.4rem;
-}
-
-#custom-lock {
-  border-radius: 0.4rem 0px 0px 0.4rem;
-  color: @lavender;
-}
-
-#custom-power {
-  margin-right: 0.4rem;
-  border-radius: 0.4rem;
-  color: @red;
-}
-
-#tray {
-  margin-right: 0.4rem;
-  border-radius: 0.4rem;
 }
 
 #cpu {
-  color: @blue;
-  border-radius: 0.4rem;
-  margin-right: 0.4rem;
-}
-
-#memory {
-  color: @blue;
-  border-radius: 0.4rem;
-  margin-right: 0.4rem;
-}
-
-#network {
-  color: @blue;
-  border-radius: 0.4rem;
-  margin-right: 0.4rem;
+  border-radius: 0.4rem 0 0 0.4rem;
+  margin-right: 0;
 }
 
 #custom-cpu_temp {
-  color: @blue;
-  border-radius: 0.4rem;
-  margin-right: 0.4rem;
+  border-radius: 0 0.4rem 0.4rem 0;
+  margin-left: 0;
+  padding-left: 0;
 }
 
 #customer-cpu_temp.critical {

@@ -3,7 +3,7 @@
 
   "modules-left": [
     "pulseaudio",
-    "network",
+    "network"
   ],
 
   "modules-center": [
