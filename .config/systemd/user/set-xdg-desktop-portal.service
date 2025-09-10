@@ -1,0 +1,18 @@
+[Unit]
+Description=Set correct XDG Desktop Portal backend
+After=graphical-session.target dbus.service
+# Avoid tight coupling that can cause stop/start conflicts:
+# (Remove any previous "Before=xdg-desktop-portal.service" line)
+
+[Service]
+Type=oneshot
+# small delay so sway session/socket is ready
+ExecStartPre=/bin/sleep 1
+ExecStart=%h/scripts/set-xdg-desktop-portal.sh
+TimeoutStartSec=15s
+RemainAfterExit=yes
+# ensure systemd doesn't kill our script when it stops other units
+KillMode=process
+
+[Install]
+WantedBy=default.target

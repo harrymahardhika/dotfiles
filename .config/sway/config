@@ -8,24 +8,22 @@ set $webapp $browser --app
 set $file_manager nautilus
 
 ### --- Autostart applications ---
-exec --no-startup-id "$HOME/.config/sway/set-wallpaper.sh"
+exec_always swayidle -w \
+            timeout 300 '$HOME/.config/sway/lock.sh' \
+            timeout 600 'swaymsg "output * dpms off"' \
+            resume 'swaymsg "output * dpms on"' \
+            before-sleep '$HOME/.config/sway/lock.sh'
+
+exec_always pkill waybar
+exec_always waybar -c $HOME/.config/waybar/sway-config.jsonc -s $HOME/.config/waybar/sway-style.css
+exec_always --no-startup-id bash -c "while true; do \"$HOME/.config/i3/battery-warning.sh\"; sleep 60; done"
+exec_always swww-daemon
+exec_always --no-startup-id "$HOME/.config/sway/set-wallpaper.sh"
+
+exec systemctl --user import-environment XDG_SESSION_TYPE XDG_CURRENT_DESKTOP WAYLAND_DISPLAY
 exec --no-startup-id dunst
 exec --no-startup-id udiskie -n
 exec --no-startup-id dropbox start
-
-# Kill old Waybar, then launch with Sway-specific config
-exec_always pkill waybar
-exec_always waybar -c $HOME/.config/waybar/sway-config.jsonc -s $HOME/.config/waybar/sway-style.css
-
-# Set XDG desktop portal
-exec_always $HOME/scripts/set-xdg-desktop-portal.sh
-
-### --- Idle settings ---
-exec_always swayidle -w \
-    timeout 300 '$HOME/.config/sway/lock.sh' \
-    timeout 600 'swaymsg "output * dpms off"' \
-    resume 'swaymsg "output * dpms on"' \
-    before-sleep '$HOME/.config/sway/lock.sh'
 
 ### --- Window management ---
 floating_modifier $mod
@@ -35,7 +33,7 @@ bindsym $mod+q kill
 bindsym $mod+Shift+w exec --no-startup-id $HOME/.config/sway/set-wallpaper.sh
 bindsym $mod+d exec --no-startup-id rofi -show drun
 bindsym $mod+Shift+t exec $HOME/.config/sway/toggle-transparency.sh
-bindsym $mod+Shift+x exec $HOME/.config/sway/lock.sh
+bindsym $mod+Shift+x exec wlogout -b 4
 bindsym $mod+b exec pkill -SIGUSR1 waybar
 
 bindsym $mod+a exec --no-startup-id brave-browser-stable --app=https://chatgpt.com

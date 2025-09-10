@@ -1,0 +1,24 @@
+{
+  "label": "lock",
+  "action": "$HOME/.config/sway/lock.sh",
+  "text": "Lock",
+  "keybind": "l"
+},
+{
+  "label": "logout",
+  "action": "swaymsg exit",
+  "text": "Logout",
+  "keybind": "e"
+}
+{
+  "label": "reboot",
+  "action": "systemctl reboot",
+  "text": "Reboot",
+  "keybind": "r"
+}
+{
+  "label": "shutdown",
+  "action": "systemctl poweroff",
+  "text": "Shutdown",
+  "keybind": "p"
+}

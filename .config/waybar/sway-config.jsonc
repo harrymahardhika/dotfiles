@@ -2,8 +2,9 @@
   "position": "top",
 
   "modules-left": [
+    "network",
     "pulseaudio",
-    "network"
+    "battery",
   ],
 
   "modules-center": [
@@ -15,7 +16,6 @@
     "memory",
     "cpu",
     "custom/cpu_temp",
-    "battery",
     "clock"
   ],
 
@@ -25,18 +25,27 @@
   },
 
   "sway/window": {
-    "max-length": 50,
-    "separate-outputs": true
+    "format": "{}",
+    "max-length": 60,
+    "separate-outputs": true,
+    "rewrite": {
+      "tmux(.*)": " tmux",
+      "": "(empty)"
+    }
   },
 
   "battery": {
-    "format": "{capacity}% {icon}",
+    "format": "{icon} {capacity}%",
+    "format-charging": "󰂅 {capacity}%",
+    "format-discharging": "{icon} {capacity}%",
+    "format-full": "󰂄 {capacity}%",
+    "format-plugged": "󰂄 {capacity}%",
     "format-icons": [
-      "",
-      "",
-      "",
-      "",
-      ""
+      "󰁺",  // 0–20%
+      "󰁼",  // 20–40%
+      "󰁾",  // 40–60%
+      "󰂀",  // 60–80%
+      "󰂂"   // 80–100%
     ]
   },
 
@@ -46,9 +55,10 @@
   },
 
   "pulseaudio": {
-    "format": "{volume}% ",
+    "format": " {volume}%",
     "format-muted": "󰖁 Muted",
-    "scroll-step": 5
+    "scroll-step": 5,
+    "on-click": "pavucontrol"
   },
 
   "cpu": {
@@ -57,9 +67,9 @@
   },
 
   "memory": {
-    "format": " {used:0.1f}G/{total:0.1f}G",
-    "tooltip": "{used} / {total} ({percent}%)",
-    "max-length": 16
+    "interval": 5,
+    "format": " {used:0.1f}G/{total:0.1f}G 易 {swapUsed:0.1f}G/{swapTotal:0.1f}G",
+    "tooltip": false
   },
 
   "temperature": {
@@ -79,7 +89,7 @@
     "format-ethernet": "󰈀  {ifname}",
     "format-disconnected": "󰖪  Disconnected",
     "tooltip-format": "{ipaddr}/{cidr}\nGateway: {gwaddr}",
-    "max-length": 25
+    "max-length": 40
   }
 }
 

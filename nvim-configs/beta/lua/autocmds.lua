@@ -35,3 +35,11 @@ vim.api.nvim_create_autocmd("RecordingLeave", {
 vim.api.nvim_create_user_command("BufOnly", function()
   vim.cmd("silent! %bd | e# | bd#")
 end, {})
+
+-- format json files on save
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.json",
+  callback = function()
+    vim.cmd("%!jq .")
+  end,
+})
