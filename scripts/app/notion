@@ -1,4 +1,4 @@
 #!/bin/bash
 
-nohup brave-browser-stable --app="https://www.notion.com" >/dev/null 2>&1 &
+nohup brave-browser-stable --app="https://www.notion.so" >/dev/null 2>&1 &
 

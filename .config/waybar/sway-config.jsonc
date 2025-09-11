@@ -1,29 +1,25 @@
 {
   "position": "top",
-
   "modules-left": [
     "network",
     "pulseaudio",
     "battery",
+    "backlight"
   ],
-
   "modules-center": [
     "sway/workspaces",
     "sway/window"
   ],
-
   "modules-right": [
     "memory",
     "cpu",
     "custom/cpu_temp",
     "clock"
   ],
-
   "sway/workspaces": {
     "disable-scroll": true,
     "format": "{icon}"
   },
-
   "sway/window": {
     "format": "{}",
     "max-length": 60,
@@ -33,7 +29,6 @@
       "": "(empty)"
     }
   },
-
   "battery": {
     "format": "{icon} {capacity}%",
     "format-charging": "󰂅 {capacity}%",
@@ -41,55 +36,55 @@
     "format-full": "󰂄 {capacity}%",
     "format-plugged": "󰂄 {capacity}%",
     "format-icons": [
-      "󰁺",  // 0–20%
-      "󰁼",  // 20–40%
-      "󰁾",  // 40–60%
-      "󰂀",  // 60–80%
-      "󰂂"   // 80–100%
+      "󰁺",
+      "󰁼",
+      "󰁾",
+      "󰂀",
+      "󰂂"
     ]
   },
-
   "clock": {
     "format-alt": "{:%a, %d %b %H:%M}",
     "tooltip-format": "{:%A %d %B %Y}"
   },
-
   "pulseaudio": {
     "format": " {volume}%",
     "format-muted": "󰖁 Muted",
     "scroll-step": 5,
     "on-click": "pavucontrol"
   },
-
   "cpu": {
     "format": "󰍛 {usage}%",
     "tooltip": true
   },
-
   "memory": {
     "interval": 5,
-    "format": " {used:0.1f}G/{total:0.1f}G 易 {swapUsed:0.1f}G/{swapTotal:0.1f}G",
+    "format": " {used:0.1f}G/{total:0.1f}G 󰓡 {swapUsed:0.1f}G/{swapTotal:0.1f}G",
     "tooltip": false
   },
-
   "temperature": {
     "thermal-zone": 3,
     "format": " {temperature}°C",
     "critical-threshold": 90
   },
-
   "custom/cpu_temp": {
     "exec": "awk '{printf \" %d°C\\n\", $1/1000}' /sys/class/thermal/thermal_zone7/temp",
     "interval": 5,
     "tooltip": false
   },
-
   "network": {
     "format-wifi": " {essid} 󰹤 {signalStrength}%",
     "format-ethernet": "󰈀  {ifname}",
     "format-disconnected": "󰖪  Disconnected",
     "tooltip-format": "{ipaddr}/{cidr}\nGateway: {gwaddr}",
     "max-length": 40
+  },
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "{icon} {percent}%",
+    "format-icons": [
+      "",
+      ""
+    ]
   }
 }
-

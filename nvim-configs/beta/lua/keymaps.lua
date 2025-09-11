@@ -13,6 +13,8 @@ map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Exit terminal mode" })
 -- Scrolling with centering
 map("n", "<C-j>", "10jzz", opts)
 map("n", "<C-k>", "10kzz", opts)
+map("n", "<C-d>", "<C-d>zz", opts)
+map("n", "<C-u>", "<C-u>zz", opts)
 
 -- Save
 map("n", "<leader>w", ":w<CR>", { desc = "Save current file", silent = true })

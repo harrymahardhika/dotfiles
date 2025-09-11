@@ -1,7 +1,7 @@
 @import "mocha.css";
 
 * {
-  font-family: "JetBrainsMono Nerd Font Propo", monospace;
+  font-family: "JetBrainsMono Nerd Font Propo";
   font-size: 0.9rem;
   border: none;
   min-height: 0;
@@ -14,6 +14,7 @@
 }
 
 #clock,
+#backlight,
 #battery,
 #cpu,
 #custom-cpu_temp,

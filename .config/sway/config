@@ -1,6 +1,9 @@
 ### --- Mod key ---
 set $mod Mod4
 
+### --- Font ---
+font pango:JetBrainsMono Nerd Font 9
+
 ### --- Variables ---
 set $terminal ghostty
 set $browser brave-browser-stable
@@ -32,14 +35,16 @@ bindsym $mod+m exec $browser
 bindsym $mod+q kill
 bindsym $mod+Shift+w exec --no-startup-id $HOME/.config/sway/set-wallpaper.sh
 bindsym $mod+d exec --no-startup-id rofi -show drun
+# bindsym $mod+d exec $HOME/.config/wofi/launch.sh
 bindsym $mod+Shift+t exec $HOME/.config/sway/toggle-transparency.sh
 bindsym $mod+Shift+x exec wlogout -b 4
 bindsym $mod+b exec pkill -SIGUSR1 waybar
 
-bindsym $mod+a exec --no-startup-id brave-browser-stable --app=https://chatgpt.com
-bindsym $mod+Shift+a exec --no-startup-id brave-browser-stable --app=https://ticktick.com/webapp
-bindsym $mod+s exec --no-startup-id brave-browser-stable --app=https://web.whatsapp.com
-bindsym $mod+Shift+s exec --no-startup-id brave-browser-stable --app=https://web.telegram.org
+bindsym $mod+a exec --no-startup-id brave-browser --app=https://chatgpt.com
+bindsym $mod+Shift+a exec --no-startup-id brave-browser --app=https://ticktick.com/webapp
+bindsym $mod+s exec --no-startup-id brave-browser --app=https://web.whatsapp.com
+bindsym $mod+Shift+s exec --no-startup-id brave-browser --app=https://web.telegram.org
+bindsym $mod+n exec --no-startup-id brave-browser --app=https://notion.so
 
 ### --- Navigation ---
 bindsym $mod+h focus left
@@ -86,18 +91,6 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-### --- Assign workspaces to outputs ---
-workspace $ws1 output eDP-1
-workspace $ws2 output HDMI-2
-workspace $ws3 output HDMI-2
-workspace $ws4 output HDMI-2
-workspace $ws5 output HDMI-2
-workspace $ws6 output HDMI-2
-workspace $ws7 output HDMI-2
-workspace $ws8 output HDMI-2
-workspace $ws9 output HDMI-2
-workspace $ws10 output HDMI-2
-
 ### --- Switch workspaces ---
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -111,16 +104,16 @@ bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
 
 ### --- Move windows to workspaces ---
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
+bindsym $mod+Shift+1 move container to workspace number $ws1; workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2; workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3; workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4; workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5; workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6; workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7; workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8; workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9; workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10; workspace number $ws10
 
 ### --- Other workspace settings ---
 focus_follows_mouse yes
@@ -181,6 +174,16 @@ input "Logitech Wireless Mouse" {
     scroll_method on_button_down
     pointer_accel 0.4
 }
+
+# Audio volume
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+# Brightness
+bindsym XF86MonBrightnessUp exec brightnessctl set 10%+
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
 
 ### --- Catppuccin theme colors ---
 set $rosewater  #f5e0dc
