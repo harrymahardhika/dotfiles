@@ -11,7 +11,9 @@ decorations = "none"
 decorations_theme_variant = "Dark"
 
 [font]
-size=7
+size=10
+offset.x=0
+offset.y=2
 
 [font.bold]
 family = "JetBrainsMono Nerd Font"

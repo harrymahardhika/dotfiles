@@ -1,0 +1,7 @@
+mode=drun,run
+allow_images=false
+hide_scroll=true
+prompt=
+width=30%
+
+; vim:ft=dosini

@@ -26,7 +26,7 @@
     "separate-outputs": true,
     "rewrite": {
       "tmux(.*)": " tmux",
-      "": "(empty)"
+      "": ""
     }
   },
   "battery": {

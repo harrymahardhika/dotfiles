@@ -24,7 +24,7 @@ if [ "$state" = "solid" ]; then
     swaymsg "[con_id=$id] opacity $OPACITY_TRANSPARENT" >/dev/null
   done
   echo "transparent" > "$STATE_FILE"
-  dunstify -u low "Sway" "Transparency enabled ($OPACITY_TRANSPARENT)"
+  dunstify -u low "Sway" "Transparency enabled"
 else
   for id in $ids; do
     swaymsg "[con_id=$id] opacity $OPACITY_SOLID" >/dev/null

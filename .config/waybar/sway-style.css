@@ -25,7 +25,7 @@
 #window {
   padding: 0.2rem 0.6rem;
   margin: 0.2rem;
-  background: @surface0;
+  background: alpha(@surface0, 0.85);
   border-radius: 0.4rem;
 }
 
