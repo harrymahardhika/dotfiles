@@ -1,11 +1,14 @@
-# font-family = FiraCode Nerd Font
-# font-family = RobotoMono Nerd Font
-adjust-cell-height = 5%
+confirm-close-surface = true
+copy-on-select = true
 font-family = JetBrainsMono Nerd Font
 font-size = 10.5
 font-style = Medium
 gtk-titlebar = false
+mouse-hide-while-typing = true
+mouse-shift-capture = true
+resize-overlay = never
 shell-integration = zsh
+shell-integration-features = cursor,sudo,title
 theme = catppuccin-mocha
 window-decoration = server
 window-padding-balance = true
@@ -13,4 +16,3 @@ window-padding-color = background
 window-padding-x = 0
 window-padding-y = 0
 window-save-state = always
-
