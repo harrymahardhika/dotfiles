@@ -29,6 +29,11 @@ return {
         modules = {},
         sync_install = false,
       })
+
+      -- Set up treesitter-based folding
+      vim.opt.foldmethod = "expr"
+      vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+      vim.opt.foldenable = true -- Ensure folding is enabled
     end,
   },
 }

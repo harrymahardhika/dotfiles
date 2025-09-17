@@ -36,8 +36,8 @@ map("n", "<leader>bo", function()
 end, { desc = "Close all other buffers except terminals", silent = true })
 
 -- Yank and paste with system clipboard
-map({ "n", "v" }, "y", '"+y', opts)
-map({ "n", "v" }, "p", '"+p', opts)
+-- map({ "n", "v" }, "y", '"+y', opts)
+-- map({ "n", "v" }, "p", '"+p', opts)
 
 -- Commenting
 map("n", "<leader>/", "gc", { desc = "Toggle comment" })

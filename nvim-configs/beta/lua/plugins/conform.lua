@@ -19,6 +19,7 @@ return {
       typescript = { "prettierd" },
       css = { "prettierd" },
       vue = { "prettierd" },
+      json = { "prettierd" },
     },
     format_on_save = {
       timeout_ms = 10000,

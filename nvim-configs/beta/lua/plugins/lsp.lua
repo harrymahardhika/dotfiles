@@ -24,9 +24,31 @@ return {
   },
   config = function()
     vim.lsp.enable("lua_ls")
+
     vim.lsp.enable("intelephense")
+
+    local function phpactor_code_actions_only(client)
+      local capabilities = client.server_capabilities or {}
+      local allowed = {
+        codeActionProvider = true,
+        executeCommandProvider = true,
+      }
+
+      for _, capability in ipairs(vim.tbl_keys(capabilities)) do
+        if capability:find("Provider", 1, true) and not allowed[capability] then
+          capabilities[capability] = nil
+        end
+      end
+    end
+
+    vim.lsp.config("phpactor", {
+      on_attach = phpactor_code_actions_only,
+    })
+
     vim.lsp.enable("phpactor")
+
     -- vim.lsp.enable("biome")
+
     vim.lsp.enable("gopls")
 
     local vue_language_server_path = "/usr/lib/node_modules/@vue/language-server"

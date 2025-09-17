@@ -2,6 +2,7 @@ return {
   {
     "nvim-mini/mini.nvim",
     version = "*",
+    event = "VeryLazy",
     config = function()
       require("mini.ai").setup()
       require("mini.indentscope").setup({
