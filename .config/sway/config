@@ -27,8 +27,9 @@ exec systemctl --user import-environment XDG_SESSION_TYPE XDG_CURRENT_DESKTOP WA
 exec --no-startup-id dunst
 exec --no-startup-id udiskie -n
 exec --no-startup-id dropbox start
+exec_always wl-paste --watch cliphist store
 
-### --- Window management ---
+### --- Keybindings ---
 floating_modifier $mod
 bindsym $mod+Return exec $terminal
 bindsym $mod+m exec $browser
@@ -39,6 +40,7 @@ bindsym $mod+d exec --no-startup-id rofi -show drun
 bindsym $mod+Shift+t exec $HOME/.config/sway/toggle-transparency.sh
 bindsym $mod+Shift+x exec wlogout -b 4
 bindsym $mod+b exec pkill -SIGUSR1 waybar
+bindsym $mod+v exec --no-startup-id $HOME/scripts/clipboard-history.sh
 
 bindsym $mod+a exec --no-startup-id $webapp https://chatgpt.com
 bindsym $mod+Shift+a exec --no-startup-id $webapp https://ticktick.com/webapp
