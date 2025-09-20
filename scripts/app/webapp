@@ -7,5 +7,20 @@ if [ -z "$URL" ]; then
   exit 1
 fi
 
-nohup chromium-browser --app="$URL" >/dev/null 2>&1 &
+browser="${BROWSER_APP:-}"
 
+if [ -z "$browser" ]; then
+  for candidate in brave-browser-stable brave-browser chromium-browser google-chrome-stable google-chrome; do
+    if command -v "$candidate" >/dev/null 2>&1; then
+      browser="$candidate"
+      break
+    fi
+  done
+fi
+
+if [ -z "$browser" ]; then
+  echo "webapp: no supported browser found (set BROWSER_APP to override)" >&2
+  exit 1
+fi
+
+nohup "$browser" --app="$URL" >/dev/null 2>&1 &

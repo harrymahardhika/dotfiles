@@ -13,16 +13,17 @@
   color: @text;
 }
 
-#clock,
 #backlight,
 #battery,
+#clock,
 #cpu,
 #custom-cpu_temp,
 #memory,
-#pulseaudio,
+#mode,
 #network,
-#workspaces,
-#window {
+#pulseaudio,
+#window,
+#workspaces {
   padding: 0.2rem 0.6rem;
   margin: 0.2rem;
   background: alpha(@surface0, 0.85);

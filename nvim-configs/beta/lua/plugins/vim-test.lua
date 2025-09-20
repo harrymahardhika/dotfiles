@@ -12,10 +12,10 @@ return {
       -- { "<leader>g", ":TestVisit<CR>", desc = "Test visit" },
     },
     config = function()
-      vim.cmd("let test#strategy = 'neovim'")
-      vim.cmd("let g:test#neovim#start_normal = 1")
+      -- vim.cmd("let test#strategy = 'neovim'")
+      -- vim.cmd("let g:test#neovim#start_normal = 1")
       -- vim.cmd("let test#strategy = 'kitty'")
-      -- vim.cmd("let test#strategy = 'vimux'")
+      vim.cmd("let test#strategy = 'vimux'")
     end,
   },
   {

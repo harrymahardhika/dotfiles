@@ -4,7 +4,8 @@
     "network",
     "pulseaudio",
     "battery",
-    "backlight"
+    "backlight",
+    "sway/mode"
   ],
   "modules-center": [
     "sway/workspaces",
@@ -16,6 +17,9 @@
     "custom/cpu_temp",
     "clock"
   ],
+  "sway/mode": {
+    "format": ""
+  },
   "sway/workspaces": {
     "disable-scroll": true,
     "format": "{icon}"
@@ -61,11 +65,6 @@
     "interval": 5,
     "format": " {used:0.1f}G/{total:0.1f}G 󰓡 {swapUsed:0.1f}G/{swapTotal:0.1f}G",
     "tooltip": false
-  },
-  "temperature": {
-    "thermal-zone": 3,
-    "format": " {temperature}°C",
-    "critical-threshold": 90
   },
   "custom/cpu_temp": {
     "exec": "awk '{printf \" %d°C\\n\", $1/1000}' /sys/class/thermal/thermal_zone7/temp",
