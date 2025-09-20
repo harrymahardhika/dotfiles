@@ -7,7 +7,7 @@ font pango:JetBrainsMono Nerd Font 9
 ### --- Variables ---
 set $terminal ghostty
 set $browser brave-browser-stable
-set $webapp $HOME/scripts/app/webapp
+set $webapp $HOME/scripts/webapp
 set $file_manager nautilus
 
 ### --- Autostart applications ---
@@ -42,11 +42,7 @@ bindsym $mod+Shift+x exec wlogout -b 4
 bindsym $mod+b exec pkill -SIGUSR1 waybar
 bindsym $mod+v exec --no-startup-id $HOME/scripts/clipboard-history.sh
 
-bindsym $mod+a exec --no-startup-id $webapp https://chatgpt.com
-bindsym $mod+Shift+a exec --no-startup-id $webapp https://ticktick.com/webapp
-bindsym $mod+s exec --no-startup-id $webapp https://web.whatsapp.com
-bindsym $mod+Shift+s exec --no-startup-id $webapp https://web.telegram.org
-bindsym $mod+n exec --no-startup-id $webapp https://notion.so
+bindsym $mod+a exec --no-startup-id $HOME/scripts/webapp-launcher.sh
 
 ### --- Navigation ---
 bindsym $mod+h focus left
@@ -222,3 +218,4 @@ client.unfocused         $overlay0 $base $overlay0 $rosewater $base
 client.urgent            $peach    $base $peach    $overlay0  $peach
 client.placeholder       $overlay0 $base $text     $overlay0  $base
 client.background        $base
+

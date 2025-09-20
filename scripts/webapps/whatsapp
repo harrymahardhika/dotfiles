@@ -1,0 +1,4 @@
+#!/bin/bash
+
+nohup brave-browser-stable --app="https://web.whatsapp.com" >/dev/null 2>&1 &
+
