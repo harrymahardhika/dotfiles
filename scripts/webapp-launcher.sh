@@ -4,7 +4,7 @@
 LAUNCH_DIR="$HOME/scripts/webapps"
 
 # List available files, pick one with rofi, and execute it
-choice=$(ls -1 "$LAUNCH_DIR" | rofi -dmenu -i -p "Webapp:")
+choice=$(find "$LAUNCH_DIR" -maxdepth 1 -type f -printf '%f\n' | sort | rofi -dmenu -i -p "Webapp:")
 
 # Exit if nothing chosen
 [ -z "$choice" ] && exit 0

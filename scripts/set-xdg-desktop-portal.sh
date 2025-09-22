@@ -7,14 +7,12 @@ mkdir -p "$(dirname "$LOGFILE")"
 log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" | tee -a "$LOGFILE"; }
 
 stop_portals() {
-  log "Stopping existing xdg-desktop-portal services (non-blocking)"
-  systemctl --user --no-block stop "xdg-desktop-portal*" 2>/dev/null || true
-  # kill any leftovers that might hold the bus/socket
-  pkill -f xdg-desktop-portal || true
-  pkill -f xdg-desktop-portal-gtk || true
-  pkill -f xdg-desktop-portal-wlr || true
+  log "Stopping existing xdg-desktop-portal services"
+  
+  # Only clean up runtime directory - skip process killing as it hangs
   rm -rf "/run/user/$UID/xdg-desktop-portal" 2>/dev/null || true
-  sleep 1
+  
+  log "Portal cleanup completed"
 }
 
 start_portals() {
@@ -36,14 +34,20 @@ start_portals() {
   systemctl --user --no-block start xdg-desktop-portal.service
   log "Requested start of xdg-desktop-portal (+ backend: $mode)"
 
-  # self-check (gives the backend 2s to register on the bus)
-  sleep 2
+  # self-check (gives the backend time to register on the bus)
+  sleep 1
   if [ "$mode" = "x11" ]; then
-    busctl --user --timeout=1 status org.freedesktop.impl.portal.desktop.gtk >/dev/null 2>&1 \
-      && log "OK: gtk portal active" || log "WARN: gtk portal NOT active"
+    if timeout 3 busctl --user --timeout=2 status org.freedesktop.impl.portal.desktop.gtk >/dev/null 2>&1; then
+      log "OK: gtk portal active"
+    else
+      log "WARN: gtk portal NOT active"
+    fi
   else
-    busctl --user --timeout=1 status org.freedesktop.impl.portal.desktop.wlr >/dev/null 2>&1 \
-      && log "OK: wlr portal active" || log "WARN: wlr portal NOT active"
+    if timeout 3 busctl --user --timeout=2 status org.freedesktop.impl.portal.desktop.wlr >/dev/null 2>&1; then
+      log "OK: wlr portal active"
+    else
+      log "WARN: wlr portal NOT active"
+    fi
   fi
 }
 
