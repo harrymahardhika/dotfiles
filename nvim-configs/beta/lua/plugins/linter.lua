@@ -9,10 +9,10 @@ return {
       -- typescript = { "biomejs" },
       -- vue = { "biomejs" },
       javascript = { "eslint_d" },
-      typescript = { "eslint_d" },
-      vue = { "eslint_d" },
       json = { "jsonlint" },
       php = { "phpstan" },
+      typescript = { "eslint_d" },
+      vue = { "eslint_d" },
     }
 
     vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost" }, {

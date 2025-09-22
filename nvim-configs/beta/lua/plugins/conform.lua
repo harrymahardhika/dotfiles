@@ -1,36 +1,34 @@
 return {
   "stevearc/conform.nvim",
-  event = {
-    "LspAttach",
-    "BufReadPost",
-    "BufNewFile",
-    "BufWritePre",
-  },
-  cmd = { "ConformInfo", "ConformFormat" },
+  event = { "BufWritePre" },
+  cmd = { "ConformInfo" },
   opts = {
     formatters_by_ft = {
-      lua = { "stylua" },
-      php = { "pint" },
-      -- python = { "black", "isort", "autopep8" },
       -- javascript = { "biome" },
+      -- python = { "black", "isort", "autopep8" },
       -- typescript = { "biome" },
       -- vue = { "biome" },
-      javascript = { "prettierd" },
-      typescript = { "prettierd" },
       css = { "prettierd" },
-      vue = { "prettierd" },
+      javascript = { "prettierd" },
       json = { "prettierd" },
+      lua = { "stylua" },
+      php = { "pint" },
+      typescript = { "prettierd" },
+      vue = { "prettierd" },
     },
     format_on_save = {
       timeout_ms = 10000,
-      lsp_fallback = true,
+      lsp_format = "fallback",
+    },
+    formatters = {
+      pint = {
+        command = "pint",
+        args = { "$FILENAME" },
+        stdin = false,
+      },
+      prettierd = {
+        prepend_args = { "--prose-wrap", "always" },
+      },
     },
   },
-  config = function(_, opts)
-    local conform = require("conform")
-    conform.setup(opts)
-    conform.formatters.prettier = {
-      prepend_args = { "--prose-wrap", "always" },
-    }
-  end,
 }
