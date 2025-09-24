@@ -5,7 +5,7 @@ update_git_prompt_info() {
   git rev-parse --is-inside-work-tree &>/dev/null || return
 
   local ref dirty
-  local -i ahead=0 behind=0 added=0 removed=0
+  local -i ahead=0 behind=0 added=0 removed=0 new_files=0
   local -i a_ws=0 d_ws=0 a_st=0 d_st=0
 
   # branch / ref
@@ -37,6 +37,10 @@ update_git_prompt_info() {
   added=$((a_ws + a_st))
   removed=$((d_ws + d_st))
 
+  # new (untracked) files
+  new_files=$(git status --porcelain --untracked-files=normal 2>/dev/null \
+    | awk 'substr($0,1,2)=="??"{c++} END{print c+0}')
+
   # --- catppuccin mocha colors ---
   local ref_color="%F{#b4befe}"     # lavender
   local dirty_color="%F{#f38ba8}"   # red
@@ -44,12 +48,14 @@ update_git_prompt_info() {
   local behind_color="%F{#89b4fa}"  # blue
   local added_color="%F{#a6e3a1}"   # green
   local removed_color="%F{#f38ba8}" # red
+  local new_color="%F{#f9e2af}"    # yellow
   local reset="%f"
 
   GIT_PROMPT_CACHE="${ref_color} $ref${reset}"
   [[ -n $dirty ]] && GIT_PROMPT_CACHE+=" ${dirty_color}$dirty${reset}"
   (( ahead   > 0 )) && GIT_PROMPT_CACHE+=" ${ahead_color}↑$ahead${reset}"
   (( behind  > 0 )) && GIT_PROMPT_CACHE+=" ${behind_color}↓$behind${reset}"
+  (( new_files > 0 )) && GIT_PROMPT_CACHE+=" ${new_color}?$new_files${reset}"
   (( added   > 0 )) && GIT_PROMPT_CACHE+=" ${added_color}+$added${reset}"
   (( removed > 0 )) && GIT_PROMPT_CACHE+=" ${removed_color}-$removed${reset}"
 }
@@ -63,4 +69,3 @@ set_prompt() {
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd update_git_prompt_info
 add-zsh-hook precmd set_prompt
-
