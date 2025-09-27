@@ -32,6 +32,7 @@ return {
       local allowed = {
         codeActionProvider = true,
         executeCommandProvider = true,
+        renameProvider = true,
       }
 
       for _, capability in ipairs(vim.tbl_keys(capabilities)) do
