@@ -1,5 +1,5 @@
 #!/bin/bash
 
-nohup brave-browser-stable --app="https://open.spotify.com" >/dev/null 2>&1 &
+exec "$(cd "$(dirname "$0")/.." && pwd)/webapp" "https://open.spotify.com"
 
 

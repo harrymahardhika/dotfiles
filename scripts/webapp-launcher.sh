@@ -9,6 +9,6 @@ choice=$(find "$LAUNCH_DIR" -maxdepth 1 -type f -printf '%f\n' | sort | rofi -dm
 # Exit if nothing chosen
 [ -z "$choice" ] && exit 0
 
-# Run the chosen file
-exec "$LAUNCH_DIR/$choice"
+# Run the chosen file with bash explicitly
+bash "$LAUNCH_DIR/$choice"
 

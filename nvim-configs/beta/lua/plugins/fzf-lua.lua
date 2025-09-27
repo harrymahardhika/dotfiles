@@ -9,9 +9,9 @@ return {
         winopts = {
           border = "rounded",
           height = 0.7, -- 50% of total height
-          width = 1.0, -- full width
-          row = 1.0, -- align to bottom
-          col = 0.5, -- center horizontally
+          width = 1.0,  -- full width
+          row = 1.0,    -- align to bottom
+          col = 0.5,    -- center horizontally
           preview = {
             layout = "flex",
             scrollbar = false,
@@ -56,7 +56,7 @@ return {
       vim.keymap.set("n", "<leader>sD", fzf.diagnostics_workspace, { desc = "Diagnostics" })
       vim.keymap.set("n", "<leader>sd", fzf.diagnostics_document, { desc = "Buffer Diagnostics" })
 
-      -- vim.keymap.set("n", "gd", fzf.lsp_typedefs, { desc = "LSP Type Definitions" })
+      vim.keymap.set("n", "gd", fzf.lsp_typedefs, { desc = "LSP Type Definitions" })
       vim.keymap.set("n", "gi", fzf.lsp_implementations, { desc = "LSP Implementations" })
       vim.keymap.set("n", "gR", fzf.lsp_references, { desc = "LSP References" })
       vim.keymap.set("n", "<leader>fd", fzf.lsp_document_symbols, { desc = "LSP Document Symbols" })

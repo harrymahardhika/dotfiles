@@ -23,16 +23,25 @@ return {
     },
   },
   config = function()
-    vim.lsp.enable("lua_ls")
+    -- Helper functions for LSP capability management
+    local function disable_navigation_capabilities(client)
+      local capabilities = client.server_capabilities or {}
+      capabilities.definitionProvider = nil
+      capabilities.typeDefinitionProvider = nil
+      capabilities.declarationProvider = nil
+      capabilities.implementationProvider = nil
+    end
 
-    vim.lsp.enable("intelephense")
-
-    local function phpactor_code_actions_only(client)
+    local function limit_phpactor_capabilities(client)
       local capabilities = client.server_capabilities or {}
       local allowed = {
         codeActionProvider = true,
+        declarationProvider = true,
+        definitionProvider = true,
         executeCommandProvider = true,
+        implementationProvider = true,
         renameProvider = true,
+        typeDefinitionProvider = true,
       }
 
       for _, capability in ipairs(vim.tbl_keys(capabilities)) do
@@ -42,18 +51,25 @@ return {
       end
     end
 
-    vim.lsp.config("phpactor", {
-      on_attach = phpactor_code_actions_only,
-    })
+    -- Lua Language Server
+    vim.lsp.enable("lua_ls")
 
+    -- PHP Language Servers
+    vim.lsp.config("intelephense", {
+      on_attach = disable_navigation_capabilities,
+    })
+    vim.lsp.enable("intelephense")
+
+    vim.lsp.config("phpactor", {
+      on_attach = limit_phpactor_capabilities,
+    })
     vim.lsp.enable("phpactor")
 
-    -- vim.lsp.enable("biome")
-
+    -- Go Language Server
     vim.lsp.enable("gopls")
 
+    -- TypeScript/Vue Setup
     local vue_language_server_path = "/usr/lib/node_modules/@vue/language-server"
-
     local vue_plugin = {
       name = "@vue/typescript-plugin",
       location = vue_language_server_path,
@@ -106,15 +122,19 @@ return {
     vim.lsp.config("vue_ls", vue_ls_config)
     vim.lsp.enable({ "vtsls", "vue_ls" })
 
+    -- Tailwind CSS
     vim.lsp.config("tailwindcss", {
       filetypes = { "javascript", "typescript", "vue", "svelte" },
     })
     vim.lsp.enable("tailwindcss")
 
-    -- vim.lsp.buf.hover({
-    --   border = "rounded",
-    -- })
+    -- Biome (commented out)
+    -- vim.lsp.enable("biome")
 
-    vim.api.nvim_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
+    -- LSP Keymaps
+    -- vim.api.nvim_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
+    -- vim.api.nvim_set_keymap("n", "gy", "<cmd>lua vim.lsp.buf.type_definition()<CR>", { noremap = true, silent = true })
+    -- vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.declaration()<CR>", { noremap = true, silent = true })
+    -- vim.api.nvim_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", { noremap = true, silent = true })
   end,
 }

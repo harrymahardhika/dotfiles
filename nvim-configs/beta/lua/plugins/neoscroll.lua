@@ -22,8 +22,6 @@ return {
 
     local function do_scroll(lines)
       local target_win = vim.api.nvim_get_current_win()
-      local target_buf = vim.api.nvim_get_current_buf()
-      local wait = duration
 
       if lines ~= 0 then
         neoscroll.scroll(lines, {
@@ -31,26 +29,7 @@ return {
           duration = duration,
           winid = target_win,
         })
-      else
-        wait = 0
       end
-
-      -- Recenter smoothly with neoscroll once the jump finishes.
-      vim.defer_fn(function()
-        if not vim.api.nvim_win_is_valid(target_win) then
-          return
-        end
-        if vim.api.nvim_win_get_buf(target_win) ~= target_buf then
-          return
-        end
-
-        vim.api.nvim_win_call(target_win, function()
-          neoscroll.zz({
-            half_win_duration = duration,
-            winid = target_win,
-          })
-        end)
-      end, wait)
     end
 
     vim.keymap.set("n", "go", function()

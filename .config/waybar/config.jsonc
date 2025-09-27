@@ -1,88 +1,85 @@
 {
   "position": "top",
-
   "modules-left": [
+    "network",
     "pulseaudio",
-    "network"
+    "battery",
+    "hyprland/submap"
   ],
-
   "modules-center": [
     "hyprland/workspaces",
-    "hyprland/submap",
     "hyprland/window"
-
   ],
-
   "modules-right": [
     "memory",
     "cpu",
     "custom/cpu_temp",
-    "battery",
     "clock"
   ],
-
   "sway/window": {
     "max-length": 50
   },
-
   "battery": {
-    "format": "{capacity}% {icon}",
+    "format": "{icon} {capacity}%",
+    "format-charging": "󰂅 {capacity}%",
+    "format-discharging": "{icon} {capacity}%",
+    "format-full": "󰂄 {capacity}%",
+    "format-plugged": "󰂄 {capacity}%",
     "format-icons": [
-      "",
-      "",
-      "",
-      "",
-      ""
+      "󰁺",
+      "󰁼",
+      "󰁾",
+      "󰂀",
+      "󰂂"
     ]
   },
-
   "clock": {
     "format-alt": "{:%a, %d %b %H:%M}",
     "tooltip-format": "{:%A, %d %B %Y}"
   },
-
   "pulseaudio": {
-    "format": "{volume}% ",
+    "format": " {volume}%",
     "format-muted": "󰖁 Muted",
-    "scroll-step": 5
+    "scroll-step": 5,
+    "on-click": "pavucontrol"
   },
-
+  "hyprland/submap": {
+    "format": "d"
+  },
   "hyprland/workspaces": {
     "format": "{icon}",
     "on-click": "activate",
     "sort-by-number": true
   },
-
   "hyprland/window": {
-    "separate-outputs": true
+    "separate-outputs": true,
+    "rewrite": {
+      "tmux(.*)": " tmux",
+      "": ""
+    }
   },
-
   "cpu": {
     "format": "󰍛 {usage}%",
     "tooltip": true
   },
-
   "memory": {
-    "format": " {used:0.1f}G/{total:0.1f}G",
-    "tooltip": "{used} / {total} ({percent}%)",
-    "max-length": 16
+    "interval": 5,
+    "format": " {used:0.1f}G/{total:0.1f}G 󰓡 {swapUsed:0.1f}G/{swapTotal:0.1f}G",
+    "tooltip": false
   },
-
   "temperature": {
     "thermal-zone": 3,
     "format": " {temperature}°C",
     "critical-threshold": 90
   },
-
   "custom/cpu_temp": {
     "exec": "awk '{printf \" %d°C\\n\", $1/1000}' /sys/class/thermal/thermal_zone3/temp",
     "interval": 5,
     "tooltip": false
   },
-
   "network": {
     "format-wifi": " {essid} 󰹤 {signalStrength}%",
-    "format-ethernet": "󰈀  {ifname}",
+    "format-ethernet": "󰈀 {ifname}",
     "format-disconnected": "󰖪  Disconnected",
     "tooltip-format": "{ipaddr}/{cidr}\nGateway: {gwaddr}",
     "max-length": 25

@@ -2,29 +2,30 @@
 
 * {
   font-family: JetBrainsMono Nerd Font Propo;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   min-height: 0;
   border: none;
 }
 
 #waybar {
-  /* backgrounw: @base; */
+  /* background: @base; */
   background: transparent;
   color: @text;
 }
 
-#clock,
 #battery,
+#clock,
 #cpu,
 #custom-cpu_temp,
 #memory,
-#pulseaudio,
 #network,
-#workspaces,
-#window {
+#pulseaudio,
+#submap,
+#window,
+#workspaces {
   padding: 0.2rem 0.6rem;
   margin: 0.2rem;
-  background: @surface0;
+  background: alpha(@surface0, 0.85);
   border-radius: 0.4rem;
 }
 

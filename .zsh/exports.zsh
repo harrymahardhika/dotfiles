@@ -35,3 +35,9 @@ export PNPM_HOME="$HOME/.local/share/pnpm"
 # opencode
 export PATH=/home/harry/.opencode/bin:$PATH
 
+# bun completions
+[ -s "/home/harry/.bun/_bun" ] && source "/home/harry/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

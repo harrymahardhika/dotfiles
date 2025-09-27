@@ -1,4 +1,4 @@
 #!/bin/bash
 
-nohup brave-browser-stable --app="https://chat.openai.com" >/dev/null 2>&1 &
+exec "$(cd "$(dirname "$0")/.." && pwd)/webapp" "https://chat.openai.com"
 
