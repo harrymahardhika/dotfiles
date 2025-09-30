@@ -61,9 +61,10 @@ update_git_prompt_info() {
 }
 
 set_prompt() {
-  local path_color="%F{#89b4fa}"   # blue
-  local arrow_color="%F{#cba6f7}"  # mauve
-  PROMPT="${path_color}%~%f${GIT_PROMPT_CACHE:+ $GIT_PROMPT_CACHE} ${arrow_color}❯%f "
+  local hostname_color="%F{#f9e2af}" # yellow
+  local path_color="%F{#89b4fa}"     # blue
+  local arrow_color="%F{#cba6f7}"    # mauve
+  PROMPT="${hostname_color}%m%f ${path_color}%~%f${GIT_PROMPT_CACHE:+ $GIT_PROMPT_CACHE} ${arrow_color}❯%f "
 }
 
 autoload -Uz add-zsh-hook
