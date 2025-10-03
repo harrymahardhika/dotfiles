@@ -20,10 +20,6 @@ return {
       })
 
       -- Keymaps (mirroring your Telescope setup)
-      vim.keymap.set("n", "<leader><space>", function()
-        require("fzf-lua").files({ hidden = true }) -- no cwd field
-      end, { desc = "Find Files" })
-
       vim.keymap.set("n", "<leader>f", function()
         require("fzf-lua").files({ hidden = true })
       end, { desc = "Find Files" })
@@ -35,15 +31,11 @@ return {
       vim.keymap.set("n", "<leader>.", fzf.buffers, { desc = "Buffers" })
       -- vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "Buffers" })
       vim.keymap.set("n", "<leader>/", fzf.live_grep, { desc = "Live Grep" })
-      -- vim.keymap.set("n", "<leader>fg", fzf.git_files, { desc = "Git Files" })
-      -- vim.keymap.set("n", "<leader>f/", fzf.blines, { desc = "Fuzzy Find in Buffer" })
-      -- vim.keymap.set("n", "<leader>fr", fzf.oldfiles, { desc = "Recent Files" })
       vim.keymap.set("n", "<leader>R", fzf.oldfiles, { desc = "Recent Files" })
 
       vim.keymap.set("n", "<leader>C", fzf.commands, { desc = "Commands" })
       vim.keymap.set("n", "<leader>:", fzf.command_history, { desc = "Command History" })
       vim.keymap.set("n", "<leader>r", fzf.registers, { desc = "Registers" })
-      -- vim.keymap.set("n", "<leader>fh", fzf.help_tags, { desc = "Help Tags" })
       vim.keymap.set("n", "<leader>H", fzf.help_tags, { desc = "Help Tags" })
 
       vim.keymap.set("n", "<leader>gb", fzf.git_branches, { desc = "Git Branches" })
