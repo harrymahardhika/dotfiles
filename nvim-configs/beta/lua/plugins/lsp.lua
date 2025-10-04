@@ -39,6 +39,7 @@ return {
         declarationProvider = true,
         definitionProvider = true,
         executeCommandProvider = true,
+        hoverProvider = true,
         implementationProvider = true,
         renameProvider = true,
         typeDefinitionProvider = true,
