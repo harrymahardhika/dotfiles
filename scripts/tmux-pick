@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# List only windows (across all sessions)
+# List only windows (across all sessions), excluding popup session
 list() {
-  tmux list-windows -a -F $'W\t#{session_name}\t#{window_index}\t\t#{session_name}:#{window_index}  #{window_name}'
+  tmux list-windows -a -F $'W\t#{session_name}\t#{window_index}\t\t#{session_name}:#{window_index} #{window_name}' | grep -v $'^W\tpopup\t'
 }
 
 # Show labels (field 5) but keep raw row for parsing

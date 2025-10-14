@@ -9,6 +9,17 @@ local function run_pest_with_coverage()
   end)
 end
 
+local function run_pest_nearest_with_coverage()
+  local coverage_flag = "--coverage-html coverage-report"
+  local original_opts = vim.g["test#php#pest#options"]
+
+  vim.g["test#php#pest#options"] = coverage_flag
+  vim.cmd("TestNearest")
+  vim.schedule(function()
+    vim.g["test#php#pest#options"] = original_opts
+  end)
+end
+
 return {
   {
     "vim-test/vim-test",
@@ -21,6 +32,7 @@ return {
       { "<leader>ta", ":TestSuite<CR>", desc = "Test suite" },
       { "<leader>tl", ":TestLast<CR>", desc = "Test last" },
       { "<leader>tc", run_pest_with_coverage, desc = "Test file with coverage" },
+      { "<leader>tcn", run_pest_nearest_with_coverage, desc = "Test nearest with coverage" },
       -- { "<leader>g", ":TestVisit<CR>", desc = "Test visit" },
     },
     config = function()

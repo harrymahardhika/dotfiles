@@ -66,6 +66,8 @@ return {
     })
     vim.lsp.enable("phpactor")
 
+    -- vim.lsp.enable("phptools")
+
     -- Go Language Server
     vim.lsp.enable("gopls")
 

@@ -1,0 +1,23 @@
+{
+  "ui_font_size": 16,
+  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "buffer_font_size": 14,
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "Catppuccin Mocha - No Italics"
+  },
+  "tab_bar": {
+    "show": false,
+    "show_nav_history_buttons": true,
+    "show_tab_bar_buttons": true
+  },
+  "toolbar": {
+    "breadcrumbs": false,
+    "quick_actions": false,
+    "selections_menu": false,
+    "agent_review": false,
+    "code_actions": false
+  },
+  "vim_mode": true
+}
