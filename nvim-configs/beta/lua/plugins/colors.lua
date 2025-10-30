@@ -4,7 +4,7 @@ return {
   priority = 1000,
   config = function()
     require("catppuccin").setup({
-      auto_integrations = false,
+      auto_integrations = true,
       flavour = "mocha",
       transparent_background = true,
       float = {

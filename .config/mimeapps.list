@@ -1,0 +1,31 @@
+[Default Applications]
+x-scheme-handler/http=zen-browser.desktop
+x-scheme-handler/https=zen-browser.desktop
+x-scheme-handler/about=zen-browser.desktop
+x-scheme-handler/unknown=zen-browser.desktop
+x-scheme-handler/mailto=zen-browser.desktop
+text/html=zen-browser.desktop
+inode/directory=org.gnome.Nautilus.desktop
+text/plain=dev.zed.Zed.desktop
+application/json=dev.zed.Zed.desktop
+application/x-shellscript=dev.zed.Zed.desktop
+application/pdf=org.gnome.Evince.desktop
+image/png=org.gnome.eog.desktop
+image/jpeg=org.gnome.eog.desktop
+image/gif=org.gnome.eog.desktop
+
+[Added Associations]
+text/html=zen-browser.desktop;brave-browser.desktop;com.brave.Browser.desktop;
+x-scheme-handler/http=zen-browser.desktop;brave-browser.desktop;com.brave.Browser.desktop;
+x-scheme-handler/https=zen-browser.desktop;brave-browser.desktop;com.brave.Browser.desktop;
+x-scheme-handler/about=zen-browser.desktop;brave-browser.desktop;com.brave.Browser.desktop;
+x-scheme-handler/unknown=zen-browser.desktop;brave-browser.desktop;com.brave.Browser.desktop;
+x-scheme-handler/mailto=zen-browser.desktop;brave-browser.desktop;
+inode/directory=org.gnome.Nautilus.desktop;
+text/plain=dev.zed.Zed.desktop;
+application/json=dev.zed.Zed.desktop;
+application/x-shellscript=dev.zed.Zed.desktop;
+application/pdf=org.gnome.Evince.desktop;
+image/png=org.gnome.eog.desktop;
+image/jpeg=org.gnome.eog.desktop;
+image/gif=org.gnome.eog.desktop;

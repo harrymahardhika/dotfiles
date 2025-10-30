@@ -37,6 +37,7 @@ o.termguicolors = true
 o.timeoutlen = 500
 o.title = true
 o.ttimeoutlen = 0
+o.winborder = "rounded"
 o.wrap = false
 
 g.netrw_browse_split = 0

@@ -23,3 +23,45 @@ gui:
   authorColors:
     '*': '#b4befe'
 
+  showIcons: true
+  nerdFontsVersion: "3"
+  showRandomTip: false
+  expandFocusedSidePanel: true
+  filterMode: fuzzy
+  splitDiff: always
+  timeFormat: "2006-01-02 15:04"
+  shortTimeFormat: "15:04"
+
+git:
+  commit:
+    autoWrapCommitMessage: true
+    autoWrapWidth: 72
+  log:
+    showGraph: always
+    showWholeGraph: true
+  ignoreWhitespaceInDiffView: true
+  # Use delta for a better diff view. Requires delta to be installed.
+  # https://github.com/dandavison/delta
+  paging:
+    colorArg: always
+    # pager: delta --dark --paging=never
+
+refresher:
+  # The default refresh interval is 10. 5 is a bit frequent and might
+  # use unnecessary resources, but this is a personal preference.
+  refreshInterval: 10
+  fetchInterval: 120
+
+update:
+  method: background
+promptToReturnFromSubprocess: false
+os:
+  editPreset: "nvim"
+
+# Custom commands can significantly improve your workflow.
+customCommands:
+  - key: 'b'
+    command: "git branch --sort=-committerdate | fzf --height 40% --reverse --header 'Checkout branch' | xargs -r git checkout"
+    context: 'localBranches'
+    description: 'Checkout branch (fuzzy find)'
+    loadingText: 'Checking out branch...'

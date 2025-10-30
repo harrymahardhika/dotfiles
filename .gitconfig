@@ -10,6 +10,7 @@
   fsync = none
   preloadindex = true             # preload index for faster status
   whitespace = error              # treat incorrect whitespace as errors
+  pager = delta                   # use delta for paging diffs
 
 [init]
   defaultBranch = main
@@ -86,6 +87,7 @@
 
 [interactive]
   singlekey = true
+  diffFilter = delta --color-only
 
 [log]
   abbrevCommit = true                # short commits
@@ -103,4 +105,10 @@
 [status]
   branch = true
   short = true
+
+[delta]
+  line-numbers = true
+  navigate = true
+  side-by-side = true
+  features = line-numbers decorations
 

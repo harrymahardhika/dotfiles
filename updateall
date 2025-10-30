@@ -1,21 +1,65 @@
 #!/bin/bash
 
+set -e
+
+echo "🔄 Starting system updates..."
+
 if [ -f /etc/arch-release ]; then
     # For Arch-based systems
-    sudo pacman -Syu
-    yay -Sua
-    sudo pacman -Rns $(pacman -Qdtq)
-    sudo pacman -Sc
+    echo "📦 Updating Arch packages..."
+    sudo pacman -Syu --noconfirm
+
+    if command -v yay &> /dev/null; then
+        echo "📦 Updating AUR packages..."
+        yay -Sua --noconfirm
+    fi
+
+    # Remove orphan packages only if they exist
+    orphans=$(pacman -Qdtq)
+    if [ -n "$orphans" ]; then
+        echo "🗑️  Removing orphan packages..."
+        sudo pacman -Rns --noconfirm $orphans
+    fi
+
+    echo "🧹 Cleaning package cache..."
+    sudo pacman -Sc --noconfirm
 else
     # For Ubuntu/Pop!_OS-based systems
-    # sudo systemctl stop packagekit.service
+    echo "📦 Updating Ubuntu/Debian packages..."
     sudo apt update
     sudo apt upgrade -y
     sudo apt autopurge -y && sudo apt autoremove -y && sudo apt clean
+
+    if command -v pacstall &> /dev/null; then
+        echo "📦 Updating Pacstall..."
+        pacstall -U -P
+        pacstall -Up -P
+    fi
 fi
 
-# Common for both
-sudo composer global selfupdate
-composer global update -vv --profile
-sudo npm-check -gui
+# Update Flatpak
+if command -v flatpak &> /dev/null; then
+    echo "📦 Updating Flatpak packages..."
+    flatpak update -y
+fi
 
+# Update Snap
+if command -v snap &> /dev/null; then
+    echo "📦 Updating Snap packages..."
+    sudo snap refresh
+fi
+
+# Update Composer
+if command -v composer &> /dev/null; then
+    echo "🎼 Updating Composer..."
+    composer global self-update
+    composer global update -vv --profile
+fi
+
+# Update npm global packages
+if command -v npm &> /dev/null; then
+    echo "📦 Updating npm global packages..."
+    sudo npm-check -gui
+fi
+
+echo "✅ All updates completed!"

@@ -33,11 +33,16 @@ export PNPM_HOME="$HOME/.local/share/pnpm"
 [[ ":$PATH:" != *":$PNPM_HOME:"* ]] && export PATH="$PNPM_HOME:$PATH"
 
 # opencode
-export PATH=/home/harry/.opencode/bin:$PATH
+export PATH=$HOME/.opencode/bin:$PATH
 
 # bun completions
-[ -s "/home/harry/.bun/_bun" ] && source "/home/harry/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+if [ -r "$HOME/.secrets" ]; then
+  # shellcheck source=/dev/null
+  source "$HOME/.secrets"
+fi

@@ -6,7 +6,8 @@ font pango:JetBrainsMono Nerd Font 9
 
 ### --- Variables ---
 set $terminal ghostty
-set $browser brave-browser-stable
+# set $browser brave-browser-stable
+set $browser zen-browser
 set $webapp $HOME/scripts/webapp
 set $file_manager nautilus
 
