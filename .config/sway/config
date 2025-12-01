@@ -25,6 +25,7 @@ exec_always swww-daemon
 exec_always --no-startup-id "$HOME/.config/sway/set-wallpaper.sh"
 
 exec systemctl --user import-environment XDG_SESSION_TYPE XDG_CURRENT_DESKTOP WAYLAND_DISPLAY
+exec_always systemctl --user restart xdg-desktop-portal-gtk.service xdg-desktop-portal.service
 exec --no-startup-id dunst
 exec --no-startup-id udiskie -n
 exec --no-startup-id dropbox start

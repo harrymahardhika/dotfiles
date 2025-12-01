@@ -27,7 +27,7 @@ else
     # For Ubuntu/Pop!_OS-based systems
     echo "📦 Updating Ubuntu/Debian packages..."
     sudo apt update
-    sudo apt upgrade -y
+    sudo apt upgrade -y --allow-downgrades
     sudo apt autopurge -y && sudo apt autoremove -y && sudo apt clean
 
     if command -v pacstall &> /dev/null; then

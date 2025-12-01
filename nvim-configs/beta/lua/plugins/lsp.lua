@@ -23,6 +23,9 @@ return {
     },
   },
   config = function()
+    -- Increase LSP file size limit to 5MB (default is 1MB)
+    vim.g.lsp_file_size_limit = 5000000
+
     -- Helper functions for LSP capability management
     local function disable_navigation_capabilities(client)
       local capabilities = client.server_capabilities or {}
@@ -122,7 +125,7 @@ return {
     }
 
     vim.lsp.config("vtsls", vtsls_config)
-    vim.lsp.config("vue_ls", vue_ls_config)
+    vim.lsp.config("vue_ls", {})
     vim.lsp.enable({ "vtsls", "vue_ls" })
 
     -- Tailwind CSS

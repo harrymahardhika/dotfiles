@@ -67,6 +67,15 @@ end, { desc = "Previous diagnostic" })
 vim.keymap.set("n", "[q", "<cmd>cprev<CR>", { desc = "Previous Quickfix" })
 vim.keymap.set("n", "]q", "<cmd>cnext<CR>", { desc = "Next Quickfix" })
 
+-- Send diagnostics to quickfix/location list
+vim.keymap.set("n", "<leader>xq", function()
+  vim.diagnostic.setqflist({ open = true })
+end, { desc = "Send all diagnostics to quickfix" })
+
+vim.keymap.set("n", "<leader>xb", function()
+  vim.diagnostic.setloclist({ open = true })
+end, { desc = "Send buffer diagnostics to location list" })
+
 -- Copy file paths to clipboard
 local function copy_to_clipboard(label, value)
   vim.fn.setreg("+", value)
