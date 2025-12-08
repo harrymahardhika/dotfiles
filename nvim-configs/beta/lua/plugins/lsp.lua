@@ -27,7 +27,7 @@ return {
     vim.g.lsp_file_size_limit = 5000000
 
     -- Helper functions for LSP capability management
-    local function disable_navigation_capabilities(client)
+    local function intelephense_capabilities(client)
       local capabilities = client.server_capabilities or {}
       capabilities.definitionProvider = nil
       capabilities.typeDefinitionProvider = nil
@@ -35,7 +35,7 @@ return {
       capabilities.implementationProvider = nil
     end
 
-    local function limit_phpactor_capabilities(client)
+    local function phpactor_capabilities(client)
       local capabilities = client.server_capabilities or {}
       local allowed = {
         codeActionProvider = true,
@@ -60,12 +60,12 @@ return {
 
     -- PHP Language Servers
     vim.lsp.config("intelephense", {
-      on_attach = disable_navigation_capabilities,
+      on_attach = intelephense_capabilities,
     })
     vim.lsp.enable("intelephense")
 
     vim.lsp.config("phpactor", {
-      on_attach = limit_phpactor_capabilities,
+      on_attach = phpactor_capabilities,
     })
     vim.lsp.enable("phpactor")
 
@@ -94,34 +94,6 @@ return {
         },
       },
       filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-    }
-
-    local vue_ls_config = {
-      on_init = function(client)
-        client.handlers["tsserver/request"] = function(_, result, context)
-          local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "vtsls" })
-          if #clients == 0 then
-            vim.notify("Could not find `vtsls` lsp client, `vue_ls` will not work.", vim.log.levels.ERROR)
-            return
-          end
-
-          local ts_client = clients[1]
-          local param = unpack(result or {})
-          local id, command, payload = unpack(param or {})
-
-          ts_client:exec_cmd({
-            title = "vue_request_forward",
-            command = "typescript.tsserverRequest",
-            arguments = { command, payload },
-          }, { bufnr = context.bufnr }, function(_, r)
-            if not r or not r.body then
-              vim.notify("vue_ls: failed to forward tsserverRequest", vim.log.levels.WARN)
-              return
-            end
-            client:notify("tsserver/response", { { id, r.body } })
-          end)
-        end
-      end,
     }
 
     vim.lsp.config("vtsls", vtsls_config)
