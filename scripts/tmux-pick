@@ -1,19 +1,53 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# List only windows (across all sessions), excluding popup session
+# Check for required commands
+if ! command -v fzf >/dev/null 2>&1; then
+  echo "Error: fzf is required but not installed." >&2
+  exit 1
+fi
+
+if ! command -v tmux >/dev/null 2>&1; then
+  echo "Error: tmux is required but not installed." >&2
+  exit 1
+fi
+
+# List windows (across all sessions, excluding popup-like sessions)
 list() {
-  tmux list-windows -a -F $'W\t#{session_name}\t#{window_index}\t\t#{session_name}:#{window_index} #{window_name}' | grep -v $'^W\tpopup\t'
+  local exclude_pattern="${TMUX_PICK_EXCLUDE:-^(popup|scratch|temp)$}"
+  
+  # Windows with activity timestamp
+  tmux list-windows -a -F $'W\t#{session_name}\t#{window_index}\t\t#{window_activity}\t#{session_name}:#{window_index} #{window_name}' 2>/dev/null | \
+    grep -Ev $'\t'"$exclude_pattern"$'\t' || true
 }
 
-# Show labels (field 5) but keep raw row for parsing
-sel="$(list | fzf -e -d $'\t' --with-nth=5.. --prompt='❯ ' --reverse --height=100% || true)"
+# Sort by activity (field 5)
+list_sorted() {
+  list | sort -t$'\t' -k5 -rn 2>/dev/null || list
+}
+
+# Show labels (field 6+) but keep raw row for parsing
+sel="$(list_sorted | fzf \
+  -e \
+  -d $'\t' \
+  --with-nth=6.. \
+  --prompt='❯ ' \
+  --reverse \
+  --header='Windows' \
+  --info=inline \
+  --height=90% \
+  || true)"
+
 [ -z "${sel:-}" ] && exit 0
 
-kind=$(printf '%s' "$sel" | cut -f1)
-sess=$(printf '%s' "$sel" | cut -f2)
-win=$( printf '%s' "$sel" | cut -f3)
+# Parse selection using awk for safer field extraction
+sess=$(echo "$sel" | awk -F'\t' '{print $2}')
+win=$(echo "$sel" | awk -F'\t' '{print $3}')
 
-case "$kind" in
-  W) exec tmux switch-client -t "$sess:$win" ;;
-esac
+# Validate target exists before switching
+if tmux list-windows -t "$sess" -F '#{window_index}' 2>/dev/null | grep -q "^${win}$"; then
+  exec tmux switch-client -t "$sess:$win"
+else
+  echo "Error: Window '$sess:$win' not found" >&2
+  exit 1
+fi

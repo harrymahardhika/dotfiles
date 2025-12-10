@@ -1,0 +1,6 @@
+[Unit]
+Description=Battery warning check
+
+[Service]
+Type=oneshot
+ExecStart=%h/.config/i3/battery-warning.sh

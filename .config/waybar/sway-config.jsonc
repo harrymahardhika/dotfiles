@@ -31,7 +31,7 @@
     "separate-outputs": true,
     "rewrite": {
       "tmux(.*)": "tmux",
-      "": "  Desktop"
+      "": "(empty)"
     }
   },
   "battery": {

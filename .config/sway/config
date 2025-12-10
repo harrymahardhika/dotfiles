@@ -12,24 +12,22 @@ set $webapp $HOME/scripts/webapp
 set $file_manager nautilus
 
 ### --- Autostart applications ---
-exec_always swayidle -w \
-            timeout 300 '$HOME/.config/sway/lock.sh' \
-            timeout 600 'swaymsg "output * dpms off"' \
-            resume 'swaymsg "output * dpms on"' \
-            before-sleep '$HOME/.config/sway/lock.sh'
+# Systemd services handle: waybar, swayidle, swww-daemon, cliphist, dunst, udiskie, battery-warning
+# Enable them with: systemctl --user enable waybar swayidle swww-daemon cliphist dunst udiskie battery-warning.timer
 
-exec_always pkill waybar
-exec_always waybar -c $HOME/.config/waybar/sway-config.jsonc -s $HOME/.config/waybar/sway-style.css
-exec_always --no-startup-id bash -c "while true; do \"$HOME/.config/i3/battery-warning.sh\"; sleep 60; done"
-exec_always swww-daemon
-exec_always --no-startup-id "$HOME/.config/sway/set-wallpaper.sh"
+# Session environment - import variables to systemd
+exec systemctl --user import-environment XDG_SESSION_TYPE XDG_CURRENT_DESKTOP WAYLAND_DISPLAY SWAYSOCK
+exec systemctl --user restart xdg-desktop-portal-gtk.service xdg-desktop-portal.service
 
-exec systemctl --user import-environment XDG_SESSION_TYPE XDG_CURRENT_DESKTOP WAYLAND_DISPLAY
-exec_always systemctl --user restart xdg-desktop-portal-gtk.service xdg-desktop-portal.service
-exec --no-startup-id dunst
-exec --no-startup-id udiskie -n
-exec --no-startup-id dropbox start
-exec_always wl-paste --watch cliphist store
+# Restart waybar on config reload to pick up any waybar config changes
+# Use exec_always with a delay to ensure SWAYSOCK is imported first
+exec_always sleep 1 && systemctl --user import-environment SWAYSOCK && systemctl --user restart waybar
+
+# Wallpaper (requires swww-daemon.service to be running)
+exec "$HOME/.config/sway/set-wallpaper.sh"
+
+# Dropbox
+exec dropbox start
 
 ### --- Keybindings ---
 floating_modifier $mod
@@ -155,6 +153,8 @@ mode "resize" {
 
 ### --- App assignments ---
 assign [class="vesktop"] 4
+
+### --- Window rules ---
 
 ### --- Screenshot ---
 bindsym $mod+Shift+p exec sh -c 'grim -g "$(slurp)" - | wl-copy'

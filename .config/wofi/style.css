@@ -62,7 +62,7 @@ window {
   padding: 0.2rem;
   border: 0.1rem solid @lavender;
   border-radius: 0.4em;
-  background-color: @base;
+  background-color: rgba(30, 30, 46, 0.92);
   animation: slideIn 0.2s ease-in-out both;
 }
 
@@ -82,7 +82,7 @@ window {
   margin: 0.2rem;
   padding: 0.4rem;
   border: none;
-  background-color: @base;
+  background-color: rgba(30, 30, 46, 0.92);
   animation: fadeIn 0.2s ease-in-out both;
 }
 
@@ -102,7 +102,7 @@ window {
   margin: 0.2rem;
   padding: 0.2rem;
   border: none;
-  background-color: @base;
+  background-color: rgba(30, 30, 46, 0.92);
 }
 
 /* Scroll */
@@ -110,7 +110,7 @@ window {
   margin: 0;
   padding: 0.2rem;
   border: none;
-  background-color: @base;
+  background-color: rgba(30, 30, 46, 0.92);
 }
 
 /* Input */
@@ -119,7 +119,7 @@ window {
   padding: 0.2rem;
   border: none;
   color: @text;
-  background-color: @base;
+  background-color: rgba(30, 30, 46, 0.92);
   animation: fadeIn 0.2s ease-in-out both;
 }
 
@@ -145,7 +145,7 @@ window {
 }
 
 #entry {
-  background-color: @base;
+  background-color: rgba(30, 30, 46, 0.92);
 }
 
 #entry arrow {
