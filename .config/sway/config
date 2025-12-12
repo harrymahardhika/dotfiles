@@ -6,25 +6,30 @@ font pango:JetBrainsMono Nerd Font 9
 
 ### --- Variables ---
 set $terminal ghostty
+# set $terminal $HOME/.local/bin/kitty
 # set $browser brave-browser-stable
 set $browser zen-browser
 set $webapp $HOME/scripts/webapp
 set $file_manager nautilus
 
 ### --- Autostart applications ---
-# Systemd services handle: waybar, swayidle, swww-daemon, cliphist, dunst, udiskie, battery-warning
-# Enable them with: systemctl --user enable waybar swayidle swww-daemon cliphist dunst udiskie battery-warning.timer
+# Systemd services handle: waybar, swayidle, cliphist, dunst, udiskie, battery-warning
+# Enable them with: systemctl --user enable waybar swayidle cliphist dunst udiskie battery-warning.timer
+# Note: swww-daemon is started by sway config below (not enabled in systemd)
 
 # Session environment - import variables to systemd
 exec systemctl --user import-environment XDG_SESSION_TYPE XDG_CURRENT_DESKTOP WAYLAND_DISPLAY SWAYSOCK
 exec systemctl --user restart xdg-desktop-portal-gtk.service xdg-desktop-portal.service
+
+# Start swww-daemon after environment is ready
+exec systemctl --user start swww-daemon.service
 
 # Restart waybar on config reload to pick up any waybar config changes
 # Use exec_always with a delay to ensure SWAYSOCK is imported first
 exec_always sleep 1 && systemctl --user import-environment SWAYSOCK && systemctl --user restart waybar
 
 # Wallpaper (requires swww-daemon.service to be running)
-exec "$HOME/.config/sway/set-wallpaper.sh"
+exec sleep 2 && "$HOME/.config/sway/set-wallpaper.sh"
 
 # Dropbox
 exec dropbox start
@@ -36,9 +41,8 @@ bindsym $mod+m exec $browser
 bindsym $mod+q kill
 bindsym $mod+Shift+w exec --no-startup-id $HOME/.config/sway/set-wallpaper.sh
 bindsym $mod+d exec --no-startup-id rofi -show drun
-# bindsym $mod+d exec $HOME/.config/wofi/launch.sh
 bindsym $mod+Shift+t exec $HOME/.config/sway/toggle-transparency.sh
-bindsym $mod+Shift+x exec wlogout -b 4
+bindsym $mod+Shift+x exec wlogout -b 5
 bindsym $mod+b exec pkill -SIGUSR1 waybar
 bindsym $mod+v exec --no-startup-id $HOME/scripts/clipboard-history.sh
 
@@ -69,7 +73,7 @@ bindsym $mod+Shift+b split h
 bindsym $mod+Shift+v split v
 
 ### --- Fullscreen & layout toggle ---
-bindsym $mod+f fullscreen toggle
+bindsym $mod+f exec $HOME/.config/sway/toggle-gaps-fullscreen.sh
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
@@ -127,7 +131,6 @@ bindsym $mod+g gaps inner current plus 2
 
 ### --- Borders ---
 default_border none
-# default_border pixel 2
 default_floating_border none
 hide_edge_borders smart
 

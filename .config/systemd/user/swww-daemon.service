@@ -7,7 +7,7 @@ PartOf=graphical-session.target
 Type=simple
 ExecStart=/usr/local/bin/swww-daemon
 Restart=on-failure
-RestartSec=3
+RestartSec=5
 
 [Install]
 WantedBy=graphical-session.target

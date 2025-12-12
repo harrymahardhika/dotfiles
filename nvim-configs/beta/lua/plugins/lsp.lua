@@ -26,17 +26,20 @@ return {
     -- Increase LSP file size limit to 5MB (default is 1MB)
     vim.g.lsp_file_size_limit = 5000000
 
+    -- Get capabilities from nvim-cmp
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
     -- Helper functions for LSP capability management
     local function intelephense_capabilities(client)
-      local capabilities = client.server_capabilities or {}
-      capabilities.definitionProvider = nil
-      capabilities.typeDefinitionProvider = nil
-      capabilities.declarationProvider = nil
-      capabilities.implementationProvider = nil
+      local server_caps = client.server_capabilities or {}
+      server_caps.definitionProvider = nil
+      server_caps.typeDefinitionProvider = nil
+      server_caps.declarationProvider = nil
+      server_caps.implementationProvider = nil
     end
 
     local function phpactor_capabilities(client)
-      local capabilities = client.server_capabilities or {}
+      local server_caps = client.server_capabilities or {}
       local allowed = {
         codeActionProvider = true,
         declarationProvider = true,
@@ -48,30 +51,36 @@ return {
         typeDefinitionProvider = true,
       }
 
-      for _, capability in ipairs(vim.tbl_keys(capabilities)) do
+      for _, capability in ipairs(vim.tbl_keys(server_caps)) do
         if capability:find("Provider", 1, true) and not allowed[capability] then
-          capabilities[capability] = nil
+          server_caps[capability] = nil
         end
       end
     end
 
     -- Lua Language Server
+    vim.lsp.config("lua_ls", {
+      capabilities = capabilities,
+    })
     vim.lsp.enable("lua_ls")
 
     -- PHP Language Servers
     vim.lsp.config("intelephense", {
       on_attach = intelephense_capabilities,
+      capabilities = capabilities,
     })
     vim.lsp.enable("intelephense")
 
     vim.lsp.config("phpactor", {
       on_attach = phpactor_capabilities,
+      capabilities = capabilities,
     })
     vim.lsp.enable("phpactor")
 
-    -- vim.lsp.enable("phptools")
-
     -- Go Language Server
+    vim.lsp.config("gopls", {
+      capabilities = capabilities,
+    })
     vim.lsp.enable("gopls")
 
     -- TypeScript/Vue Setup
@@ -84,6 +93,7 @@ return {
     }
 
     local vtsls_config = {
+      capabilities = capabilities,
       settings = {
         vtsls = {
           tsserver = {
@@ -97,11 +107,14 @@ return {
     }
 
     vim.lsp.config("vtsls", vtsls_config)
-    vim.lsp.config("vue_ls", {})
+    vim.lsp.config("vue_ls", {
+      capabilities = capabilities,
+    })
     vim.lsp.enable({ "vtsls", "vue_ls" })
 
     -- Tailwind CSS
     vim.lsp.config("tailwindcss", {
+      capabilities = capabilities,
       filetypes = { "javascript", "typescript", "vue", "svelte" },
     })
     vim.lsp.enable("tailwindcss")
@@ -109,10 +122,15 @@ return {
     -- Biome (commented out)
     -- vim.lsp.enable("biome")
 
-    -- LSP Keymaps
-    -- vim.api.nvim_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
-    -- vim.api.nvim_set_keymap("n", "gy", "<cmd>lua vim.lsp.buf.type_definition()<CR>", { noremap = true, silent = true })
-    -- vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.declaration()<CR>", { noremap = true, silent = true })
-    -- vim.api.nvim_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", { noremap = true, silent = true })
+    -- LSP Keymaps on attach
+    vim.api.nvim_create_autocmd("LspAttach", {
+      callback = function(args)
+        local opts = { buffer = args.buf }
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+        vim.keymap.set("n", "gr", vim.lsp.buf.rename, opts)
+        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+      end,
+    })
   end,
 }

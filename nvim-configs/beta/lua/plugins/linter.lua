@@ -15,7 +15,8 @@ return {
       vue = { "eslint_d" },
     }
 
-    vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost" }, {
+    -- Run linting on save and when leaving insert mode (more efficient than on every read)
+    vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
       callback = function()
         lint.try_lint()
       end,

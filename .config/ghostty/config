@@ -1,3 +1,5 @@
+adjust-cell-height = 0%
+adjust-cell-width = 0%
 confirm-close-surface = true
 copy-on-select = true
 font-family = JetBrainsMono Nerd Font
@@ -10,7 +12,7 @@ resize-overlay = never
 shell-integration = zsh
 shell-integration-features = cursor,sudo,title
 theme = catppuccin-mocha
-window-decoration = server
+window-decoration = false
 window-padding-balance = true
 window-padding-color = background
 window-padding-x = 0

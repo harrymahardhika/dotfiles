@@ -62,4 +62,13 @@ if command -v npm &> /dev/null; then
     sudo npm-check -gui
 fi
 
+# Update uv
+if command -v uv &> /dev/null; then
+    echo "🐍 Updating uv..."
+    timeout 120 uv self update || echo "⚠️  UV update timed out or failed, skipping..."
+
+    echo "🔧 Updating uv tools..."
+    uv tool upgrade --all
+fi
+
 echo "✅ All updates completed!"

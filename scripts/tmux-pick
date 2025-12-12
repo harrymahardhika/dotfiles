@@ -15,7 +15,7 @@ fi
 # List windows (across all sessions, excluding popup-like sessions)
 list() {
   local exclude_pattern="${TMUX_PICK_EXCLUDE:-^(popup|scratch|temp)$}"
-  
+
   # Windows with activity timestamp
   tmux list-windows -a -F $'W\t#{session_name}\t#{window_index}\t\t#{window_activity}\t#{session_name}:#{window_index} #{window_name}' 2>/dev/null | \
     grep -Ev $'\t'"$exclude_pattern"$'\t' || true
@@ -33,9 +33,6 @@ sel="$(list_sorted | fzf \
   --with-nth=6.. \
   --prompt='❯ ' \
   --reverse \
-  --header='Windows' \
-  --info=inline \
-  --height=90% \
   || true)"
 
 [ -z "${sel:-}" ] && exit 0

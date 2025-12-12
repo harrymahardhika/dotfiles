@@ -7,7 +7,6 @@ return {
       "L3MON4D3/LuaSnip",
     },
     config = function()
-      -- cmp setup
       local cmp = require("cmp")
       local luasnip = require("luasnip")
 
@@ -24,29 +23,8 @@ return {
         sources = {
           { name = "nvim_lsp" },
           { name = "luasnip" },
-          { name = "buffer" },
-          { name = "path" },
         },
       })
     end,
   },
-  -- {
-  --   "saghen/blink.cmp",
-  --   dependencies = { "rafamadriz/friendly-snippets" },
-  --   version = "1.*",
-  --   ---@module 'blink.cmp'
-  --   ---@type blink.cmp.Config
-  --   opts = {
-  --     keymap = { preset = "default" },
-  --     appearance = {
-  --       nerd_font_variant = "normal",
-  --     },
-  --     sources = {
-  --       default = { "lsp", "path", "snippets", "buffer" },
-  --     },
-  --     completion = { documentation = { auto_show = false } },
-  --     fuzzy = { implementation = "prefer_rust_with_warning" },
-  --   },
-  --   opts_extend = { "sources.default" },
-  -- },
 }

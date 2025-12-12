@@ -56,11 +56,11 @@ map("n", "<leader>cw", function()
 end, { desc = "Clean trailing whitespace" })
 
 vim.keymap.set("n", "]d", function()
-  vim.diagnostic.jump({ count = -1, float = true })
+  vim.diagnostic.jump({ count = 1, float = true })
 end, { desc = "Next diagnostic" })
 
 vim.keymap.set("n", "[d", function()
-  vim.diagnostic.jump({ count = 1, float = true })
+  vim.diagnostic.jump({ count = -1, float = true })
 end, { desc = "Previous diagnostic" })
 
 -- Quickfix list navigation

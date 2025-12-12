@@ -1,13 +1,13 @@
+-- Enable vim.loader FIRST for better performance
+if vim.loader then
+  pcall(vim.loader.reset)
+  pcall(vim.loader.enable)
+end
+
 require("settings")
 require("keymaps")
 require("autocmds")
 require("float-term")
--- require("float-notify")
-
-if vim.loader then
-  pcall(vim.loader.reset) -- drop stale index
-  pcall(vim.loader.enable, true)
-end
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
