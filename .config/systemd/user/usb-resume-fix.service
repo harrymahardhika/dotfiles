@@ -1,0 +1,10 @@
+[Unit]
+Description=Fix USB ports after suspend/resume
+After=suspend.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c 'for usb in /sys/bus/usb/devices/*/power/control; do echo on > $usb 2>/dev/null; done'
+
+[Install]
+WantedBy=suspend.target

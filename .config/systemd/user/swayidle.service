@@ -1,8 +1,7 @@
 [Unit]
 Description=Swayidle idle manager
 Documentation=https://github.com/swaywm/swayidle
-After=graphical-session.target
-PartOf=graphical-session.target
+After=default.target
 
 [Service]
 Type=simple
@@ -15,4 +14,4 @@ Restart=on-failure
 RestartSec=3
 
 [Install]
-WantedBy=graphical-session.target
+WantedBy=default.target

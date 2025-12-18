@@ -12,6 +12,9 @@ o.cursorline = false
 o.errorbells = false
 o.expandtab = true
 o.foldcolumn = "0"
+o.foldenable = false
+o.foldmethod = "manual"
+o.foldlevelstart = 99
 o.hlsearch = false
 o.number = true
 o.relativenumber = true
@@ -24,7 +27,7 @@ o.splitright = true
 o.swapfile = false
 o.tabstop = 2
 o.termguicolors = true
-o.timeoutlen = 500
+o.timeoutlen = 300
 o.title = true
 o.ttimeoutlen = 0
 o.winborder = "rounded"
@@ -35,6 +38,20 @@ g.netrw_banner = 0
 g.netrw_winsize = 25
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
+
+-- Clipboard provider for Wayland
+g.clipboard = {
+  name = "WaylandClipboard",
+  copy = {
+    ["+"] = "wl-copy",
+    ["*"] = "wl-copy",
+  },
+  paste = {
+    ["+"] = "wl-paste --no-newline",
+    ["*"] = "wl-paste --no-newline",
+  },
+  cache_enabled = 1,
+}
 
 vim.diagnostic.config({
   float = {

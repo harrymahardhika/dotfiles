@@ -63,6 +63,7 @@ alias csd="gd --staged | xclip -sel clipboard"
 
 # Python/Django
 alias dje="source ~/.virtualenvs/djangoenv/bin/activate"
+alias python="python3"
 alias p3="python3"
 alias pm="python3 manage.py"
 

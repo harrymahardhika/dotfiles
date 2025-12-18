@@ -32,6 +32,16 @@
   border-radius: 0.4rem;
 }
 
+#clock.time {
+  margin-right: 0;
+  border-radius: 0.4rem 0 0 0.4rem;
+}
+
+#clock.date {
+  margin-left: 0;
+  border-radius: 0 0.4rem 0.4rem 0;
+}
+
 #workspaces {
   padding-left: 0.4rem;
   padding-right: 0;

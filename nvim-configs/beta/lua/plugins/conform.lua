@@ -12,6 +12,7 @@ return {
       javascript = { "prettierd" },
       json = { "prettierd" },
       lua = { "stylua" },
+      markdown = { "prettierd" },
       php = { "pint" },
       typescript = { "prettierd" },
       vue = { "prettierd" },

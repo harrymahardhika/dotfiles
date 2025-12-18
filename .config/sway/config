@@ -28,6 +28,9 @@ exec systemctl --user start swww-daemon.service
 # Use exec_always with a delay to ensure SWAYSOCK is imported first
 exec_always sleep 1 && systemctl --user import-environment SWAYSOCK && systemctl --user restart waybar
 
+# Fix USB ports on config reload
+exec_always $HOME/.config/sway/fix-usb.sh
+
 # Wallpaper (requires swww-daemon.service to be running)
 exec sleep 2 && "$HOME/.config/sway/set-wallpaper.sh"
 

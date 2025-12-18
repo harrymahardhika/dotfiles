@@ -1,8 +1,7 @@
 [Unit]
 Description=Waybar status bar
 Documentation=https://github.com/Alexays/Waybar
-After=graphical-session.target
-PartOf=graphical-session.target
+After=default.target
 
 [Service]
 Type=simple
@@ -11,4 +10,4 @@ Restart=on-failure
 RestartSec=3
 
 [Install]
-WantedBy=graphical-session.target
+WantedBy=default.target

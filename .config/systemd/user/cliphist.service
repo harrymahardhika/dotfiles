@@ -1,7 +1,6 @@
 [Unit]
 Description=Clipboard history with cliphist
-After=graphical-session.target
-PartOf=graphical-session.target
+After=default.target
 
 [Service]
 Type=simple
@@ -10,4 +9,4 @@ Restart=on-failure
 RestartSec=3
 
 [Install]
-WantedBy=graphical-session.target
+WantedBy=default.target
