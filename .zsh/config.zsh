@@ -2,10 +2,30 @@
 bindkey '^W' backward-kill-word
 bindkey '^U' backward-kill-line
 
-# FZF
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[[ -f ~/.fzf/shell/completion.zsh ]] && source ~/.fzf/shell/completion.zsh
-[[ -f ~/.fzf/shell/key-bindings.zsh ]] && source ~/.fzf/shell/key-bindings.zsh
+# Better directory navigation
+setopt AUTO_CD              # cd by typing directory name
+setopt AUTO_PUSHD           # Make cd push old directory onto stack
+setopt PUSHD_IGNORE_DUPS    # Don't push duplicates
+setopt PUSHD_SILENT         # Don't print directory stack
+
+# Completion improvements
+setopt COMPLETE_IN_WORD     # Complete from both ends
+setopt ALWAYS_TO_END        # Move cursor to end after completion
+setopt AUTO_MENU            # Show completion menu on tab
+setopt AUTO_LIST            # Automatically list choices
+setopt MENU_COMPLETE        # Insert first match immediately
+
+# Globbing improvements
+setopt EXTENDED_GLOB        # Use extended globbing
+setopt GLOB_DOTS            # Include dotfiles in glob
+
+# FZF initialization
+if [ -f ~/.fzf.zsh ]; then
+  source ~/.fzf.zsh
+elif [[ -f ~/.fzf/shell/completion.zsh ]]; then
+  source ~/.fzf/shell/completion.zsh
+  source ~/.fzf/shell/key-bindings.zsh
+fi
 
 export FZF_DEFAULT_OPTS=" \
 --color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 \

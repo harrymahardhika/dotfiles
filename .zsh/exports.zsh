@@ -5,42 +5,50 @@ export PAGER="less"
 export XDG_CONFIG_HOME="$HOME/.config"
 
 # Language/Locale
-export LANG="$LC_ALL"
 export LC_ALL="en_US.UTF-8"
-
-# PATHs
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
-export PATH=$PATH:$HOME/.cargo/bin
-export PATH=$PATH:$HOME/.composer/vendor/bin
-export PATH=$PATH:$HOME/.config/composer/vendor/bin
-export PATH=$PATH:$HOME/.local/bin
-export PATH=$PATH:$HOME/.rbenv/bin
-export PATH=$PATH:/usr/local/go/bin
+export LANG="$LC_ALL"
 
 # Android SDK
 export ANDROID_HOME="$HOME/Android/Sdk"
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/tools/bin
 
 # Golang
 export GOPATH="$HOME/.go"
-export PATH=$PATH:$GOPATH/bin
 
 # pnpm
 export PNPM_HOME="$HOME/.local/share/pnpm"
-[[ ":$PATH:" != *":$PNPM_HOME:"* ]] && export PATH="$PNPM_HOME:$PATH"
-
-# opencode
-export PATH=$HOME/.opencode/bin:$PATH
-
-# bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+
+# PATHs - Build once for efficiency
+typeset -U path  # Remove duplicates automatically
+path=(
+  $HOME/.opencode/bin
+  $BUN_INSTALL/bin
+  $PNPM_HOME
+  $HOME/.cargo/bin
+  $HOME/.composer/vendor/bin
+  $HOME/.config/composer/vendor/bin
+  $HOME/.local/bin
+  $HOME/.rbenv/bin
+  /usr/local/go/bin
+  $GOPATH/bin
+  $ANDROID_HOME/emulator
+  $ANDROID_HOME/platform-tools
+  $ANDROID_HOME/tools
+  $ANDROID_HOME/tools/bin
+  /usr/local/bin
+  /usr/bin
+  /bin
+  /usr/local/sbin
+  /usr/sbin
+  /sbin
+  $path
+)
+export PATH
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 if [ -r "$HOME/.secrets" ]; then
   # shellcheck source=/dev/null

@@ -1,6 +1,13 @@
 # General
 alias cl="clear"
 
+# Better defaults
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias mkdir='mkdir -p'
+alias cp='cp -i'
+alias mv='mv -i'
+
 # Laravel
 alias getrekt="vendor/bin/rector"
 alias mig="pa migrate"
@@ -14,7 +21,6 @@ alias pf="vendor/bin/pest --filter"
 alias pg="vendor/bin/pest --group"
 alias pint="vendor/bin/pint"
 alias pp="vendor/bin/pest --parallel"
-alias pstan="vendor/bin/phpstan analyse "
 alias pstan="vendor/bin/phpstan analyse"
 alias rekt="vendor/bin/rector"
 alias rl="php artisan route:list"
@@ -56,10 +62,21 @@ alias changelog="$HOME/scripts/changelog.sh"
 alias battery_limit="$HOME/scripts/battery_limit.sh"
 
 # Git
+alias gs='git status'
+alias gd='git diff'
+alias gl='git log --oneline --graph --decorate'
+alias gp='git push'
+alias gpl='git pull'
+alias gco='git checkout'
+alias gcb='git checkout -b'
+alias ga='git add'
 alias gcm="git commit -m"
+alias gca='git commit --amend'
 alias wip="git add . && git commit -m 'wip'"
 alias nah="git reset --hard; git clean -df"
 alias csd="gd --staged | xclip -sel clipboard"
+alias gdsc="git diff --staged | wl-copy"
+
 
 # Python/Django
 alias dje="source ~/.virtualenvs/djangoenv/bin/activate"

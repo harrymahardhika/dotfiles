@@ -12,15 +12,11 @@ source $ZSH/oh-my-zsh.sh
 source $HOME/.antidote/antidote.zsh
 antidote load < $HOME/.zsh_plugins.txt
 
-# Async plugin loading (after prompt ready)
-zsh-defer source "${ANTIDOTE_CACHE_DIR:-$HOME/.cache/antidote}"/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-zsh-defer source "${ANTIDOTE_CACHE_DIR:-$HOME/.cache/antidote}"/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-autosuggestions/zsh-autosuggestions.zsh
+# Defer compinit for faster startup
 zsh-defer compinit -C
 
 # Load custom configuration
 for config_file in ~/.zsh/*.zsh; do
   source "$config_file"
 done
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
