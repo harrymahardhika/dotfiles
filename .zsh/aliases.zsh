@@ -64,8 +64,6 @@ alias battery_limit="$HOME/scripts/battery_limit.sh"
 # Git
 alias gs='git status'
 alias gd='git diff'
-alias gl='git log --oneline --graph --decorate'
-alias gp='git push'
 alias gpl='git pull'
 alias gco='git checkout'
 alias gcb='git checkout -b'

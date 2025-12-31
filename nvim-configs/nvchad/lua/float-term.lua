@@ -161,7 +161,7 @@ api.nvim_create_autocmd("QuitPre", {
       api.nvim_win_close(state.floating.win, true)
       state.floating.win = -1
     end
-    
+
     -- Force delete terminal buffer if it exists
     if api.nvim_buf_is_valid(state.floating.buf) then
       vim.bo[state.floating.buf].bufhidden = "wipe"

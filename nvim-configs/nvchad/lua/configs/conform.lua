@@ -1,16 +1,31 @@
 local options = {
   formatters_by_ft = {
+    css = { "prettierd" },
+    javascript = { "prettierd" },
+    json = { "prettierd" },
     lua = { "stylua" },
+    markdown = { "prettierd" },
     php = { "pint" },
-    typescript = { "prettier" },
-    vue = { "prettier" },
+    typescript = { "prettierd" },
+    vue = { "prettierd" },
   },
 
   format_on_save = {
-    -- These options will be passed to conform.format()
-    timeout_ms = 2500,
+    timeout_ms = 10000,
     lsp_fallback = true,
+  },
+
+  formatters = {
+    pint = {
+      command = "pint",
+      args = { "$FILENAME" },
+      stdin = false,
+    },
+    prettier = {
+      prepend_args = { "--prose-wrap", "always" },
+    },
   },
 }
 
 return options
+

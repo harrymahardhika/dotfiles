@@ -102,15 +102,27 @@ return {
             },
           },
         },
+        typescript = {
+          preferences = {
+            importModuleSpecifier = "relative",
+            importModuleSpecifierEnding = "minimal",
+          },
+          tsserver = {
+            maxTsServerMemory = 8192,
+          },
+        },
+        javascript = {
+          preferences = {
+            importModuleSpecifier = "relative",
+            importModuleSpecifierEnding = "minimal",
+          },
+        },
       },
       filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
     }
 
     vim.lsp.config("vtsls", vtsls_config)
-    vim.lsp.config("vue_ls", {
-      capabilities = capabilities,
-    })
-    vim.lsp.enable({ "vtsls", "vue_ls" })
+    vim.lsp.enable("vtsls")
 
     -- Tailwind CSS
     vim.lsp.config("tailwindcss", {
@@ -130,6 +142,7 @@ return {
         vim.keymap.set("n", "gr", vim.lsp.buf.rename, opts)
         vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
       end,
     })
   end,

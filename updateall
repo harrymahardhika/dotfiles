@@ -62,6 +62,13 @@ if command -v npm &> /dev/null; then
     sudo npm-check -gui
 fi
 
+# Update pnpm
+if command -v pnpm &> /dev/null; then
+    echo "📦 Updating pnpm..."
+    pnpm self-update
+    pnpm update -g
+fi
+
 # Update uv
 if command -v uv &> /dev/null; then
     echo "🐍 Updating uv..."
