@@ -41,7 +41,7 @@ local function apply_window_options(win)
   wo.signcolumn = "no"
   wo.scrolloff = 0
   wo.sidescrolloff = 0
-  api.nvim_win_set_option(win, "winhighlight", "NormalFloat:Normal,FloatBorder:FloatBorder")
+  vim.api.nvim_set_option_value("winhighlight", "NormalFloat:Normal,FloatBorder:FloatBorder", { win = win })
 end
 
 local function create_floating_window(opts)

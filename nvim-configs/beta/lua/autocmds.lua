@@ -68,38 +68,3 @@ autocmd("RecordingLeave", {
 api.nvim_create_user_command("BufOnly", function()
   vim.cmd("silent! %bd | e# | bd#")
 end, {})
-
--- format json files on save (requires jq)
-autocmd("BufWritePre", {
-  group = api.nvim_create_augroup("FormatJson", { clear = true }),
-  pattern = "*.json",
-  callback = function(event)
-    if fn.executable("jq") == 0 then
-      return
-    end
-
-    local buf = event.buf
-    if not vim.bo[buf].modifiable or vim.bo[buf].binary or vim.bo[buf].buftype ~= "" then
-      return
-    end
-
-    local source = api.nvim_buf_get_lines(buf, 0, -1, false)
-    local formatted = fn.systemlist({ "jq", "." }, table.concat(source, "\n"))
-    if vim.v.shell_error ~= 0 then
-      vim.notify(table.concat(formatted, "\n"), vim.log.levels.WARN, { title = "jq format" })
-      return
-    end
-
-    if formatted[#formatted] ~= "" then
-      table.insert(formatted, "")
-    end
-
-    if table.concat(source, "\n") == table.concat(formatted, "\n") then
-      return
-    end
-
-    local view = fn.winsaveview()
-    api.nvim_buf_set_lines(buf, 0, -1, false, formatted)
-    fn.winrestview(view)
-  end,
-})

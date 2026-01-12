@@ -1,7 +1,6 @@
--- Enable vim.loader FIRST for better performance
+-- Enable vim.loader for better performance
 if vim.loader then
-  pcall(vim.loader.reset)
-  pcall(vim.loader.enable)
+  vim.loader.enable()
 end
 
 require("settings")

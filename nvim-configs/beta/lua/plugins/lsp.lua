@@ -1,6 +1,6 @@
 return {
   "neovim/nvim-lspconfig",
-  event = "VeryLazy",
+  event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     {
       "folke/lazydev.nvim",
@@ -85,20 +85,21 @@ return {
 
     -- TypeScript/Vue Setup
     local vue_language_server_path = "/usr/lib/node_modules/@vue/language-server"
-    local vue_plugin = {
-      name = "@vue/typescript-plugin",
-      location = vue_language_server_path,
-      languages = { "vue" },
-      configNamespace = "typescript",
-    }
 
+    -- vtsls for TypeScript/JavaScript/Vue
     local vtsls_config = {
       capabilities = capabilities,
       settings = {
         vtsls = {
           tsserver = {
             globalPlugins = {
-              vue_plugin,
+              {
+                name = "@vue/typescript-plugin",
+                location = vue_language_server_path,
+                languages = { "vue" },
+                configNamespace = "typescript",
+                enableForWorkspaceTypeScriptVersions = true,
+              },
             },
           },
         },
@@ -124,6 +125,18 @@ return {
     vim.lsp.config("vtsls", vtsls_config)
     vim.lsp.enable("vtsls")
 
+    -- Vue Language Server (requires vtsls to be running)
+    vim.lsp.config("vue_ls", {
+      capabilities = capabilities,
+      filetypes = { "vue" },
+      init_options = {
+        typescript = {
+          tsdk = "/usr/lib/node_modules/@vtsls/language-server/node_modules/typescript/lib",
+        },
+      },
+    })
+    vim.lsp.enable("vue_ls")
+
     -- Tailwind CSS
     vim.lsp.config("tailwindcss", {
       capabilities = capabilities,
@@ -142,7 +155,7 @@ return {
         vim.keymap.set("n", "gr", vim.lsp.buf.rename, opts)
         vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+        -- Note: gd is mapped to fzf.lsp_typedefs in fzf-lua.lua
       end,
     })
   end,
