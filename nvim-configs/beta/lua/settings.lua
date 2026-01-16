@@ -15,7 +15,6 @@ o.foldcolumn = "0"
 o.foldenable = true
 o.foldlevelstart = 99
 o.hlsearch = false
-o.ignorecase = true
 o.number = true
 o.relativenumber = true
 o.scrolloff = 8

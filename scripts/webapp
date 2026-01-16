@@ -10,7 +10,7 @@ fi
 browser="${BROWSER_APP:-}"
 
 if [ -z "$browser" ]; then
-  for candidate in brave-browser-stable brave-browser chromium-browser google-chrome-stable google-chrome; do
+  for candidate in google-chrome-stable google-chrome brave-browser-stable brave-browser chromium-browser; do
     if command -v "$candidate" >/dev/null 2>&1; then
       browser="$candidate"
       break

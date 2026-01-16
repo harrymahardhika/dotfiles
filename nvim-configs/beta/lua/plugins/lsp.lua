@@ -26,8 +26,8 @@ return {
     -- Increase LSP file size limit to 5MB (default is 1MB)
     vim.g.lsp_file_size_limit = 5000000
 
-    -- Get capabilities from nvim-cmp
-    local capabilities = require("cmp_nvim_lsp").default_capabilities()
+    -- Get capabilities from blink.cmp
+    local capabilities = require("blink.cmp").get_lsp_capabilities()
 
     -- Helper functions for LSP capability management
     local function intelephense_capabilities(client)
