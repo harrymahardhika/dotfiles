@@ -52,7 +52,7 @@ fi
 # Update Composer
 if command -v composer &> /dev/null; then
     echo "🎼 Updating Composer..."
-    composer global self-update
+    sudo composer global self-update
     composer global update -vv --profile
 fi
 

@@ -161,7 +161,7 @@ return {
         vim.keymap.set("n", "gr", vim.lsp.buf.rename, opts)
         vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-        -- Note: gd is mapped to fzf.lsp_typedefs in fzf-lua.lua
+        -- Note: gd, gR, gi, gt are mapped to Telescope LSP pickers in telescope.lua
       end,
     })
   end,

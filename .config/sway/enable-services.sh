@@ -20,6 +20,7 @@ systemctl --user enable swayidle.service
 systemctl --user enable cliphist.service
 systemctl --user enable dunst.service
 systemctl --user enable udiskie.service
+systemctl --user enable fix-usb.service
 
 # Enable battery warning timer
 systemctl --user enable battery-warning.timer
@@ -29,8 +30,8 @@ echo "Services enabled. They will start on next login."
 echo "Note: swww-daemon is started by sway config after environment setup"
 echo ""
 echo "To start them now, run:"
-echo "  systemctl --user start waybar swayidle cliphist dunst udiskie battery-warning.timer"
+echo "  systemctl --user start waybar swayidle cliphist dunst udiskie fix-usb battery-warning.timer"
 echo ""
 echo "To check status:"
-echo "  systemctl --user status waybar swayidle cliphist dunst udiskie"
+echo "  systemctl --user status waybar swayidle cliphist dunst udiskie fix-usb"
 echo "  systemctl --user list-timers"

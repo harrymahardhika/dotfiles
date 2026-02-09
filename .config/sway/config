@@ -4,6 +4,29 @@ set $mod Mod4
 ### --- Font ---
 font pango:JetBrainsMono Nerd Font 9
 
+### --- Output Configuration ---
+# Laptop display
+output eDP-1 {
+    resolution 1920x1080@60.008Hz
+    position 0,0
+    adaptive_sync on
+}
+
+# External monitor (27" 1920x1080)
+output HDMI-A-2 {
+    resolution 1920x1080@60Hz
+    position 1920,0
+    adaptive_sync on
+}
+
+### --- Laptop-specific settings ---
+# Handle laptop lid - lock screen and turn off display when closed
+bindswitch --reload --locked lid:on exec $HOME/.config/sway/lock.sh && swaymsg "output eDP-1 dpms off"
+bindswitch --reload --locked lid:off exec swaymsg "output eDP-1 dpms on"
+
+# Power management - reduce brightness on battery
+# You can adjust these values as needed
+
 ### --- Variables ---
 set $terminal ghostty
 # set $terminal $HOME/.local/bin/kitty
@@ -28,9 +51,6 @@ exec systemctl --user start swww-daemon.service
 # Use exec_always with a delay to ensure SWAYSOCK is imported first
 exec_always sleep 1 && systemctl --user import-environment SWAYSOCK && systemctl --user restart waybar
 
-# Fix USB ports on config reload
-exec_always $HOME/.config/sway/fix-usb.sh
-
 # Wallpaper (requires swww-daemon.service to be running)
 exec sleep 2 && "$HOME/.config/sway/set-wallpaper.sh"
 
@@ -46,6 +66,7 @@ bindsym $mod+Shift+w exec --no-startup-id $HOME/.config/sway/set-wallpaper.sh
 bindsym $mod+d exec --no-startup-id rofi -show drun
 bindsym $mod+Shift+t exec $HOME/.config/sway/toggle-transparency.sh
 bindsym $mod+Shift+x exec wlogout -b 5
+bindsym $mod+x exec $HOME/.config/sway/lock.sh
 bindsym $mod+b exec pkill -SIGUSR1 waybar
 bindsym $mod+v exec --no-startup-id $HOME/scripts/clipboard-history.sh
 
@@ -96,6 +117,9 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
+# Enable workspace back and forth
+workspace_auto_back_and_forth yes
+
 ### --- Switch workspaces ---
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -122,6 +146,12 @@ bindsym $mod+Shift+0 move container to workspace number $ws10; workspace number 
 
 ### --- Other workspace settings ---
 focus_follows_mouse yes
+
+# Move workspace to different output (for dual monitor setup)
+bindsym $mod+Ctrl+Left move workspace to output left
+bindsym $mod+Ctrl+Right move workspace to output right
+bindsym $mod+Ctrl+Up move workspace to output up
+bindsym $mod+Ctrl+Down move workspace to output down
 
 ### --- Gaps ---
 gaps inner 2
@@ -159,26 +189,86 @@ mode "resize" {
 
 ### --- App assignments ---
 assign [class="vesktop"] 4
+assign [app_id="vesktop"] 4
 
 ### --- Window rules ---
+
+# Floating windows - dialogs and utilities
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="dialog"] floating enable
+for_window [window_role="menu"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+for_window [title="Preferences$"] floating enable
+for_window [title="Settings$"] floating enable
+
+# File pickers
+for_window [title="^Open"] floating enable
+for_window [title="^Save"] floating enable
+for_window [app_id="xdg-desktop-portal-gtk"] floating enable
+for_window [app_id="nautilus" title="^Properties"] floating enable
+
+# System utilities that should float
+for_window [app_id="pavucontrol"] floating enable, resize set 800 600
+for_window [app_id="blueman-manager"] floating enable, resize set 700 500
+for_window [app_id="nm-connection-editor"] floating enable
+for_window [title="^nmtui"] floating enable
+for_window [app_id="gnome-calculator"] floating enable
+
+# Picture-in-Picture
+for_window [title="Picture-in-Picture"] floating enable, sticky enable, resize set 640 360
+
+# Authentication dialogs
+for_window [app_id="polkit-gnome-authentication-agent-1"] floating enable
+for_window [title="^Authentication Required"] floating enable
+
+# Inhibit idle for fullscreen apps (video players, presentations)
+for_window [class=".*"] inhibit_idle fullscreen
+for_window [app_id=".*"] inhibit_idle fullscreen
+
+# Specific apps to inhibit idle
+for_window [app_id="mpv"] inhibit_idle visible
+for_window [app_id="vlc"] inhibit_idle visible
+for_window [class="zoom"] inhibit_idle visible
+for_window [title=".*Zoom Meeting.*"] inhibit_idle visible
+
+# Browser-specific rules
+for_window [title="Firefox — Sharing Indicator"] floating enable, sticky enable
+for_window [title="Chrome — Sharing Indicator"] floating enable, sticky enable
+
+# Focus urgent windows automatically
+for_window [urgent="latest"] focus
 
 ### --- Screenshot ---
 bindsym $mod+Shift+p exec sh -c 'grim -g "$(slurp)" - | wl-copy'
 
-# Natural scrolling (touchpad)
-input type:touchpad {
-    tap enabled                   # Tapping Enabled (1)
-    natural_scroll enabled        # Natural Scrolling Enabled (1)
-    scroll_method two_finger      # Scroll Method Enabled (0 0 1)
-    dwt enabled                   # Disable While Typing Enabled (1)
-    pointer_accel 0.4             # Pointer Acceleration (0.5)
+### --- Input Devices ---
+
+# Touchpad (Synaptics)
+input "2:7:SynPS/2_Synaptics_TouchPad" {
+    tap enabled
+    natural_scroll enabled
+    scroll_method two_finger
+    dwt enabled                    # Disable While Typing
+    pointer_accel 0.4
+    accel_profile adaptive
+    middle_emulation enabled       # Three-finger tap for middle click
 }
 
-# Example for a specific mouse
-input "Logitech Wireless Mouse" {
-    natural_scroll enabled
+# TrackPoint
+input "2:10:TPPS/2_ALPS_TrackPoint" {
+    pointer_accel 0.3
+    accel_profile flat
     scroll_method on_button_down
+    scroll_button 275              # Middle button (button 2) for scrolling
+}
+
+# Logitech Wireless Mouse
+input "1133:16468:Logitech_Wireless_Mouse" {
+    natural_scroll enabled
     pointer_accel 0.4
+    accel_profile adaptive
 }
 
 # Audio volume
@@ -226,4 +316,11 @@ client.unfocused         $overlay0 $base $overlay0 $rosewater $base
 client.urgent            $peach    $base $peach    $overlay0  $peach
 client.placeholder       $overlay0 $base $text     $overlay0  $base
 client.background        $base
+
+### --- Performance & Power Optimization ---
+# Focus windows on urgent hint
+focus_on_window_activation urgent
+
+# Don't wrap around when reaching edge of workspace
+focus_wrapping no
 
