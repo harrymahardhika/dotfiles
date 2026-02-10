@@ -64,6 +64,7 @@ return {
       "sindrets/diffview.nvim", -- optional - Diff integration
       "nvim-telescope/telescope.nvim", -- optional
     },
+    cmd = "Neogit",
     config = function()
       vim.keymap.set("n", "<leader>gn", "<cmd>Neogit<cr>", { desc = "Neogit" })
     end,

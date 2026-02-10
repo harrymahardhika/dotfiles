@@ -20,9 +20,9 @@ output HDMI-A-2 {
 }
 
 ### --- Laptop-specific settings ---
-# Handle laptop lid - lock screen and turn off display when closed
-bindswitch --reload --locked lid:on exec $HOME/.config/sway/lock.sh && swaymsg "output eDP-1 dpms off"
-bindswitch --reload --locked lid:off exec swaymsg "output eDP-1 dpms on"
+# Lid close/suspend handling: Managed by systemd-logind (default: suspend on lid close)
+# swayidle's 'before-sleep' hook will lock the screen before suspend
+# This is more reliable than manual DPMS control and handles all hardware properly
 
 # Power management - reduce brightness on battery
 # You can adjust these values as needed

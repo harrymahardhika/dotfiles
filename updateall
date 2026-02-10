@@ -32,8 +32,8 @@ else
 
     if command -v pacstall &> /dev/null; then
         echo "📦 Updating Pacstall..."
-        pacstall -U -P
-        pacstall -Up -P
+        pacstall -U --disable-prompts # Update pacstall tool itself
+        pacstall -Up --disable-prompts # Update all installed pacstall packages
     fi
 fi
 
@@ -59,7 +59,7 @@ fi
 # Update npm global packages
 if command -v npm &> /dev/null; then
     echo "📦 Updating npm global packages..."
-    sudo npm-check -gui
+    sudo npm update -g
 fi
 
 # Update pnpm

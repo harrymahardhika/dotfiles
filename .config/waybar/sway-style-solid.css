@@ -18,7 +18,6 @@
 #clock,
 #cpu,
 #custom-cpu_temp,
-#custom-swap,
 #memory,
 #mode,
 #network,
@@ -70,10 +69,6 @@
 
 #memory {
   color: @sky;
-}
-
-#custom-swap {
-  color: @teal;
 }
 
 #cpu {
