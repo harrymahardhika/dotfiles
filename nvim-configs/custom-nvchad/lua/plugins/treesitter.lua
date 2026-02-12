@@ -60,7 +60,7 @@ return {
       indent = {
         enable = true,
         -- Performance: Disable indent for problematic languages
-        disable = { "python", "yaml", "php" },
+        disable = { "python", "yaml" },
       },
       modules = {},
       sync_install = false,

@@ -11,6 +11,23 @@ fi
 echo "🔄 Starting system updates..."
 echo "⏰ Started at $(date)"
 
+# Sudo preflight: notify before password prompt, authenticate once, then keep ticket alive.
+if ! sudo -n true 2>/dev/null; then
+    if command -v notify-send &> /dev/null; then
+        notify-send -u critical "sudo password required" "updateall needs elevated privileges"
+    fi
+    printf '\a'
+fi
+
+if ! sudo -v; then
+    echo "❌ Failed to authenticate with sudo."
+    exit 1
+fi
+
+( while true; do sudo -n true; sleep 50; kill -0 "$$" || exit; done ) 2>/dev/null &
+SUDO_KEEPALIVE_PID=$!
+trap 'kill "$SUDO_KEEPALIVE_PID" 2>/dev/null || true' EXIT
+
 if [ -f /etc/arch-release ]; then
     # For Arch-based systems
     echo "📦 Updating Arch packages..."

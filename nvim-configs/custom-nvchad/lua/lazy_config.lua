@@ -37,12 +37,10 @@ M.performance = {
       "zipPlugin",
       "tutor",
       "rplugin",
-      "syntax",
       "synmenu",
       "optwin",
       "compiler",
       "bugreport",
-      "ftplugin",
     },
   },
 }

@@ -41,7 +41,7 @@ return {
   config = function(_, opts)
     local telescope = require("telescope")
     telescope.setup(opts)
-    
+
     -- Load fzf-native extension for better fuzzy matching
     telescope.load_extension("fzf")
 
@@ -82,7 +82,7 @@ return {
 
     -- LSP keymaps (replace fzf-lua LSP pickers)
     vim.keymap.set("n", "gd", builtin.lsp_definitions, { desc = "LSP Definitions" })
-    vim.keymap.set("n", "gt", builtin.lsp_type_definitions, { desc = "LSP Type Definitions" })
+    -- vim.keymap.set("n", "gt", builtin.lsp_type_definitions, { desc = "LSP Type Definitions" })
     vim.keymap.set("n", "gi", builtin.lsp_implementations, { desc = "LSP Implementations" })
     vim.keymap.set("n", "gR", builtin.lsp_references, { desc = "LSP References" })
     vim.keymap.set("n", "<leader>D", builtin.lsp_document_symbols, { desc = "LSP Document Symbols" })

@@ -10,7 +10,6 @@
   "modules-center": ["hyprland/workspaces", "hyprland/window"],
   "modules-right": [
     "memory",
-
     "cpu",
     "custom/cpu_temp",
     "clock#time",

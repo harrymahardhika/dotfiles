@@ -10,7 +10,6 @@
   "modules-center": ["sway/workspaces", "sway/window"],
   "modules-right": [
     "memory",
-
     "cpu",
     "custom/cpu_temp",
     "clock#time",
