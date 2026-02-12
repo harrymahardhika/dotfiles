@@ -19,10 +19,8 @@ gui:
       - '#cdd6f4'
     searchingActiveBorderColor:
       - '#f9e2af'
-
   authorColors:
     '*': '#b4befe'
-
   showIcons: true
   nerdFontsVersion: "3"
   showRandomTip: false
@@ -31,7 +29,6 @@ gui:
   splitDiff: always
   timeFormat: "2006-01-02 15:04"
   shortTimeFormat: "15:04"
-
 git:
   commit:
     autoWrapCommitMessage: true
@@ -42,22 +39,19 @@ git:
   ignoreWhitespaceInDiffView: true
   # Use delta for a better diff view. Requires delta to be installed.
   # https://github.com/dandavison/delta
-  paging:
-    colorArg: always
-    # pager: delta --dark --paging=never
-
+  pagers:
+    - colorArg: always
+      # pager: delta --dark --paging=never
 refresher:
   # The default refresh interval is 10. 5 is a bit frequent and might
   # use unnecessary resources, but this is a personal preference.
   refreshInterval: 10
   fetchInterval: 120
-
 update:
   method: background
 promptToReturnFromSubprocess: false
 os:
   editPreset: "nvim"
-
 # Custom commands can significantly improve your workflow.
 customCommands:
   - key: 'b'

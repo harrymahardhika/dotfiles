@@ -323,4 +323,3 @@ focus_on_window_activation urgent
 
 # Don't wrap around when reaching edge of workspace
 focus_wrapping no
-

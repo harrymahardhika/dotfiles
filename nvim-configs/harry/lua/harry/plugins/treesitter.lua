@@ -3,8 +3,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function()
-      local config = require("nvim-treesitter.configs")
-      config.setup({
+      local ts_opts = {
         ensure_installed = {
           "bash",
           "javascript",
@@ -24,7 +23,10 @@ return {
         indent = {
           enable = true,
         }
-      })
+      }
+
+      local config = require("nvim-treesitter.config")
+      config.setup(ts_opts)
     end
   },
   {

@@ -1,10 +1,11 @@
 @import "mocha.css";
 
 * {
-  font-family: JetBrainsMono Nerd Font Propo;
+  font-family: "JetBrainsMono Nerd Font Propo";
+  font-weight: 500;
   font-size: 0.9rem;
-  min-height: 0;
   border: none;
+  min-height: 0;
 }
 
 #waybar {
@@ -13,11 +14,13 @@
   color: @text;
 }
 
+#backlight,
 #battery,
 #clock,
 #cpu,
 #custom-cpu_temp,
 #memory,
+#mode,
 #network,
 #pulseaudio,
 #submap,
@@ -27,6 +30,79 @@
   margin: 0.2rem;
   background: alpha(@surface0, 0.85);
   border-radius: 0.4rem;
+}
+
+/* Color-coded modules */
+#workspaces {
+  color: @blue;
+}
+
+#window {
+  color: @sapphire;
+}
+
+#network {
+  color: @green;
+}
+
+#pulseaudio {
+  color: @mauve;
+}
+
+#battery {
+  color: @peach;
+}
+
+#battery.charging {
+  color: @green;
+}
+
+#battery.warning:not(.charging) {
+  color: @yellow;
+}
+
+#battery.critical:not(.charging) {
+  color: @red;
+}
+
+#backlight {
+  color: @yellow;
+}
+
+#memory {
+  color: @sky;
+}
+
+#cpu {
+  color: @pink;
+}
+
+#custom-cpu_temp {
+  color: @flamingo;
+}
+
+#clock {
+  color: @lavender;
+}
+
+#mode {
+  color: @red;
+  font-weight: bold;
+}
+
+#submap {
+  color: @red;
+  font-weight: bold;
+}
+
+#clock.time {
+  margin-right: 0;
+  border-radius: 0.4rem 0 0 0.4rem;
+}
+
+#clock.date {
+  margin-left: 0;
+  border-radius: 0 0.4rem 0.4rem 0;
 }
 
 #workspaces {
@@ -68,8 +144,4 @@
   border-radius: 0 0.4rem 0.4rem 0;
   margin-left: 0;
   padding-left: 0;
-}
-
-#customer-cpu_temp.critical {
-  color: @red;
 }

@@ -16,7 +16,12 @@ return {
         show_hidden = true,
       },
       win_options = {
+        number = false,
+        relativenumber = false,
+        statuscolumn = "",
         signcolumn = "yes:2",
+        conceallevel = 3,
+        concealcursor = "nvic",
       },
     },
   },

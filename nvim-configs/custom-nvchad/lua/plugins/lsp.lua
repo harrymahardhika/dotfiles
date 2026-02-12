@@ -32,7 +32,7 @@ return {
     -- Get capabilities from nvim-cmp
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-    -- Performance: Disable semantic tokens (use treesitter instead)
+    -- Disable semantic tokens to prevent conflicts with treesitter highlighting
     capabilities.textDocument.semanticTokens = vim.NIL
 
     -- Helper functions for LSP capability management
@@ -67,6 +67,13 @@ return {
     -- Lua Language Server
     vim.lsp.config("lua_ls", {
       capabilities = capabilities,
+      settings = {
+        Lua = {
+          diagnostics = {
+            globals = { "vim" },
+          },
+        },
+      },
     })
     vim.lsp.enable("lua_ls")
 
@@ -90,7 +97,19 @@ return {
     vim.lsp.enable("gopls")
 
     -- TypeScript/Vue Setup
-    local vue_language_server_path = "/usr/lib/node_modules/@vue/language-server"
+    local function node_modules_root()
+      if vim.fn.executable("pnpm") == 1 then
+        local root = vim.fn.system("pnpm root -g"):gsub("%s+$", "")
+        if vim.v.shell_error == 0 and root ~= "" then
+          return root
+        end
+      end
+      return "/usr/lib/node_modules"
+    end
+
+    local npm_root = node_modules_root()
+    local vue_language_server_path = npm_root .. "/@vue/language-server"
+    local vtsls_typescript_lib_path = npm_root .. "/@vtsls/language-server/node_modules/typescript/lib"
 
     -- vtsls for TypeScript/JavaScript/Vue
     local vtsls_config = {
@@ -137,7 +156,7 @@ return {
       filetypes = { "vue" },
       init_options = {
         typescript = {
-          tsdk = "/usr/lib/node_modules/@vtsls/language-server/node_modules/typescript/lib",
+          tsdk = vtsls_typescript_lib_path,
         },
       },
     })
@@ -156,7 +175,16 @@ return {
     -- LSP Keymaps on attach
     vim.api.nvim_create_autocmd("LspAttach", {
       callback = function(args)
-        local opts = { buffer = args.buf }
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        local bufnr = args.buf
+        if client and client.server_capabilities then
+          client.server_capabilities.semanticTokensProvider = nil
+        end
+        -- Some servers may have already started semantic token streams;
+        -- stop them explicitly so Tree-sitter/Catppuccin colors remain authoritative.
+        pcall(vim.lsp.semantic_tokens.stop, bufnr, client and client.id or nil)
+
+        local opts = { buffer = bufnr }
         vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
         vim.keymap.set("n", "gr", vim.lsp.buf.rename, opts)
         vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)

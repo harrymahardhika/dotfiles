@@ -3,7 +3,7 @@ local g = vim.g
 
 -- Performance optimizations
 o.lazyredraw = true              -- Don't redraw during macros
-o.synmaxcol = 300                -- Only syntax highlight first 300 columns
+o.synmaxcol = 0                  -- Highlight all columns (avoid partial/wrong colors on long lines)
 o.redrawtime = 1500              -- Timeout for syntax highlighting (ms)
 
 o.autochdir = false

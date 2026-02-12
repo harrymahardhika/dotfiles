@@ -1,14 +1,14 @@
 return {
   "catppuccin/nvim",
   name = "catppuccin",
+  enabled = false, -- Disabled by default since NvChad uses base46
   priority = 1000,
   config = function()
     require("catppuccin").setup({
-      auto_integrations = true,
       flavour = "mocha",
-      transparent_background = true,
+      transparent_background = false,
       float = {
-        transparent = true,
+        transparent = false,
         solid = false,
       },
       no_italic = true,

@@ -1,25 +1,32 @@
 #!/bin/bash
 
 WALLPAPER_DIR="$HOME/wallpapers"
-HYPERPAPER_CONF="/tmp/hyprpaper.conf"
 
 echo "Setting wallpaper from $WALLPAPER_DIR"
 
-if [ -d "$WALLPAPER_DIR" ] && find -L "$WALLPAPER_DIR" -type f | grep -q .; then
-  WALLPAPER_PATH=$(find -L "$WALLPAPER_DIR" -type f | shuf -n 1)
-
-  # Kill existing hyprpaper instances
-  pkill hyprpaper
-
-  # Create a temporary Hyprpaper config
-  echo "preload = $WALLPAPER_PATH" > "$HYPERPAPER_CONF"
-
-  # Set for each monitor (you can customize or detect dynamically)
-  for MON in $(hyprctl monitors -j | jq -r '.[].name'); do
-    echo "wallpaper = $MON,$WALLPAPER_PATH" >> "$HYPERPAPER_CONF"
-  done
-
-  # Start hyprpaper with the config
-  hyprpaper -c "$HYPERPAPER_CONF" &
+if [ ! -d "$WALLPAPER_DIR" ]; then
+  exit 0
 fi
 
+WALLPAPER_PATH=$(find -L "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) | shuf -n 1)
+
+if [ -z "$WALLPAPER_PATH" ]; then
+  exit 0
+fi
+
+pkill hyprpaper >/dev/null 2>&1 || true
+
+if ! pgrep -x swww-daemon >/dev/null 2>&1; then
+  swww-daemon >/dev/null 2>&1 &
+  sleep 0.2
+fi
+
+MONITORS=$(hyprctl monitors -j | jq -r '.[].name')
+
+if [ -n "$MONITORS" ]; then
+  for MON in $MONITORS; do
+    swww img -o "$MON" "$WALLPAPER_PATH" --transition-type any --transition-fps 60 --transition-duration 1 >/dev/null 2>&1
+  done
+else
+  swww img "$WALLPAPER_PATH" --transition-type any --transition-fps 60 --transition-duration 1 >/dev/null 2>&1
+fi

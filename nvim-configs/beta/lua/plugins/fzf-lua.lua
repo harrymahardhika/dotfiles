@@ -14,6 +14,19 @@ return {
         preview = {
           layout = "flex",
           scrollbar = false,
+          winopts = {
+            cursorcolumn = false,
+            cursorline = true,
+            cursorlineopt = "both",
+            foldenable = false,
+            foldmethod = "manual",
+            list = false,
+            number = true,
+            relativenumber = false,
+            scrolloff = 0,
+            signcolumn = "no",
+            winblend = 0,
+          },
         },
       },
     })

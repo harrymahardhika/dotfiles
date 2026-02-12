@@ -32,7 +32,7 @@ return {
     -- Get capabilities from nvim-cmp
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-    -- Performance: Disable semantic tokens (use treesitter instead)
+    -- Disable semantic tokens to prevent conflicts with treesitter highlighting
     capabilities.textDocument.semanticTokens = vim.NIL
 
     -- Helper functions for LSP capability management
@@ -67,6 +67,13 @@ return {
     -- Lua Language Server
     vim.lsp.config("lua_ls", {
       capabilities = capabilities,
+      settings = {
+        Lua = {
+          diagnostics = {
+            globals = { "vim" },
+          },
+        },
+      },
     })
     vim.lsp.enable("lua_ls")
 
@@ -156,7 +163,16 @@ return {
     -- LSP Keymaps on attach
     vim.api.nvim_create_autocmd("LspAttach", {
       callback = function(args)
-        local opts = { buffer = args.buf }
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        local bufnr = args.buf
+        if client and client.server_capabilities then
+          client.server_capabilities.semanticTokensProvider = nil
+        end
+        -- Some servers may have already started semantic token streams;
+        -- stop them explicitly so Tree-sitter/Catppuccin colors remain authoritative.
+        pcall(vim.lsp.semantic_tokens.stop, bufnr, client and client.id or nil)
+
+        local opts = { buffer = bufnr }
         vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
         vim.keymap.set("n", "gr", vim.lsp.buf.rename, opts)
         vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)

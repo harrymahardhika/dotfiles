@@ -50,12 +50,14 @@ alias reload="source ~/.zshrc"
 alias v="nvim"
 alias y="yazi"
 alias lg="lazygit"
+alias hyprland="uwsm start hyprland.desktop"
 alias clear_swap="sudo swapoff -a && sudo swapon -a"
 alias home="cd ~"
 
 # Custom scripts
 alias change-wallpaper="$HOME/scripts/set-wallpaper.sh"
 alias nvim-switch="$HOME/scripts/nvim-switch.sh"
+alias nvim-cleanup="$HOME/scripts/nvim-cleanup.sh"
 alias php-switch="$HOME/scripts/php-switch.sh"
 alias updateall="$HOME/updateall"
 alias changelog="$HOME/scripts/changelog.sh"
@@ -75,10 +77,15 @@ alias nah="git reset --hard; git clean -df"
 alias csd="gd --staged | xclip -sel clipboard"
 alias gdsc="git diff --staged | wl-copy"
 
-
 # Python/Django
 alias dje="source ~/.virtualenvs/djangoenv/bin/activate"
 alias python="python3"
 alias p3="python3"
 alias pm="python3 manage.py"
+
+# Paru aliases
+alias pru='paru -Syu'
+alias pri='paru -S'
+alias prs='paru -Ss'
+alias prr='paru -Rns'
 

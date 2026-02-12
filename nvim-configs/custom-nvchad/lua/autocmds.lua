@@ -19,7 +19,7 @@ autocmd("BufWritePre", {
 
     -- Performance: Skip for large files
     local max_filesize = 500 * 1024 -- 500 KB
-    local ok, stats = pcall(vim.loop.fs_stat, api.nvim_buf_get_name(buf))
+    local ok, stats = pcall(vim.uv.fs_stat, api.nvim_buf_get_name(buf))
     if ok and stats and stats.size > max_filesize then
       return
     end

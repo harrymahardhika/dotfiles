@@ -2,27 +2,37 @@
 
 set -e
 
+# Check if running as root
+if [ "$EUID" -eq 0 ]; then
+    echo "❌ Please don't run this script as root. Use sudo only where needed."
+    exit 1
+fi
+
 echo "🔄 Starting system updates..."
+echo "⏰ Started at $(date)"
 
 if [ -f /etc/arch-release ]; then
     # For Arch-based systems
     echo "📦 Updating Arch packages..."
     sudo pacman -Syu --noconfirm
 
-    if command -v yay &> /dev/null; then
+    if command -v paru &> /dev/null; then
         echo "📦 Updating AUR packages..."
+        paru -Sua --noconfirm
+    elif command -v yay &> /dev/null; then
+        echo "📦 Updating AUR packages with yay..."
         yay -Sua --noconfirm
     fi
 
     # Remove orphan packages only if they exist
-    orphans=$(pacman -Qdtq)
+    orphans=$(pacman -Qdtq 2>/dev/null || true)
     if [ -n "$orphans" ]; then
         echo "🗑️  Removing orphan packages..."
-        sudo pacman -Rns --noconfirm $orphans
+        echo "$orphans" | xargs sudo pacman -Rns --noconfirm
     fi
 
     echo "🧹 Cleaning package cache..."
-    sudo pacman -Sc --noconfirm
+    sudo pacman -Scc --noconfirm
 else
     # For Ubuntu/Pop!_OS-based systems
     echo "📦 Updating Ubuntu/Debian packages..."
@@ -52,14 +62,14 @@ fi
 # Update Composer
 if command -v composer &> /dev/null; then
     echo "🎼 Updating Composer..."
-    sudo composer global self-update
-    composer global update -vv --profile
+    composer global self-update --quiet
+    composer global update --no-progress --profile
 fi
 
 # Update npm global packages
 if command -v npm &> /dev/null; then
     echo "📦 Updating npm global packages..."
-    sudo npm update -g
+    npm update -g --silent
 fi
 
 # Update pnpm
@@ -72,10 +82,20 @@ fi
 # Update uv
 if command -v uv &> /dev/null; then
     echo "🐍 Updating uv..."
-    timeout 120 uv self update || echo "⚠️  UV update timed out or failed, skipping..."
+    timeout 120 uv self update --quiet || echo "⚠️  UV update timed out or failed, skipping..."
 
     echo "🔧 Updating uv tools..."
-    uv tool upgrade --all
+    uv tool upgrade --all --quiet
 fi
 
+echo ""
 echo "✅ All updates completed!"
+echo ""
+echo "📊 Summary:"
+if command -v paru &> /dev/null; then
+    echo "  • Used paru for AUR packages"
+elif command -v yay &> /dev/null; then
+    echo "  • Used yay for AUR packages (fallback)"
+fi
+echo "  • Package cache cleaned"
+echo "  • Orphaned packages removed"

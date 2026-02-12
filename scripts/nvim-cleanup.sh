@@ -65,6 +65,7 @@ echo "  • State:  $(get_dir_size "$NVIM_STATE_DIR")"
 echo "  • Swap:   $(get_dir_size "$NVIM_STATE_DIR/swap")"
 echo "  • Shada:  $(get_dir_size "$NVIM_STATE_DIR/shada")"
 echo "  • Log:    $(get_dir_size "$NVIM_STATE_DIR/log")"
+echo "  • Lazy:   $(get_dir_size "$NVIM_DATA_DIR/lazy")"
 echo ""
 
 # Ask for confirmation
@@ -85,8 +86,8 @@ cleanup_dir "$NVIM_STATE_DIR/swap" "Swap files"
 cleanup_dir "$NVIM_STATE_DIR/shada" "Shared data (history, marks, etc.)"
 cleanup_dir "$NVIM_STATE_DIR/log" "Log files"
 
-# Clean lazy.nvim plugin cache
-cleanup_dir "$NVIM_DATA_DIR/lazy/cache" "Lazy.nvim cache"
+# Clean lazy.nvim plugins
+cleanup_dir "$NVIM_DATA_DIR/lazy" "Lazy.nvim plugins"
 
 # Clean Mason LSP server logs
 cleanup_dir "$NVIM_DATA_DIR/mason/packages" "Mason package caches (optional - may need reinstall)"
