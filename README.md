@@ -4,7 +4,7 @@ Personal configuration files for Linux development environment with support for 
 
 ## Features
 
-- **Multiple Neovim Configurations** - Four separate configs (beta, harry, astro, nvchad) with easy switching
+- **Multiple Neovim Configurations** - Three separate configs (beta, harry, custom-nvchad) with easy switching
 - **Modular Shell Setup** - Clean, organized ZSH configuration with Antidote plugin manager
 - **Cross-Environment Support** - Configs for both X11 (i3) and Wayland (Hyprland, Sway)
 - **PHP/Laravel Focus** - Extensive tooling for PHP development with version switching
@@ -29,9 +29,9 @@ dotfiles/
 │   └── ...              # 30+ other configs
 ├── nvim-configs/        # Multiple Neovim setups
 │   ├── beta/           # Beta/testing config
+│   ├── custom-nvchad/  # NvChad-style custom config
 │   ├── harry/          # Personal config
-│   ├── astro/          # AstroNvim-based
-│   └── nvchad/         # NvChad-based
+│   └── stylua.toml     # Lua formatting config
 ├── scripts/             # Utility scripts
 │   ├── webapps/        # Web app launchers
 │   ├── nvim-switch.sh  # Switch Neovim configs
@@ -63,12 +63,11 @@ dotfiles/
 
 ### Neovim
 
-Four separate configurations available via `nvim-switch.sh`:
+Three separate configurations available via `nvim-switch.sh`:
 
-- **beta** - Testing ground for new plugins/features, using blink.cmp
+- **beta** - Testing ground for new plugins/features, using `nvim-cmp`
 - **harry** - Personal stable configuration
-- **astro** - AstroNvim community distribution
-- **nvchad** - NvChad community distribution
+- **custom-nvchad** - NvChad-style custom distribution
 
 All configs use Lazy.nvim plugin manager.
 
@@ -110,7 +109,7 @@ Multiple options configured with Catppuccin theme:
 - Nginx config templates
 
 #### Version Control
-- Git with Delta pager
+- Git with custom aliases and sane defaults
 - Lazygit TUI
 - Custom git aliases
 
@@ -125,7 +124,7 @@ Multiple options configured with Catppuccin theme:
 
 ### System Management
 
-- **`updateall`** - Update all packages (pacman, yay, flatpak, snap, composer, npm, pnpm, uv)
+- **`updateall`** - Update all packages (pacman, paru/yay, flatpak, snap, composer, npm, pnpm, uv) with sudo preflight notification/auth
 - **`nvim-switch.sh`** - Switch between Neovim configurations
 - **`php-switch.sh`** - Change PHP version system-wide
 
