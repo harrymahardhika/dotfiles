@@ -10,7 +10,6 @@
   fsync = none
   preloadindex = true             # preload index for faster status
   whitespace = error              # treat incorrect whitespace as errors
-  pager = delta                   # use delta for paging diffs
 
 [init]
   defaultBranch = main
