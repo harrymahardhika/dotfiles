@@ -1,0 +1,4 @@
+#!/bin/bash
+
+exec "$(cd "$(dirname "$0")/.." && pwd)/webapp" "https://bsky.app"
+

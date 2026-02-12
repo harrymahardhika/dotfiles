@@ -18,6 +18,11 @@ fi
 
 INCLUDE_GLOB="${CONF_DIR}/*.conf"
 INCLUDE_LINE="    include ${INCLUDE_GLOB};"
+HOSTS_FILE="/etc/hosts"
+HOSTS_MANAGE="${HOSTS_MANAGE:-1}"
+HOSTS_IP="${HOSTS_IP:-127.0.0.1}"
+HOSTS_MARKER_BEGIN="# >>> laravel-nginx managed hosts >>>"
+HOSTS_MARKER_END="# <<< laravel-nginx managed hosts <<<"
 
 echo "[INFO] Using nginx config dir: $CONF_DIR"
 sudo mkdir -p "$CONF_DIR"
@@ -73,6 +78,8 @@ fi
 
 echo "[INFO] Using PHP ${php_version} (socket: ${php_fpm_socket})"
 
+generated_hosts=()
+
 for site in "$SITES_DIR"/*; do
   # Only process symlinks
   [ -L "$site" ] || continue
@@ -96,7 +103,37 @@ for site in "$SITES_DIR"/*; do
     "$TEMPLATE" | sudo tee "$conf_file" > /dev/null
 
   echo "[INFO] Generated config for $server_name → $conf_file"
+  generated_hosts+=("$server_name")
 done
+
+if [ "$HOSTS_MANAGE" = "1" ]; then
+  echo "[INFO] Updating $HOSTS_FILE managed block for generated .test domains"
+  tmp_hosts="$(mktemp)"
+
+  sudo awk \
+    -v begin="$HOSTS_MARKER_BEGIN" \
+    -v end="$HOSTS_MARKER_END" '
+      $0 == begin { skip=1; next }
+      $0 == end { skip=0; next }
+      !skip { print }
+    ' "$HOSTS_FILE" > "$tmp_hosts"
+
+  {
+    echo
+    echo "$HOSTS_MARKER_BEGIN"
+    if [ "${#generated_hosts[@]}" -eq 0 ]; then
+      echo "# (no generated Laravel .test hosts)"
+    else
+      for host in "${generated_hosts[@]}"; do
+        echo "${HOSTS_IP} ${host}"
+      done
+    fi
+    echo "$HOSTS_MARKER_END"
+  } >> "$tmp_hosts"
+
+  sudo cp "$tmp_hosts" "$HOSTS_FILE"
+  rm -f "$tmp_hosts"
+fi
 
 # Reload nginx
 sudo nginx -t && sudo systemctl reload nginx
