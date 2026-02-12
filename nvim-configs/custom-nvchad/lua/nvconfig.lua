@@ -23,7 +23,6 @@ M.ui = {
     icons_left = true,
     style = "default",
   },
-
   telescope = { style = "borderless" },
 
   statusline = {

@@ -40,7 +40,7 @@ map({ "n", "v" }, "y", '"+y', opts)
 map({ "n", "v" }, "p", '"+p', opts)
 
 -- Commenting
-map("n", "<leader>/", "gc", { desc = "Toggle comment" })
+-- map("n", "<leader>/", "gc", { desc = "Toggle comment" })
 
 -- Oil file explorer
 -- map("n", "-", "<cmd>Oil --float<CR>", { desc = "Open file explorer" })
