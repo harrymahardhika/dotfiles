@@ -50,6 +50,13 @@ autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   end,
 })
 
+-- auto-save when focus is lost (like VS Code)
+autocmd({ "BufLeave", "FocusLost" }, {
+  group = api.nvim_create_augroup("AutoSave", { clear = true }),
+  pattern = "*",
+  command = "silent! if &mod | update | endif",
+})
+
 -- set php commentstring to use double-slash comments
 autocmd("FileType", {
   pattern = "php",
