@@ -64,7 +64,7 @@ return {
     vim.keymap.set("n", "<leader>sd", fzf.diagnostics_document, { desc = "Buffer Diagnostics" })
 
     vim.keymap.set("n", "gd", fzf.lsp_definitions, { desc = "LSP Definitions" })
-    vim.keymap.set("n", "gt", fzf.lsp_typedefs, { desc = "LSP Type Definitions" })
+    -- vim.keymap.set("n", "gt", fzf.lsp_typedefs, { desc = "LSP Type Definitions" })
     vim.keymap.set("n", "gi", fzf.lsp_implementations, { desc = "LSP Implementations" })
     vim.keymap.set("n", "gR", fzf.lsp_references, { desc = "LSP References" })
     vim.keymap.set("n", "<leader>D", fzf.lsp_document_symbols, { desc = "LSP Document Symbols" })

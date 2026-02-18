@@ -54,7 +54,26 @@ autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 autocmd({ "BufLeave", "FocusLost" }, {
   group = api.nvim_create_augroup("AutoSave", { clear = true }),
   pattern = "*",
-  command = "silent! if &mod | update | endif",
+  callback = function(event)
+    local buf = event.buf
+    if not api.nvim_buf_is_valid(buf) then
+      return
+    end
+
+    if vim.bo[buf].buftype ~= "" then
+      return
+    end
+
+    if fn.empty(api.nvim_buf_get_name(buf)) == 1 then
+      return
+    end
+
+    if not vim.bo[buf].modifiable or vim.bo[buf].readonly or not vim.bo[buf].modified then
+      return
+    end
+
+    vim.cmd("silent! update")
+  end,
 })
 
 -- set php commentstring to use double-slash comments
@@ -101,4 +120,3 @@ autocmd("InsertLeave", {
 api.nvim_create_user_command("BufOnly", function()
   vim.cmd("silent! %bd | e# | bd#")
 end, {})
-
