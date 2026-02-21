@@ -2,9 +2,9 @@ local o = vim.opt
 local g = vim.g
 
 -- Performance optimizations
-o.lazyredraw = true              -- Don't redraw during macros
-o.synmaxcol = 0                  -- Highlight all columns (avoid partial/wrong colors on long lines)
-o.redrawtime = 1500              -- Timeout for syntax highlighting (ms)
+o.lazyredraw = true -- Don't redraw during macros
+o.synmaxcol = 0 -- Highlight all columns (avoid partial/wrong colors on long lines)
+o.redrawtime = 1500 -- Timeout for syntax highlighting (ms)
 
 o.autochdir = false
 o.autoread = true
@@ -20,8 +20,8 @@ o.foldcolumn = "0"
 o.foldenable = true
 o.foldlevelstart = 99
 o.hlsearch = false
-o.number = true
-o.relativenumber = true
+o.number = false
+o.relativenumber = false
 o.scrolloff = 8
 o.shiftwidth = 2
 o.sidescrolloff = 8
