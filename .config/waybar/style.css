@@ -2,7 +2,7 @@
 
 * {
   font-family: "JetBrainsMono Nerd Font Propo";
-  font-weight: 500;
+  font-weight: 600;
   font-size: 0.9rem;
   border: none;
   min-height: 0;
@@ -10,6 +10,7 @@
 
 #waybar {
   /* background: @base; */
+  /* background: alpha(@surface0, 0.9); */
   background: transparent;
   color: @text;
 }
@@ -26,10 +27,10 @@
 #submap,
 #window,
 #workspaces {
-  padding: 0.2rem 0.6rem;
-  margin: 0.2rem;
-  background: alpha(@surface0, 0.85);
-  border-radius: 0.4rem;
+  padding: 0.1rem 0.6rem;
+  margin: 0.15rem;
+  background: alpha(@surface0, 0.9);
+  border-radius: 0.2rem;
 }
 
 /* Color-coded modules */
@@ -97,25 +98,25 @@
 
 #clock.time {
   margin-right: 0;
-  border-radius: 0.4rem 0 0 0.4rem;
+  border-radius: 0.2rem 0 0 0.2rem;
 }
 
 #clock.date {
   margin-left: 0;
-  border-radius: 0 0.4rem 0.4rem 0;
+  border-radius: 0 0.2rem 0.2rem 0;
 }
 
 #workspaces {
   padding-left: 0.4rem;
   padding-right: 0;
   margin-right: 0;
-  border-radius: 0.4rem 0 0 0.4rem;
+  border-radius: 0.2rem 0 0 0.2rem;
 }
 
 #workspaces button {
   color: @text;
   border: none;
-  padding: 0.2rem 0.4rem;
+  padding: 0.1rem 0.2rem;
 }
 
 #workspaces button.focused,
@@ -131,17 +132,17 @@
 
 #window {
   margin-left: 0;
-  border-radius: 0 0.4rem 0.4rem 0;
-  color: @blue;
+  border-radius: 0 0.2rem 0.2rem 0;
+  color: @text;
 }
 
 #cpu {
-  border-radius: 0.4rem 0 0 0.4rem;
+  border-radius: 0.2rem 0 0 0.2rem;
   margin-right: 0;
 }
 
 #custom-cpu_temp {
-  border-radius: 0 0.4rem 0.4rem 0;
+  border-radius: 0 0.2rem 0.2rem 0;
   margin-left: 0;
   padding-left: 0;
 }

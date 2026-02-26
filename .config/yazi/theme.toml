@@ -19,7 +19,7 @@ count_selected = { fg = "#1e1e2e", bg = "#89b4fa" }
 border_symbol = "│"
 border_style  = { fg = "#7f849c" }
 
-syntect_theme = "~/.config/yazi/Catppuccin-mocha.tmTheme"
+syntect_theme = "~/.config/bat/themes/Catppuccin Mocha.tmTheme"
 
 [tabs]
 active   = { fg = "#1e1e2e", bg = "#cdd6f4", bold = true }
@@ -36,8 +36,10 @@ unset_main  = { fg = "#1e1e2e", bg = "#f2cdcd", bold = true }
 unset_alt   = { fg = "#f2cdcd", bg = "#313244"}
 
 [status]
-sep_left  = { open = "", close = "" }
-sep_right = { open = "", close = "" }
+sep_left  = { open = "", close = "" }
+sep_right = { open = "", close = "" }
+# sep_left  = { open = "", close = "" }
+# sep_right = { open = "", close = "" }
 
 progress_label  = { fg = "#ffffff", bold = true }
 progress_normal = { fg = "#89b4fa", bg = "#45475a" }
