@@ -29,9 +29,6 @@ return {
         args = { "$FILENAME" },
         stdin = false,
       },
-      prettier = {
-        prepend_args = { "--prose-wrap", "always" },
-      },
     },
   },
 }

@@ -5,7 +5,7 @@ After=default.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/waybar -c %h/.config/waybar/sway-config.jsonc -s %h/.config/waybar/sway-style.css
+ExecStart=/usr/bin/waybar -c %h/.config/waybar/config.jsonc -s %h/.config/waybar/style.css
 Restart=on-failure
 RestartSec=3
 
