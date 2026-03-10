@@ -172,6 +172,8 @@ return {
     -- Biome (commented out)
     -- vim.lsp.enable("biome")
 
+    -- vim.lsp.enable("harper_ls")
+
     -- LSP Keymaps on attach
     vim.api.nvim_create_autocmd("LspAttach", {
       callback = function(args)

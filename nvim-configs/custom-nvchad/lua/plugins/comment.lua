@@ -13,4 +13,24 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = {},
   },
+  {
+    "danymat/neogen",
+    config = true, -- Load default configuration
+    keys = {
+      {
+        "<leader>df",
+        function()
+          require("neogen").generate({ type = "func" })
+        end,
+        desc = "Generate Function Docblock",
+      },
+      {
+        "<leader>dc",
+        function()
+          require("neogen").generate({ type = "class" })
+        end,
+        desc = "Generate Class Docblock",
+      },
+    },
+  },
 }

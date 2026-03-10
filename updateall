@@ -35,10 +35,10 @@ if [ -f /etc/arch-release ]; then
 
     if command -v paru &> /dev/null; then
         echo "📦 Updating AUR packages..."
-        paru -Sua --noconfirm
+        paru -Sua --noconfirm || echo "⚠️  paru update failed, skipping..."
     elif command -v yay &> /dev/null; then
         echo "📦 Updating AUR packages with yay..."
-        yay -Sua --noconfirm
+        yay -Sua --noconfirm || echo "⚠️  yay update failed, skipping..."
     fi
 
     # Remove orphan packages only if they exist
@@ -59,41 +59,41 @@ else
 
     if command -v pacstall &> /dev/null; then
         echo "📦 Updating Pacstall..."
-        pacstall -U --disable-prompts # Update pacstall tool itself
-        pacstall -Up --disable-prompts # Update all installed pacstall packages
+        pacstall -U --disable-prompts || echo "⚠️  Pacstall tool update failed, skipping..." # Update pacstall tool itself
+        pacstall -Up --disable-prompts || echo "⚠️  Pacstall packages update failed, skipping..." # Update all installed pacstall packages
     fi
 fi
 
 # Update Flatpak
 if command -v flatpak &> /dev/null; then
     echo "📦 Updating Flatpak packages..."
-    flatpak update -y
+    flatpak update -y || echo "⚠️  Flatpak update failed, skipping..."
 fi
 
 # Update Snap
 if command -v snap &> /dev/null; then
     echo "📦 Updating Snap packages..."
-    sudo snap refresh
+    sudo snap refresh || echo "⚠️  Snap refresh failed, skipping..."
 fi
 
 # Update Composer
 if command -v composer &> /dev/null; then
     echo "🎼 Updating Composer..."
-    composer global self-update --quiet
-    composer global update --no-progress --profile
+    composer global self-update --quiet || echo "⚠️  Composer self-update failed, skipping..."
+    composer global update --no-progress --profile || echo "⚠️  Composer global update failed, skipping..."
 fi
 
 # Update npm global packages
 if command -v npm &> /dev/null; then
     echo "📦 Updating npm global packages..."
-    npm update -g --silent
+    npm update -g --silent || echo "⚠️  npm global update failed, skipping..."
 fi
 
 # Update pnpm
 if command -v pnpm &> /dev/null; then
     echo "📦 Updating pnpm..."
-    pnpm self-update
-    pnpm update -g
+    pnpm self-update || echo "⚠️  pnpm self-update failed, skipping..."
+    pnpm update -g || echo "⚠️  pnpm global update failed, skipping..."
 fi
 
 # Update uv
@@ -109,10 +109,14 @@ echo ""
 echo "✅ All updates completed!"
 echo ""
 echo "📊 Summary:"
-if command -v paru &> /dev/null; then
-    echo "  • Used paru for AUR packages"
-elif command -v yay &> /dev/null; then
-    echo "  • Used yay for AUR packages (fallback)"
+if [ -f /etc/arch-release ]; then
+    if command -v paru &> /dev/null; then
+        echo "  • Used paru for AUR packages"
+    elif command -v yay &> /dev/null; then
+        echo "  • Used yay for AUR packages (fallback)"
+    fi
+    echo "  • Package cache cleaned"
+    echo "  • Orphaned packages removed"
+else
+    echo "  • System packages updated and cleaned"
 fi
-echo "  • Package cache cleaned"
-echo "  • Orphaned packages removed"

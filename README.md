@@ -1,21 +1,27 @@
 # Dotfiles
 
-Personal configuration files for Linux development environment with support for both X11 and Wayland.
+Personal configuration files for Linux development environment with support for
+both X11 and Wayland.
 
 ## Features
 
-- **Multiple Neovim Configurations** - Three separate configs (beta, harry, custom-nvchad) with easy switching
-- **Modular Shell Setup** - Clean, organized ZSH configuration with Antidote plugin manager
-- **Cross-Environment Support** - Configs for both X11 (i3) and Wayland (Hyprland, Sway)
-- **PHP/Laravel Focus** - Extensive tooling for PHP development with version switching
+- **Multiple Neovim Configurations** - Three separate configs (beta, harry,
+  custom-nvchad) with easy switching
+- **Modular Shell Setup** - Clean, organized ZSH configuration with Antidote
+  plugin manager
+- **Cross-Environment Support** - Configs for both X11 (i3) and Wayland
+  (Hyprland, Sway)
+- **PHP/Laravel Focus** - Extensive tooling for PHP development with version
+  switching
 - **Unified Theme** - Catppuccin Mocha color scheme across all applications
-- **Automation Scripts** - System updates, web app launchers, and utility scripts
+- **Automation Scripts** - System updates, web app launchers, and utility
+  scripts
 
 ## Structure
 
 ```
 dotfiles/
-├── .config/              # XDG-compliant application configs
+├── .config/             # XDG-compliant application configs
 │   ├── alacritty/       # Terminal emulator
 │   ├── hypr/            # Hyprland (Wayland WM)
 │   ├── i3/              # i3wm (X11 WM)
@@ -28,20 +34,20 @@ dotfiles/
 │   ├── yazi/            # File manager TUI
 │   └── ...              # 30+ other configs
 ├── nvim-configs/        # Multiple Neovim setups
-│   ├── beta/           # Beta/testing config
-│   ├── custom-nvchad/  # NvChad-style custom config
-│   ├── harry/          # Personal config
-│   └── stylua.toml     # Lua formatting config
+│   ├── beta/            # Beta/testing config
+│   ├── custom-nvchad/   # NvChad-style custom config
+│   ├── harry/           # Personal config
+│   └── stylua.toml      # Lua formatting config
 ├── scripts/             # Utility scripts
-│   ├── webapps/        # Web app launchers
-│   ├── nvim-switch.sh  # Switch Neovim configs
-│   ├── php-switch.sh   # PHP version manager
-│   └── ...             # Additional utilities
+│   ├── webapps/         # Web app launchers
+│   ├── nvim-switch.sh   # Switch Neovim configs
+│   ├── php-switch.sh    # PHP version manager
+│   └── ...              # Additional utilities
 ├── .zsh/                # Modular ZSH config
-│   ├── aliases.zsh     # Command aliases
-│   ├── exports.zsh     # Environment variables
-│   ├── functions.zsh   # Shell functions
-│   └── ...             # Other modules
+│   ├── aliases.zsh      # Command aliases
+│   ├── exports.zsh      # Environment variables
+│   ├── functions.zsh    # Shell functions
+│   └── ...              # Other modules
 ├── .zshrc               # Main ZSH entry point
 ├── .tmux.conf           # Tmux configuration
 ├── .gitconfig           # Git settings
@@ -55,7 +61,7 @@ dotfiles/
 - **Plugin Manager**: Antidote for fast plugin loading
 - **Plugins**: fzf, zoxide, autosuggestions, syntax-highlighting, wakatime
 - **Prompt**: Starship with Catppuccin theme
-- **Features**: 
+- **Features**:
   - Laravel/PHP development aliases
   - Git shortcuts
   - Node.js/pnpm helpers
@@ -83,17 +89,22 @@ All configs use Lazy.nvim plugin manager.
 ### Window Managers
 
 #### Wayland
-- **Hyprland** - Primary Wayland compositor
+
+- **Hyprland** - Primary Wayland compositor with scrolling layout enabled and
+  systemd integration
 - **Sway** - Alternative i3-like compositor
 
 #### X11
+
 - **i3wm** - Tiling window manager
 
-All with corresponding status bars (waybar/polybar), launchers (wofi/rofi), and compositors.
+All with corresponding status bars (waybar/polybar), launchers (wofi/rofi), and
+compositors.
 
 ### Terminal Emulators
 
 Multiple options configured with Catppuccin theme:
+
 - Kitty (primary)
 - Alacritty
 - Ghostty
@@ -103,17 +114,20 @@ Multiple options configured with Catppuccin theme:
 ### Development Tools
 
 #### PHP/Laravel
+
 - PHP version switcher (8.2, 8.3, 8.4)
 - Laravel artisan aliases
 - Pest, PHPStan, Rector, Pint shortcuts
 - Nginx config templates
 
 #### Version Control
+
 - Git with custom aliases and sane defaults
 - Lazygit TUI
 - Custom git aliases
 
 #### Other Tools
+
 - Helix, Zed editors
 - Yazi file manager
 - btop system monitor
@@ -124,13 +138,17 @@ Multiple options configured with Catppuccin theme:
 
 ### System Management
 
-- **`updateall`** - Update all packages (pacman, paru/yay, flatpak, snap, composer, npm, pnpm, uv) with sudo preflight notification/auth
+- **`updateall`** - Robust multi-OS (Arch, Ubuntu/Debian) update script for all
+  packages (pacman, paru/yay, flatpak, snap, composer, npm, pnpm, uv). Features
+  sudo preflight, error handling (continues on tool failure), and OS-specific
+  summary.
 - **`nvim-switch.sh`** - Switch between Neovim configurations
 - **`php-switch.sh`** - Change PHP version system-wide
 
 ### Web Apps
 
 Launch web applications as desktop apps via `scripts/webapps/`:
+
 - ChatGPT, Claude, Gemini
 - GitHub, Gmail, Google Drive
 - Notion, Spotify, WhatsApp
@@ -145,12 +163,10 @@ Launch web applications as desktop apps via `scripts/webapps/`:
 
 ## Technology Stack
 
-**Languages**: PHP (8.2-8.4), Node.js, Python, Go, Rust  
-**Shells**: ZSH (primary), Fish  
-**Editors**: Neovim, Helix, Zed  
-**Terminals**: Kitty, Alacritty, Ghostty, Foot, WezTerm  
-**WM**: Hyprland, Sway, i3wm  
-**Theme**: Catppuccin Mocha (consistent across all tools)
+**Languages**: PHP (8.2-8.4), Node.js, Python, Go, Rust **Shells**: ZSH
+(primary), Fish **Editors**: Neovim, Helix, Zed **Terminals**: Kitty, Alacritty,
+Ghostty, Foot, WezTerm **WM**: Hyprland, Sway, i3wm **Theme**: Catppuccin Mocha
+(consistent across all tools)
 
 ## Installation
 
@@ -185,7 +201,8 @@ stow -d . -t ~ .tmux.conf .gitconfig
 stow -D .
 ```
 
-**Note**: GNU Stow will create symlinks from `~/dotfiles/*` to `~/*`. Ensure no conflicting files exist in your home directory before stowing.
+**Note**: GNU Stow will create symlinks from `~/dotfiles/*` to `~/*`. Ensure no
+conflicting files exist in your home directory before stowing.
 
 ### ZSH Setup
 
@@ -248,4 +265,6 @@ MIT
 
 ## Notes
 
-This is a personal configuration optimized for PHP/Laravel development with support for multiple environments. Feel free to use as inspiration or reference for your own dotfiles.
+This is a personal configuration optimized for PHP/Laravel development with
+support for multiple environments. Feel free to use as inspiration or reference
+for your own dotfiles.

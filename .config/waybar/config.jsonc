@@ -12,7 +12,7 @@
     "memory",
     "cpu",
     "custom/cpu_temp",
-    // "clock#time",
+    "clock#time",
     "clock#date"
   ],
   "hyprland/submap": {
