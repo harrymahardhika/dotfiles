@@ -1,3 +1,14 @@
 # yazi.toml
 [mgr]
 show_hidden = true
+
+[opener]
+pdf = [
+  { run = "zathura %s", orphan = true, for = "unix" }
+]
+
+[open]
+rules = [
+  { url = "*.pdf", use = "pdf" },
+  { mime = "application/pdf", use = "pdf" }
+]

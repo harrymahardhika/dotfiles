@@ -86,7 +86,7 @@ fi
 # Update npm global packages
 if command -v npm &> /dev/null; then
     echo "📦 Updating npm global packages..."
-    npm update -g --silent || echo "⚠️  npm global update failed, skipping..."
+    sudo npm update -g --silent || echo "⚠️  npm global update failed, skipping..."
 fi
 
 # Update pnpm
