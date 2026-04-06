@@ -38,20 +38,20 @@ set $file_manager nautilus
 ### --- Autostart applications ---
 # Systemd services handle: waybar, swayidle, cliphist, dunst, udiskie, battery-warning
 # Enable them with: systemctl --user enable waybar swayidle cliphist dunst udiskie battery-warning.timer
-# Note: swww-daemon is started by sway config below (not enabled in systemd)
+# Note: awww-daemon is started by sway config below (not enabled in systemd)
 
 # Session environment - import variables to systemd
 exec systemctl --user import-environment XDG_SESSION_TYPE XDG_CURRENT_DESKTOP WAYLAND_DISPLAY SWAYSOCK
 exec systemctl --user restart xdg-desktop-portal-gtk.service xdg-desktop-portal.service
 
-# Start swww-daemon after environment is ready
-exec systemctl --user start swww-daemon.service
+# Start awww-daemon after environment is ready
+exec systemctl --user start awww-daemon.service
 
 # Restart waybar on config reload to pick up any waybar config changes
 # Use exec_always with a delay to ensure SWAYSOCK is imported first
 exec_always sleep 1 && systemctl --user import-environment SWAYSOCK && systemctl --user restart waybar
 
-# Wallpaper (requires swww-daemon.service to be running)
+# Wallpaper (requires awww-daemon.service to be running)
 exec sleep 2 && "$HOME/.config/sway/set-wallpaper.sh"
 
 # Dropbox

@@ -14,7 +14,7 @@ systemctl --user daemon-reload
 echo ""
 echo "Step 3: Enabling sway systemd user services..."
 
-# Enable services (swww-daemon is started by sway config, not enabled here)
+# Enable services (awww-daemon is started by sway config, not enabled here)
 systemctl --user enable waybar.service
 systemctl --user enable swayidle.service
 systemctl --user enable cliphist.service
@@ -27,7 +27,7 @@ systemctl --user enable battery-warning.timer
 
 echo ""
 echo "Services enabled. They will start on next login."
-echo "Note: swww-daemon is started by sway config after environment setup"
+echo "Note: awww-daemon is started by sway config after environment setup"
 echo ""
 echo "To start them now, run:"
 echo "  systemctl --user start waybar swayidle cliphist dunst udiskie fix-usb battery-warning.timer"

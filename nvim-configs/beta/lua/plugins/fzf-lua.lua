@@ -43,7 +43,9 @@ return {
     vim.keymap.set("n", "<leader>.", fzf.buffers, { desc = "Buffers" })
     vim.keymap.set("n", "<leader>e", fzf.buffers, { desc = "Buffers" })
     -- vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "Buffers" })
-    vim.keymap.set("n", "<leader>/", fzf.live_grep, { desc = "Live Grep" })
+    vim.keymap.set("n", "<leader>/", function()
+      require("fzf-lua").live_grep({ no_ignore = true })
+    end, { desc = "Live Grep" })
     vim.keymap.set("n", "<leader>R", fzf.oldfiles, { desc = "Recent Files" })
 
     vim.keymap.set("n", "<leader>C", fzf.commands, { desc = "Commands" })

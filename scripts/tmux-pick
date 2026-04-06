@@ -18,7 +18,7 @@ list() {
 
   # Windows with activity timestamp
   tmux list-windows -a -F $'W\t#{session_name}\t#{window_index}\t\t#{window_activity}\t#{session_name}:#{window_index} #{window_name}' 2>/dev/null | \
-    grep -Ev $'\t'"$exclude_pattern"$'\t' || true
+    awk -F $'\t' -v exclude_pattern="$exclude_pattern" '$2 !~ exclude_pattern' || true
 }
 
 # Sort by activity (field 5)
