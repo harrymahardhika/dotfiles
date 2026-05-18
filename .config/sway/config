@@ -42,6 +42,7 @@ set $file_manager nautilus
 
 # Session environment - import variables to systemd
 exec systemctl --user import-environment XDG_SESSION_TYPE XDG_CURRENT_DESKTOP WAYLAND_DISPLAY SWAYSOCK
+exec $HOME/scripts/set-gtk-dark-mode.sh
 exec systemctl --user restart xdg-desktop-portal-gtk.service xdg-desktop-portal.service
 
 # Start awww-daemon after environment is ready

@@ -14,9 +14,6 @@ export ANDROID_HOME="$HOME/Android/Sdk"
 # Golang
 export GOPATH="$HOME/.go"
 
-# pnpm
-export PNPM_HOME="$HOME/.local/share/pnpm"
-
 # bun
 export BUN_INSTALL="$HOME/.bun"
 
@@ -25,11 +22,11 @@ typeset -U path  # Remove duplicates automatically
 path=(
   $HOME/.opencode/bin
   $BUN_INSTALL/bin
-  $PNPM_HOME
   $HOME/.cargo/bin
   $HOME/.composer/vendor/bin
   $HOME/.config/composer/vendor/bin
   $HOME/.local/bin
+  $HOME/.local/share/pnpm/bin
   $HOME/.rbenv/bin
   /usr/local/go/bin
   $GOPATH/bin

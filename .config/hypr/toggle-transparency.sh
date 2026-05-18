@@ -15,6 +15,6 @@ if [[ "$OPAQUE" == "yes" ]]; then
 else
   # Restore full opacity
   hyprctl keyword decoration:active_opacity 1.0
-  hyprctl keyword decoration:inactive_opacity 0.8
+  hyprctl keyword decoration:inactive_opacity 1.0
 fi
 

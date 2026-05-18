@@ -1,14 +1,53 @@
 # yazi.toml
-[mgr]
-show_hidden = true
+[manager]
+ratio          = [ 1, 3, 4 ]
+sort_by        = "natural"
+sort_sensitive = false
+sort_dir_first = true
+linemode       = "size"
+show_hidden    = true
 
 [opener]
+edit = [
+  { run = 'nvim "$@"', block = true, desc = "Edit" },
+]
+open = [
+  { run = 'xdg-open "$@"', desc = "Open" },
+]
+image = [
+  { run = 'swayimg "$@"', desc = "swayimg", block = false, orphan = true },
+]
 pdf = [
-  { run = "zathura %s", orphan = true, for = "unix" }
+  { run = 'zathura "$@"', desc = "zathura", orphan = true, for = "unix" },
+]
+trash = [
+  { run = 'gio trash "$@"', desc = "Trash" },
 ]
 
 [open]
 rules = [
+  # Text and Code
+  { mime = "text/*", use = "edit" },
+  { mime = "application/json", use = "edit" },
+  { mime = "*/javascript", use = "edit" },
+  
+  # Media
+  { mime = "image/*", use = "image" },
   { url = "*.pdf", use = "pdf" },
-  { mime = "application/pdf", use = "pdf" }
+  { mime = "application/pdf", use = "pdf" },
+  
+  # Fallback
+  { url = "*", use = [ "edit", "open" ] },
 ]
+
+[preview]
+tab_size   = 2
+max_width  = 1000
+max_height = 1000
+cache_dir  = "~/.cache/yazi"
+
+[tasks]
+micro_workers    = 5
+macro_workers    = 10
+biv_workers      = 5
+suppress_confirm = false

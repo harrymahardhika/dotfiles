@@ -8,8 +8,11 @@ if [ "$EUID" -eq 0 ]; then
     exit 1
 fi
 
+START_TIME=$(date +%s)
+STARTED_AT=$(date)
+
 echo "🔄 Starting system updates..."
-echo "⏰ Started at $(date)"
+echo "⏰ Started at $STARTED_AT"
 
 # Sudo preflight: notify before password prompt, authenticate once, then keep ticket alive.
 if ! sudo -n true 2>/dev/null; then
@@ -91,8 +94,7 @@ fi
 
 # Update pnpm
 if command -v pnpm &> /dev/null; then
-    echo "📦 Updating pnpm..."
-    pnpm self-update || echo "⚠️  pnpm self-update failed, skipping..."
+    echo "📦 Updating pnpm global packages..."
     pnpm update -g || echo "⚠️  pnpm global update failed, skipping..."
 fi
 
@@ -119,4 +121,22 @@ if [ -f /etc/arch-release ]; then
     echo "  • Orphaned packages removed"
 else
     echo "  • System packages updated and cleaned"
+fi
+
+COMPLETED_AT=$(date)
+ELAPSED=$(( $(date +%s) - START_TIME ))
+HOURS=$(( ELAPSED / 3600 ))
+MINUTES=$(( (ELAPSED % 3600) / 60 ))
+SECONDS=$(( ELAPSED % 60 ))
+
+echo ""
+echo "📈 Stats:"
+echo "  • Started at: $STARTED_AT"
+echo "  • Completed at: $COMPLETED_AT"
+if [ $HOURS -gt 0 ]; then
+    echo "  • Elapsed time: ${HOURS}h ${MINUTES}m ${SECONDS}s"
+elif [ $MINUTES -gt 0 ]; then
+    echo "  • Elapsed time: ${MINUTES}m ${SECONDS}s"
+else
+    echo "  • Elapsed time: ${SECONDS}s"
 fi
