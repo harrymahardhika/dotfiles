@@ -859,6 +859,22 @@ return {
     end,
   }),
   use("vim-wakatime", "wakatime/vim-wakatime", { pack = "start" }),
+  use("text-case.nvim", "johmsalas/text-case.nvim", {
+    pack = "start",
+    config = function()
+      require("textcase").setup({})
+    end,
+    keys = {
+      "ga",
+    },
+    cmd = {
+      "Subs",
+      "TextCaseOpenTelescope",
+      "TextCaseOpenTelescopeQuickChange",
+      "TextCaseOpenTelescopeLSPChange",
+      "TextCaseStartReplacingCommand",
+    },
+  }),
   use("which-key.nvim", "folke/which-key.nvim", {
     pack = "opt",
     event = "VimEnter",

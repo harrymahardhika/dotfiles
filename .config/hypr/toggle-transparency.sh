@@ -1,20 +1,14 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -uo pipefail
 
-get_active() {
-  hyprctl getoption decoration:active_opacity | awk '/float/ {print $NF}'
-}
+STATE_FILE="/tmp/hypr-transparent"
 
-ACTIVE="$(get_active)"
-OPAQUE=$(awk -v v="$ACTIVE" 'BEGIN{if (v>=0.999) print "yes"; else print "no";}')
-
-if [[ "$OPAQUE" == "yes" ]]; then
-  # Make windows semi-transparent
-  hyprctl keyword decoration:active_opacity 0.97
-  hyprctl keyword decoration:inactive_opacity 0.8
+if [ -f "$STATE_FILE" ]; then
+  echo 'hl.config({ decoration = { active_opacity = 1.0, inactive_opacity = 0.95 } })' > /tmp/hypr-opacity.lua
+  rm -f "$STATE_FILE"
 else
-  # Restore full opacity
-  hyprctl keyword decoration:active_opacity 1.0
-  hyprctl keyword decoration:inactive_opacity 1.0
+  echo 'hl.config({ decoration = { active_opacity = 0.94, inactive_opacity = 0.75 } })' > /tmp/hypr-opacity.lua
+  touch "$STATE_FILE"
 fi
 
+hyprctl reload
