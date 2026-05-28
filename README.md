@@ -5,8 +5,8 @@ both X11 and Wayland.
 
 ## Features
 
-- **Multiple Neovim Configurations** - Three separate configs (beta, harry,
-  custom-nvchad) with easy switching
+- **Multiple Neovim Configurations** - Four separate configs (beta, harry,
+  custom-nvchad, twelve) with easy switching
 - **Modular Shell Setup** - Clean, organized ZSH configuration with Antidote
   plugin manager
 - **Cross-Environment Support** - Configs for both X11 (i3) and Wayland
@@ -37,6 +37,7 @@ dotfiles/
 │   ├── beta/            # Beta/testing config
 │   ├── custom-nvchad/   # NvChad-style custom config
 │   ├── harry/           # Personal config
+│   ├── twelve/          # Native-package config
 │   └── stylua.toml      # Lua formatting config
 ├── scripts/             # Utility scripts
 │   ├── webapps/         # Web app launchers
@@ -69,13 +70,14 @@ dotfiles/
 
 ### Neovim
 
-Three separate configurations available via `nvim-switch.sh`:
+Four separate configurations available via `nvim-switch.sh`:
 
 - **beta** - Testing ground for new plugins/features, using `nvim-cmp`
 - **harry** - Personal stable configuration
 - **custom-nvchad** - NvChad-style custom distribution
+- **twelve** - Native-package Neovim config inspired by `beta` (uses native packages, zero external plugin managers)
 
-All configs use Lazy.nvim plugin manager.
+Most configs use the Lazy.nvim plugin manager, while `twelve` leverages native package loading.
 
 ### Tmux
 

@@ -308,15 +308,24 @@ local function setup_lazy_events(spec)
 
   if spec.keys then
     for _, key in ipairs(spec.keys) do
-      local mode = key.mode or "n"
-      vim.keymap.set(mode, key.lhs, function()
-        load_plugin(spec.name)
-        if type(key.rhs) == "function" then
-          key.rhs()
-        elseif type(key.rhs) == "string" then
-          vim.cmd(key.rhs)
-        end
-      end, { desc = key.desc, silent = key.silent ~= false })
+      if type(key) == "string" then
+        local lhs = key
+        vim.keymap.set("n", lhs, function()
+          vim.keymap.del("n", lhs)
+          load_plugin(spec.name)
+          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(lhs, true, false, true), "m", true)
+        end, { desc = "Load " .. spec.name })
+      else
+        local mode = key.mode or "n"
+        vim.keymap.set(mode, key.lhs, function()
+          load_plugin(spec.name)
+          if type(key.rhs) == "function" then
+            key.rhs()
+          elseif type(key.rhs) == "string" then
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key.rhs, true, false, true), "m", true)
+          end
+        end, { desc = key.desc, silent = key.silent ~= false })
+      end
     end
   end
 end

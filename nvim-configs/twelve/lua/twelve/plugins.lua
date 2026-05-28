@@ -455,6 +455,9 @@ return {
           debounce = 150,
           throttle = 60,
           fetching_timeout = 500,
+          filtering_context_budget = 200,
+          confirm_resolve_timeout = 100,
+          async_budget = 1,
           max_view_entries = 50,
         },
         mapping = cmp.mapping.preset.insert({
@@ -532,7 +535,7 @@ return {
 
       local ok_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
       local capabilities = ok_cmp and cmp_nvim_lsp.default_capabilities() or vim.lsp.protocol.make_client_capabilities()
-      capabilities.textDocument.semanticTokens = vim.NIL
+      capabilities.textDocument.semanticTokens = nil
       local missing_servers = {}
 
       local function executable_exists(cmd)
@@ -697,7 +700,9 @@ return {
       if not has_vue_plugin then
         vim.schedule(function()
           vim.notify(
-            "Vue TypeScript plugin path not found at " .. vue_language_server_path .. ". Vue hybrid mode is disabled until it is installed.",
+            "Vue TypeScript plugin path not found at "
+              .. vue_language_server_path
+              .. ". Vue hybrid mode is disabled until it is installed.",
             vim.log.levels.WARN,
             { title = "twelve.lsp" }
           )
@@ -821,6 +826,7 @@ return {
     config = function()
       local neotest = require("neotest")
 
+      ---@diagnostic disable-next-line: missing-fields
       neotest.setup({
         adapters = {
           require("neotest-pest"),
@@ -855,7 +861,7 @@ return {
     pack = "start",
     dependencies = { "oil.nvim" },
     config = function()
-      require("oil-git-status").setup()
+      require("oil-git-status").setup({})
     end,
   }),
   use("vim-wakatime", "wakatime/vim-wakatime", { pack = "start" }),
@@ -863,17 +869,75 @@ return {
     pack = "start",
     config = function()
       require("textcase").setup({})
+
+      local actions = {
+        { "Title Case", "to_title_case" },
+        { "UPPER CASE", "to_upper_case" },
+        { "lower case", "to_lower_case" },
+        { "snake_case", "to_snake_case" },
+        { "dash-case", "to_dash_case" },
+        { "Title-Dash-Case", "to_title_dash_case" },
+        { "CONSTANT_CASE", "to_constant_case" },
+        { "dot.case", "to_dot_case" },
+        { "camelCase", "to_camel_case" },
+        { "PascalCase", "to_pascal_case" },
+        { "path/case", "to_path_case" },
+        { "Phrase case", "to_phrase_case" },
+        { "UPPER PHRASE CASE", "to_upper_phrase_case" },
+        { "lower phrase case", "to_lower_phrase_case" },
+        { "comma,case", "to_comma_case" },
+      }
+
+      local items = {}
+      local by_name = {}
+      for _, a in ipairs(actions) do
+        items[#items + 1] = a[1]
+        by_name[a[1]] = a[2]
+      end
+
+      local function picker()
+        local textcase = require("textcase")
+        require("fzf-lua").fzf_exec(items, {
+          prompt = "Cases> ",
+          winopts = { height = 0.4, width = 0.5 },
+          actions = {
+            ["default"] = function(selected)
+              local fn = by_name[selected[1]]
+              if fn then
+                textcase.current_word(fn)
+              end
+            end,
+          },
+        })
+      end
+
+      vim.keymap.set("n", "ga.", picker, { desc = "Text case picker" })
+
+      vim.keymap.set("x", "ga.", function()
+        local utils = require("textcase.shared.utils")
+        local region = utils.get_visual_region(0, true)
+
+        require("fzf-lua").fzf_exec(items, {
+          prompt = "Cases> ",
+          winopts = { height = 0.4, width = 0.5 },
+          actions = {
+            ["default"] = function(selected)
+              local fn = by_name[selected[1]]
+              if fn then
+                local conversion = require("twelve.utils")
+                conversion.do_substitution(
+                  region.start_row,
+                  region.start_col,
+                  region.end_row,
+                  region.end_col,
+                  require("textcase").api[fn].apply
+                )
+              end
+            end,
+          },
+        })
+      end, { desc = "Text case picker (visual)" })
     end,
-    keys = {
-      "ga",
-    },
-    cmd = {
-      "Subs",
-      "TextCaseOpenTelescope",
-      "TextCaseOpenTelescopeQuickChange",
-      "TextCaseOpenTelescopeLSPChange",
-      "TextCaseStartReplacingCommand",
-    },
   }),
   use("which-key.nvim", "folke/which-key.nvim", {
     pack = "opt",
