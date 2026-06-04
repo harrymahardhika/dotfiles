@@ -94,6 +94,7 @@ Most configs use the Lazy.nvim plugin manager, while `twelve` leverages native p
 
 - **Hyprland** - Primary Wayland compositor with scrolling layout enabled and
   systemd integration
+- **Waybar** - Prefer `waybar-git` on Hyprland so workspace clicks keep working
 - **Sway** - Alternative i3-like compositor
 
 #### X11
@@ -212,8 +213,8 @@ conflicting files exist in your home directory before stowing.
 # Install Oh-My-Zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# Install Antidote plugin manager
-git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-~}/.antidote
+# Install or update Antidote and bundles
+./scripts/antidote-bootstrap.sh
 ```
 
 ### Tmux Setup
@@ -250,7 +251,7 @@ Core tools required:
 ```bash
 # Arch Linux
 yay -S zsh tmux neovim kitty alacritty \
-  hyprland sway i3-wm waybar rofi wofi \
+  hyprland sway i3-wm waybar-git rofi wofi \
   starship zoxide fzf bat ripgrep fd \
   lazygit yazi btop php composer \
   nodejs npm pnpm
@@ -270,3 +271,6 @@ MIT
 This is a personal configuration optimized for PHP/Laravel development with
 support for multiple environments. Feel free to use as inspiration or reference
 for your own dotfiles.
+
+Waybar on Hyprland works best with `waybar-git` here because newer Hyprland
+workspace behavior is not handled correctly by older stable Waybar builds.

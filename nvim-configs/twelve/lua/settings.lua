@@ -58,6 +58,8 @@ g.clipboard = {
   cache_enabled = 1,
 }
 
+vim.filetype.add({ extension = { gotmpl = "gotmpl" } })
+
 vim.diagnostic.config({
   float = {
     border = "rounded",

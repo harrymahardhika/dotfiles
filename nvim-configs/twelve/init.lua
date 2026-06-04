@@ -13,9 +13,9 @@ vim.g.loaded_perl_provider = 0
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 
-require("twelve.settings")
-require("twelve.keymaps")
-require("twelve.autocmds")
-require("twelve.float-term")
-require("twelve.treesitter")
-require("twelve.pack").setup()
+require("settings")
+require("keymaps")
+require("autocmds")
+require("float-term")
+require("treesitter")
+require("pack").setup()

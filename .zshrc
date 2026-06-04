@@ -9,11 +9,16 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # Load Antidote and plugins
-source $HOME/.antidote/antidote.zsh
-antidote load < $HOME/.zsh_plugins.txt
+if [[ -r "$HOME/.antidote/antidote.zsh" ]]; then
+  source "$HOME/.antidote/antidote.zsh"
+  antidote load < "$HOME/.zsh_plugins.txt"
+else
+  print -u2 "antidote: missing $HOME/.antidote/antidote.zsh; run scripts/antidote-bootstrap.sh"
+fi
 
-# Defer compinit for faster startup
-zsh-defer compinit -C
+# Initialize completion
+autoload -Uz compinit
+compinit -C
 
 # Load custom configuration
 for config_file in ~/.zsh/*.zsh; do

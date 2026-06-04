@@ -34,7 +34,18 @@ trap 'kill "$SUDO_KEEPALIVE_PID" 2>/dev/null || true' EXIT
 if [ -f /etc/arch-release ]; then
     # For Arch-based systems
     echo "📦 Updating Arch packages..."
-    sudo pacman -Syu --noconfirm
+
+    # Clean up stale Node.js install remnants that can block pacman upgrades.
+    # These paths are typically left behind by a previous manual/npm-based global install.
+    npm_conflict_root="/usr/lib/node_modules/npm"
+    if [ -d "$npm_conflict_root" ]; then
+        if ! pacman -Qo "$npm_conflict_root" >/dev/null 2>&1; then
+            echo "🧹 Removing stale unowned npm files that block pacman..."
+            sudo rm -rf "$npm_conflict_root"
+        fi
+    fi
+
+    sudo pacman -Syu --noconfirm --overwrite '/usr/lib/node_modules/npm/*'
 
     if command -v paru &> /dev/null; then
         echo "📦 Updating AUR packages..."
