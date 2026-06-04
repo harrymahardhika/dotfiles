@@ -1,4 +1,3 @@
-romkatv/zsh-defer
 unixorn/fzf-zsh-plugin
 wbingli/zsh-wakatime
 z-shell/zsh-zoxide

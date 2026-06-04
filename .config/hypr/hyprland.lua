@@ -18,8 +18,8 @@ hl.config({
 	},
 	decoration = {
 		rounding = 4,
-		active_opacity = 0.95,
-		inactive_opacity = 0.70,
+		active_opacity = 0.97,
+		inactive_opacity = 0.80,
 		blur = {
 			enabled = true,
 			size = 3,
@@ -48,9 +48,9 @@ hl.config({
 			{ name = "layersOut", enabled = true, speed = 6, curve = "snap", style = "fade" },
 			{ name = "fadeLayersIn", enabled = true, speed = 6, curve = "snap" },
 			{ name = "fadeLayersOut", enabled = true, speed = 6, curve = "snap" },
-			{ name = "workspaces", enabled = true, speed = 10, curve = "snap", style = "fade" },
-			{ name = "workspacesIn", enabled = true, speed = 10, curve = "snap", style = "fade" },
-			{ name = "workspacesOut", enabled = true, speed = 10, curve = "snap", style = "fade" },
+			{ name = "workspaces", enabled = false, speed = 10, curve = "snap", style = "fade" },
+			{ name = "workspacesIn", enabled = false, speed = 10, curve = "snap", style = "fade" },
+			{ name = "workspacesOut", enabled = false, speed = 10, curve = "snap", style = "fade" },
 		},
 	},
 	input = {
