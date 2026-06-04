@@ -19,19 +19,22 @@ update_git_prompt_info() {
   if git rev-parse --abbrev-ref @{upstream} &>/dev/null; then
     local remote_status
     remote_status=$(git rev-list --left-right --count @{upstream}...HEAD 2>/dev/null)
-    behind=$(echo $remote_status | awk '{print ($1 ~ /^[0-9]+$/) ? $1 : 0}')
-    ahead=$(echo  $remote_status | awk '{print ($2 ~ /^[0-9]+$/) ? $2 : 0}')
+    read -r behind ahead <<< "${remote_status:-0 0}"
   fi
 
   # added/removed (unstaged + staged)
   if ! git diff --quiet --ignore-submodules=all -- : 2>/dev/null; then
-    a_ws=$(git diff --numstat 2>/dev/null | awk '($1 ~ /^[0-9]+$/){ai+=$1} END{print ai+0}')
-    d_ws=$(git diff --numstat 2>/dev/null | awk '($2 ~ /^[0-9]+$/){di+=$2} END{print di+0}')
+    local diff_numstat
+    diff_numstat=$(git diff --numstat 2>/dev/null)
+    a_ws=$(awk '($1 ~ /^[0-9]+$/){ai+=$1} END{print ai+0}' <<< "$diff_numstat")
+    d_ws=$(awk '($2 ~ /^[0-9]+$/){di+=$2} END{print di+0}' <<< "$diff_numstat")
   fi
 
   if ! git diff --cached --quiet --ignore-submodules=all -- : 2>/dev/null; then
-    a_st=$(git diff --cached --numstat 2>/dev/null | awk '($1 ~ /^[0-9]+$/){ai+=$1} END{print ai+0}')
-    d_st=$(git diff --cached --numstat 2>/dev/null | awk '($2 ~ /^[0-9]+$/){di+=$2} END{print di+0}')
+    local staged_numstat
+    staged_numstat=$(git diff --cached --numstat 2>/dev/null)
+    a_st=$(awk '($1 ~ /^[0-9]+$/){ai+=$1} END{print ai+0}' <<< "$staged_numstat")
+    d_st=$(awk '($2 ~ /^[0-9]+$/){di+=$2} END{print di+0}' <<< "$staged_numstat")
   fi
 
   added=$((a_ws + a_st))
@@ -68,5 +71,9 @@ set_prompt() {
 }
 
 autoload -Uz add-zsh-hook
-add-zsh-hook precmd update_git_prompt_info
-add-zsh-hook precmd set_prompt
+prompt_precmd() {
+  update_git_prompt_info
+  set_prompt
+}
+
+add-zsh-hook precmd prompt_precmd

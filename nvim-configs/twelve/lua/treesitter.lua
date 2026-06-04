@@ -1,19 +1,6 @@
 local api = vim.api
-local data_dir = vim.fn.stdpath("data")
-
-local query_runtimes = {
-  data_dir .. "/lazy/nvim-treesitter/runtime",
-  data_dir .. "/site/pack/twelve/start/nvim-treesitter/runtime",
-}
 
 local group = api.nvim_create_augroup("TwelveTreesitter", { clear = true })
-
-for _, runtime in ipairs(query_runtimes) do
-  if vim.uv.fs_stat(runtime) then
-    vim.opt.rtp:append(runtime)
-    break
-  end
-end
 
 local function should_disable(buf)
   local max_filesize = 100 * 1024
@@ -39,7 +26,7 @@ local function start_treesitter(buf)
 
   local ok_start = pcall(vim.treesitter.start, buf, lang)
   if ok_start then
-    pcall(vim.api.nvim_set_option_value, "syntax", "off", { buf = buf })
+    pcall(api.nvim_set_option_value, "syntax", "off", { buf = buf })
   end
 end
 

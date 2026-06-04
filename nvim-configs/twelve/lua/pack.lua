@@ -2,7 +2,7 @@ local uv = vim.uv
 
 local M = {}
 
-local specs = require("twelve.plugins")
+local specs = require("plugins")
 local by_name = {}
 local loaded = {}
 local configured = {}

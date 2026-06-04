@@ -1,4 +1,5 @@
 {
+  // Prefer waybar-git on Hyprland so workspace clicks keep working.
   "position": "top",
   "modules-left": [
     "network",

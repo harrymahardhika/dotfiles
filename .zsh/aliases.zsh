@@ -88,4 +88,3 @@ alias pru='paru -Syu'
 alias pri='paru -S'
 alias prs='paru -Ss'
 alias prr='paru -Rns'
-
