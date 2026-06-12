@@ -15,6 +15,7 @@ image/jpeg=org.gnome.eog.desktop
 image/gif=org.gnome.eog.desktop
 x-scheme-handler/discord=vesktop.desktop
 x-scheme-handler/antigravity=antigravity.desktop
+x-scheme-handler/claude-cli=claude-code-url-handler.desktop
 
 [Added Associations]
 text/html=zen-browser.desktop;

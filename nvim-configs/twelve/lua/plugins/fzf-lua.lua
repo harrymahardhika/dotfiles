@@ -1,7 +1,8 @@
 local use = require("plugin-util").use
 
 return use("fzf-lua", "ibhagwan/fzf-lua", {
-  pack = "start",
+  pack = "opt",
+  event = "VimEnter",
   dependencies = { "nvim-web-devicons" },
   config = function()
     require("nvim-web-devicons")

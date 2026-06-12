@@ -16,7 +16,8 @@ return {
     end,
   }),
   use("nvim-lspconfig", "neovim/nvim-lspconfig", {
-    pack = "start",
+    pack = "opt",
+    event = "BufReadPre",
     dependencies = { "cmp-nvim-lsp", "lazydev.nvim" },
     config = function()
       vim.g.lsp_file_size_limit = 5000000
@@ -29,6 +30,21 @@ return {
 
       local function executable_exists(cmd)
         return vim.fn.executable(cmd) == 1
+      end
+
+      local vue_root_markers = {
+        "package.json",
+        "tsconfig.json",
+        "jsconfig.json",
+        "vite.config.ts",
+        "vite.config.js",
+        "nuxt.config.ts",
+        "nuxt.config.js",
+        ".git",
+      }
+
+      local function project_root(bufnr, on_dir)
+        on_dir(vim.fs.root(bufnr, vue_root_markers) or vim.fn.getcwd())
       end
 
       local function record_missing(server, cmd)
@@ -115,10 +131,55 @@ return {
         capabilities = capabilities,
       })
 
-      local vue_language_server_path = "/usr/lib/node_modules/@vue/language-server"
-      local vue_typescript_sdk = "/usr/lib/node_modules/@vtsls/language-server/node_modules/typescript/lib"
+      -- pnpm bin -g is slow (~300-900ms); run it once and share across all lookups.
+      local pnpm_bin = (function()
+        local r = vim.fn.trim(vim.fn.system("pnpm bin -g 2>/dev/null"))
+        return (vim.v.shell_error == 0 and r ~= "") and r or nil
+      end)()
+
+      local function pnpm_global_root(bin_name)
+        if not pnpm_bin then
+          return nil
+        end
+        local wrapper = pnpm_bin .. "/" .. bin_name
+        if not vim.uv.fs_stat(wrapper) then
+          return nil
+        end
+        local line =
+          vim.fn.trim(vim.fn.system("grep -o 'cmd-shim-target=.*' " .. vim.fn.shellescape(wrapper) .. " 2>/dev/null"))
+        local target = line:match("cmd%-shim%-target=(.+)")
+        if not target then
+          return nil
+        end
+        return vim.fn.fnamemodify(vim.fn.trim(target), ":h:h")
+      end
+
+      local npm_global = vim.fn.trim(vim.fn.system("npm root -g 2>/dev/null"))
+      local vue_language_server_path = pnpm_global_root("vue-language-server")
+        or (npm_global ~= "" and npm_global .. "/@vue/language-server" or nil)
+        or "/usr/lib/node_modules/@vue/language-server"
+
+      -- @vue/typescript-plugin must be resolvable from `location`. With npm it sits
+      -- as a sibling in node_modules/@vue/; with pnpm it lands in .pnpm/node_modules.
+      local function find_vue_ts_plugin(vue_ls_path)
+        local node_modules = vim.fn.fnamemodify(vue_ls_path, ":h:h")
+        local pnpm_path = node_modules .. "/.pnpm/node_modules/@vue/typescript-plugin"
+        if vim.uv.fs_stat(pnpm_path) then
+          return pnpm_path
+        end
+        local npm_path = node_modules .. "/@vue/typescript-plugin"
+        if vim.uv.fs_stat(npm_path) then
+          return npm_path
+        end
+        return vue_ls_path
+      end
+
+      local vue_ts_plugin_path = find_vue_ts_plugin(vue_language_server_path)
+
+      local ts_root = pnpm_global_root("tsc") or (npm_global ~= "" and npm_global .. "/typescript" or nil)
+      local vue_typescript_sdk = ts_root and (ts_root .. "/lib") or nil
       local has_vue_plugin = vim.uv.fs_stat(vue_language_server_path) ~= nil
-      local has_vue_sdk = vim.uv.fs_stat(vue_typescript_sdk) ~= nil
+      local has_vue_sdk = vue_typescript_sdk ~= nil and vim.uv.fs_stat(vue_typescript_sdk) ~= nil
       local vtsls_settings = {
         vtsls = {
           tsserver = {
@@ -145,7 +206,7 @@ return {
       if has_vue_plugin then
         table.insert(vtsls_settings.vtsls.tsserver.globalPlugins, {
           name = "@vue/typescript-plugin",
-          location = vue_language_server_path,
+          location = vue_ts_plugin_path,
           languages = { "vue" },
           configNamespace = "typescript",
           enableForWorkspaceTypeScriptVersions = true,
@@ -157,12 +218,14 @@ return {
         capabilities = capabilities,
         settings = vtsls_settings,
         filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+        root_dir = project_root,
       })
 
       enable_server("vue_ls", {
         cmd = "vue-language-server",
         capabilities = capabilities,
         filetypes = { "vue" },
+        root_dir = project_root,
         init_options = has_vue_sdk and {
           typescript = {
             tsdk = vue_typescript_sdk,
@@ -174,6 +237,7 @@ return {
         cmd = "tailwindcss-language-server",
         capabilities = capabilities,
         filetypes = { "javascript", "typescript", "vue", "svelte" },
+        root_dir = project_root,
       })
 
       if #missing_servers > 0 then
@@ -229,6 +293,7 @@ return {
           vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
         end,
       })
+
     end,
   }),
 }

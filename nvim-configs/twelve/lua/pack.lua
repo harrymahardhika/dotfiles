@@ -129,6 +129,10 @@ local function scratch_report(title, lines)
   vim.api.nvim_buf_set_name(buf, title)
 end
 
+local function status_report(title, lines)
+  scratch_report(title, lines)
+end
+
 local function run_git(args)
   local out = vim.fn.system(args)
   if vim.v.shell_error ~= 0 then
@@ -211,19 +215,27 @@ local function install_missing(opts)
   ensure_directories()
 
   local installed_any = false
+  local failed = {}
   local total = #specs
   for idx, spec in ipairs(specs) do
     progress("checking " .. spec.name, idx, total, opts)
-    if install(spec) then
+    local ok, installed = pcall(install, spec)
+    if ok and installed then
       installed_any = true
       if not opts.quiet then
         notify(("installed %s"):format(spec.name))
       end
+    elseif not ok then
+      failed[#failed + 1] = ("%s: %s"):format(spec.name, installed)
     end
   end
 
   if installed_any then
     vim.cmd.packloadall({ bang = true })
+  end
+
+  if #failed > 0 then
+    notify("Some plugins could not be installed: " .. table.concat(failed, ", "), vim.log.levels.WARN)
   end
 
   record_phase("install_missing", started_at)
@@ -380,12 +392,36 @@ end
 
 local function status()
   local lines = {}
+  local missing = 0
   for _, spec in ipairs(sort_specs(vim.deepcopy(specs))) do
     local state = is_installed(spec) and "installed" or "missing"
     local mode = spec.pack == "opt" and "opt" or "start"
     lines[#lines + 1] = ("%s [%s] %s"):format(spec.name, mode, state)
+    if state == "missing" then
+      missing = missing + 1
+    end
   end
-  notify(table.concat(lines, "\n"))
+  lines[#lines + 1] = ""
+  lines[#lines + 1] = ("Missing plugins: %d"):format(missing)
+  status_report("twelve://status", lines)
+end
+
+local function missing_plugins()
+  local lines = {}
+  for _, spec in ipairs(sort_specs(vim.deepcopy(specs))) do
+    if not is_installed(spec) then
+      local mode = spec.pack == "opt" and "opt" or "start"
+      lines[#lines + 1] = ("%s [%s]"):format(spec.name, mode)
+    end
+  end
+
+  if #lines == 0 then
+    lines[1] = "No missing plugins."
+  else
+    table.insert(lines, 1, ("Missing plugins: %d"):format(#lines))
+  end
+
+  status_report("twelve://missing", lines)
 end
 
 local function profile_report()
@@ -451,6 +487,7 @@ local function define_commands()
   vim.api.nvim_create_user_command("PackUpdate", update, {})
   vim.api.nvim_create_user_command("PackClean", clean, {})
   vim.api.nvim_create_user_command("PackStatus", status, {})
+  vim.api.nvim_create_user_command("PackMissing", missing_plugins, {})
   vim.api.nvim_create_user_command("PackProfile", profile_report, {})
   vim.api.nvim_create_user_command("PackSync", function()
     install_missing()

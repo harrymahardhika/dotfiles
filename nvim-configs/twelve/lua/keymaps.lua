@@ -86,7 +86,9 @@ map("n", "<leader>lr", function()
     vim.notify("No LSP servers running on this buffer", vim.log.levels.INFO, { title = "twelve.lsp" })
     return
   end
-  local names = vim.tbl_map(function(c) return c.name end, clients)
+  local names = vim.tbl_map(function(c)
+    return c.name
+  end, clients)
   vim.lsp.stop({ bufnr = 0 })
   vim.defer_fn(function()
     for _, name in ipairs(names) do

@@ -1,8 +1,8 @@
 * {
     bg-col:  #1e1e2e;
-    bg-col-light: #1e1e2e;
+    bg-col-light: #313244;
     border-col: #1e1e2e;
-    selected-col: #1e1e2e;
+    selected-col: #313244;
     blue: #89b4fa;
     fg-col: #cdd6f4;
     fg-col2: #f38ba8;
@@ -40,7 +40,7 @@ prompt {
     padding: 6px;
     text-color: @bg-col;
     border-radius: 3px;
-    margin: 20px 0px 0px 20px;
+    margin: 20px 20px 0px 20px;
 }
 
 textbox-prompt-colon {
@@ -50,7 +50,7 @@ textbox-prompt-colon {
 
 entry {
     padding: 6px;
-    margin: 20px 0px 0px 10px;
+    margin: 20px 20px 0px 10px;
     text-color: @fg-col;
     background-color: @bg-col;
 }
@@ -58,7 +58,7 @@ entry {
 listview {
     border: 0px 0px 0px;
     padding: 6px 0px 0px;
-    margin: 10px 0px 0px 20px;
+    margin: 10px 20px 0px 20px;
     columns: 2;
     lines: 5;
     background-color: @bg-col;

@@ -1,7 +1,11 @@
 local use = require("plugin-util").use
 
 return use("text-case.nvim", "johmsalas/text-case.nvim", {
-  pack = "start",
+  pack = "opt",
+  keys = {
+    { lhs = "ga.", mode = "n", desc = "Text case picker" },
+    { lhs = "ga.", mode = "x", desc = "Text case picker" },
+  },
   config = function()
     require("textcase").setup({})
 

@@ -33,19 +33,86 @@ trap 'kill "$SUDO_KEEPALIVE_PID" 2>/dev/null || true' EXIT
 
 if [ -f /etc/arch-release ]; then
     # For Arch-based systems
+
+    # --- Mirror connectivity pre-flight ---
+    check_mirrors() {
+        local mirrorlist="/etc/pacman.d/mirrorlist"
+        if [ ! -f "$mirrorlist" ]; then
+            echo "⚠️  Mirrorlist not found, skipping mirror check."
+            return 0
+        fi
+
+        # Collect active (non-commented) Server lines
+        local mirrors=()
+        while IFS= read -r line; do
+            [[ "$line" =~ ^[[:space:]]*Server[[:space:]]*=[[:space:]]*(.*) ]] && \
+                mirrors+=("${BASH_REMATCH[1]}")
+        done < "$mirrorlist"
+
+        if [ ${#mirrors[@]} -eq 0 ]; then
+            echo "⚠️  No active mirrors found in mirrorlist, skipping mirror check."
+            return 0
+        fi
+
+        echo "🌐 Checking pacman mirrors..."
+        local ok=0 failed=0
+        for mirror in "${mirrors[@]}"; do
+            # Replace the $repo/$arch placeholder with a real path for HEAD check
+            local url="${mirror/\$repo\/os\/\$arch/core/os/x86_64}"
+            local host
+            host=$(echo "$url" | sed -E 's|https?://([^/]+).*|\1|')
+
+            # curl: 5 s connect timeout, 10 s max total, fail silently on HTTP errors
+            # Declare curl_exit before assignment so `local` doesn't clobber $?.
+            # Use || to catch non-zero exits without triggering set -e.
+            local curl_exit=0
+            local http_code
+            http_code=$(curl -sI --connect-timeout 5 --max-time 10 \
+                --write-out '%{http_code}' --output /dev/null "$url" 2>/dev/null) \
+                || curl_exit=$?
+
+            case $curl_exit in
+                0|22)  # 22 = HTTP error, but we reached the server
+                    echo "  ✅ $host (HTTP $http_code)"
+                    (( ++ok )) ;;
+                6)   echo "  ❌ $host — DNS resolution failed"; (( ++failed )) ;;
+                28)  echo "  ⏱️  $host — timed out"; (( ++failed )) ;;
+                35|60|51)
+                     echo "  🔒 $host — SSL/certificate error (curl exit $curl_exit)"; (( ++failed )) ;;
+                *)   echo "  ⚠️  $host — unreachable (curl exit $curl_exit)"; (( ++failed )) ;;
+            esac
+        done
+
+        echo ""
+        echo "  Mirror summary: ✅ $ok reachable, ❌ $failed unreachable (out of ${#mirrors[@]} checked)"
+
+        if [ "$failed" -gt 0 ] && [ "$ok" -eq 0 ]; then
+            echo "❌ All mirrors are unreachable. Aborting update to avoid incomplete transactions."
+            exit 1
+        fi
+
+        if [ "$failed" -gt 0 ]; then
+            echo "⚠️  Some mirrors are unreachable. pacman will skip them automatically."
+            echo "   You may want to run 'reflector' to refresh your mirrorlist."
+        fi
+        echo ""
+    }
+
+    check_mirrors
+
     echo "📦 Updating Arch packages..."
 
     # Clean up stale Node.js install remnants that can block pacman upgrades.
     # These paths are typically left behind by a previous manual/npm-based global install.
-    npm_conflict_root="/usr/lib/node_modules/npm"
-    if [ -d "$npm_conflict_root" ]; then
-        if ! pacman -Qo "$npm_conflict_root" >/dev/null 2>&1; then
-            echo "🧹 Removing stale unowned npm files that block pacman..."
-            sudo rm -rf "$npm_conflict_root"
+    for dir in npm node-gyp; do
+        p="/usr/lib/node_modules/$dir"
+        if [ -d "$p" ] && ! pacman -Qo "$p" >/dev/null 2>&1; then
+            echo "🧹 Removing stale unowned files: $dir"
+            sudo rm -rf "$p"
         fi
-    fi
+    done
 
-    sudo pacman -Syu --noconfirm --overwrite '/usr/lib/node_modules/npm/*'
+    sudo pacman -Syu --noconfirm --overwrite '/usr/lib/node_modules/*'
 
     if command -v paru &> /dev/null; then
         echo "📦 Updating AUR packages..."
@@ -146,8 +213,15 @@ echo "  • Started at: $STARTED_AT"
 echo "  • Completed at: $COMPLETED_AT"
 if [ $HOURS -gt 0 ]; then
     echo "  • Elapsed time: ${HOURS}h ${MINUTES}m ${SECONDS}s"
+    ELAPSED_STR="${HOURS}h ${MINUTES}m ${SECONDS}s"
 elif [ $MINUTES -gt 0 ]; then
     echo "  • Elapsed time: ${MINUTES}m ${SECONDS}s"
+    ELAPSED_STR="${MINUTES}m ${SECONDS}s"
 else
     echo "  • Elapsed time: ${SECONDS}s"
+    ELAPSED_STR="${SECONDS}s"
+fi
+
+if command -v notify-send &> /dev/null; then
+    notify-send -u normal "✅ System update complete" "All packages updated in ${ELAPSED_STR}"
 fi

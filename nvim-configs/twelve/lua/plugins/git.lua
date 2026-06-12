@@ -2,7 +2,8 @@ local use = require("plugin-util").use
 
 return {
   use("gitsigns.nvim", "lewis6991/gitsigns.nvim", {
-    pack = "start",
+    pack = "opt",
+    event = "BufReadPost",
     config = function()
       local gitsigns = require("gitsigns")
       gitsigns.setup({
