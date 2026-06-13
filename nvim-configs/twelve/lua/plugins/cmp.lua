@@ -9,6 +9,10 @@ return {
       local cmp = require("cmp")
       local luasnip = require("luasnip")
 
+      -- after/plugin files don't run for mid-session packadd, so M.setup() in
+      -- cmp-nvim-lsp's after/plugin is never called. Bootstrap it manually.
+      local ok_lsp, cmp_lsp = pcall(require, "cmp_nvim_lsp")
+
       cmp.setup({
         snippet = {
           expand = function(args)
@@ -70,6 +74,11 @@ return {
           },
         },
       })
+
+      if ok_lsp then
+        cmp_lsp.setup()
+        cmp_lsp._on_insert_enter()
+      end
     end,
   }),
   use("cmp-nvim-lsp", "hrsh7th/cmp-nvim-lsp", { pack = "opt" }),
