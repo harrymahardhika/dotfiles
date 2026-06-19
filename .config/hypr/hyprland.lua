@@ -29,29 +29,6 @@ hl.config({
 	},
 	animations = {
 		enabled = true,
-		bezier = {
-			{ name = "snap", p1 = { 0.05, 0.9 }, p2 = { 0.1, 1 } },
-			{ name = "easeOutQuint", p1 = { 0.23, 1 }, p2 = { 0.32, 1 } },
-			{ name = "linear", p1 = { 0, 0 }, p2 = { 1, 1 } },
-		},
-		animation = {
-			{ name = "global", enabled = true, speed = 10, curve = "default" },
-			{ name = "border", enabled = true, speed = 8, curve = "snap" },
-			{ name = "windows", enabled = true, speed = 8, curve = "snap" },
-			{ name = "windowsIn", enabled = true, speed = 8, curve = "snap", style = "popin 87%" },
-			{ name = "windowsOut", enabled = true, speed = 6, curve = "snap", style = "popin 87%" },
-			{ name = "fadeIn", enabled = true, speed = 6, curve = "snap" },
-			{ name = "fadeOut", enabled = true, speed = 6, curve = "snap" },
-			{ name = "fade", enabled = true, speed = 7, curve = "snap" },
-			{ name = "layers", enabled = true, speed = 7, curve = "snap" },
-			{ name = "layersIn", enabled = true, speed = 8, curve = "snap", style = "fade" },
-			{ name = "layersOut", enabled = true, speed = 6, curve = "snap", style = "fade" },
-			{ name = "fadeLayersIn", enabled = true, speed = 6, curve = "snap" },
-			{ name = "fadeLayersOut", enabled = true, speed = 6, curve = "snap" },
-			{ name = "workspaces", enabled = false, speed = 10, curve = "snap", style = "fade" },
-			{ name = "workspacesIn", enabled = false, speed = 10, curve = "snap", style = "fade" },
-			{ name = "workspacesOut", enabled = false, speed = 10, curve = "snap", style = "fade" },
-		},
 	},
 	input = {
 		kb_layout = "us",
@@ -83,6 +60,29 @@ hl.config({
 		column_width = 0.75,
 	},
 })
+
+-- Curves
+hl.curve("snap", { type = "bezier", points = { { 0.05, 0.9 }, { 0.1, 1 } } })
+hl.curve("easeOutQuint", { type = "bezier", points = { { 0.23, 1 }, { 0.32, 1 } } })
+hl.curve("linear", { type = "bezier", points = { { 0, 0 }, { 1, 1 } } })
+
+-- Animations
+hl.animation({ leaf = "global", enabled = true, speed = 10, bezier = "default" })
+hl.animation({ leaf = "border", enabled = true, speed = 8, bezier = "snap" })
+hl.animation({ leaf = "windows", enabled = true, speed = 8, bezier = "snap" })
+hl.animation({ leaf = "windowsIn", enabled = true, speed = 8, bezier = "snap", style = "popin 87%" })
+hl.animation({ leaf = "windowsOut", enabled = true, speed = 6, bezier = "snap", style = "popin 87%" })
+hl.animation({ leaf = "fadeIn", enabled = true, speed = 6, bezier = "snap" })
+hl.animation({ leaf = "fadeOut", enabled = true, speed = 6, bezier = "snap" })
+hl.animation({ leaf = "fade", enabled = true, speed = 7, bezier = "snap" })
+hl.animation({ leaf = "layers", enabled = true, speed = 7, bezier = "snap" })
+hl.animation({ leaf = "layersIn", enabled = true, speed = 8, bezier = "snap", style = "fade" })
+hl.animation({ leaf = "layersOut", enabled = true, speed = 6, bezier = "snap", style = "fade" })
+hl.animation({ leaf = "fadeLayersIn", enabled = true, speed = 6, bezier = "snap" })
+hl.animation({ leaf = "fadeLayersOut", enabled = true, speed = 6, bezier = "snap" })
+hl.animation({ leaf = "workspaces", enabled = true, speed = 10, bezier = "snap", style = "fade" })
+hl.animation({ leaf = "workspacesIn", enabled = true, speed = 10, bezier = "snap", style = "fade" })
+hl.animation({ leaf = "workspacesOut", enabled = true, speed = 10, bezier = "snap", style = "fade" })
 
 local terminal = "ghostty"
 local menu = "rofi -show drun"

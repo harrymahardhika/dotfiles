@@ -21,6 +21,12 @@
 # .config/vesktop
 # .local
 .config/btop/*.conf
+.config/opencode/node_modules/
+.config/opencode/bun.lock
+.config/opencode/package.json
+.config/opencode/package-lock.json
+.config/opencode/.gitignore
 nvim-configs/*/lazy-lock.json
 *.log
 .nvimlog
+.config/systemd/user/timers.target.wants/

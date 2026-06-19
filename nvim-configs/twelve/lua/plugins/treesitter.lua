@@ -3,6 +3,7 @@ local use = require("plugin-util").use
 return use("nvim-treesitter", "nvim-treesitter/nvim-treesitter", {
   pack = "start",
   config = function()
+    vim.treesitter.language.register('bash', 'zsh')
     require("nvim-treesitter.config").setup({
       ensure_installed = {
         "lua",
@@ -16,6 +17,7 @@ return use("nvim-treesitter", "nvim-treesitter/nvim-treesitter", {
         "html",
         "yaml",
         "json",
+        "bash",
       },
       auto_install = false,
       highlight = {

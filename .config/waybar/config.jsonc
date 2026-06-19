@@ -105,12 +105,13 @@
     "tooltip-format": "CPU Temperature (Package)"
   },
   "network": {
-    "format-wifi": "󰖩 {essid}",
+    "format-wifi": "󰖩 {essid} ·  {bandwidthDownBytes}  {bandwidthUpBytes}",
     "format-ethernet": "󰈀 {ifname}",
     "format-disconnected": "󰖪 Disconnected",
+    "interval": 2,
     "tooltip-format": "{ipaddr}/{cidr}\nGateway: {gwaddr}\nSignal: {signalStrength}%\n󰇚 {bandwidthDownBytes} 󰕒 {bandwidthUpBytes}",
     "tooltip-format-disconnected": "Disconnected",
-    "max-length": 40
+    "max-length": 80
   },
   "backlight": {
     "device": "intel_backlight",
