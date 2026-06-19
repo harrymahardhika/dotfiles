@@ -1,0 +1,6 @@
+[Unit]
+Description=Empty trashed files older than 7 days
+
+[Service]
+Type=oneshot
+ExecStart=%h/scripts/trash-cleanup.sh

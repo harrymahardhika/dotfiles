@@ -62,6 +62,7 @@ alias php-switch="$HOME/scripts/php-switch.sh"
 alias updateall="$HOME/updateall"
 alias changelog="$HOME/scripts/changelog.sh"
 alias battery_limit="$HOME/scripts/battery_limit.sh"
+alias trash-cleanup="$HOME/scripts/trash-cleanup.sh"
 
 # Git
 alias gs='git status'
@@ -81,7 +82,7 @@ alias gdsc="git diff --staged | wl-copy"
 alias dje="source ~/.virtualenvs/djangoenv/bin/activate"
 alias python="python3"
 alias p3="python3"
-alias pm="python3 manage.py"
+# alias pm="python3 manage.py"
 
 # Paru aliases
 alias pru='paru -Syu'
