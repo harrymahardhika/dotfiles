@@ -2,9 +2,8 @@
 
 ---@diagnostic disable: undefined-global
 
--- Monitors
-hl.monitor({ output = "HDMI-A-2", mode = "1920x1080", position = "0x0", scale = 1 })
-hl.monitor({ output = "eDP-1", mode = "1920x1080", position = "1920x0", scale = 1 })
+-- Monitors (managed by nwg-displays)
+pcall(dofile, os.getenv("HOME") .. "/.config/hypr/monitors.lua")
 
 -- General settings
 hl.config({
@@ -83,6 +82,10 @@ hl.animation({ leaf = "fadeLayersOut", enabled = true, speed = 6, bezier = "snap
 hl.animation({ leaf = "workspaces", enabled = true, speed = 10, bezier = "snap", style = "fade" })
 hl.animation({ leaf = "workspacesIn", enabled = true, speed = 10, bezier = "snap", style = "fade" })
 hl.animation({ leaf = "workspacesOut", enabled = true, speed = 10, bezier = "snap", style = "fade" })
+
+-- Gestures
+hl.gesture({ fingers = 3, direction = "l", action = function() hl.dispatch(hl.dsp.window.cycle_next("prev")) end })
+hl.gesture({ fingers = 3, direction = "r", action = function() hl.dispatch(hl.dsp.window.cycle_next()) end })
 
 local terminal = "ghostty"
 local menu = "rofi -show drun"

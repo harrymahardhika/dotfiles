@@ -2,10 +2,10 @@
   // Prefer waybar-git on Hyprland so workspace clicks keep working.
   "position": "top",
   "modules-left": [
-    "network",
-    "pulseaudio",
     "battery",
     "backlight",
+    "pulseaudio",
+    "network",
     "hyprland/submap"
   ],
   "modules-center": ["hyprland/workspaces", "hyprland/window"],
