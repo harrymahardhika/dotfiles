@@ -17,12 +17,12 @@ hl.config({
 	},
 	decoration = {
 		rounding = 4,
-		active_opacity = 0.97,
-		inactive_opacity = 0.80,
+		active_opacity = 0.95,
+		inactive_opacity = 0.85,
 		blur = {
 			enabled = true,
-			size = 3,
-			passes = 2,
+			size = 5,
+			passes = 4,
 			vibrancy = 0.1696,
 		},
 	},
@@ -66,26 +66,38 @@ hl.curve("easeOutQuint", { type = "bezier", points = { { 0.23, 1 }, { 0.32, 1 } 
 hl.curve("linear", { type = "bezier", points = { { 0, 0 }, { 1, 1 } } })
 
 -- Animations
-hl.animation({ leaf = "global", enabled = true, speed = 10, bezier = "default" })
+hl.animation({ leaf = "global", enabled = true, speed = 8, bezier = "default" })
 hl.animation({ leaf = "border", enabled = true, speed = 8, bezier = "snap" })
 hl.animation({ leaf = "windows", enabled = true, speed = 8, bezier = "snap" })
 hl.animation({ leaf = "windowsIn", enabled = true, speed = 8, bezier = "snap", style = "popin 87%" })
-hl.animation({ leaf = "windowsOut", enabled = true, speed = 6, bezier = "snap", style = "popin 87%" })
-hl.animation({ leaf = "fadeIn", enabled = true, speed = 6, bezier = "snap" })
-hl.animation({ leaf = "fadeOut", enabled = true, speed = 6, bezier = "snap" })
+hl.animation({ leaf = "windowsOut", enabled = true, speed = 4, bezier = "snap", style = "popin 87%" })
+hl.animation({ leaf = "fadeIn", enabled = true, speed = 4, bezier = "snap" })
+hl.animation({ leaf = "fadeOut", enabled = true, speed = 4, bezier = "snap" })
 hl.animation({ leaf = "fade", enabled = true, speed = 7, bezier = "snap" })
 hl.animation({ leaf = "layers", enabled = true, speed = 7, bezier = "snap" })
 hl.animation({ leaf = "layersIn", enabled = true, speed = 8, bezier = "snap", style = "fade" })
-hl.animation({ leaf = "layersOut", enabled = true, speed = 6, bezier = "snap", style = "fade" })
-hl.animation({ leaf = "fadeLayersIn", enabled = true, speed = 6, bezier = "snap" })
-hl.animation({ leaf = "fadeLayersOut", enabled = true, speed = 6, bezier = "snap" })
-hl.animation({ leaf = "workspaces", enabled = true, speed = 10, bezier = "snap", style = "fade" })
-hl.animation({ leaf = "workspacesIn", enabled = true, speed = 10, bezier = "snap", style = "fade" })
-hl.animation({ leaf = "workspacesOut", enabled = true, speed = 10, bezier = "snap", style = "fade" })
+hl.animation({ leaf = "layersOut", enabled = true, speed = 4, bezier = "snap", style = "fade" })
+hl.animation({ leaf = "fadeLayersIn", enabled = true, speed = 4, bezier = "snap" })
+hl.animation({ leaf = "fadeLayersOut", enabled = true, speed = 4, bezier = "snap" })
+hl.animation({ leaf = "workspaces", enabled = true, speed = 8, bezier = "snap", style = "fade" })
+hl.animation({ leaf = "workspacesIn", enabled = true, speed = 8, bezier = "snap", style = "fade" })
+hl.animation({ leaf = "workspacesOut", enabled = true, speed = 8, bezier = "snap", style = "fade" })
 
 -- Gestures
-hl.gesture({ fingers = 3, direction = "l", action = function() hl.dispatch(hl.dsp.window.cycle_next("prev")) end })
-hl.gesture({ fingers = 3, direction = "r", action = function() hl.dispatch(hl.dsp.window.cycle_next()) end })
+hl.gesture({
+	fingers = 3,
+	direction = "l",
+	action = function()
+		hl.dispatch(hl.dsp.window.cycle_next("prev"))
+	end,
+})
+hl.gesture({
+	fingers = 3,
+	direction = "r",
+	action = function()
+		hl.dispatch(hl.dsp.window.cycle_next())
+	end,
+})
 
 local terminal = "ghostty"
 local menu = "rofi -show drun"
@@ -124,7 +136,7 @@ hl.bind(kb(mainMod, "P"), hl.dsp.layout("pseudo"))
 hl.bind(kb(mainMod, "F"), hl.dsp.window.fullscreen({ action = "toggle" }))
 hl.bind(kb(mainMod, "G"), hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
 hl.bind(kb(modShift, "W"), hl.dsp.exec_cmd("$HOME/.config/hypr/set-wallpaper.sh"))
-hl.bind(kb(mainMod, "B"), hl.dsp.exec_cmd("pkill -SIGUSR1 waybar"))
+hl.bind(kb(mainMod, "B"), hl.dsp.exec_cmd("~/.config/waybar/scripts/toggle.sh"))
 hl.bind(kb(modShift, "T"), hl.dsp.exec_cmd("$HOME/.config/hypr/toggle-transparency.sh"))
 
 -- Gap controls
@@ -141,10 +153,10 @@ hl.bind(
 hl.bind(kb(mainMod, "V"), hl.dsp.exec_cmd("$HOME/scripts/clipboard-history.sh"))
 
 -- Layout controls
-hl.bind(kb(modShift, "B"), hl.dsp.layout("preselect l"))
-hl.bind(kb(modShift, "V"), hl.dsp.layout("preselect d"))
-hl.bind(kb(mainMod, "W"), hl.dsp.exec_cmd("hyprctl keyword general:layout scrolling"))
-hl.bind(kb(mainMod, "E"), hl.dsp.exec_cmd("hyprctl keyword general:layout dwindle"))
+-- hl.bind(kb(modShift, "B"), hl.dsp.layout("preselect l"))
+-- hl.bind(kb(modShift, "V"), hl.dsp.layout("preselect d"))
+-- hl.bind(kb(mainMod, "W"), hl.dsp.exec_cmd("hyprctl keyword general:layout scrolling"))
+-- hl.bind(kb(mainMod, "E"), hl.dsp.exec_cmd("hyprctl keyword general:layout dwindle"))
 hl.bind(kb(mainMod, "A"), hl.dsp.exec_cmd("$HOME/scripts/webapp-launcher.sh"))
 
 -- === MOVE FOCUS ===
@@ -174,12 +186,12 @@ end
 hl.define_submap("resize", function()
 	hl.bind("h", hl.dsp.layout("colresize -0.1"), { repeating = true })
 	hl.bind("l", hl.dsp.layout("colresize +0.1"), { repeating = true })
-	hl.bind("k", hl.dsp.window.resize({ x = 0, y = -100, relative = true }), { repeating = true })
-	hl.bind("j", hl.dsp.window.resize({ x = 0, y = 100, relative = true }), { repeating = true })
-	hl.bind("left", hl.dsp.window.resize({ x = -100, y = 0, relative = true }), { repeating = true })
-	hl.bind("right", hl.dsp.window.resize({ x = 100, y = 0, relative = true }), { repeating = true })
-	hl.bind("up", hl.dsp.window.resize({ x = 0, y = -100, relative = true }), { repeating = true })
-	hl.bind("down", hl.dsp.window.resize({ x = 0, y = 100, relative = true }), { repeating = true })
+	hl.bind("k", hl.dsp.window.resize({ x = 0, y = -80, relative = true }), { repeating = true })
+	hl.bind("j", hl.dsp.window.resize({ x = 0, y = 80, relative = true }), { repeating = true })
+	hl.bind("left", hl.dsp.window.resize({ x = -80, y = 0, relative = true }), { repeating = true })
+	hl.bind("right", hl.dsp.window.resize({ x = 80, y = 0, relative = true }), { repeating = true })
+	hl.bind("up", hl.dsp.window.resize({ x = 0, y = -80, relative = true }), { repeating = true })
+	hl.bind("down", hl.dsp.window.resize({ x = 0, y = 80, relative = true }), { repeating = true })
 	hl.bind("return", hl.dsp.submap("reset"))
 	hl.bind("escape", hl.dsp.submap("reset"))
 end)

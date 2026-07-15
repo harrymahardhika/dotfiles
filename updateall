@@ -158,18 +158,18 @@ if [ -f /etc/arch-release ]; then
     done
 
     # Clean up stale pacman download temp files from previous interrupted runs
-    if ls /var/cache/pacman/pkg/download-* >/dev/null 2>&1; then
-        echo "🧹 Removing stale pacman download temp files..."
-        sudo rm -f /var/cache/pacman/pkg/download-*
-    fi
+    sudo find /var/cache/pacman/pkg -maxdepth 1 -name 'download-*' -delete 2>/dev/null || true
 
     sudo pacman -Syu --noconfirm --overwrite '/usr/lib/node_modules/*' || retry=$?
     if [ "${retry:-0}" -ne 0 ]; then
         echo "⚠️  pacman encountered errors (exit $retry). Cleaning and retrying..."
-        sudo rm -f /var/cache/pacman/pkg/download-*
+        sudo find /var/cache/pacman/pkg -maxdepth 1 -name 'download-*' -delete 2>/dev/null || true
         sudo pacman -Syu --noconfirm --overwrite '/usr/lib/node_modules/*' || \
             echo "⚠️  pacman update failed on retry, skipping..."
     fi
+
+    # Clean any download-* temp files pacman may have left behind during -Syu
+    sudo find /var/cache/pacman/pkg -maxdepth 1 -name 'download-*' -delete 2>/dev/null || true
 
     if command -v paru &> /dev/null; then
         echo "📦 Updating AUR packages..."
@@ -187,10 +187,11 @@ if [ -f /etc/arch-release ]; then
     fi
 
     echo "🧹 Cleaning package cache..."
+    sudo find /var/cache/pacman/pkg -maxdepth 1 -name 'download-*' -delete 2>/dev/null || true
     if command -v paccache &> /dev/null; then
-        sudo paccache -rk3 --noconfirm
+        sudo paccache -rk3 --noconfirm 2>/dev/null || true
     else
-        sudo pacman -Sc --noconfirm
+        sudo pacman -Sc --noconfirm 2>/dev/null || true
     fi
 else
     # For Ubuntu/Pop!_OS-based systems
@@ -234,7 +235,7 @@ fi
 # Update pnpm
 if command -v pnpm &> /dev/null; then
     echo "📦 Updating pnpm global packages..."
-    pnpm update -g || echo "⚠️  pnpm global update failed, skipping..."
+    pnpm update -g --no-optional || echo "⚠️  pnpm global update failed, skipping..."
 fi
 
 # Update uv

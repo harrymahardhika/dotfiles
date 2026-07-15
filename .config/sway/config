@@ -68,7 +68,7 @@ bindsym $mod+d exec --no-startup-id rofi -show drun
 bindsym $mod+Shift+t exec $HOME/.config/sway/toggle-transparency.sh
 bindsym $mod+Shift+x exec wlogout -b 5
 bindsym $mod+x exec $HOME/.config/sway/lock.sh
-bindsym $mod+b exec pkill -SIGUSR1 waybar
+bindsym $mod+b exec ~/.config/waybar/scripts/toggle.sh
 bindsym $mod+v exec --no-startup-id $HOME/scripts/clipboard-history.sh
 
 bindsym $mod+a exec --no-startup-id $HOME/scripts/webapp-launcher.sh

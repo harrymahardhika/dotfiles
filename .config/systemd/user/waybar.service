@@ -5,6 +5,7 @@ After=default.target
 
 [Service]
 Type=simple
+ExecStartPre=/usr/bin/touch %t/waybar-visible
 ExecStart=/usr/bin/waybar -c %h/.config/waybar/config.jsonc -s %h/.config/waybar/style.css
 Restart=on-failure
 RestartSec=3

@@ -16,13 +16,18 @@ NVIM_DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/nvim"
 NVIM_STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/nvim"
 NVIM_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/nvim"
 
-# Stale VIMRUNTIME files from previous Neovim builds
+# Stale VIMRUNTIME files from previous Neovim builds.
+# When Neovim compiles Lua modules into the C core, the old .lua files
+# may linger after `make install`. To update this list for new versions:
+#   nvim --headless -c 'lua for _, f in ipairs(vim.api.nvim_get_runtime_file("lua/vim/*.lua", true)) do print(f) end' -c qa
+# Then diff against actual files in /usr/local/share/nvim/runtime/lua/vim/.
 STALE_VIMRUNTIME_FILES=(
   /usr/local/share/nvim/runtime/lua/vim/_editor.lua
   /usr/local/share/nvim/runtime/lua/vim/_defaults.lua
   /usr/local/share/nvim/runtime/lua/vim/_options.lua
   /usr/local/share/nvim/runtime/lua/vim/_system.lua
   /usr/local/share/nvim/runtime/lua/vim/shared.lua
+  /usr/local/share/nvim/runtime/plugin/shellmenu.vim
 )
 
 DRY_RUN=false
@@ -85,10 +90,12 @@ $DRY_RUN && echo -e "${YELLOW}[DRY RUN MODE]${NC} - no files will be deleted\n" 
 
 echo -e "${BLUE}Directories to clean:${NC}"
 echo "  • Cache:  $(get_dir_size "$NVIM_CACHE_DIR")"
+echo "  • Lua cache: $(get_dir_size "$NVIM_CACHE_DIR/luac")"
 echo "  • State:  $(get_dir_size "$NVIM_STATE_DIR")"
 echo "  • Swap:   $(get_dir_size "$NVIM_STATE_DIR/swap")"
 echo "  • Shada:  $(get_dir_size "$NVIM_STATE_DIR/shada")"
 echo "  • Log:    $(get_dir_size "$NVIM_STATE_DIR/log")"
+echo "  • Trust:  $(get_dir_size "$NVIM_STATE_DIR/trust")"
 echo "  • Lazy:   $(get_dir_size "$NVIM_DATA_DIR/lazy")"
 echo "  • Mason registry: $(get_dir_size "$NVIM_DATA_DIR/mason/registry")"
 echo "  • Mason log:      $(get_dir_size "$NVIM_DATA_DIR/mason/log")"
@@ -119,11 +126,13 @@ fi
 
 # --- Cache ---
 cleanup_dir "$NVIM_CACHE_DIR" "Cache directory"
+cleanup_dir "$NVIM_CACHE_DIR/luac" "Lua bytecode cache"
 
 # --- State ---
 cleanup_dir "$NVIM_STATE_DIR/swap" "Swap files"
 cleanup_dir "$NVIM_STATE_DIR/shada" "Shared data (history, marks, etc.)"
 cleanup_dir "$NVIM_STATE_DIR/log" "Log files"
+cleanup_dir "$NVIM_STATE_DIR/trust" "Trust database (exrc)"
 
 # --- Lazy plugins ---
 cleanup_dir "$NVIM_DATA_DIR/lazy" "Lazy.nvim plugins"

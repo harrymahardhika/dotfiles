@@ -54,14 +54,19 @@ return {
       local function enable_server(server, opts)
         opts = opts or {}
         local cmd = opts.cmd
+        local exe = type(cmd) == "table" and cmd[1] or cmd
 
         local config = vim.deepcopy(opts)
-        config.cmd = nil
+        if type(cmd) == "string" then
+          -- Plain executable name: only used for the existence check below,
+          -- let nvim-lspconfig supply its own default cmd table.
+          config.cmd = nil
+        end
 
         vim.lsp.config(server, config)
 
-        if cmd and not executable_exists(cmd) then
-          record_missing(server, cmd)
+        if exe and not executable_exists(exe) then
+          record_missing(server, exe)
           return
         end
 
@@ -221,16 +226,18 @@ return {
         root_dir = project_root,
       })
 
+      -- NOTE: this version of @vue/language-server only reads the TS SDK from
+      -- a `--tsdk=` CLI arg (checked against process.argv in its bootstrap),
+      -- NOT from init_options.typescript.tsdk. Without it, it falls back to
+      -- `require('typescript')` resolved from its own install location, which
+      -- can land on an unrelated/incompatible typescript package and crash
+      -- with "Cannot read properties of undefined (reading 'protocol')".
       enable_server("vue_ls", {
-        cmd = "vue-language-server",
+        cmd = has_vue_sdk and { "vue-language-server", "--stdio", "--tsdk=" .. vue_typescript_sdk }
+          or "vue-language-server",
         capabilities = capabilities,
         filetypes = { "vue" },
         root_dir = project_root,
-        init_options = has_vue_sdk and {
-          typescript = {
-            tsdk = vue_typescript_sdk,
-          },
-        } or nil,
       })
 
       enable_server("tailwindcss", {
