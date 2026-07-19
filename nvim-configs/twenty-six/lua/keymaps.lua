@@ -43,8 +43,8 @@ map({ "n", "v" }, "p", '"+p', opts)
 -- map("n", "<leader>/", "gc", { desc = "Toggle comment" })
 
 -- Oil file explorer
--- map("n", "-", "<cmd>Oil --float<CR>", { desc = "Open file explorer" })
-map("n", "-", "<cmd>Oil --float --preview<CR>", { desc = "Open file explorer" })
+map("n", "-", "<cmd>Oil --float<CR>", { desc = "Open file explorer" })
+-- map("n", "-", "<cmd>Oil --float --preview<CR>", { desc = "Open file explorer" })
 -- map("n", "-", "<cmd>Oil --preview<CR>", { desc = "Open file explorer" })
 
 -- jk to escape

@@ -126,9 +126,10 @@ end
 -- === APPLICATION SHORTCUTS ===
 hl.bind(kb(mainMod, "RETURN"), hl.dsp.exec_cmd(terminal))
 hl.bind(kb(mainMod, "Q"), hl.dsp.window.close())
+hl.bind(kb(mainMod, "E"), hl.dsp.exec_cmd(terminal .. " -e yazi"))
 hl.bind(kb(mainMod, "M"), hl.dsp.exec_cmd(browser))
 hl.bind(kb(modShift, "R"), hl.dsp.exec_cmd("$HOME/.config/hypr/reload.sh"))
-hl.bind(kb(modShift, "E"), hl.dsp.exit())
+hl.bind(kb(modShift, "Q"), hl.dsp.exit())
 hl.bind(kb(modShift, "X"), hl.dsp.exec_cmd("hyprlock"))
 hl.bind(kb(modShift, "SPACE"), hl.dsp.window.float({ action = "toggle" }))
 hl.bind(kb(mainMod, "D"), hl.dsp.exec_cmd(menu))
