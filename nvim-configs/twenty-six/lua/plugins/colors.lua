@@ -9,7 +9,7 @@ return {
       transparent_background = true,
       float = {
         transparent = true,
-        solid = false,
+        solid = true,
       },
       no_italic = true,
       integrations = {

@@ -17,23 +17,23 @@ save_to_clipboard = true
 style = { shape = "Beam", blinking = "On" }
 
 [font]
-size = 10
+size = 10.5
 offset = { x = 0, y = 2 }
 
 [font.bold]
-family = "JetBrainsMono Nerd Font"
+family = "GeistMono Nerd Font"
 style = "Heavy"
 
 [font.bold_italic]
-family = "JetBrainsMono Nerd Font"
+family = "GeistMono Nerd Font"
 style = "Heavy Italic"
 
 [font.italic]
-family = "JetBrainsMono Nerd Font"
+family = "GeistMono Nerd Font"
 style = "Medium Italic"
 
 [font.normal]
-family = "JetBrainsMono Nerd Font"
+family = "GeistMono Nerd Font"
 style = "Medium"
 
 [general]

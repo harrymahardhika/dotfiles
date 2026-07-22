@@ -24,7 +24,7 @@ echo "⏰ Started at $STARTED_AT"
 # Sudo preflight: notify before password prompt, authenticate once, then keep ticket alive.
 if ! sudo -n true 2>/dev/null; then
     if command -v notify-send &> /dev/null; then
-        notify-send -u critical "sudo password required" "updateall needs elevated privileges"
+        notify-send -u critical "sudo password required" "updateall needs elevated privileges" 2>/dev/null || true
     fi
     printf '\a'
 fi
@@ -285,5 +285,5 @@ else
 fi
 
 if command -v notify-send &> /dev/null; then
-    notify-send -u normal "✅ System update complete" "All packages updated in ${ELAPSED_STR}"
+    notify-send -u normal "✅ System update complete" "All packages updated in ${ELAPSED_STR}" 2>/dev/null || true
 fi

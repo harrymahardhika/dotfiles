@@ -1,0 +1,12 @@
+[keys]
+prefix = "ctrl+a"
+
+[ui.sound]
+enabled = false
+
+[ui.toast]
+delivery = "system"
+
+[theme]
+name = "catppuccin"
+auto_switch = false

@@ -8,10 +8,13 @@ return {
 
       require("telescope").setup({
         defaults = {
+          layout_strategy = "bottom_pane",
           layout_config = {
-            prompt_position = "top",
-            height = 0.7,
-            width = 0.95,
+            bottom_pane = {
+              prompt_position = "top",
+              width = { padding = 0 },
+              height = 0.6,
+            },
           },
           sorting_strategy = "ascending",
           border = true,
@@ -20,6 +23,7 @@ return {
           find_files = { hidden = true },
           live_grep = { no_ignore = true },
           diagnostics = { bufnr = 0 },
+          buffers = { sort_mru = true, ignore_current_buffer = true },
         },
       })
 
