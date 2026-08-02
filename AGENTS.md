@@ -28,7 +28,7 @@ Four configs under `nvim-configs/`: `beta`, `harry`, `custom-nvchad`, `twelve`. 
 
 - `updateall` — full system update (pacman/apt + AUR + flatpak + snap + composer + npm/pnpm + uv). Run as non-root; sudo handled internally.
 - `scripts/php-switch.sh` — PHP version via `update-alternatives` (8.2/8.3/8.4)
-- `scripts/tmux-pick` — fzf tmux session picker (bound to `prefix+s`)
+- `scripts/tmux/tmux-pick.sh` — fzf tmux session picker (bound to `prefix+s`)
 - `scripts/nvim-switch.sh` — switches Neovim config symlink
 - `scripts/trash-cleanup.sh` — removes FreeDesktop trash items older than 7 days. Runs daily via `trash-cleanup.timer` (systemd --user). Accepts `--dry-run`. Alias: `trash-cleanup`.
 

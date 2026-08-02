@@ -23,12 +23,8 @@ list() {
       -v exclude="$exclude" \
       -v cur_sess="$cur_sess" \
       -v cur_win="$cur_win" \
-      'BEGIN{OFS="\t"; prev=""}
+      'BEGIN{OFS="\t"}
        $2 !~ exclude {
-         if ($2 != prev) {
-           prev = $2
-           print "0", "H", $2, "", "0", "\033[1;36m── " $2 " ──\033[0m"
-         }
          is_cur = ($2 == cur_sess && $3+0 == cur_win+0)
          sk = is_cur ? "1" : "2"
          prefix = is_cur ? "▶ " : "  "
@@ -55,8 +51,6 @@ if [ -z "${TMUX:-}" ]; then
 
   sel=$(echo "$sessions" | fzf \
     --prompt='❯ ' --reverse \
-    --preview='tmux list-windows -t {} -F "  {window_index}: {window_name}"' \
-    --preview-window='right:60%' \
     --color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 \
     --color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC \
     --color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
@@ -74,8 +68,6 @@ sel=$(
   -d $'\t' \
   --with-nth=6.. --ansi \
   --prompt='❯ ' --reverse \
-  --preview='if [ -n "{4}" ]; then printf "\033[1;36m── %s:%s ──\033[0m\n" "{3}" "{4}"; tmux capture-pane -t {3}:{4} -p -S -40; fi' \
-  --preview-window='right:60%' \
   --bind='ctrl-r:execute-silent(if [ -n "{4}" ]; then tmux command-prompt -p "Rename window:" "rename-window -t {3}:{4} %1"; fi)+reload:'"$SELF list" \
   --bind='ctrl-k:execute-silent(if [ -n "{4}" ]; then tmux kill-window -t {3}:{4}; fi)+reload:'"$SELF list" \
   --color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 \
@@ -88,8 +80,6 @@ sel=$(
 [ -z "${sel:-}" ] && exit 0
 
 IFS=$'\t' read -r _ type sess win _ _ <<< "$sel"
-# Ignore header rows
-[ "$type" = "H" ] && exit 0
 
 if tmux list-windows -t "$sess" -F '#{window_index}' 2>/dev/null | grep -qFx "$win"; then
   exec tmux switch-client -t "$sess:$win"

@@ -41,7 +41,7 @@ nvim-switch      # interactive picker (alias for scripts/nvim-switch.sh)
 - `updateall` — full system update (pacman/apt + AUR + flatpak + snap + composer + npm/pnpm + uv). Run as non-root; handles sudo internally.
 - `scripts/nvim-switch.sh` — switches active Neovim config by re-symlinking `~/.config/nvim`
 - `scripts/php-switch.sh` — switches active PHP version via `update-alternatives`
-- `scripts/tmux-pick` — fzf-based tmux session picker (bound to `prefix+s` in tmux)
+- `scripts/tmux/tmux-pick.sh` — fzf-based tmux session picker (bound to `prefix+s` in tmux)
 - `scripts/antidote-bootstrap.sh` — installs/updates Antidote and compiles the plugin bundle
 
 ## Theme

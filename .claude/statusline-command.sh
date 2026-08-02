@@ -18,8 +18,8 @@ reset="\033[0m"
 sep=" ${overlay0} ${reset} "
 
 # Nerd Font icons (Font Awesome codepoints)
-icon_dir=$''
-icon_model=$''
+icon_dir=$'󰇐'
+icon_model=$'󰧑'
 icon_ctx=$'󰮰'
 icon_5h=$''
 icon_7d=$''

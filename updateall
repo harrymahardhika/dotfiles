@@ -34,7 +34,7 @@ if ! sudo -v; then
     exit 1
 fi
 
-( while true; do sudo -n true; sleep 50; kill -0 "$$" || exit; done ) 2>/dev/null 9>&- &
+( while true; do sudo -n true || true; sleep 50; kill -0 "$$" || exit; done ) 2>/dev/null 9>&- &
 SUDO_KEEPALIVE_PID=$!
 trap 'kill "$SUDO_KEEPALIVE_PID" 2>/dev/null || true' EXIT
 
@@ -93,7 +93,7 @@ if [ -f /etc/arch-release ]; then
                     *)     exit 1 ;;
                 esac
             ) &
-            pids+=($!)
+            pids+=("$!")
             (( ++idx ))
         done
 
@@ -116,10 +116,16 @@ if [ -f /etc/arch-release ]; then
                 echo "🔄 Auto-refreshing mirrorlist..."
                 if ! command -v reflector &> /dev/null; then
                     echo "📦 Installing reflector..."
-                    sudo pacman -S reflector --noconfirm
+                    if ! sudo pacman -S reflector --noconfirm; then
+                        echo "⚠️  Failed to install reflector (mirrors unreachable)."
+                        exit 1
+                    fi
                 fi
                 sudo reflector --latest 10 --protocol https --sort rate \
-                    --save /tmp/updateall_mirrorlist
+                    --save /tmp/updateall_mirrorlist || {
+                        echo "⚠️  Reflector failed to refresh the mirrorlist."
+                        exit 1
+                    }
                 if [ -s /tmp/updateall_mirrorlist ]; then
                     sudo cp /etc/pacman.d/mirrorlist \
                         "/etc/pacman.d/mirrorlist.bak.$(date +%s)"
@@ -196,9 +202,9 @@ if [ -f /etc/arch-release ]; then
 else
     # For Ubuntu/Pop!_OS-based systems
     echo "📦 Updating Ubuntu/Debian packages..."
-    sudo apt update
-    sudo apt upgrade -y --allow-downgrades
-    sudo apt autopurge -y && sudo apt autoremove -y && sudo apt clean
+    sudo apt update || echo "⚠️  apt update failed, package index may be stale..."
+    sudo apt upgrade -y --allow-downgrades || echo "⚠️  apt upgrade failed, skipping..."
+    sudo apt autopurge -y && sudo apt autoremove -y && sudo apt clean || echo "⚠️  apt cleanup failed, skipping..."
 
     if command -v pacstall &> /dev/null; then
         echo "📦 Updating Pacstall..."
@@ -244,7 +250,7 @@ if command -v uv &> /dev/null; then
     timeout 120 uv self update --quiet || echo "⚠️  UV update timed out or failed, skipping..."
 
     echo "🔧 Updating uv tools..."
-    uv tool upgrade --all --quiet
+    uv tool upgrade --all --quiet || echo "⚠️  uv tool upgrade failed, skipping..."
 fi
 
 echo ""

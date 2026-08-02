@@ -14,7 +14,7 @@ segments=()
 git=$(gitmux -cfg "$HOME/.gitmux.conf" "$pane_path" 2>/dev/null)
 [ -n "$git" ] && segments+=("$git")
 
-battery=$(~/scripts/tmux-battery.sh)
+battery=$(~/scripts/tmux/tmux-battery.sh)
 [ -n "$battery" ] && segments+=("#[fg=${text}]${battery}")
 
 segments+=("#[fg=${text}]󰥔 $(date +%H:%M)")

@@ -159,7 +159,7 @@ Launch web applications as desktop apps via `scripts/webapps/`:
 
 ### Utilities
 
-- `tmux-pick` - Interactive tmux session picker
+- `scripts/tmux/tmux-pick.sh` - Interactive tmux session picker
 - `set-wallpaper.sh` - Wallpaper setter
 - `battery_limit.sh` - Battery charge limiting
 - `waybar-cleanup.sh` - Clean up waybar processes
