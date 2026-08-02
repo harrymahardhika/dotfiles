@@ -1,10 +1,10 @@
 [Default Applications]
-x-scheme-handler/http=zen-browser.desktop
-x-scheme-handler/https=zen-browser.desktop
-x-scheme-handler/about=zen-browser.desktop
-x-scheme-handler/unknown=zen-browser.desktop
-x-scheme-handler/mailto=zen-browser.desktop
-text/html=zen-browser.desktop
+x-scheme-handler/http=zen.desktop
+x-scheme-handler/https=zen.desktop
+x-scheme-handler/about=zen.desktop
+x-scheme-handler/unknown=zen.desktop
+x-scheme-handler/mailto=zen.desktop
+text/html=zen.desktop
 inode/directory=org.gnome.Nautilus.desktop
 text/plain=dev.zed.Zed.desktop
 application/json=dev.zed.Zed.desktop
@@ -18,12 +18,12 @@ x-scheme-handler/antigravity=antigravity.desktop
 x-scheme-handler/claude-cli=claude-code-url-handler.desktop
 
 [Added Associations]
-text/html=zen-browser.desktop;
-x-scheme-handler/http=zen-browser.desktop;
-x-scheme-handler/https=zen-browser.desktop;
-x-scheme-handler/about=zen-browser.desktop;
-x-scheme-handler/unknown=zen-browser.desktop;
-x-scheme-handler/mailto=zen-browser.desktop;
+text/html=zen.desktop;
+x-scheme-handler/http=zen.desktop;
+x-scheme-handler/https=zen.desktop;
+x-scheme-handler/about=zen.desktop;
+x-scheme-handler/unknown=zen.desktop;
+x-scheme-handler/mailto=zen.desktop;
 inode/directory=org.gnome.Nautilus.desktop;
 text/plain=dev.zed.Zed.desktop;
 application/json=dev.zed.Zed.desktop;

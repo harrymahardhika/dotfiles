@@ -1,34 +1,16 @@
 {
-  "agentPushNotifEnabled": true,
-  "effortLevel": "medium",
-  "enabledPlugins": {
-    "claude-code-setup@claude-plugins-official": true,
-    "code-review@claude-plugins-official": true,
-    "code-simplifier@claude-plugins-official": true,
-    "feature-dev@claude-plugins-official": true,
-    "laravel-boost@claude-plugins-official": true,
-    "lua-lsp@claude-plugins-official": true,
-    "php-lsp@claude-plugins-official": true,
-    "skill-creator@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true
-  },
-  "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "command": "bash '/home/harry/.claude/hooks/herdr-agent-state.sh' session",
-            "timeout": 10,
-            "type": "command"
-          }
-        ],
-        "matcher": "*"
-      }
-    ]
-  },
   "statusLine": {
-    "command": "bash ~/.claude/statusline-command.sh",
-    "type": "command"
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
   },
-  "theme": "auto"
+  "enabledPlugins": {
+    "lua-lsp@claude-plugins-official": true,
+    "laravel-boost@claude-plugins-official": true,
+    "claude-code-setup@claude-plugins-official": true,
+    "php-lsp@claude-plugins-official": true,
+    "context7@claude-plugins-official": true
+  },
+  "effortLevel": "medium",
+  "theme": "auto",
+  "agentPushNotifEnabled": true
 }

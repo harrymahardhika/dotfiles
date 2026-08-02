@@ -1,3 +1,4 @@
+onboarding = false
 [keys]
 prefix = "ctrl+a"
 
@@ -10,3 +11,9 @@ delivery = "system"
 [theme]
 name = "catppuccin"
 auto_switch = false
+
+[ui]
+show_agent_labels_on_pane_borders = true
+
+[experimental]
+pane_history = false

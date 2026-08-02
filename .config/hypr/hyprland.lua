@@ -2,10 +2,10 @@
 
 ---@diagnostic disable: undefined-global
 
--- Monitors (managed by nwg-displays)
+-- === MONITORS ===
 pcall(dofile, os.getenv("HOME") .. "/.config/hypr/monitors.lua")
 
--- General settings
+-- === CONFIG ===
 hl.config({
 	general = {
 		gaps_in = 2,
@@ -19,11 +19,17 @@ hl.config({
 		rounding = 4,
 		active_opacity = 0.95,
 		inactive_opacity = 0.85,
+		shadow = {
+			enabled = true,
+			range = 4,
+			render_power = 3,
+		},
 		blur = {
 			enabled = true,
 			size = 5,
 			passes = 4,
 			vibrancy = 0.1696,
+			new_optimizations = true,
 		},
 	},
 	animations = {
@@ -48,6 +54,7 @@ hl.config({
 	misc = {
 		force_default_wallpaper = -1,
 		disable_hyprland_logo = true,
+		mouse_move_enables_dpms = true,
 	},
 	dwindle = {
 		preserve_split = true,
@@ -60,30 +67,56 @@ hl.config({
 	},
 })
 
--- Curves
+-- === WINDOW RULES ===
+local floating_dialogs = {
+	{ match = { class = "pavucontrol" }, float = true },
+	{ match = { class = "blueman-manager" }, float = true },
+	{ match = { class = "nm-connection-editor" }, float = true },
+	{ match = { class = "org.gnome.Calculator" }, float = true },
+	{ match = { class = "XDG-Desktop-Portal" }, float = true },
+}
+for _, rule in ipairs(floating_dialogs) do
+	hl.window_rule(rule)
+end
+
+-- === CURVES ===
 hl.curve("snap", { type = "bezier", points = { { 0.05, 0.9 }, { 0.1, 1 } } })
 hl.curve("easeOutQuint", { type = "bezier", points = { { 0.23, 1 }, { 0.32, 1 } } })
 hl.curve("linear", { type = "bezier", points = { { 0, 0 }, { 1, 1 } } })
 
--- Animations
-hl.animation({ leaf = "global", enabled = true, speed = 8, bezier = "default" })
-hl.animation({ leaf = "border", enabled = true, speed = 8, bezier = "snap" })
-hl.animation({ leaf = "windows", enabled = true, speed = 8, bezier = "snap" })
-hl.animation({ leaf = "windowsIn", enabled = true, speed = 8, bezier = "snap", style = "popin 87%" })
-hl.animation({ leaf = "windowsOut", enabled = true, speed = 4, bezier = "snap", style = "popin 87%" })
-hl.animation({ leaf = "fadeIn", enabled = true, speed = 4, bezier = "snap" })
-hl.animation({ leaf = "fadeOut", enabled = true, speed = 4, bezier = "snap" })
-hl.animation({ leaf = "fade", enabled = true, speed = 7, bezier = "snap" })
-hl.animation({ leaf = "layers", enabled = true, speed = 7, bezier = "snap" })
-hl.animation({ leaf = "layersIn", enabled = true, speed = 8, bezier = "snap", style = "fade" })
-hl.animation({ leaf = "layersOut", enabled = true, speed = 4, bezier = "snap", style = "fade" })
-hl.animation({ leaf = "fadeLayersIn", enabled = true, speed = 4, bezier = "snap" })
-hl.animation({ leaf = "fadeLayersOut", enabled = true, speed = 4, bezier = "snap" })
-hl.animation({ leaf = "workspaces", enabled = true, speed = 8, bezier = "snap", style = "fade" })
-hl.animation({ leaf = "workspacesIn", enabled = true, speed = 8, bezier = "snap", style = "fade" })
-hl.animation({ leaf = "workspacesOut", enabled = true, speed = 8, bezier = "snap", style = "fade" })
+-- === ANIMATIONS ===
+local anim_speed = 1.0
+local animations = {
+	{ leaf = "global", speed = 8 * anim_speed, bezier = "default" },
+	{ leaf = "border", speed = 8 * anim_speed, bezier = "snap" },
+	{ leaf = "windows", speed = 8 * anim_speed, bezier = "snap" },
+	{ leaf = "windowsIn", speed = 8 * anim_speed, bezier = "snap", style = "popin 87%" },
+	{ leaf = "windowsOut", speed = 4 * anim_speed, bezier = "snap", style = "popin 87%" },
+	{ leaf = "fadeIn", speed = 4 * anim_speed, bezier = "snap" },
+	{ leaf = "fadeOut", speed = 4 * anim_speed, bezier = "snap" },
+	{ leaf = "fade", speed = 7 * anim_speed, bezier = "snap" },
+	{ leaf = "layers", speed = 7 * anim_speed, bezier = "snap" },
+	{ leaf = "layersIn", speed = 8 * anim_speed, bezier = "snap", style = "fade" },
+	{ leaf = "layersOut", speed = 4 * anim_speed, bezier = "snap", style = "fade" },
+	{ leaf = "fadeLayersIn", speed = 4 * anim_speed, bezier = "snap" },
+	{ leaf = "fadeLayersOut", speed = 4 * anim_speed, bezier = "snap" },
+	{ leaf = "workspaces", speed = 8 * anim_speed, bezier = "snap", style = "fade" },
+	{ leaf = "workspacesIn", speed = 8 * anim_speed, bezier = "snap", style = "fade" },
+	{ leaf = "workspacesOut", speed = 8 * anim_speed, bezier = "snap", style = "fade" },
+}
+for _, a in ipairs(animations) do
+	a.enabled = true
+	hl.animation(a)
+end
 
--- Gestures
+-- === CONSTANTS ===
+local terminal = "ghostty"
+local menu = "rofi -show drun"
+local browser = "zen-browser"
+local mainMod = "SUPER"
+local modShift = "SUPER + SHIFT"
+
+-- === GESTURES ===
 hl.gesture({
 	fingers = 3,
 	direction = "l",
@@ -99,12 +132,7 @@ hl.gesture({
 	end,
 })
 
-local terminal = "ghostty"
-local menu = "rofi -show drun"
-local browser = "zen-browser"
-local mainMod = "SUPER"
-local modShift = "SUPER + SHIFT"
-
+-- === AUTOSTART ===
 hl.on("hyprland.start", function()
 	hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
 	hl.exec_cmd(terminal .. " -e $HOME/scripts/set-gtk-dark-mode.sh")
@@ -112,13 +140,18 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("dropbox")
 	hl.exec_cmd("wl-paste --watch cliphist store")
 	hl.exec_cmd("awww-daemon --format xrgb")
-	hl.exec_cmd("bash -c 'while true; do \"$HOME/.config/i3/battery-warning.sh\"; sleep 60; done'")
+	hl.exec_cmd(
+		"bash -c 'while true; do \"$HOME/.config/i3/battery-warning.sh\" >> /tmp/battery-warning.log 2>&1; sleep 60; done'"
+	)
 	hl.exec_cmd(terminal .. " -e $HOME/.config/hypr/set-wallpaper.sh")
 end)
 
+-- === ENVIRONMENT ===
 hl.env("XCURSOR_SIZE", "20")
 hl.env("HYPRCURSOR_SIZE", "20")
+hl.env("XCURSOR_THEME", "catppuccin-mocha")
 
+-- kb(mod, key) returns "mod + key"
 local function kb(mod, key)
 	return mod .. " + " .. key
 end
@@ -139,25 +172,7 @@ hl.bind(kb(mainMod, "G"), hl.dsp.window.fullscreen({ mode = "maximized", action 
 hl.bind(kb(modShift, "W"), hl.dsp.exec_cmd("$HOME/.config/hypr/set-wallpaper.sh"))
 hl.bind(kb(mainMod, "B"), hl.dsp.exec_cmd("~/.config/waybar/scripts/toggle.sh"))
 hl.bind(kb(modShift, "T"), hl.dsp.exec_cmd("$HOME/.config/hypr/toggle-transparency.sh"))
-
--- Gap controls
-hl.bind(
-	kb(modShift, "Minus"),
-	hl.dsp.exec_cmd("hyprctl keyword general:gaps_in 0 && hyprctl keyword general:gaps_out 0")
-)
-hl.bind(
-	kb(mainMod, "Minus"),
-	hl.dsp.exec_cmd("hyprctl keyword general:gaps_in 2 && hyprctl keyword general:gaps_out 4")
-)
-
--- Clipboard history
 hl.bind(kb(mainMod, "V"), hl.dsp.exec_cmd("$HOME/scripts/clipboard-history.sh"))
-
--- Layout controls
--- hl.bind(kb(modShift, "B"), hl.dsp.layout("preselect l"))
--- hl.bind(kb(modShift, "V"), hl.dsp.layout("preselect d"))
--- hl.bind(kb(mainMod, "W"), hl.dsp.exec_cmd("hyprctl keyword general:layout scrolling"))
--- hl.bind(kb(mainMod, "E"), hl.dsp.exec_cmd("hyprctl keyword general:layout dwindle"))
 hl.bind(kb(mainMod, "A"), hl.dsp.exec_cmd("$HOME/scripts/webapp-launcher.sh"))
 
 -- === MOVE FOCUS ===
@@ -178,7 +193,7 @@ hl.bind(kb(modShift, "L"), hl.dsp.window.move({ direction = "right" }))
 
 -- === WORKSPACES ===
 for i = 1, 10 do
-	local key = i % 10
+	local key = i % 10 -- 0 → workspace 10
 	hl.bind(kb(mainMod, tostring(key)), hl.dsp.focus({ workspace = i }))
 	hl.bind(kb(modShift, tostring(key)), hl.dsp.window.move({ workspace = i }))
 end
@@ -225,7 +240,20 @@ hl.bind(
 )
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true })
 hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { locked = true })
-hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl s 10%+"), { repeating = true, locked = true })
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl s 10%-"), { repeating = true, locked = true })
+hl.bind(
+	"XF86MonBrightnessUp",
+	hl.dsp.exec_cmd(
+		"brightnessctl s 10%+ && notify-send -h 'int:value:'$(brightnessctl -m | cut -d, -f4 | tr -d %) 'Brightness'"
+	),
+	{ repeating = true, locked = true }
+)
+hl.bind(
+	"XF86MonBrightnessDown",
+	hl.dsp.exec_cmd(
+		"brightnessctl s 10%- && notify-send -h 'int:value:'$(brightnessctl -m | cut -d, -f4 | tr -d %) 'Brightness'"
+	),
+	{ repeating = true, locked = true }
+)
 
+-- === DYNAMIC OVERRIDES ===
 pcall(dofile, "/tmp/hypr-opacity.lua")

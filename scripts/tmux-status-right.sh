@@ -7,7 +7,7 @@ pane_path="$1"
 
 overlay=$(tmux show -gqv @thm_overlay_2)
 text=$(tmux show -gqv @thm_fg)
-sep=" #[fg=${overlay}]│#[fg=${text}] "
+sep=" #[fg=${overlay}]#[fg=${text}] "
 
 segments=()
 

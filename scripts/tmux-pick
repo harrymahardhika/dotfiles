@@ -1,69 +1,98 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Check for required commands
-if ! command -v fzf >/dev/null 2>&1; then
-  echo "Error: fzf is required but not installed." >&2
-  exit 1
-fi
+SELF="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")"
 
-if ! command -v tmux >/dev/null 2>&1; then
-  echo "Error: tmux is required but not installed." >&2
-  exit 1
-fi
+die() { echo "Error: $*" >&2; exit 1; }
 
-# List windows (across all sessions, excluding popup-like sessions)
-# Adds sort-key (0 = current, 1 = others) and visual marker
+command -v fzf >/dev/null 2>&1 || die "fzf is required but not installed."
+command -v tmux >/dev/null 2>&1 || die "tmux is required but not installed."
+
+# ── list functions ──────────────────────────────────────────────────────────
+
 list() {
-  local exclude_pattern="${TMUX_PICK_EXCLUDE:-^(popup|scratch|temp)$}"
+  local exclude="${TMUX_PICK_EXCLUDE:-^(popup|scratch|temp)$}"
+  local cur_sess cur_win
 
   local current
   current=$(tmux display -p $'C\t#{session_name}\t#{window_index}' 2>/dev/null) || current=$'C\t\t'
-  local cur_sess cur_win
   IFS=$'\t' read -r _ cur_sess cur_win <<< "$current"
 
   tmux list-windows -a -F $'W\t#{session_name}\t#{window_index}\t#{window_activity}\t#{session_name}:#{window_index} #{window_name}' 2>/dev/null | \
     awk -F $'\t' \
-      -v exclude="$exclude_pattern" \
+      -v exclude="$exclude" \
       -v cur_sess="$cur_sess" \
       -v cur_win="$cur_win" \
-      'BEGIN{OFS="\t"}
+      'BEGIN{OFS="\t"; prev=""}
        $2 !~ exclude {
+         if ($2 != prev) {
+           prev = $2
+           print "0", "H", $2, "", "0", "\033[1;36m── " $2 " ──\033[0m"
+         }
          is_cur = ($2 == cur_sess && $3+0 == cur_win+0)
-         sort_key = is_cur ? "0" : "1"
+         sk = is_cur ? "1" : "2"
          prefix = is_cur ? "▶ " : "  "
-         print sort_key, $1, $2, $3, $4, prefix $5
+         print sk, $1, $2, $3, $4, prefix $5
        }' || true
 }
 
-# Sort by current-window (field 1) then by activity (field 5)
 list_sorted() {
-  list | sort -t$'\t' -k1,1n -k5,5rn
+  list | sort -t$'\t' -k3,3 -k1,1n -k5,5rn
 }
 
-sel="$(list_sorted | fzf \
+# ── subcommands ─────────────────────────────────────────────────────────────
+
+if [ "${1:-}" = "list" ]; then
+  list_sorted
+  exit 0
+fi
+
+# ── outside tmux → session picker ──────────────────────────────────────────
+
+if [ -z "${TMUX:-}" ]; then
+  sessions=$(tmux list-sessions -F '#{session_name}' 2>/dev/null) || die "No tmux sessions found."
+  [ -z "$sessions" ] && die "No tmux sessions found."
+
+  sel=$(echo "$sessions" | fzf \
+    --prompt='❯ ' --reverse \
+    --preview='tmux list-windows -t {} -F "  {window_index}: {window_name}"' \
+    --preview-window='right:60%' \
+    --color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 \
+    --color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC \
+    --color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
+    --color=selected-bg:#45475A --color=border:#313244,label:#CDD6F4 \
+    || true)
+
+  [ -z "${sel:-}" ] && exit 0
+  exec tmux attach -t "$sel"
+fi
+
+# ── inside tmux → window picker ────────────────────────────────────────────
+
+sel=$(
+  list_sorted | fzf \
   -d $'\t' \
-  --with-nth=6.. \
-  --prompt='❯ ' \
-  --reverse \
-  --preview='tmux capture-pane -t {3}:{4} -p -S -20' \
-  --preview-window='right:40%' \
+  --with-nth=6.. --ansi \
+  --prompt='❯ ' --reverse \
+  --preview='if [ -n "{4}" ]; then printf "\033[1;36m── %s:%s ──\033[0m\n" "{3}" "{4}"; tmux capture-pane -t {3}:{4} -p -S -40; fi' \
+  --preview-window='right:60%' \
+  --bind='ctrl-r:execute-silent(if [ -n "{4}" ]; then tmux command-prompt -p "Rename window:" "rename-window -t {3}:{4} %1"; fi)+reload:'"$SELF list" \
+  --bind='ctrl-k:execute-silent(if [ -n "{4}" ]; then tmux kill-window -t {3}:{4}; fi)+reload:'"$SELF list" \
   --color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 \
   --color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC \
   --color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
-  --color=selected-bg:#45475A \
-  --color=border:#313244,label:#CDD6F4 \
-  || true)"
+  --color=selected-bg:#45475A --color=border:#313244,label:#CDD6F4 \
+  || true
+)
 
 [ -z "${sel:-}" ] && exit 0
 
-# Parse once (sort_key, type, sess, win, activity, marker, label — discard extras)
-IFS=$'\t' read -r _ _ sess win _ _ <<< "$sel"
+IFS=$'\t' read -r _ type sess win _ _ <<< "$sel"
+# Ignore header rows
+[ "$type" = "H" ] && exit 0
 
-# Validate target exists before switching
 if tmux list-windows -t "$sess" -F '#{window_index}' 2>/dev/null | grep -qFx "$win"; then
   exec tmux switch-client -t "$sess:$win"
 else
-  echo "Error: Window '$sess:$win' not found" >&2
-  exit 1
+  die "Window '$sess:$win' not found"
 fi
