@@ -38,5 +38,5 @@ style = "Medium"
 
 [general]
 live_config_reload = true
-import = ["~/.config/alacritty/catppuccin-mocha.toml"]
+import = ["~/.config/alacritty/kanagawa.toml"]
 

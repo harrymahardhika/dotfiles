@@ -2,7 +2,7 @@ local wezterm = require("wezterm")
 
 local config = wezterm.config_builder()
 
-config.color_scheme = "Catppuccin Mocha"
+config.color_scheme = "Kanagawa Wave"
 config.font_size = 10.8
 config.font = wezterm.font({ family = "JetBrainsMono Nerd Font", weight = "Medium" })
 config.enable_tab_bar = false

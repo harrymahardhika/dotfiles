@@ -279,8 +279,8 @@ pane_frames false
 // Choose the theme that is specified in the themes section.
 // Default: default
 //
-// theme "default"
-theme "catppuccin-mocha"
+// theme "kanagawa"
+theme "kanagawa"
 
 // The name of the default layout to load on startup
 // Default: "default"

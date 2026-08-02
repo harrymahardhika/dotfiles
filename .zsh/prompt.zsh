@@ -45,13 +45,13 @@ update_git_prompt_info() {
     | awk 'substr($0,1,2)=="??"{c++} END{print c+0}')
 
   # --- catppuccin mocha colors ---
-  local ref_color="%F{#b4befe}"     # lavender
-  local dirty_color="%F{#f38ba8}"   # red
-  local ahead_color="%F{#fab387}"   # peach
-  local behind_color="%F{#89b4fa}"  # blue
-  local added_color="%F{#a6e3a1}"   # green
-  local removed_color="%F{#f38ba8}" # red
-  local new_color="%F{#f9e2af}"    # yellow
+  local ref_color="%F{#8992b2}"     # lavender
+  local dirty_color="%F{#e46876}"   # red
+  local ahead_color="%F{#ffa066}"   # peach
+  local behind_color="%F{#7e9cd8}"  # blue
+  local added_color="%F{#98bb6c}"   # green
+  local removed_color="%F{#e46876}" # red
+  local new_color="%F{#e6c384}"    # yellow
   local reset="%f"
 
   GIT_PROMPT_CACHE="${ref_color} $ref${reset}"
@@ -64,9 +64,9 @@ update_git_prompt_info() {
 }
 
 set_prompt() {
-  local hostname_color="%F{#f9e2af}" # yellow
-  local path_color="%F{#89b4fa}"     # blue
-  local arrow_color="%F{#cba6f7}"    # mauve
+  local hostname_color="%F{#e6c384}" # yellow
+  local path_color="%F{#7e9cd8}"     # blue
+  local arrow_color="%F{#957fb8}"    # mauve
   PROMPT="${hostname_color}%m%f ${path_color}%~%f${GIT_PROMPT_CACHE:+ $GIT_PROMPT_CACHE} ${arrow_color}❯%f "
 }
 

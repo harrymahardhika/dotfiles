@@ -4,10 +4,15 @@
     "read": "allow",
     "glob": "allow",
     "grep": "allow",
-    "list": "allow"
+    "list": "allow",
+    "edit": "ask",
+    "bash": "ask",
+    "webfetch": "ask"
   },
   "instructions": [
     "../../AGENTS.md",
     "../../CLAUDE.md"
-  ]
+  ],
+  "share": "manual",
+  "autoupdate": "notify"
 }

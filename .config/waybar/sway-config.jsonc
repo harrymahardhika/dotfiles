@@ -59,11 +59,11 @@
       "on-scroll": 1,
       "on-click-right": "mode",
       "format": {
-        "months": "<span color='#cdd6f4'><b>{}</b></span>",
-        "days": "<span color='#cdd6f4'><b>{}</b></span>",
-        "weeks": "<span color='#89dceb'><b>W{}</b></span>",
-        "weekdays": "<span color='#f9e2af'><b>{}</b></span>",
-        "today": "<span color='#f38ba8'><b><u>{}</u></b></span>"
+        "months": "<span color='#dcd7ba'><b>{}</b></span>",
+        "days": "<span color='#dcd7ba'><b>{}</b></span>",
+        "weeks": "<span color='#7aa89f'><b>W{}</b></span>",
+        "weekdays": "<span color='#e6c384'><b>{}</b></span>",
+        "today": "<span color='#e46876'><b><u>{}</u></b></span>"
       }
     },
     "actions": {

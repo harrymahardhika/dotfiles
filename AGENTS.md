@@ -32,6 +32,18 @@ Four configs under `nvim-configs/`: `beta`, `harry`, `custom-nvchad`, `twelve`. 
 - `scripts/nvim-switch.sh` — switches Neovim config symlink
 - `scripts/trash-cleanup.sh` — removes FreeDesktop trash items older than 7 days. Runs daily via `trash-cleanup.timer` (systemd --user). Accepts `--dry-run`. Alias: `trash-cleanup`.
 
+## Theme Switching
+
+`scripts/theme-switch.sh` (alias `theme-switch`, rofi frontend `theme-pick`) swaps the whole system between **mocha** (default) and **kanagawa**.
+
+- Themes driven by `themes/palettes/<name>.palette` (semantic color map). Payload files live in `themes/<name>/`; inline (non-payload) configs are rendered from mocha masters under `themes/mocha/inline/`.
+- After editing a config that's inlined (see `sync-masters`), run `theme-switch sync-masters` so masters stay authoritative — switching is then lossless in both directions.
+- Run `theme-switch apply <name> --dry` to preview. `apply` reloads services (mako/waybar/dunst), hyprctl, and terminals (kitty SIGUSR1, ghostty SIGUSR2; alacritty live-reloads).
+- `.config/opencode/tui.json` holds the opencode TUI theme (built-ins `catppuccin`/`kanagawa`).
+- Wallpapers live in `wallpapers/<theme>/` (mocha, kanagawa). `theme-switch apply` randomizes a wallpaper from the active theme's subdir via `set-wallpaper.sh` (awww), which reads `~/.cache/theme-current` and falls back to `wallpapers/` root.
+- tmux: catppuccin/tmux only ships catppuccin flavors, so non-mocha themes inject a `# THEME-SWITCH @thm_* OVERRIDES` block at the end of `.tmux.conf` (after the tpm `run`). The plugin uses `set -ogq`, so leftovers are unset before re-sourcing.
+- Payload names are short (`mocha`, `kanagawa`) — not `catppuccin-mocha`.
+
 ## Tmux
 
 Prefix is `Ctrl+A` (not `Ctrl+B`). TPM plugins: clone `tmux-plugins/tpm` to `~/.tmux/plugins/tpm`, then `prefix+I` to install.

@@ -1,6 +1,17 @@
 #!/bin/bash
 
-WALLPAPER_DIR="$HOME/wallpapers"
+THEME_STATE="$HOME/.cache/theme-current"
+THEME="mocha"
+
+if [ -f "$THEME_STATE" ]; then
+  THEME=$(cat "$THEME_STATE")
+fi
+
+WALLPAPER_DIR="$HOME/wallpapers/$THEME"
+
+if [ ! -d "$WALLPAPER_DIR" ]; then
+  WALLPAPER_DIR="$HOME/wallpapers"
+fi
 
 echo "Setting wallpaper from $WALLPAPER_DIR"
 

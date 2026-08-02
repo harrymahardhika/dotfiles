@@ -1,0 +1,29 @@
+# Migrated from dunst settings in ~/.config/dunst/dunstrc
+
+font=JetBrainsMono Nerd Font 9
+markup=1
+format=<b>%s</b>\n%b
+text-alignment=left
+
+width=380
+padding=8
+padding=8,16
+border-size=1
+border-radius=8
+max-icon-size=48
+icons=1
+
+background-color=#1e1e2e
+text-color=#cdd6f4
+border-color=#b4befe
+progress-color=over #313244
+
+[urgency=low]
+default-timeout=5000
+
+[urgency=normal]
+default-timeout=8000
+
+[urgency=critical]
+default-timeout=0
+border-color=#fab387

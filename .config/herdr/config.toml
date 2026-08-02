@@ -9,7 +9,7 @@ enabled = false
 delivery = "system"
 
 [theme]
-name = "catppuccin"
+name = "kanagawa"
 auto_switch = false
 
 [ui]

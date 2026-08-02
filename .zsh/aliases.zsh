@@ -62,6 +62,8 @@ alias updateall="$HOME/updateall"
 alias changelog="$HOME/scripts/changelog.sh"
 alias battery_limit="$HOME/scripts/battery_limit.sh"
 alias trash-cleanup="$HOME/scripts/trash-cleanup.sh"
+alias theme-switch="$HOME/scripts/theme-switch.sh"
+alias theme-pick="$HOME/scripts/theme-pick.sh"
 
 # Git
 alias gs='git status'

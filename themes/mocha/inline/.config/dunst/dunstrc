@@ -1,0 +1,37 @@
+[global]
+monitor = 0
+
+alignment = left
+corner_radius = 8
+font = JetBrainsMono Nerd Font 9
+format = "<b>%s</b>\n%b"
+frame_color = "#89b4fa"
+frame_width = 1
+highlight = "#89b4fa"
+horizontal_padding = 16
+icon_position = left
+markup = full
+max_icon_size = 48
+padding = 8
+separator_color = frame
+transparency = 10
+width = (0, 380)
+word_wrap = yes
+
+[urgency_low]
+background = "#1e1e2e"
+foreground = "#cdd6f4"
+timeout = 5
+
+[urgency_normal]
+background = "#1e1e2e"
+foreground = "#cdd6f4"
+timeout = 8
+
+[urgency_critical]
+background = "#1e1e2e"
+foreground = "#cdd6f4"
+frame_color = "#fab387"
+timeout = 0
+
+# vim: ft=cfg

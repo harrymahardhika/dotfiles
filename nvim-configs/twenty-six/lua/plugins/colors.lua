@@ -1,29 +1,28 @@
 return {
-  "catppuccin/nvim",
-  name = "catppuccin",
+  "rebelot/kanagawa.nvim",
+  name = "kanagawa",
   priority = 1000,
   config = function()
-    require("catppuccin").setup({
-      auto_integrations = true,
-      flavour = "mocha",
-      transparent_background = true,
-      float = {
-        transparent = true,
-        solid = false,
-      },
-      no_italic = true,
-      integrations = {
-        gitsigns = true,
-        grug_far = true,
-        mini = {
-          enabled = true,
-          indentscope_color = "surface0",
-        },
-        treesitter = true,
-        which_key = true,
-      },
+    require("kanagawa").setup({
+      transparent = true,
+      commentStyle = { italic = false },
+      overrides = function(colors)
+        return {
+          MiniIndentscopeSymbol = { fg = colors.theme.ui.bg_p2 },
+          StatusLine = { bg = "none" },
+          StatusLineNC = { bg = "none" },
+          WinBar = { bg = "none" },
+          WinBarNC = { bg = "none" },
+          SignColumn = { bg = "none" },
+          LineNr = { bg = "none" },
+          CursorLineNr = { bg = "none" },
+          NormalNC = { bg = "none" },
+          FloatBorder = { bg = "none" },
+          FloatTitle = { bg = "none" },
+        }
+      end,
     })
 
-    vim.cmd("colorscheme catppuccin")
+    vim.cmd("colorscheme kanagawa")
   end,
 }

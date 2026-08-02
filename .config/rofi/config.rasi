@@ -13,5 +13,5 @@ configuration {
   sidebar-mode: false;
 }
 
-@theme "catppuccin-mocha"
+@theme "kanagawa"
 

@@ -5,9 +5,9 @@ alignment = left
 corner_radius = 8
 font = JetBrainsMono Nerd Font 9
 format = "<b>%s</b>\n%b"
-frame_color = "#89b4fa"
+frame_color = "#7e9cd8"
 frame_width = 1
-highlight = "#89b4fa"
+highlight = "#7e9cd8"
 horizontal_padding = 16
 icon_position = left
 markup = full
@@ -19,19 +19,19 @@ width = (0, 380)
 word_wrap = yes
 
 [urgency_low]
-background = "#1e1e2e"
-foreground = "#cdd6f4"
+background = "#1f1f28"
+foreground = "#dcd7ba"
 timeout = 5
 
 [urgency_normal]
-background = "#1e1e2e"
-foreground = "#cdd6f4"
+background = "#1f1f28"
+foreground = "#dcd7ba"
 timeout = 8
 
 [urgency_critical]
-background = "#1e1e2e"
-foreground = "#cdd6f4"
-frame_color = "#fab387"
+background = "#1f1f28"
+foreground = "#dcd7ba"
+frame_color = "#ffa066"
 timeout = 0
 
 # vim: ft=cfg

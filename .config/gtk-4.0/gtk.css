@@ -2,13 +2,13 @@
 based on the solarized dark colours from adw-colors: https://github.com/lassekongo83/adw-colors/tree/main/themes/solarized-dark */
 
 /* Catppuccin colors */
-@define-color accent #b4befe;
-@define-color red #f38ba8;
-@define-color green #a6e3a1;
-@define-color text #cdd6f4;
-@define-color surface_0 #313244;
-@define-color base #1e1e2e;
-@define-color crust #11111b;
+@define-color accent #8992b2;
+@define-color red #e46876;
+@define-color green #98bb6c;
+@define-color text #dcd7ba;
+@define-color surface_0 #16161d;
+@define-color base #1f1f28;
+@define-color crust #16161d;
 
 /* Adwaita stuff */
 @define-color accent_color @accent;
