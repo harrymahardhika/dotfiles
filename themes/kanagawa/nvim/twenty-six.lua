@@ -17,6 +17,7 @@ return {
           LineNr = { bg = "none" },
           CursorLineNr = { bg = "none" },
           NormalNC = { bg = "none" },
+          NormalFloat = { bg = "none" },
           FloatBorder = { bg = "none" },
           FloatTitle = { bg = "none" },
         }

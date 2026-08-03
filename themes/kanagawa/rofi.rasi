@@ -1,9 +1,9 @@
 * {
     bg-col:  #1f1f28;
     bg-col-light: #16161d;
-    border-col: #1f1f28;
+    border-col: #2a2a37;
     selected-col: #16161d;
-    blue: #7e9cd8;
+    accent: #938056;  /* boatYellow1 - warm ochre from the wave painting */
     fg-col: #dcd7ba;
     fg-col2: #e46876;
     grey: #54546d;
@@ -19,7 +19,7 @@ element-text, element-icon , mode-switcher {
 
 window {
     height: 360px;
-    border: 3px;
+    border: 2px;
     border-color: @border-col;
     background-color: @bg-col;
     border-radius: 8px;
@@ -37,7 +37,7 @@ inputbar {
 }
 
 prompt {
-    background-color: @blue;
+    background-color: @accent;
     padding: 6px;
     text-color: @bg-col;
     border-radius: 3px;
@@ -94,7 +94,7 @@ button {
 
 button selected {
   background-color: @bg-col;
-  text-color: @blue;
+  text-color: @accent;
 }
 
 message {
@@ -107,6 +107,6 @@ message {
 textbox {
     padding: 6px;
     margin: 20px 0px 0px 20px;
-    text-color: @blue;
+    text-color: @accent;
     background-color: @bg-col-light;
 }

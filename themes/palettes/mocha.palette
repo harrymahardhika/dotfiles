@@ -1,3 +1,18 @@
+# Semantic design tokens (processed first so they win over base aliases)
+border_accent=89b4fa
+border_subtle=1e1e2e
+accent_primary=89b4fa
+accent_secondary=cba6f7
+prompt_accent=89b4fa
+selection_bg=313244
+cursor_color=f5e0dc
+success=a6e3a1
+warning=f9e2af
+error=f38ba8
+surface_elevated=313244
+surface_overlay=181825
+
+# Base Catppuccin Mocha palette
 rosewater=f5e0dc
 flamingo=f2cdcd
 pink=f5c2e7

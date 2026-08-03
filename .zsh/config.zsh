@@ -27,8 +27,8 @@ elif [[ -f ~/.fzf/shell/completion.zsh ]]; then
 fi
 
 export FZF_DEFAULT_OPTS=" \
---color=bg+:#16161d,bg:#1f1f28,spinner:#dcd7ba,hl:#e46876 \
---color=fg:#dcd7ba,header:#e46876,info:#957fb8,pointer:#dcd7ba \
---color=marker:#8992b2,fg+:#dcd7ba,prompt:#957fb8,hl+:#e46876 \
+--color=bg+:#2a2a37,bg:#1f1f28,spinner:#dcd7ba,hl:#e46876 \
+--color=fg:#dcd7ba,header:#e46876,info:#7aa89f,pointer:#dcd7ba \
+--color=marker:#8992b2,fg+:#dcd7ba,prompt:#7aa89f,hl+:#e46876 \
 --color=selected-bg:#2a2a37 \
---color=border:#16161d,label:#dcd7ba"
+--color=border:#2a2a37,label:#dcd7ba"

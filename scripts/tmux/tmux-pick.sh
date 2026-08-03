@@ -51,10 +51,10 @@ if [ -z "${TMUX:-}" ]; then
 
   sel=$(echo "$sessions" | fzf \
     --prompt='❯ ' --reverse \
-    --color=bg+:#16161d,bg:#1f1f28,spinner:#dcd7ba,hl:#e46876 \
-    --color=fg:#dcd7ba,header:#e46876,info:#957fb8,pointer:#dcd7ba \
-    --color=marker:#8992b2,fg+:#dcd7ba,prompt:#957fb8,hl+:#e46876 \
-    --color=selected-bg:#2a2a37 --color=border:#16161d,label:#dcd7ba \
+    --color=bg+:#2a2a37,bg:#1f1f28,spinner:#dcd7ba,hl:#e46876 \
+    --color=fg:#dcd7ba,header:#e46876,info:#7aa89f,pointer:#dcd7ba \
+    --color=marker:#8992b2,fg+:#dcd7ba,prompt:#7aa89f,hl+:#e46876 \
+    --color=selected-bg:#2a2a37 --color=border:#2a2a37,label:#dcd7ba \
     || true)
 
   [ -z "${sel:-}" ] && exit 0
@@ -70,10 +70,10 @@ sel=$(
   --prompt='❯ ' --reverse \
   --bind='ctrl-r:execute-silent(if [ -n "{4}" ]; then tmux command-prompt -p "Rename window:" "rename-window -t {3}:{4} %1"; fi)+reload:'"$SELF list" \
   --bind='ctrl-k:execute-silent(if [ -n "{4}" ]; then tmux kill-window -t {3}:{4}; fi)+reload:'"$SELF list" \
-  --color=bg+:#16161d,bg:#1f1f28,spinner:#dcd7ba,hl:#e46876 \
-  --color=fg:#dcd7ba,header:#e46876,info:#957fb8,pointer:#dcd7ba \
-  --color=marker:#8992b2,fg+:#dcd7ba,prompt:#957fb8,hl+:#e46876 \
-  --color=selected-bg:#2a2a37 --color=border:#16161d,label:#dcd7ba \
+  --color=bg+:#2a2a37,bg:#1f1f28,spinner:#dcd7ba,hl:#e46876 \
+  --color=fg:#dcd7ba,header:#e46876,info:#7aa89f,pointer:#dcd7ba \
+  --color=marker:#8992b2,fg+:#dcd7ba,prompt:#7aa89f,hl+:#e46876 \
+  --color=selected-bg:#2a2a37 --color=border:#2a2a37,label:#dcd7ba \
   || true
 )
 

@@ -1,0 +1,20 @@
+{
+  "lastChangelogVersion": "0.83.0",
+  "defaultProvider": "anthropic",
+  "defaultModel": "claude-opus-4-5",
+  "defaultThinkingLevel": "medium",
+  "theme": "kanagawa",
+  "themes": [
+    "~/.pi/agent/themes"
+  ],
+  "defaultProjectTrust": "ask",
+  "quietStartup": false,
+  "collapseChangelog": true,
+  "enableInstallTelemetry": true,
+  "terminal": {
+    "showTerminalProgress": true
+  },
+  "warnings": {
+    "anthropicExtraUsage": true
+  }
+}

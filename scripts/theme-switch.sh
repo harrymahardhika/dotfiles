@@ -25,6 +25,7 @@ STATE_FILE="${THEME_STATE:-$HOME/.cache/theme-current}"
 
 DEFAULT_THEME="mocha"
 ACTIVE_CFG="$HOME/.config/nvim"
+ZEN_PROFILE="oct5ov6c.Default (release)"
 
 usage() {
   sed -n '2,12p' "$0" | sed 's/^# \{0,1\}//'
@@ -458,6 +459,15 @@ apply_nvchad() {
   sed -i '/M\.base46 = {/,/^}/s/^  theme = ".*",$/  theme = "'"$base46"'",/' "$file"
 }
 
+# Zen Browser userChrome.css (payloads themes/{theme}/zen.css)
+apply_zen() {
+  local theme="$1"
+  local dest="$HOME/.zen/$ZEN_PROFILE/chrome/userChrome.css"
+  [ -f "$THEMES_DIR/$theme/zen.css" ] || { echo "  warn: no zen payload for $theme" >&2; return 0; }
+  mkdir -p "$(dirname "$dest")"
+  install_payload "$theme" "zen.css" "$dest"
+}
+
 # ---- palette substitution -------------------------------------------------
 
 # resolve to the real file so sed -i doesn't replace a stowed symlink
@@ -470,7 +480,10 @@ from_to_args() {
   local from_palette="$1" to_palette="$2" kind="$3"
   local args=() name from_hex to_hex from_val to_val
   while IFS== read -r name from_hex; do
+    # skip empty lines and comments
     [ -n "$name" ] || continue
+    [[ "$name" == \#* ]] && continue
+    [ -n "$from_hex" ] || continue
     to_hex="$(grep -m1 "^${name}=" "$to_palette" | cut -d= -f2)"
     [ -n "$to_hex" ] || continue
     [ "$from_hex" != "$to_hex" ] || continue
@@ -482,11 +495,11 @@ from_to_args() {
                 to_val="$(printf 'rgb(%d,%d,%d)' 0x${to_hex:0:2} 0x${to_hex:2:2} 0x${to_hex:4:2})" ;;
       hyprland) from_val="rgb(${from_hex})"; to_val="rgb(${to_hex})" ;;
     esac
-    args+=("-e" "s/${from_val}/${to_val}/g")
+    args+=("-e" "s|${from_val}|${to_val}|g")
     if [ "$kind" = "hyprlock" ]; then
-      from_val="$(printf 'rgba(%d,%d,%d' 0x${from_hex:0:2} 0x${from_hex:2:2} 0x${from_hex:4:2})"
-      to_val="$(printf 'rgba(%d,%d,%d' 0x${to_hex:0:2} 0x${to_hex:2:2} 0x${to_hex:4:2})"
-      args+=("-e" "s/${from_val}/${to_val}/g")
+      from_val="$(printf 'rgba(%d,%d,%d)' 0x${from_hex:0:2} 0x${from_hex:2:2} 0x${from_hex:4:2})"
+      to_val="$(printf 'rgba(%d,%d,%d)' 0x${to_hex:0:2} 0x${to_hex:2:2} 0x${to_hex:4:2})"
+      args+=("-e" "s|${from_val}|${to_val}|g")
     fi
   done < "$from_palette"
   printf '%s\n' "${args[@]}"
@@ -633,6 +646,7 @@ apply_theme() {
   apply_starship "$theme" || true
   apply_tmux "$theme" || true
   apply_nvim "$theme" || true
+  apply_zen "$theme" || true
 
   notify_processing "$theme"
 

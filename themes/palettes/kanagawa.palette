@@ -1,3 +1,19 @@
+# Semantic design tokens (processed first so they win over base aliases)
+# Using warm colors to differentiate from mocha's cool blue palette
+border_accent=938056
+border_subtle=1f1f28
+accent_primary=938056
+accent_secondary=7aa89f
+prompt_accent=938056
+selection_bg=2a2a37
+cursor_color=dcd7ba
+success=98bb6c
+warning=e6c384
+error=e46876
+surface_elevated=16161d
+surface_overlay=16161d
+
+# Base Kanagawa palette
 rosewater=dcd7ba
 flamingo=d2869c
 pink=d2869c

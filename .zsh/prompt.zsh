@@ -48,7 +48,7 @@ update_git_prompt_info() {
   local ref_color="%F{#8992b2}"     # lavender
   local dirty_color="%F{#e46876}"   # red
   local ahead_color="%F{#ffa066}"   # peach
-  local behind_color="%F{#7e9cd8}"  # blue
+  local behind_color="%F{#938056}"  # blue
   local added_color="%F{#98bb6c}"   # green
   local removed_color="%F{#e46876}" # red
   local new_color="%F{#e6c384}"    # yellow
@@ -65,8 +65,8 @@ update_git_prompt_info() {
 
 set_prompt() {
   local hostname_color="%F{#e6c384}" # yellow
-  local path_color="%F{#7e9cd8}"     # blue
-  local arrow_color="%F{#957fb8}"    # mauve
+  local path_color="%F{#938056}"     # blue
+  local arrow_color="%F{#7aa89f}"    # mauve
   PROMPT="${hostname_color}%m%f ${path_color}%~%f${GIT_PROMPT_CACHE:+ $GIT_PROMPT_CACHE} ${arrow_color}❯%f "
 }
 

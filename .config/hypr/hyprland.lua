@@ -244,14 +244,14 @@ hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURC
 hl.bind(
 	"XF86MonBrightnessUp",
 	hl.dsp.exec_cmd(
-		"brightnessctl s 10%+ && notify-send -h 'int:value:'$(brightnessctl -m | cut -d, -f4 | tr -d %) 'Brightness'"
+		"brightnessctl s 10%+ && notify-send -h 'int:value:'$(brightnessctl -m | cut -d, -f4 | tr -d %) 'Brightness '$(brightnessctl -m | cut -d, -f4)"
 	),
 	{ repeating = true, locked = true }
 )
 hl.bind(
 	"XF86MonBrightnessDown",
 	hl.dsp.exec_cmd(
-		"brightnessctl s 10%- && notify-send -h 'int:value:'$(brightnessctl -m | cut -d, -f4 | tr -d %) 'Brightness'"
+		"brightnessctl s 10%- && notify-send -h 'int:value:'$(brightnessctl -m | cut -d, -f4 | tr -d %) 'Brightness '$(brightnessctl -m | cut -d, -f4)"
 	),
 	{ repeating = true, locked = true }
 )

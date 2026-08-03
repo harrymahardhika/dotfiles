@@ -17,3 +17,29 @@ show_agent_labels_on_pane_borders = true
 
 [experimental]
 pane_history = false
+
+# Pane layout keybindings (mimic tmux)
+# Requires: herdr plugin install github:iurysza/herdr-pane-layouts
+[[keys.command]]
+key = "prefix+space"
+command = "herdr plugin action invoke cycle"
+
+[[keys.command]]
+key = "prefix+="
+command = "herdr plugin action invoke equalize"
+
+[[keys.command]]
+key = "prefix+alt+h"
+command = "herdr plugin action invoke resize-left"
+
+[[keys.command]]
+key = "prefix+alt+j"
+command = "herdr plugin action invoke resize-down"
+
+[[keys.command]]
+key = "prefix+alt+k"
+command = "herdr plugin action invoke resize-up"
+
+[[keys.command]]
+key = "prefix+alt+l"
+command = "herdr plugin action invoke resize-right"
