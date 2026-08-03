@@ -4,6 +4,7 @@ border_subtle=1e1e2e
 accent_primary=89b4fa
 accent_secondary=cba6f7
 prompt_accent=89b4fa
+active_window_accent=89b4fa
 selection_bg=313244
 cursor_color=f5e0dc
 success=a6e3a1

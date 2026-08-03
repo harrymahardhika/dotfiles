@@ -8,6 +8,9 @@ return {
         theme = "wave",
         transparent = true,
         commentStyle = { italic = false },
+        keywordStyle = { italic = false },
+        statementStyle = { italic = false },
+        functionStyle = { italic = false },
         overrides = function(colors)
           return {
             StatusLine = { bg = "none" },

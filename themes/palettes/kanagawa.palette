@@ -5,6 +5,7 @@ border_subtle=1f1f28
 accent_primary=938056
 accent_secondary=7aa89f
 prompt_accent=938056
+active_window_accent=e6c384
 selection_bg=2a2a37
 cursor_color=dcd7ba
 success=98bb6c

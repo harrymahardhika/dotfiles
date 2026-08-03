@@ -7,6 +7,9 @@ return use("kanagawa", "rebelot/kanagawa.nvim", {
     require("kanagawa").setup({
       transparent = true,
       commentStyle = { italic = false },
+      keywordStyle = { italic = false },
+      statementStyle = { italic = false },
+      functionStyle = { italic = false },
       overrides = function(colors)
         return {
           MiniIndentscopeSymbol = { fg = colors.theme.ui.bg_p2 },

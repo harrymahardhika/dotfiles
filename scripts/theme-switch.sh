@@ -391,19 +391,22 @@ inject_tmux_thm() {
   local name mocha_hex theme_hex
   while IFS== read -r name mocha_hex; do
     [ -n "$name" ] || continue
-    theme_hex="$(grep -m1 "^${name}=" "$theme_palette" | cut -d= -f2)"
+    [[ "$name" == \#* ]] && continue
+    mocha_hex="${mocha_hex%%[[:space:]]*}"
+    [ -n "$mocha_hex" ] || continue
+    theme_hex="$(grep -m1 "^${name}=" "$theme_palette" | cut -d= -f2 | awk '{print $1}')"
     [ -n "$theme_hex" ] || continue
     lines+=("set -g @thm_${name} \"#${theme_hex}\"")
   done < "$mocha_palette"
   # catppuccin/tmux uses snake_case for a few names; emit both forms
   for n in surface0 surface1 surface2 overlay0 overlay1 overlay2 subtext0 subtext1; do
     local stem="${n//[0-9]/}"
-    local hex="$(grep -m1 "^${n}=" "$theme_palette" | cut -d= -f2)"
+    local hex="$(grep -m1 "^${n}=" "$theme_palette" | cut -d= -f2 | awk '{print $1}')"
     [ -n "$hex" ] && lines+=("set -g @thm_${stem}_${n##*[a-z]} \"#${hex}\"")
   done
   # plugin's canonical bg/fg names come from base/text palette keys
-  local base_hex="$(grep -m1 '^base=' "$theme_palette" | cut -d= -f2)"
-  local text_hex="$(grep -m1 '^text=' "$theme_palette" | cut -d= -f2)"
+  local base_hex="$(grep -m1 '^base=' "$theme_palette" | cut -d= -f2 | awk '{print $1}')"
+  local text_hex="$(grep -m1 '^text=' "$theme_palette" | cut -d= -f2 | awk '{print $1}')"
   lines+=("set -g @thm_bg \"#${base_hex}\"")
   lines+=("set -g @thm_fg \"#${text_hex}\"")
   lines+=("# END THEME-SWITCH" "")
@@ -483,8 +486,10 @@ from_to_args() {
     # skip empty lines and comments
     [ -n "$name" ] || continue
     [[ "$name" == \#* ]] && continue
+    # strip inline comments / trailing whitespace from value
+    from_hex="${from_hex%%[[:space:]]*}"
     [ -n "$from_hex" ] || continue
-    to_hex="$(grep -m1 "^${name}=" "$to_palette" | cut -d= -f2)"
+    to_hex="$(grep -m1 "^${name}=" "$to_palette" | cut -d= -f2 | awk '{print $1}')"
     [ -n "$to_hex" ] || continue
     [ "$from_hex" != "$to_hex" ] || continue
     case "$kind" in
