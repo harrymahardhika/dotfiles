@@ -17,8 +17,8 @@ hl.config({
 	},
 	decoration = {
 		rounding = 4,
-		active_opacity = 0.95,
-		inactive_opacity = 0.85,
+		active_opacity = 0.90,
+		inactive_opacity = 0.80,
 		shadow = {
 			enabled = true,
 			range = 4,
@@ -26,9 +26,11 @@ hl.config({
 		},
 		blur = {
 			enabled = true,
-			size = 5,
-			passes = 4,
-			vibrancy = 0.1696,
+			size = 3,
+			passes = 2,
+			vibrancy = 0.4,
+			contrast = 1.0,
+			brightness = 1.0,
 			new_optimizations = true,
 		},
 	},
@@ -136,7 +138,6 @@ hl.gesture({
 hl.on("hyprland.start", function()
 	hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
 	hl.exec_cmd(terminal .. " -e $HOME/scripts/set-gtk-dark-mode.sh")
-	hl.exec_cmd("hypridle")
 	hl.exec_cmd("dropbox")
 	hl.exec_cmd("wl-paste --watch cliphist store")
 	hl.exec_cmd("awww-daemon --format xrgb")
