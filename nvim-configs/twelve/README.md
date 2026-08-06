@@ -1,6 +1,6 @@
 # twelve
 
-Native-package Neovim config inspired by `nvim-configs/beta`.
+Native-package Neovim config (uses native packages, zero external plugin managers).
 
 ## Notes
 
