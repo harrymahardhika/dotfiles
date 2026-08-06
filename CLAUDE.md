@@ -17,6 +17,7 @@ After editing any config file, changes are live immediately since `~/.config/foo
 ## ZSH Loading Order
 
 `.zshrc` loads in this order:
+
 1. Oh-My-Zsh (git plugin only; theme disabled)
 2. Antidote plugins from `.zsh_plugins.txt` (syntax-highlighting excluded here, loaded last)
 3. All `~/.zsh/*.zsh` modules (alphabetical: aliases, config, exports, functions, history, prompt)
@@ -28,7 +29,7 @@ To reload ZSH config in the current shell: `reload` (alias for `source ~/.zshrc`
 
 ## Neovim Configs
 
-Four configs live under `nvim-configs/`: `beta`, `harry`, `custom-nvchad`, `twelve`. The active one is a symlink at `~/.config/nvim`.
+Two configs live under `nvim-configs/`: `twelve`, `twenty-six`. The active one is a symlink at `~/.config/nvim`.
 
 ```bash
 nvim-switch      # interactive picker (alias for scripts/nvim-switch.sh)

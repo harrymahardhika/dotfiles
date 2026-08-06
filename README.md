@@ -5,8 +5,7 @@ both X11 and Wayland.
 
 ## Features
 
-- **Multiple Neovim Configurations** - Four separate configs (beta, harry,
-  custom-nvchad, twelve) with easy switching
+- **Multiple Neovim Configurations** - Two configs (twelve, twenty-six) with easy switching
 - **Modular Shell Setup** - Clean, organized ZSH configuration with Antidote
   plugin manager
 - **Cross-Environment Support** - Configs for both X11 (i3) and Wayland
@@ -34,10 +33,8 @@ dotfiles/
 │   ├── yazi/            # File manager TUI
 │   └── ...              # 30+ other configs
 ├── nvim-configs/        # Multiple Neovim setups
-│   ├── beta/            # Beta/testing config
-│   ├── custom-nvchad/   # NvChad-style custom config
-│   ├── harry/           # Personal config
 │   ├── twelve/          # Native-package config
+│   ├── twenty-six/      # Lazy.nvim config
 │   └── stylua.toml      # Lua formatting config
 ├── scripts/             # Utility scripts
 │   ├── webapps/         # Web app launchers
@@ -70,12 +67,10 @@ dotfiles/
 
 ### Neovim
 
-Four separate configurations available via `nvim-switch.sh`:
+Two configurations available via `nvim-switch.sh`:
 
-- **beta** - Testing ground for new plugins/features, using `nvim-cmp`
-- **harry** - Personal stable configuration
-- **custom-nvchad** - NvChad-style custom distribution
-- **twelve** - Native-package Neovim config inspired by `beta` (uses native packages, zero external plugin managers)
+- **twelve** - Native-package Neovim config (uses native packages, zero external plugin managers)
+- **twenty-six** - Lazy.nvim-based config
 
 Most configs use the Lazy.nvim plugin manager, while `twelve` leverages native package loading.
 
@@ -231,7 +226,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 ```bash
 # Switch to desired config
-./scripts/nvim-switch.sh beta
+./scripts/nvim-switch.sh twenty-six
 
 # Install plugins (inside Neovim)
 # Lazy.nvim will auto-install on first launch

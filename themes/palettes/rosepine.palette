@@ -1,0 +1,43 @@
+# Semantic design tokens (processed first so they win over base aliases)
+# Rosé Pine "main" — muted purple/pink on a dark pine base
+border_accent=31748f
+border_subtle=191724
+accent_primary=31748f
+accent_secondary=c4a7e7
+prompt_accent=31748f
+active_window_accent=31748f
+selection_bg=26233a
+cursor_color=e0def4
+success=9ccfd8
+warning=f6c177
+error=eb6f92
+surface_elevated=1f1d2e
+surface_overlay=1f1d2e
+
+# Base Rosé Pine palette
+rosewater=ebbcba
+flamingo=ebbcba
+pink=c4a7e7
+mauve=c4a7e7
+red=eb6f92
+maroon=eb6f92
+peach=f6c177
+yellow=f6c177
+green=9ccfd8
+teal=9ccfd8
+sky=9ccfd8
+sapphire=31748f
+blue=31748f
+lavender=c4a7e7
+text=e0def4
+subtext1=908caa
+subtext0=908caa
+overlay2=908caa
+overlay1=6e6a86
+overlay0=6e6a86
+surface2=524f67
+surface1=403d52
+surface0=26233a
+base=191724
+mantle=13111e
+crust=13111e

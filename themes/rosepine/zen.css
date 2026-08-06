@@ -1,0 +1,175 @@
+/* Zen Browser - userChrome.css
+ * Master: Catppuccin Mocha. Generated per-theme via theme-generate.sh.
+ * Install: place in ~/.zen/<profile>/chrome/userChrome.css and set
+ * toolkit.legacyUserProfileCustomizations.stylesheets = true in about:config.
+ */
+
+:root {
+  --zen-base: #191724;
+  --zen-mantle: #1f1d2e;
+  --zen-crust: #13111e;
+  --zen-surface0: #26233a;
+  --zen-surface1: #403d52;
+  --zen-surface2: #524f67;
+  --zen-text: #e0def4;
+  --zen-subtext0: #908caa;
+  --zen-overlay0: #6e6a86;
+  --zen-accent: #31748f;  /* blue */
+  --zen-blue: #31748f;
+  --zen-mauve: #c4a7e7;
+  --zen-peach: #f6c177;
+  --zen-green: #9ccfd8;
+  --zen-red: #eb6f92;
+
+  --zen-main-browser-background: var(--zen-base) !important;
+  --toolbar-bgcolor: var(--zen-mantle) !important;
+  --lwt-accent-color: var(--zen-mantle) !important;
+}
+
+* {
+  scrollbar-color: var(--zen-surface1) var(--zen-mantle) !important;
+}
+
+/* ---- toolbox / toolbars ---- */
+#navigator-toolbox {
+  background-color: var(--zen-mantle) !important;
+  border-bottom: 1px solid var(--zen-surface1) !important;
+}
+
+#nav-bar,
+#TabsToolbar,
+#toolbar-menubar,
+#PersonalToolbar {
+  background-color: var(--zen-mantle) !important;
+  color: var(--zen-text) !important;
+}
+
+/* ---- tabs ---- */
+.tabbrowser-tab {
+  background-color: transparent !important;
+}
+
+.tab-background {
+  background-color: var(--zen-surface0) !important;
+  border-radius: 8px !important;
+  border: 1px solid transparent !important;
+}
+
+.tab-background[selected="true"] {
+  background-color: var(--zen-surface1) !important;
+  border-color: var(--zen-surface2) !important;
+}
+
+.tabbrowser-tab:hover > .tab-stack > .tab-background:not([selected="true"]) {
+  background-color: var(--zen-surface0) !important;
+}
+
+.tab-content {
+  color: var(--zen-subtext0) !important;
+}
+
+.tabbrowser-tab[selected="true"] .tab-content {
+  color: var(--zen-text) !important;
+}
+
+.tab-icon-image {
+  fill: var(--zen-accent) !important;
+}
+
+/* ---- zen essentials (pinned row) ---- */
+#zen-essentials,
+#zen-essentials .zen-essentials-container {
+  --tab-min-height: 30px !important;
+}
+
+#zen-essentials .zen-essentials-container {
+  gap: 2px !important;
+}
+
+#zen-essentials .tabbrowser-tab[zen-essential="true"] .tab-background {
+  margin-block: 1px !important;
+}
+
+/* ---- urlbar / searchbar ---- */
+#urlbar,
+#searchbar {
+  --toolbar-field-background-color: var(--zen-surface0) !important;
+  --toolbar-field-color: var(--zen-text) !important;
+  --toolbar-field-border-color: transparent !important;
+  --toolbar-field-focus-background-color: var(--zen-surface0) !important;
+  --toolbar-field-focus-border-color: var(--zen-accent) !important;
+}
+
+#urlbar-background,
+#searchbar > .searchbar-textbox {
+  background-color: var(--zen-surface0) !important;
+  border: 1px solid transparent !important;
+  border-radius: 8px !important;
+}
+
+#urlbar[focused="true"] > #urlbar-background {
+  background-color: var(--zen-surface0) !important;
+  border-color: var(--zen-accent) !important;
+}
+
+/* urlbar results dropdown */
+#urlbar[open="true"] > #urlbar-background,
+#urlbar .panel-arrowcontent,
+#PopupAutoComplete richlistbox {
+  background-color: var(--zen-base) !important;
+  color: var(--zen-text) !important;
+}
+
+#urlbar-results .urlbarView-row[selected],
+.urlbarView-row:hover {
+  background-color: var(--zen-surface0) !important;
+  border-radius: 6px !important;
+}
+
+/* ---- buttons / icons ---- */
+toolbarbutton,
+.urlbar-icon,
+#urlbar-input-container {
+  fill: var(--zen-subtext0) !important;
+  color: var(--zen-subtext0) !important;
+}
+
+toolbarbutton:hover,
+toolbarbutton[open="true"],
+.urlbar-icon:hover {
+  background-color: var(--zen-surface0) !important;
+  fill: var(--zen-text) !important;
+  color: var(--zen-text) !important;
+}
+
+/* ---- zen sidebar ---- */
+#zen-sidebar,
+#sidebar,
+#sidebar-box {
+  background-color: var(--zen-mantle) !important;
+  color: var(--zen-text) !important;
+}
+
+#sidebar-header {
+  background-color: var(--zen-mantle) !important;
+  border-bottom: 1px solid var(--zen-surface1) !important;
+}
+
+/* ---- content area edge ---- */
+#browser,
+#tabbrowser-tabpanels {
+  background-color: var(--zen-crust) !important;
+}
+
+/* ---- context menus ---- */
+menupopup,
+#context-navigation {
+  background-color: var(--zen-base) !important;
+  color: var(--zen-text) !important;
+  border: 1px solid var(--zen-surface1) !important;
+}
+
+menuitem:hover {
+  background-color: var(--zen-surface0) !important;
+  color: var(--zen-text) !important;
+}

@@ -69,7 +69,7 @@
     "unticked": "[ ] "
   },
   "link": {
-    "color": "#7e9cd8",
+    "color": "#938056",
     "underline": true
   },
   "link_text": {
@@ -77,7 +77,7 @@
     "bold": true
   },
   "image": {
-    "color": "#7e9cd8",
+    "color": "#938056",
     "underline": true
   },
   "image_text": {
@@ -105,13 +105,13 @@
         "color": "#54546d"
       },
       "comment_preproc": {
-        "color": "#7e9cd8"
+        "color": "#938056"
       },
       "keyword": {
-        "color": "#957fb8"
+        "color": "#7aa89f"
       },
       "keyword_reserved": {
-        "color": "#957fb8"
+        "color": "#7aa89f"
       },
       "keyword_namespace": {
         "color": "#e6c384"
@@ -132,7 +132,7 @@
         "color": "#ffa066"
       },
       "name_tag": {
-        "color": "#957fb8"
+        "color": "#7aa89f"
       },
       "name_attribute": {
         "color": "#e6c384"
@@ -148,7 +148,7 @@
       },
       "name_exception": {},
       "name_function": {
-        "color": "#7e9cd8"
+        "color": "#938056"
       },
       "name_other": {},
       "literal": {},

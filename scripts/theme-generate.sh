@@ -23,6 +23,7 @@ build_sed() {
   sed_args=()
   while IFS== read -r name mocha_hex; do
     [ -n "$name" ] || continue
+    [[ "$name" == \#* ]] && continue
     theme_hex="$(grep -m1 "^${name}=" "$target_palette" | cut -d= -f2)"
     [ -n "$theme_hex" ] || { echo "Warning: $name missing from $(basename "$target_palette")" >&2; continue; }
     sed_args+=("-e" "s/#${mocha_hex}/#${theme_hex}/g")
@@ -36,6 +37,7 @@ build_rgb_sed() {
   sed_rgb_args=()
   while IFS== read -r name mocha_hex; do
     [ -n "$name" ] || continue
+    [[ "$name" == \#* ]] && continue
     theme_hex="$(grep -m1 "^${name}=" "$target_palette" | cut -d= -f2)"
     [ -n "$theme_hex" ] || continue
     mocha_rgb="$(printf '%d;%d;%d' 0x${mocha_hex:0:2} 0x${mocha_hex:2:2} 0x${mocha_hex:4:2})"
@@ -51,6 +53,7 @@ build_hyprlock_sed() {
   sed_hl_args=()
   while IFS== read -r name mocha_hex; do
     [ -n "$name" ] || continue
+    [[ "$name" == \#* ]] && continue
     theme_hex="$(grep -m1 "^${name}=" "$target_palette" | cut -d= -f2)"
     [ -n "$theme_hex" ] || continue
     mocha_rgb="$(printf 'rgb(%d,%d,%d)' 0x${mocha_hex:0:2} 0x${mocha_hex:2:2} 0x${mocha_hex:4:2})"
@@ -85,16 +88,21 @@ for theme in "${themes[@]}"; do
     [ -f "$master" ] || continue
     base="$(basename "$master")"
     case "$base" in
-      # ghostty uses bare hex (no '#') for background/foreground/cursor
+      # ghostty uses bare hex (no '#') for background/foreground/cursor;
+      # derive those from the palette (base/text/cursor_color/surface1)
       ghostty)
-        # replace #hex first, then bare hex for the 5 non-palette keys
+        base_hex="$(grep -m1 '^base=' "$target_palette" | cut -d= -f2 | awk '{print $1}')"
+        text_hex="$(grep -m1 '^text=' "$target_palette" | cut -d= -f2 | awk '{print $1}')"
+        cursor_hex="$(grep -m1 '^cursor_color=' "$target_palette" | cut -d= -f2 | awk '{print $1}')"
+        sel_hex="$(grep -m1 '^surface1=' "$target_palette" | cut -d= -f2 | awk '{print $1}')"
+        # replace #hex first, then bare hex for the non-palette keys
         sed "${sed_args[@]}" \
-          -e 's/^background = 1e1e2e/background = 1f1f28/' \
-          -e 's/^foreground = cdd6f4/foreground = dcd7ba/' \
-          -e 's/^cursor-color = f5e0dc/cursor-color = dcd7ba/' \
-          -e 's/^cursor-text = 1e1e2e/cursor-text = 1f1f28/' \
-          -e 's/^selection-background = 45475a/selection-background = 2a2a37/' \
-          -e 's/^selection-foreground = cdd6f4/selection-foreground = dcd7ba/' \
+          -e "s/^background = 1e1e2e/background = ${base_hex}/" \
+          -e "s/^foreground = cdd6f4/foreground = ${text_hex}/" \
+          -e "s/^cursor-color = f5e0dc/cursor-color = ${cursor_hex}/" \
+          -e "s/^cursor-text = 1e1e2e/cursor-text = ${base_hex}/" \
+          -e "s/^selection-background = 45475a/selection-background = ${sel_hex}/" \
+          -e "s/^selection-foreground = cdd6f4/selection-foreground = ${text_hex}/" \
           "$master" > "$target_dir/$base"
         ;;
       bat.tmTheme)

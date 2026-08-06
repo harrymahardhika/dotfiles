@@ -16,7 +16,7 @@ New plugin: append to `.zsh_plugins.txt`, run `scripts/antidote-bootstrap.sh`. R
 
 ## Neovim
 
-Four configs under `nvim-configs/`: `beta`, `harry`, `custom-nvchad`, `twelve`. Active one is a symlink at `~/.config/nvim`. Switch with `nvim-switch` (alias for `scripts/nvim-switch.sh`).
+Two configs under `nvim-configs/`: `twelve`, `twenty-six`. Active one is a symlink at `~/.config/nvim`. Switch with `nvim-switch` (alias for `scripts/nvim-switch.sh`).
 
 `nvim-configs/stylua.toml` is the shared Lua formatter config. `lazy-lock.json` files gitignored per config.
 
@@ -34,15 +34,15 @@ Four configs under `nvim-configs/`: `beta`, `harry`, `custom-nvchad`, `twelve`. 
 
 ## Theme Switching
 
-`scripts/theme-switch.sh` (alias `theme-switch`, rofi frontend `theme-pick`) swaps the whole system between **mocha** (default) and **kanagawa**.
+`scripts/theme-switch.sh` (alias `theme-switch`, rofi frontend `theme-pick`) swaps the whole system between **mocha** (default), **kanagawa**, **tokyonight**, and **rosepine**.
 
 - Themes driven by `themes/palettes/<name>.palette` (semantic color map). Payload files live in `themes/<name>/`; inline (non-payload) configs are rendered from mocha masters under `themes/mocha/inline/`.
 - After editing a config that's inlined (see `sync-masters`), run `theme-switch sync-masters` so masters stay authoritative — switching is then lossless in both directions.
 - Run `theme-switch apply <name> --dry` to preview. `apply` reloads services (mako/waybar/dunst), hyprctl, and terminals (kitty SIGUSR1, ghostty SIGUSR2; alacritty live-reloads).
-- `.config/opencode/tui.json` holds the opencode TUI theme (built-ins `catppuccin`/`kanagawa`).
-- Wallpapers live in `wallpapers/<theme>/` (mocha, kanagawa). `theme-switch apply` randomizes a wallpaper from the active theme's subdir via `set-wallpaper.sh` (awww), which reads `~/.cache/theme-current` and falls back to `wallpapers/` root.
+- `.config/opencode/tui.json` holds the opencode TUI theme (built-ins `catppuccin`/`kanagawa`/`tokyonight`/`rosepine`).
+- Wallpapers live in `wallpapers/<theme>/` (mocha, kanagawa, tokyonight, rosepine). `theme-switch apply` randomizes a wallpaper from the active theme's subdir via `set-wallpaper.sh` (awww), which reads `~/.cache/theme-current` and falls back to `wallpapers/` root.
 - tmux: catppuccin/tmux only ships catppuccin flavors, so non-mocha themes inject a `# THEME-SWITCH @thm_* OVERRIDES` block at the end of `.tmux.conf` (after the tpm `run`). The plugin uses `set -ogq`, so leftovers are unset before re-sourcing.
-- Payload names are short (`mocha`, `kanagawa`) — not `catppuccin-mocha`.
+- Payload names are short (`mocha`, `kanagawa`, `tokyonight`, `rosepine`) — not `catppuccin-mocha`.
 
 ## Tmux
 

@@ -8,15 +8,15 @@
   --zen-base: #1f1f28;
   --zen-mantle: #16161d;
   --zen-crust: #16161d;
-  --zen-surface0: #16161d;
+  --zen-surface0: #2a2a37;
   --zen-surface1: #2a2a37;
   --zen-surface2: #363646;
   --zen-text: #dcd7ba;
   --zen-subtext0: #a9a9b8;
   --zen-overlay0: #54546d;
-  --zen-accent: #938056;  /* boatYellow1 */
-  --zen-blue: #7e9cd8;
-  --zen-mauve: #957fb8;
+  --zen-accent: #938056;  /* blue */
+  --zen-blue: #938056;
+  --zen-mauve: #7aa89f;
   --zen-peach: #ffa066;
   --zen-green: #98bb6c;
   --zen-red: #e46876;
@@ -74,6 +74,20 @@
 
 .tab-icon-image {
   fill: var(--zen-accent) !important;
+}
+
+/* ---- zen essentials (pinned row) ---- */
+#zen-essentials,
+#zen-essentials .zen-essentials-container {
+  --tab-min-height: 30px !important;
+}
+
+#zen-essentials .zen-essentials-container {
+  gap: 2px !important;
+}
+
+#zen-essentials .tabbrowser-tab[zen-essential="true"] .tab-background {
+  margin-block: 1px !important;
 }
 
 /* ---- urlbar / searchbar ---- */

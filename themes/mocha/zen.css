@@ -76,6 +76,20 @@
   fill: var(--zen-accent) !important;
 }
 
+/* ---- zen essentials (pinned row) ---- */
+#zen-essentials,
+#zen-essentials .zen-essentials-container {
+  --tab-min-height: 30px !important;
+}
+
+#zen-essentials .zen-essentials-container {
+  gap: 2px !important;
+}
+
+#zen-essentials .tabbrowser-tab[zen-essential="true"] .tab-background {
+  margin-block: 1px !important;
+}
+
 /* ---- urlbar / searchbar ---- */
 #urlbar,
 #searchbar {

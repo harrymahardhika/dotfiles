@@ -1,0 +1,43 @@
+# Semantic design tokens (processed first so they win over base aliases)
+# Tokyo Night "night" — cool blue accents, deeper base than mocha
+border_accent=7aa2f7
+border_subtle=1a1b26
+accent_primary=7aa2f7
+accent_secondary=bb9af7
+prompt_accent=7aa2f7
+active_window_accent=7aa2f7
+selection_bg=292e42
+cursor_color=c0caf5
+success=9ece6a
+warning=e0af68
+error=f7768e
+surface_elevated=292e42
+surface_overlay=16161e
+
+# Base Tokyo Night palette
+rosewater=c0caf5
+flamingo=f7768e
+pink=bb9af7
+mauve=9d7cd8
+red=f7768e
+maroon=db4b4b
+peach=ff9e64
+yellow=e0af68
+green=9ece6a
+teal=73daca
+sky=7dcfff
+sapphire=7aa2f7
+blue=7aa2f7
+lavender=89ddff
+text=c0caf5
+subtext1=a9b1d6
+subtext0=a9b1d6
+overlay2=737aa2
+overlay1=565f89
+overlay0=3b4261
+surface2=545c7e
+surface1=3b4261
+surface0=292e42
+base=1a1b26
+mantle=16161e
+crust=16161e

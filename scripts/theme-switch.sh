@@ -134,9 +134,11 @@ apply_alacritty() {
 apply_wezterm() {
   local theme="$1"
   case "$theme" in
-    mocha)    local name="Catppuccin Mocha" ;;
-    kanagawa) local name="Kanagawa Wave" ;;
-    *)        local name="$theme" ;;
+    mocha)      local name="Catppuccin Mocha" ;;
+    kanagawa)   local name="Kanagawa Wave" ;;
+    tokyonight) local name="Tokyo Night" ;;
+    rosepine)   local name="Rosé Pine" ;;
+    *)          local name="$theme" ;;
   esac
   rewrite_line "$HOME/.config/wezterm/wezterm.lua" 'color_scheme = ".*"' "color_scheme = \"$name\""
 }
@@ -144,9 +146,11 @@ apply_wezterm() {
 apply_helix() {
   local theme="$1"
   case "$theme" in
-    kanagawa) local name="kanagawa" ;;
-    mocha)    local name="catppuccin_mocha" ;;
-    *)        local name="$theme" ;;
+    kanagawa)   local name="kanagawa" ;;
+    mocha)      local name="catppuccin_mocha" ;;
+    tokyonight) local name="tokyonight" ;;
+    rosepine)   local name="rose_pine" ;;
+    *)          local name="$theme" ;;
   esac
   rewrite_line "$HOME/.config/helix/config.toml" 'theme = ".*"' "theme = \"$name\""
 }
@@ -200,9 +204,11 @@ apply_bat() {
 apply_zed() {
   local theme="$1"
   case "$theme" in
-    kanagawa) local name="Kanagawa" ;;
-    mocha)    local name="Catppuccin Mocha - No Italics" ;;
-    *)        local name="$theme" ;;
+    kanagawa)   local name="Kanagawa" ;;
+    mocha)      local name="Catppuccin Mocha - No Italics" ;;
+    tokyonight) local name="Tokyo Night" ;;
+    rosepine)   local name="Rosé Pine" ;;
+    *)          local name="$theme" ;;
   esac
   rewrite_line "$HOME/.config/zed/settings.json" '"dark": ".*"' "\"dark\": \"$name\""
 }
@@ -210,9 +216,11 @@ apply_zed() {
 apply_vscode() {
   local theme="$1"
   case "$theme" in
-    kanagawa) local name="Kanagawa" ;;
-    mocha)    local name="Catppuccin Mocha" ;;
-    *)        local name="$theme" ;;
+    kanagawa)   local name="Kanagawa" ;;
+    mocha)      local name="Catppuccin Mocha" ;;
+    tokyonight) local name="Tokyo Night" ;;
+    rosepine)   local name="Rosé Pine" ;;
+    *)          local name="$theme" ;;
   esac
   # misc/vscode-settings.json is a settings fragment; edit in place
   local f="$DOTFILES/misc/vscode-settings.json"
@@ -228,9 +236,11 @@ apply_opencode() {
   local theme="$1"
   local file="$HOME/.config/opencode/tui.json"
   case "$theme" in
-    mocha)    local name="catppuccin" ;;
-    kanagawa) local name="kanagawa" ;;
-    *)        local name="$theme" ;;
+    mocha)      local name="catppuccin" ;;
+    kanagawa)   local name="kanagawa" ;;
+    tokyonight) local name="tokyonight" ;;
+    rosepine)   local name="rosepine" ;;
+    *)          local name="$theme" ;;
   esac
   if [ "${DRY:-0}" = "1" ]; then
     echo "  DRY: set opencode theme -> $name"
@@ -247,8 +257,10 @@ apply_opencode() {
 apply_herdr() {
   local theme="$1"
   case "$theme" in
-    kanagawa) local name="kanagawa" ;;    mocha)    local name="catppuccin" ;;
-    *)        local name="$theme" ;;
+    kanagawa)   local name="kanagawa" ;;    mocha)    local name="catppuccin" ;;
+    tokyonight) local name="tokyonight" ;;
+    rosepine)   local name="rosepine" ;;
+    *)          local name="$theme" ;;
   esac
   rewrite_line "$HOME/.config/herdr/config.toml" '^name = ".*"' "name = \"$name\""
 }
@@ -326,9 +338,11 @@ apply_starship() {
   local theme="$1"
   # starship uses inline [palettes.<name>] blocks; flip the active palette line
   case "$theme" in
-    mocha)    local pal="catppuccin_mocha" ;;
-    kanagawa) local pal="kanagawa" ;;
-    *)        local pal="$theme" ;;
+    mocha)      local pal="catppuccin_mocha" ;;
+    kanagawa)   local pal="kanagawa" ;;
+    tokyonight) local pal="tokyonight" ;;
+    rosepine)   local pal="rosepine" ;;
+    *)          local pal="$theme" ;;
   esac
   rewrite_line "$HOME/.config/starship.toml" "^palette = .*" "palette = '$pal'"
 }
@@ -347,6 +361,26 @@ apply_tmux() {
       tmux set -ug "$v" 2>/dev/null || true
     done
     tmux source-file "$HOME/.tmux.conf"
+    # The tmux server's global env is baked at server start and inherited by
+    # login-shell children (e.g. the tmux-pick popup's `bash -lc`). Refresh it so
+    # a stale theme's FZF_DEFAULT_OPTS doesn't leak into new panes/popups.
+    refresh_tmux_env
+  fi
+}
+
+# update tmux server-global env vars that carry theme colors so newly spawned
+# login shells (popups, split panes) don't inherit a stale theme
+refresh_tmux_env() {
+  if [ "${DRY:-0}" = "1" ]; then
+    echo "  DRY: refresh tmux server env (FZF_DEFAULT_OPTS)"
+    return
+  fi
+  local opts
+  opts="$(awk '/^export FZF_DEFAULT_OPTS=/{sub(/^export FZF_DEFAULT_OPTS="/,""); sub(/"?[[:space:]]*\\?$/,""); print; in_opts=1; next} in_opts{sub(/"$/,""); sub(/\\$/,""); print; if($0 ~ /^[[:space:]]*$/){exit}}' "$HOME/.zsh/config.zsh" 2>/dev/null | tr '\n' ' ')"
+  if [ -n "$opts" ]; then
+    tmux setenv -g FZF_DEFAULT_OPTS "$opts"
+  else
+    tmux setenv -gu FZF_DEFAULT_OPTS 2>/dev/null || true
   fi
 }
 
@@ -418,11 +452,7 @@ apply_nvim() {
   for cfg in "$DOTFILES/nvim-configs"/*/; do
     [ -d "$cfg" ] || continue
     cfg="${cfg%/}"
-    name="$(basename "$cfg")"
-    case "$name" in
-      custom-nvchad) apply_nvchad "$name" "$theme" ;;
-      *)             apply_nvim_payload "$name" "$theme" ;;
-    esac
+    apply_nvim_payload "$(basename "$cfg")" "$theme"
   done
 }
 
@@ -435,7 +465,7 @@ apply_nvim_payload() {
   local found=""
   while IFS= read -r f; do
     [ -f "$f" ] || continue
-    if grep -qE 'catppuccin/nvim|rebelot/kanagawa.nvim' "$f" 2>/dev/null; then
+    if grep -qE 'catppuccin/nvim|rebelot/kanagawa.nvim|folke/tokyonight.nvim|rose-pine/neovim' "$f" 2>/dev/null; then
       found="$f"
       break
     fi
@@ -443,23 +473,6 @@ apply_nvim_payload() {
   if [ -n "$found" ]; then
     run cp "$payload" "$found"
   fi
-}
-
-# custom-nvchad uses base46's built-in theme name
-apply_nvchad() {
-  local cfg="$1" theme="$2"
-  local file="$DOTFILES/nvim-configs/$cfg/lua/nvconfig.lua"
-  case "$theme" in
-    mocha)    local base46="catppuccin" ;;
-    kanagawa) local base46="kanagawa" ;;
-    *)        local base46="$theme" ;;
-  esac
-  # only the base46 theme under M.base46, not the cheatsheet theme below
-  if [ "${DRY:-0}" = "1" ]; then
-    echo "  DRY: sed nvconfig.lua base46 theme -> $base46"
-    return
-  fi
-  sed -i '/M\.base46 = {/,/^}/s/^  theme = ".*",$/  theme = "'"$base46"'",/' "$file"
 }
 
 # Zen Browser userChrome.css (payloads themes/{theme}/zen.css)
