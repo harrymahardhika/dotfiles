@@ -20,13 +20,13 @@ theme[selected_fg]="#31748f"
 theme[inactive_fg]="#6e6a86"
 
 # Color of text appearing on top of graphs, i.e uptime and current network graph scaling
-theme[graph_text]="#e0def4"
+theme[graph_text]="#ebbcba"
 
 # Background color of the percentage meters
 theme[meter_bg]="#403d52"
 
 # Misc colors for processes box including mini cpu graphs, details memory graph and details status text
-theme[proc_misc]="#e0def4"
+theme[proc_misc]="#ebbcba"
 
 # CPU, Memory, Network, Proc box outline colors
 theme[cpu_box]="#c4a7e7" #Mauve

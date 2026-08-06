@@ -23,6 +23,8 @@ THEMES_DIR="$DOTFILES/themes"
 PALETTES_DIR="$THEMES_DIR/palettes"
 STATE_FILE="${THEME_STATE:-$HOME/.cache/theme-current}"
 
+. "$DOTFILES/scripts/tmux/reload-tmux-theme.sh"
+
 DEFAULT_THEME="mocha"
 ACTIVE_CFG="$HOME/.config/nvim"
 ZEN_PROFILE="oct5ov6c.Default (release)"
@@ -365,6 +367,10 @@ apply_tmux() {
     # login-shell children (e.g. the tmux-pick popup's `bash -lc`). Refresh it so
     # a stale theme's FZF_DEFAULT_OPTS doesn't leak into new panes/popups.
     refresh_tmux_env
+    # Redraw attached clients and re-exec idle zsh panes so already-open
+    # sessions pick up the new palette immediately (idempotent; sources the
+    # config again, which is harmless).
+    reload_tmux_theme
   fi
 }
 
@@ -491,10 +497,14 @@ resolve_file() {
   readlink -f "$1" 2>/dev/null || echo "$1"
 }
 
-# build mocha->theme sed -e args for the given color syntax
+# build mocha->theme sed -e args for the given color syntax.
+# Multiple palette tokens can share a source hex (e.g. selection_bg/surface0
+# both use 313244); when they diverge in the target theme, later tokens win, so
+# keep a map keyed by source hex and emit one rule per hex (last-wins).
 from_to_args() {
   local from_palette="$1" to_palette="$2" kind="$3"
   local args=() name from_hex to_hex from_val to_val
+  local -A map=()
   while IFS== read -r name from_hex; do
     # skip empty lines and comments
     [ -n "$name" ] || continue
@@ -504,6 +514,10 @@ from_to_args() {
     [ -n "$from_hex" ] || continue
     to_hex="$(grep -m1 "^${name}=" "$to_palette" | cut -d= -f2 | awk '{print $1}')"
     [ -n "$to_hex" ] || continue
+    map["$from_hex"]="$to_hex"
+  done < "$from_palette"
+  for from_hex in "${!map[@]}"; do
+    to_hex="${map[$from_hex]}"
     [ "$from_hex" != "$to_hex" ] || continue
     case "$kind" in
       hex)      from_val="#${from_hex}"; to_val="#${to_hex}" ;;
@@ -519,7 +533,7 @@ from_to_args() {
       to_val="$(printf 'rgba(%d,%d,%d)' 0x${to_hex:0:2} 0x${to_hex:2:2} 0x${to_hex:4:2})"
       args+=("-e" "s|${from_val}|${to_val}|g")
     fi
-  done < "$from_palette"
+  done
   printf '%s\n' "${args[@]}"
 }
 
@@ -534,6 +548,71 @@ inline_master() {
     esac
   fi
   echo "$THEMES_DIR/mocha/inline/$rel"
+}
+
+# last-wins maps colliding source hexes to the base color, but a few inline
+# slots are semantically a selection highlight, an accent border, or an accent
+# color. Restore those from the palette so kanagawa keeps its boatYellow1
+# borders and teal accents, and fzf's bg+ stays lighter than the background.
+# No-op for themes where the semantic token and base color are identical.
+fixup_inline_semantics() {
+  local file="$1" theme="$2" kind="$3" master="$4"
+  [ "$kind" = "hex" ] || return 0
+  local pal="$PALETTES_DIR/$theme.palette"
+  [ -f "$pal" ] || return 0
+  local sel accent sec
+  case "$master" in
+    */.zsh/config.zsh|*/scripts/tmux/tmux-pick.sh)
+      sel="$(grep -m1 '^selection_bg=' "$pal" | cut -d= -f2 | awk '{print $1}')"
+      [ -n "$sel" ] || return 0
+      sed -i -E "s/(bg\+:)#[0-9a-fA-F]+/\1#${sel}/g; s/(--color=border:)#[0-9a-fA-F]+/\1#${sel}/g" "$file"
+      sec="$(grep -m1 '^accent_secondary=' "$pal" | cut -d= -f2 | awk '{print $1}')"
+      [ -n "$sec" ] || return 0
+      sed -i -E "s/(info:|prompt:)#[0-9a-fA-F]+/\1#${sec}/g" "$file"
+      ;;
+    */.zsh/prompt.zsh)
+      accent="$(grep -m1 '^border_accent=' "$pal" | cut -d= -f2 | awk '{print $1}')"
+      sec="$(grep -m1 '^accent_secondary=' "$pal" | cut -d= -f2 | awk '{print $1}')"
+      if [ -n "$accent" ]; then
+        sed -i -E "s/(local (behind_color|path_color)=\"%F\{)#[0-9a-fA-F]+/\1#${accent}/" "$file"
+      fi
+      if [ -n "$sec" ]; then
+        sed -i -E "s/(local arrow_color=\"%F\{)#[0-9a-fA-F]+/\1#${sec}/" "$file"
+      fi
+      ;;
+    */.gitmux.conf)
+      sec="$(grep -m1 '^accent_secondary=' "$pal" | cut -d= -f2 | awk '{print $1}')"
+      [ -n "$sec" ] || return 0
+      sed -i -E "s/(untracked: '#\[fg=)#[0-9a-fA-F]+/\1#${sec}/" "$file"
+      ;;
+    */.config/yazi/theme.toml)
+      # yazi chrome (status rows, selection markers, spot/manager/preview
+      # borders, titles, directory entries) uses the accent color; keep it on
+      # border_accent. Filetype icons (lines with `name = `) stay base blue.
+      accent="$(grep -m1 '^border_accent=' "$pal" | cut -d= -f2 | awk '{print $1}')"
+      blue="$(grep -m1 '^blue=' "$pal" | cut -d= -f2 | awk '{print $1}')"
+      [ -n "$accent" ] || return 0
+      [ -n "$blue" ] || return 0
+      [ "$blue" = "$accent" ] && return 0
+      sed -i -E "/name = /!s/#${blue}/#${accent}/g" "$file"
+      ;;
+    */.config/mako/config|*/.config/dunst/dunstrc|*/.config/wlogout/style.css)
+      accent="$(grep -m1 '^border_accent=' "$pal" | cut -d= -f2 | awk '{print $1}')"
+      [ -n "$accent" ] || return 0
+      case "$master" in
+        */.config/mako/config)
+          sed -i -E "0,/^border-color=#[0-9a-fA-F]+/s//border-color=#${accent}/" "$file"
+          ;;
+        */.config/dunst/dunstrc)
+          sed -i -E "0,/^frame_color = \"#[0-9a-fA-F]+\"/s//frame_color = \"#${accent}\"/" "$file"
+          sed -i -E "0,/^highlight = \"#[0-9a-fA-F]+\"/s//highlight = \"#${accent}\"/" "$file"
+          ;;
+        */.config/wlogout/style.css)
+          sed -i -E "s/^([[:space:]]*)border-color: #[0-9a-fA-F]+/\1border-color: #${accent}/" "$file"
+          ;;
+      esac
+      ;;
+  esac
 }
 
 # copy the mocha master over the live file, then apply mocha->theme sed.
@@ -553,6 +632,7 @@ apply_theme_inline() {
     local args=()
     mapfile -t args < <(from_to_args "$PALETTES_DIR/$DEFAULT_THEME.palette" "$PALETTES_DIR/$theme.palette" "$kind")
     sed "${args[@]}" "$master" > "$file"
+    fixup_inline_semantics "$file" "$theme" "$kind" "$master"
   fi
 }
 

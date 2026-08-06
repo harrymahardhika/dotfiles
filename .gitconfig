@@ -6,7 +6,7 @@
   autocrlf = input                # keep newlines as in input
   compression = 9                 # trade CPU for network
   editor = /usr/local/bin/nvim
-  excludesfile = /Users/harry/.gitignore_global
+  excludesfile = ~/.gitignore_global
   fsync = none
   preloadindex = true             # preload index for faster status
   whitespace = error              # treat incorrect whitespace as errors
@@ -33,8 +33,7 @@
   st = status -sb
   standup = log --since '1 day ago' --oneline --author <harrymahardhika@gmail.com>
   tlog = log --stat --since='1 day ago' --graph --pretty=oneline --abbrev-commit --date=relative
-  wtf = git-wtf -r -A
-  zip = archive --format zip --output archive.zip master
+  zip = archive --format zip --output archive.zip HEAD
 
 [blame]
   coloring = highlightRecent
@@ -67,17 +66,14 @@
   context = 3                        # less context in diffs
   interHunkContext = 10              # merge near hunks in diffs
   renames = copies                   # detect copies as renames in diffs
-  tool = nvimdiff
+  tool = nvim
+  cmd = nvim -d
 
 [merge]
-  tool = nvimdiff
+  tool = nvim
 
 [merge "ours"]
   driver = true
-
-[filter "media"]
-  clean = git-media-clean %f
-  smudge = git-media-smudge %f
 
 [filter "lfs"]
   clean = git-lfs clean %f
@@ -86,7 +82,6 @@
 
 [interactive]
   singlekey = true
-  diffFilter = delta --color-only
 
 [log]
   abbrevCommit = true                # short commits

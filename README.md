@@ -12,7 +12,8 @@ both X11 and Wayland.
   (Hyprland, Sway)
 - **PHP/Laravel Focus** - Extensive tooling for PHP development with version
   switching
-- **Unified Theme** - Catppuccin Mocha color scheme across all applications
+- **Theme Switching** - Swaps the whole system between mocha, kanagawa,
+  tokyonight, and rosepine (mocha default)
 - **Automation Scripts** - System updates, web app launchers, and utility
   scripts
 
@@ -58,7 +59,7 @@ dotfiles/
 
 - **Plugin Manager**: Antidote for fast plugin loading
 - **Plugins**: fzf, zoxide, autosuggestions, syntax-highlighting, wakatime
-- **Prompt**: Starship with Catppuccin theme
+- **Prompt**: Starship with the active theme
 - **Features**:
   - Laravel/PHP development aliases
   - Git shortcuts
@@ -78,7 +79,7 @@ Most configs use the Lazy.nvim plugin manager, while `twelve` leverages native p
 
 - Custom prefix: `Ctrl+a`
 - Vim-style navigation
-- Catppuccin Mocha theme
+- Active theme (mocha/kanagawa/tokyonight/rosepine via theme-switch)
 - Session persistence (tmux-resurrect, tmux-continuum)
 - Gitmux integration for git status
 - Custom popup session switcher
@@ -101,7 +102,7 @@ compositors.
 
 ### Terminal Emulators
 
-Multiple options configured with Catppuccin theme:
+Multiple options, all following the active theme:
 
 - Kitty (primary)
 - Alacritty
@@ -163,8 +164,8 @@ Launch web applications as desktop apps via `scripts/webapps/`:
 
 **Languages**: PHP (8.2-8.4), Node.js, Python, Go, Rust **Shells**: ZSH
 (primary), Fish **Editors**: Neovim, Helix, Zed **Terminals**: Kitty, Alacritty,
-Ghostty, Foot, WezTerm **WM**: Hyprland, Sway, i3wm **Theme**: Catppuccin Mocha
-(consistent across all tools)
+Ghostty, Foot, WezTerm **WM**: Hyprland, Sway, i3wm **Theme**: mocha
+(default), kanagawa, tokyonight, rosepine (switched via `theme-switch`)
 
 ## Installation
 
@@ -234,7 +235,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 ## Customization
 
-- **Colors**: Edit theme files in respective config directories
+- **Colors**: Use `theme-switch` to change themes; edit palettes in `themes/palettes/` and mocha masters in `themes/mocha/inline/`, then run `theme-switch sync-masters`
 - **Keybindings**: Check `.config/hypr/`, `.config/i3/`, `.tmux.conf`
 - **Aliases**: Modify `.zsh/aliases.zsh`
 - **Plugins**: Edit `.zsh_plugins.txt` for ZSH, `lua/plugins/` for Neovim

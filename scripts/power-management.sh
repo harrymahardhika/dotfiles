@@ -1,19 +1,21 @@
 #!/usr/bin/env bash
-# Laptop power management script for Sway
+# Laptop power management script
 # Monitors power state and adjusts system settings accordingly
 
 set -euo pipefail
 
 BATTERY_PATH="/sys/class/power_supply/BAT0"
-AC_PATH="/sys/class/power_supply/AC"
 
-# Check if on AC power
+# Check if on AC power (detect any mains adapter: AC0/ADP0/etc.)
 is_on_ac() {
-    if [ -f "$AC_PATH/online" ]; then
-        [ "$(cat "$AC_PATH/online")" = "1" ]
-    else
-        return 1
-    fi
+  local online name
+  for online in /sys/class/power_supply/*/online; do
+    [ -f "$online" ] || continue
+    name="${online%/online}"
+    [ "$(cat "$name/type" 2>/dev/null)" = "Mains" ] || continue
+    [ "$(cat "$online")" = "1" ] && return 0
+  done
+  return 1
 }
 
 # Get current power state

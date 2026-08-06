@@ -108,10 +108,10 @@
         "color": "#7aa2f7"
       },
       "keyword": {
-        "color": "#bb9af7"
+        "color": "#9d7cd8"
       },
       "keyword_reserved": {
-        "color": "#bb9af7"
+        "color": "#9d7cd8"
       },
       "keyword_namespace": {
         "color": "#e0af68"
@@ -132,7 +132,7 @@
         "color": "#ff9e64"
       },
       "name_tag": {
-        "color": "#bb9af7"
+        "color": "#9d7cd8"
       },
       "name_attribute": {
         "color": "#e0af68"

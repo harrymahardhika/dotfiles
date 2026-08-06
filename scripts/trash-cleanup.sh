@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Remove trashed files older than 7 days from the FreeDesktop trash.
-# Uses gio for listing (--dry-run) and direct rm for deletion (no undo).
+# Parses *.trashinfo metadata for deletion dates; direct rm for deletion (no undo).
 
 readonly CUTOFF_DAYS=7
 readonly TRASH_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/Trash"

@@ -1,0 +1,23 @@
+# OS / filesystem junk
+.DS_Store
+.AppleDouble
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.Directory
+
+# Editors
+*.swp
+*.swo
+*~
+.*.sw[a-z]
+.vscode/
+.idea/
+
+# Shell / env
+.zsh_history
+.bash_history
+
+# Logs / temp
+*.log
+*.tmp

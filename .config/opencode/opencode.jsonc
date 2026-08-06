@@ -1,15 +1,48 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "shell": "/bin/zsh",
+  // Uncomment and set to your preferred models:
+  // "model": "anthropic/claude-sonnet-4-5",
+  // "small_model": "opencode/deepseek-v4-flash-free",
+  "snapshot": true,
+  "share": "manual",
+  "autoupdate": "notify",
+  "instructions": ["../../AGENTS.md", "../../CLAUDE.md"],
+
+  "references": {
+    "dotfiles": { "path": "../../", "description": "The dotfiles repo: theme-switch system, scripts, nvim-configs." },
+    "nvim": { "path": "../../nvim-configs", "description": "Neovim configs twelve/twenty-six and shared stylua.toml." },
+    "palettes": { "path": "../../themes/palettes", "description": "Theme palette semantic color maps (mocha/kanagawa/tokyonight/rosepine)." },
+    "skills": { "path": "../../.agents/skills", "description": "Installed agent skills (stripe, connect, find-skills)." }
+  },
+
   "permission": {
     "read": "allow",
     "glob": "allow",
     "grep": "allow",
     "list": "allow",
     "edit": "ask",
-    "bash": "allow",
-    "webfetch": "allow"
+    "webfetch": "allow",
+    "websearch": "allow",
+    "task": "allow",
+    "external_directory": { "~/**": "allow", "*": "ask" },
+    "bash": {
+      "*": "allow",
+      "rm -rf / *": "deny",
+      "rm -rf *": "ask",
+      "sudo rm -rf *": "ask",
+      "git push --force*": "ask",
+      "git push -f*": "ask",
+      "git reset --hard*": "ask",
+      "git clean -f*": "ask",
+      "dd *": "ask",
+      "mkfs*": "ask",
+      "shutdown*": "ask",
+      "reboot*": "ask",
+      "poweroff*": "ask"
+    }
   },
-  "instructions": ["../../AGENTS.md", "../../CLAUDE.md"],
-  "share": "manual",
-  "autoupdate": "notify"
+
+  "tool_output": { "max_lines": 200, "max_bytes": 8192 },
+  "compaction": { "auto": true, "tail_turns": 15 }
 }

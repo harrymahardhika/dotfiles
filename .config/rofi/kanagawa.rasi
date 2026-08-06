@@ -1,9 +1,9 @@
 * {
     bg-col:  #1f1f28;
-    bg-col-light: #2a2a37;
+    bg-col-light: #16161d;
     border-col: #2a2a37;
-    selected-col: #2a2a37;
-    accent: #938056;  /* blue - cool accent */
+    selected-col: #16161d;
+    accent: #938056;  /* accent */
     fg-col: #dcd7ba;
     fg-col2: #e46876;
     grey: #54546d;

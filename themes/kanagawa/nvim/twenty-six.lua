@@ -21,7 +21,7 @@ return {
           CursorLineNr = { bg = "none" },
           NormalNC = { bg = "none" },
           NormalFloat = { bg = "none" },
-          FloatBorder = { bg = "none" },
+          FloatBorder = { fg = "#938056", bg = "none" },
           FloatTitle = { bg = "none" },
         }
       end,

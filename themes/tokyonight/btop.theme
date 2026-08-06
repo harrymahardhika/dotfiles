@@ -29,7 +29,7 @@ theme[meter_bg]="#3b4261"
 theme[proc_misc]="#c0caf5"
 
 # CPU, Memory, Network, Proc box outline colors
-theme[cpu_box]="#bb9af7" #Mauve
+theme[cpu_box]="#9d7cd8" #Mauve
 theme[mem_box]="#9ece6a" #Green
 theme[net_box]="#db4b4b" #Maroon
 theme[proc_box]="#7aa2f7" #Blue
@@ -48,7 +48,7 @@ theme[cpu_mid]="#7aa2f7"
 theme[cpu_end]="#89ddff"
 
 # Mem/Disk free meter (Mauve -> Lavender -> Blue)
-theme[free_start]="#bb9af7"
+theme[free_start]="#9d7cd8"
 theme[free_mid]="#89ddff"
 theme[free_end]="#7aa2f7"
 
@@ -80,4 +80,4 @@ theme[upload_end]="#7dcfff"
 # Process box color gradient for threads, mem and cpu usage (Sapphire -> Mauve)
 theme[process_start]="#7aa2f7"
 theme[process_mid]="#89ddff"
-theme[process_end]="#bb9af7"
+theme[process_end]="#9d7cd8"

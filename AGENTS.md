@@ -22,7 +22,7 @@ Two configs under `nvim-configs/`: `twelve`, `twenty-six`. Active one is a symli
 
 ## Theme
 
-**Catppuccin Mocha** everywhere. FZF colors in `.zsh/config.zsh` are the hex reference.
+Multi-theme, **mocha** is the default (see Theme Switching below). FZF colors in `.zsh/config.zsh` are palette-inlined, so they follow the active theme. Current theme is tracked in `~/.cache/theme-current` (not committed).
 
 ## Key Scripts
 

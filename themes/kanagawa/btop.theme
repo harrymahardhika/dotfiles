@@ -8,13 +8,13 @@ theme[main_fg]="#dcd7ba"
 theme[title]="#dcd7ba"
 
 # Highlight color for keyboard shortcuts
-theme[hi_fg]="#938056"
+theme[hi_fg]="#7e9cd8"
 
 # Background color of selected item in processes box
 theme[selected_bg]="#2a2a37"
 
 # Foreground color of selected item in processes box
-theme[selected_fg]="#938056"
+theme[selected_fg]="#7e9cd8"
 
 # Color of inactive/disabled text
 theme[inactive_fg]="#727169"
@@ -29,10 +29,10 @@ theme[meter_bg]="#2a2a37"
 theme[proc_misc]="#dcd7ba"
 
 # CPU, Memory, Network, Proc box outline colors
-theme[cpu_box]="#7aa89f" #Mauve
+theme[cpu_box]="#957fb8" #Mauve
 theme[mem_box]="#98bb6c" #Green
 theme[net_box]="#e46876" #Maroon
-theme[proc_box]="#938056" #Blue
+theme[proc_box]="#7e9cd8" #Blue
 
 # Box divider line and small boxes line color
 theme[div_line]="#54546d"
@@ -48,13 +48,13 @@ theme[cpu_mid]="#6a9589"
 theme[cpu_end]="#8992b2"
 
 # Mem/Disk free meter (Mauve -> Lavender -> Blue)
-theme[free_start]="#7aa89f"
+theme[free_start]="#957fb8"
 theme[free_mid]="#8992b2"
-theme[free_end]="#938056"
+theme[free_end]="#7e9cd8"
 
 # Mem/Disk cached meter (Sapphire -> Lavender)
 theme[cached_start]="#6a9589"
-theme[cached_mid]="#938056"
+theme[cached_mid]="#7e9cd8"
 theme[cached_end]="#8992b2"
 
 # Mem/Disk available meter (Peach -> Red)
@@ -80,4 +80,4 @@ theme[upload_end]="#7aa89f"
 # Process box color gradient for threads, mem and cpu usage (Sapphire -> Mauve)
 theme[process_start]="#6a9589"
 theme[process_mid]="#8992b2"
-theme[process_end]="#7aa89f"
+theme[process_end]="#957fb8"

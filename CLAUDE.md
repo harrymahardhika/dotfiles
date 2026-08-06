@@ -47,7 +47,7 @@ nvim-switch      # interactive picker (alias for scripts/nvim-switch.sh)
 
 ## Theme
 
-**Catppuccin Mocha** is used consistently across all tools. When adding or editing configs for new tools, use the Mocha palette. FZF colors in `.zsh/config.zsh` are the reference for hex values.
+The system is multi-theme — **mocha** (default), kanagawa, tokyonight, rosepine — switched via `scripts/theme-switch.sh` (alias `theme-switch`). Edit configs in **mocha** state, then run `theme-switch sync-masters` so mocha masters under `themes/mocha/inline/` stay authoritative. FZF colors in `.zsh/config.zsh` are palette-inlined per theme (not a static reference); the active theme is tracked in `~/.cache/theme-current`.
 
 ## Gitignore Notes
 

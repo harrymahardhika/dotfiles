@@ -21,7 +21,7 @@ return use("kanagawa", "rebelot/kanagawa.nvim", {
           LineNr = { bg = "none" },
           CursorLineNr = { bg = "none" },
           NormalNC = { bg = "none" },
-          FloatBorder = { bg = "none" },
+          FloatBorder = { fg = "#938056", bg = "none" },
           FloatTitle = { bg = "none" },
         }
       end,

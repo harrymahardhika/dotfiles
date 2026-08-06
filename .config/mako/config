@@ -16,7 +16,7 @@ icons=1
 background-color=#1f1f28
 text-color=#dcd7ba
 border-color=#938056
-progress-color=over #2a2a37
+progress-color=over #16161d
 
 [urgency=low]
 default-timeout=5000

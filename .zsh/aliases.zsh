@@ -28,9 +28,8 @@ alias seed="pa db:seed"
 alias tink="pa tinker"
 
 # PHP switchers
-alias php82="sudo update-alternatives --set php /usr/bin/php8.2"
-alias php83="sudo update-alternatives --set php /usr/bin/php8.3"
-alias php84="sudo update-alternatives --set php /usr/bin/php8.4"
+alias php83="$HOME/scripts/php-switch.sh 8.3"
+alias php84="$HOME/scripts/php-switch.sh 8.4"
 
 # Node/NPM/Yarn
 alias npmi="npm install"
@@ -76,7 +75,7 @@ alias gcm="git commit -m"
 alias gca='git commit --amend'
 alias wip="git add . && git commit -m 'wip'"
 alias nah="git reset --hard; git clean -df"
-alias csd="gd --staged | xclip -sel clipboard"
+alias csd="gd --staged | wl-copy"
 alias gdsc="git diff --staged | wl-copy"
 
 # Python/Django

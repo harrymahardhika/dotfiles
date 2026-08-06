@@ -6,7 +6,7 @@
 
 :root {
   --zen-base: #191724;
-  --zen-mantle: #1f1d2e;
+  --zen-mantle: #13111e;
   --zen-crust: #13111e;
   --zen-surface0: #26233a;
   --zen-surface1: #403d52;
@@ -14,7 +14,7 @@
   --zen-text: #e0def4;
   --zen-subtext0: #908caa;
   --zen-overlay0: #6e6a86;
-  --zen-accent: #31748f;  /* blue */
+  --zen-accent: #31748f;  /* accent */
   --zen-blue: #31748f;
   --zen-mauve: #c4a7e7;
   --zen-peach: #f6c177;

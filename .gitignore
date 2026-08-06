@@ -1,32 +1,19 @@
-# .config/BraveSoftware
-# .config/InputLeap
-# .config/composer
-# .config/conf
-# .config/dconf
-# .config/dolphinrc
-# .config/fontconfig
-# .config/github-copilot
-# .config/go
-# .config/google-chrome
-# .config/htop
-# .config/kde.org/
-# .config/lnav
-# .config/mimeapps.list
-# .config/nvim
-# .config/pavucontrol.ini
-# .config/pgcli
-# .config/pulse
-# .config/session
-# .config/trashrc
-# .config/vesktop
-# .local
+# runtime-generated
 .config/btop/*.conf
+
+# opencode local tooling (node_modules for plugins)
 .config/opencode/node_modules/
 .config/opencode/bun.lock
 .config/opencode/package.json
 .config/opencode/package-lock.json
 .config/opencode/.gitignore
+
+# neovim per-config lockfiles
 nvim-configs/*/lazy-lock.json
+
+# logs / misc runtime
 *.log
 .nvimlog
+
+# systemd user timers (managed by systemctl, not stow)
 .config/systemd/user/timers.target.wants/

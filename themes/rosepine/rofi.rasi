@@ -3,7 +3,7 @@
     bg-col-light: #26233a;
     border-col: #403d52;
     selected-col: #26233a;
-    accent: #31748f;  /* blue - cool accent */
+    accent: #31748f;  /* accent */
     fg-col: #e0def4;
     fg-col2: #eb6f92;
     grey: #6e6a86;
