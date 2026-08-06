@@ -6,13 +6,10 @@
     "grep": "allow",
     "list": "allow",
     "edit": "ask",
-    "bash": "ask",
-    "webfetch": "ask"
+    "bash": "allow",
+    "webfetch": "allow"
   },
-  "instructions": [
-    "../../AGENTS.md",
-    "../../CLAUDE.md"
-  ],
+  "instructions": ["../../AGENTS.md", "../../CLAUDE.md"],
   "share": "manual",
   "autoupdate": "notify"
 }

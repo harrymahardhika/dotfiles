@@ -1,9 +1,9 @@
 {
   "lastChangelogVersion": "0.83.0",
-  "defaultProvider": "anthropic",
-  "defaultModel": "claude-opus-4-7",
+  "defaultProvider": "openrouter",
+  "defaultModel": "openrouter/free",
   "defaultThinkingLevel": "medium",
-  "theme": "kanagawa",
+  "theme": "kanagawa/kanagawa",
   "themes": [
     "~/.pi/agent/themes"
   ],

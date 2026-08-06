@@ -1,6 +1,8 @@
 onboarding = false
 [keys]
 prefix = "ctrl+a"
+goto = "prefix+s"
+settings = "prefix+."
 
 [ui.sound]
 enabled = false

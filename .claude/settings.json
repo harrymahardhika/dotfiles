@@ -8,9 +8,12 @@
     "laravel-boost@claude-plugins-official": true,
     "claude-code-setup@claude-plugins-official": true,
     "php-lsp@claude-plugins-official": true,
-    "context7@claude-plugins-official": true
+    "context7@claude-plugins-official": false
   },
   "effortLevel": "medium",
   "theme": "auto",
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "permissions": {
+    "defaultMode": "auto"
+  }
 }
