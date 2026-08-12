@@ -17,7 +17,7 @@ return {
           number = false,
           relativenumber = false,
           statuscolumn = "",
-          signcolumn = "yes:2",
+          signcolumn = "no",
           conceallevel = 3,
           concealcursor = "nvic",
         },

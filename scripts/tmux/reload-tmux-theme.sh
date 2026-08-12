@@ -36,36 +36,39 @@ reload_tmux_theme() {
         done
 
         # re-exec each idle zsh prompt (`exec zsh` keeps the pane's PID stable).
+        # Disabled by default — set TMUX_REEXEC_ZSH=1 to re-enable.
         # tmux -F does not expand \t, so pass a real tab byte as the separator.
         # Re-check the pane right before sending: it may have closed or started
         # a foreground job since the snapshot — never send to a non-zsh pane.
-        tab="$(printf '\t')"
-        tmux list-panes -a -F "#{pane_id}${tab}#{pane_current_command}" 2>/dev/null |
-            while IFS="$tab" read -r pane cmd; do
-                [ "$cmd" = "zsh" ] || continue
-                cmd_now="$(tmux display-message -p -t "$pane" -F '#{pane_current_command}' 2>/dev/null)" || cmd_now=""
-                [ "$cmd_now" = "zsh" ] || continue
-                # Mirror the pane's login-shell status: plain `exec zsh` would
-                # silently downgrade a login shell (e.g. the 'popup' session
-                # runs `zsh -l`) to non-login, dropping .zprofile/.zlogin env.
-                # Detect via the pane process argv: a leading '-' on argv[0]
-                # or a -l/-L/--login flag means login. No tmux format exposes
-                # this, so read the pane PID's cmdline; falls back to
-                # non-login if /proc is unavailable.
-                login=0
-                pane_pid="$(tmux display-message -p -t "$pane" -F '#{pane_pid}' 2>/dev/null)" || pane_pid=""
-                if [ -n "$pane_pid" ] && [ -r "/proc/${pane_pid}/cmdline" ]; then
-                    argv="$(tr '\0' ' ' < "/proc/${pane_pid}/cmdline" 2>/dev/null)" || argv=""
-                    case "$argv" in
-                        "-"*|*" -l"*|*" -L"*|*" --login"*) login=1 ;;
-                    esac
-                fi
-                if [ "$login" = "1" ]; then
-                    tmux send-keys -t "$pane" "exec zsh -l" Enter >/dev/null 2>&1 || true
-                else
-                    tmux send-keys -t "$pane" "exec zsh" Enter >/dev/null 2>&1 || true
-                fi
-            done
+        if [ "${TMUX_REEXEC_ZSH:-0}" = "1" ]; then
+            tab="$(printf '\t')"
+            tmux list-panes -a -F "#{pane_id}${tab}#{pane_current_command}" 2>/dev/null |
+                while IFS="$tab" read -r pane cmd; do
+                    [ "$cmd" = "zsh" ] || continue
+                    cmd_now="$(tmux display-message -p -t "$pane" -F '#{pane_current_command}' 2>/dev/null)" || cmd_now=""
+                    [ "$cmd_now" = "zsh" ] || continue
+                    # Mirror the pane's login-shell status: plain `exec zsh` would
+                    # silently downgrade a login shell (e.g. the 'popup' session
+                    # runs `zsh -l`) to non-login, dropping .zprofile/.zlogin env.
+                    # Detect via the pane process argv: a leading '-' on argv[0]
+                    # or a -l/-L/--login flag means login. No tmux format exposes
+                    # this, so read the pane PID's cmdline; falls back to
+                    # non-login if /proc is unavailable.
+                    login=0
+                    pane_pid="$(tmux display-message -p -t "$pane" -F '#{pane_pid}' 2>/dev/null)" || pane_pid=""
+                    if [ -n "$pane_pid" ] && [ -r "/proc/${pane_pid}/cmdline" ]; then
+                        argv="$(tr '\0' ' ' < "/proc/${pane_pid}/cmdline" 2>/dev/null)" || argv=""
+                        case "$argv" in
+                            "-"*|*" -l"*|*" -L"*|*" --login"*) login=1 ;;
+                        esac
+                    fi
+                    if [ "$login" = "1" ]; then
+                        tmux send-keys -t "$pane" "exec zsh -l" Enter >/dev/null 2>&1 || true
+                    else
+                        tmux send-keys -t "$pane" "exec zsh" Enter >/dev/null 2>&1 || true
+                    fi
+                done
+        fi
     )
 }
 

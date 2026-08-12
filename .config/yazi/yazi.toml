@@ -11,6 +11,12 @@ show_hidden    = true
 edit = [
   { run = 'nvim "$@"', block = true, desc = "Edit" },
 ]
+doxx = [
+  { run = 'doxx "$@"', desc = "doxx", block = true },
+]
+xleak = [
+  { run = 'xleak -i "$@"', desc = "xleak", block = true },
+]
 open = [
   { run = 'xdg-open "$@"', desc = "Open" },
 ]
@@ -36,6 +42,13 @@ rules = [
   { url = "*.pdf", use = "pdf" },
   { mime = "application/pdf", use = "pdf" },
   
+  # Office
+  { url = "*.docx", use = "doxx" },
+  { url = "*.xlsx", use = [ "xleak", "open" ] },
+  { url = "*.xlsm", use = [ "xleak", "open" ] },
+  { url = "*.xls",  use = [ "xleak", "open" ] },
+  { url = "*.ods",  use = [ "xleak", "open" ] },
+  
   # Fallback
   { url = "*", use = [ "edit", "open" ] },
 ]
@@ -51,3 +64,12 @@ micro_workers    = 5
 macro_workers    = 10
 biv_workers      = 5
 suppress_confirm = false
+
+[plugin]
+prepend_previewers = [
+  { url = "*.docx", run = "doxx" },
+  { url = "*.xlsx", run = "xleak" },
+  { url = "*.xlsm", run = "xleak" },
+  { url = "*.xls",  run = "xleak" },
+  { url = "*.ods",  run = "xleak" },
+]

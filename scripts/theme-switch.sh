@@ -557,7 +557,7 @@ inline_master() {
 # No-op for themes where the semantic token and base color are identical.
 fixup_inline_semantics() {
   local file="$1" theme="$2" kind="$3" master="$4"
-  [ "$kind" = "hex" ] || return 0
+  [ "$kind" = "hex" ] || [ "$kind" = "hyprland" ] || return 0
   local pal="$PALETTES_DIR/$theme.palette"
   [ -f "$pal" ] || return 0
   local sel accent sec
@@ -595,6 +595,16 @@ fixup_inline_semantics() {
       [ -n "$blue" ] || return 0
       [ "$blue" = "$accent" ] && return 0
       sed -i -E "/name = /!s/#${blue}/#${accent}/g" "$file"
+      ;;
+    */.config/hypr/toggle-transparency.sh)
+      # hyprland col.active_border uses rgb(HEX) (no '#'). Match the window
+      # border to border_accent; only differs from blue for kanagawa.
+      accent="$(grep -m1 '^border_accent=' "$pal" | cut -d= -f2 | awk '{print $1}')"
+      blue="$(grep -m1 '^blue=' "$pal" | cut -d= -f2 | awk '{print $1}')"
+      [ -n "$accent" ] || return 0
+      [ -n "$blue" ] || return 0
+      [ "$blue" = "$accent" ] && return 0
+      sed -i -E "s/(\[\"col.active_border\"\] = \"rgb\()[0-9a-fA-F]+/\1${accent}/" "$file"
       ;;
     */.config/mako/config|*/.config/dunst/dunstrc|*/.config/wlogout/style.css)
       accent="$(grep -m1 '^border_accent=' "$pal" | cut -d= -f2 | awk '{print $1}')"

@@ -30,6 +30,7 @@ Multi-theme, **mocha** is the default (see Theme Switching below). FZF colors in
 - `scripts/php-switch.sh` — PHP version via `update-alternatives` (8.2/8.3/8.4)
 - `scripts/tmux/tmux-pick.sh` — fzf tmux session picker (bound to `prefix+s`)
 - `scripts/nvim-switch.sh` — switches Neovim config symlink
+- `scripts/hypr-binds.sh` — rofi keybind picker (parses `hyprland.lua`, executes the selected bind via `hyprctl dispatch`). Bound to `SUPER + /`. `--list` prints entries without launching rofi.
 - `scripts/trash-cleanup.sh` — removes FreeDesktop trash items older than 7 days. Runs daily via `trash-cleanup.timer` (systemd --user). Accepts `--dry-run`. Alias: `trash-cleanup`.
 
 ## Theme Switching

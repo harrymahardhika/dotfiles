@@ -38,3 +38,7 @@ if [[ -f "$HOME/.fzf/shell/key-bindings.zsh" ]]; then
 elif [[ -f "$HOME/.fzf.zsh" ]]; then
   source "$HOME/.fzf.zsh"
 fi
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/harry/.local/bin:$PATH"

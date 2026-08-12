@@ -117,6 +117,22 @@ autocmd("InsertLeave", {
   end,
 })
 
+-- strip italic from every highlight group on theme load (all colorschemes)
+local function strip_italic()
+  for _, name in ipairs(vim.fn.getcompletion("", "highlight")) do
+    local hl = vim.api.nvim_get_hl(0, { name = name })
+    if hl.italic then
+      hl.italic = false
+      vim.api.nvim_set_hl(0, name, hl)
+    end
+  end
+end
+
+autocmd({ "ColorScheme", "VimEnter" }, {
+  group = api.nvim_create_augroup("NoItalic", { clear = true }),
+  callback = strip_italic,
+})
+
 api.nvim_create_user_command("BufOnly", function()
   vim.cmd("silent! %bd | e# | bd#")
 end, {})

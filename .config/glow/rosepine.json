@@ -88,10 +88,10 @@
     "prefix": " ",
     "suffix": " ",
     "color": "#eb6f92",
-    "background_color": "#1f1d2e"
+    "background_color": "#13111e"
   },
   "code_block": {
-    "color": "#1f1d2e",
+    "color": "#13111e",
     "margin": 2,
     "chroma": {
       "text": {
@@ -180,7 +180,7 @@
         "color": "#9ccfd8"
       },
       "background": {
-        "background_color": "#1f1d2e"
+        "background_color": "#13111e"
       }
     }
   },

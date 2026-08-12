@@ -23,6 +23,15 @@ return use("kanagawa", "rebelot/kanagawa.nvim", {
           NormalNC = { bg = "none" },
           FloatBorder = { fg = "#938056", bg = "none" },
           FloatTitle = { bg = "none" },
+          Pmenu = { fg = "#DCD7BA", bg = "#2A2A37" },
+          PmenuSel = { fg = "#16161D", bg = "#938056" },
+          PmenuKind = { fg = "#C8C093", bg = "#2A2A37" },
+          PmenuKindSel = { fg = "#16161D", bg = "#938056" },
+          PmenuExtra = { fg = "#C8C093", bg = "#2A2A37" },
+          PmenuExtraSel = { fg = "#16161D", bg = "#938056" },
+          PmenuSbar = { bg = "#2A2A37" },
+          PmenuThumb = { bg = "#54546D" },
+          PmenuBorder = { fg = "#938056", bg = "none" },
         }
       end,
     })

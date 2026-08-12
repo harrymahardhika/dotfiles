@@ -167,7 +167,6 @@ hl.bind(kb(modShift, "Q"), hl.dsp.exit())
 hl.bind(kb(modShift, "X"), hl.dsp.exec_cmd("hyprlock"))
 hl.bind(kb(modShift, "SPACE"), hl.dsp.window.float({ action = "toggle" }))
 hl.bind(kb(mainMod, "D"), hl.dsp.exec_cmd(menu))
-hl.bind(kb(mainMod, "P"), hl.dsp.layout("pseudo"))
 hl.bind(kb(mainMod, "F"), hl.dsp.window.fullscreen({ action = "toggle" }))
 hl.bind(kb(mainMod, "G"), hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
 hl.bind(kb(modShift, "W"), hl.dsp.exec_cmd("$HOME/.config/hypr/set-wallpaper.sh"))
@@ -176,6 +175,7 @@ hl.bind(kb(mainMod, "B"), hl.dsp.exec_cmd("~/.config/waybar/scripts/toggle.sh"))
 hl.bind(kb(modShift, "T"), hl.dsp.exec_cmd("$HOME/.config/hypr/toggle-transparency.sh"))
 hl.bind(kb(mainMod, "V"), hl.dsp.exec_cmd("$HOME/scripts/clipboard-history.sh"))
 hl.bind(kb(mainMod, "A"), hl.dsp.exec_cmd("$HOME/scripts/webapp-launcher.sh"))
+hl.bind(kb(mainMod, "slash"), hl.dsp.exec_cmd("$HOME/scripts/hypr-binds.sh"))
 
 -- === MOVE FOCUS ===
 hl.bind(kb(mainMod, "left"), hl.dsp.focus({ direction = "left" }))
@@ -223,11 +223,35 @@ hl.bind(kb(mainMod, "mouse:272"), hl.dsp.window.drag(), { mouse = true })
 hl.bind(kb(mainMod, "mouse:273"), hl.dsp.window.resize(), { mouse = true })
 
 -- === SCREENSHOT ===
+hl.bind(kb(mainMod, "P"), hl.dsp.exec_cmd("env HYPRSHOT_DIR=$HOME/Screenshots hyprshot -m window"))
 hl.bind(kb(modShift, "P"), hl.dsp.exec_cmd("env HYPRSHOT_DIR=$HOME/Screenshots hyprshot -m region"))
+
+-- === SCRATCHPAD (special workspace) ===
+hl.bind(kb(mainMod, "Z"), hl.dsp.workspace.toggle_special("scratch"))
+hl.bind(kb(modShift, "Z"), hl.dsp.window.move({ workspace = "special:scratch" }))
+
+hl.window_rule({
+	match = { workspace = "special:scratch" },
+	float = true,
+	center = true,
+	size = "80% 80%",
+})
 
 -- === SCROLLING LAYOUT ===
 hl.bind(kb(mainMod, "period"), hl.dsp.layout("swapcol r"))
 hl.bind(kb(mainMod, "comma"), hl.dsp.layout("swapcol l"))
+hl.bind(kb(modShift, "period"), hl.dsp.layout("move +col"))
+hl.bind(kb(modShift, "comma"), hl.dsp.layout("move -col"))
+hl.bind(kb(mainMod, "HOME"), hl.dsp.layout("fit tobeg"))
+hl.bind(kb(mainMod, "END"), hl.dsp.layout("fit toend"))
+hl.bind(kb(mainMod, "bracketright"), hl.dsp.layout("colresize +conf"))
+hl.bind(kb(mainMod, "bracketleft"), hl.dsp.layout("colresize -conf"))
+hl.bind(kb(mainMod, "C"), hl.dsp.layout("consume"))
+hl.bind(kb(mainMod, "X"), hl.dsp.layout("expel"))
+hl.bind(kb(modShift, "N"), hl.dsp.layout("promote"))
+hl.bind(kb(modShift, "F"), hl.dsp.layout("fit expand"))
+hl.bind(kb(modShift, "V"), hl.dsp.layout("fit_into_view"))
+hl.bind(kb(modShift, "I"), hl.dsp.layout("inhibit_scroll"))
 
 -- === MEDIA KEYS ===
 hl.bind(

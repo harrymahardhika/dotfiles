@@ -13,7 +13,11 @@
     "php-lsp@claude-plugins-official": true,
     "context7@claude-plugins-official": false
   },
+  "alwaysThinkingEnabled": false,
   "effortLevel": "medium",
   "theme": "auto",
+  "editorMode": "normal",
+  "remoteControlAtStartup": false,
+  "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true
 }

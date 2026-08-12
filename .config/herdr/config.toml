@@ -3,6 +3,8 @@ onboarding = false
 prefix = "ctrl+a"
 goto = "prefix+s"
 settings = "prefix+."
+next_tab = ["prefix+n", "ctrl+alt+]"]
+previous_tab = ["prefix+p", "ctrl+alt+["]
 
 [ui.sound]
 enabled = false
