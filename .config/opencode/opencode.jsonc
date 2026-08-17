@@ -44,5 +44,8 @@
   },
 
   "tool_output": { "max_lines": 200, "max_bytes": 8192 },
-  "compaction": { "auto": true, "tail_turns": 15 }
+  "compaction": { "auto": true, "tail_turns": 15 },
+  "mcp": {
+    "codebase-memory-mcp": {"command":["/home/harry/.local/bin/codebase-memory-mcp"],"type":"local"}
+  }
 }
