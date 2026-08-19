@@ -1,0 +1,43 @@
+# Semantic design tokens (processed first so they win over base aliases)
+# Gruvbox Dark (medium contrast) — warm palette, orange signature accent
+border_accent=fe8019
+border_subtle=282828
+accent_primary=fe8019
+accent_secondary=d3869b
+prompt_accent=fe8019
+active_window_accent=fabd2f
+selection_bg=504945
+cursor_color=ebdbb2
+success=b8bb26
+warning=fabd2f
+error=fb4934
+surface_elevated=504945
+surface_overlay=1d2021
+
+# Base Gruvbox Dark palette
+rosewater=fbf1c7
+flamingo=fb4934
+pink=d3869b
+mauve=d3869b
+red=fb4934
+maroon=cc241d
+peach=fe8019
+yellow=fabd2f
+green=b8bb26
+teal=8ec07c
+sky=83a598
+sapphire=458588
+blue=83a598
+lavender=d3869b
+text=fbf1c7
+subtext1=ebdbb2
+subtext0=d5c4a1
+overlay2=bdae93
+overlay1=a89984
+overlay0=928374
+surface2=665c54
+surface1=504945
+surface0=3c3836
+base=282828
+mantle=1d2021
+crust=1d2021

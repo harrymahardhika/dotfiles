@@ -13,7 +13,7 @@ both X11 and Wayland.
 - **PHP/Laravel Focus** - Extensive tooling for PHP development with version
   switching
 - **Theme Switching** - Swaps the whole system between mocha, kanagawa,
-  tokyonight, and rosepine (mocha default)
+  tokyonight, rosepine, and gruvbox (mocha default)
 - **Automation Scripts** - System updates, web app launchers, and utility
   scripts
 
@@ -79,7 +79,7 @@ Most configs use the Lazy.nvim plugin manager, while `twelve` leverages native p
 
 - Custom prefix: `Ctrl+a`
 - Vim-style navigation
-- Active theme (mocha/kanagawa/tokyonight/rosepine via theme-switch)
+- Active theme (mocha/kanagawa/tokyonight/rosepine/gruvbox via theme-switch)
 - Session persistence (tmux-resurrect, tmux-continuum)
 - Gitmux integration for git status
 - Custom popup session switcher
@@ -165,7 +165,7 @@ Launch web applications as desktop apps via `scripts/webapps/`:
 **Languages**: PHP (8.2-8.4), Node.js, Python, Go, Rust **Shells**: ZSH
 (primary), Fish **Editors**: Neovim, Helix, Zed **Terminals**: Kitty, Alacritty,
 Ghostty, Foot, WezTerm **WM**: Hyprland, Sway, i3wm **Theme**: mocha
-(default), kanagawa, tokyonight, rosepine (switched via `theme-switch`)
+(default), kanagawa, tokyonight, rosepine, gruvbox (switched via `theme-switch`)
 
 ## Installation
 

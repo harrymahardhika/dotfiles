@@ -12,7 +12,7 @@
   "references": {
     "dotfiles": { "path": "../../", "description": "The dotfiles repo: theme-switch system, scripts, nvim-configs." },
     "nvim": { "path": "../../nvim-configs", "description": "Neovim configs twelve/twenty-six and shared stylua.toml." },
-    "palettes": { "path": "../../themes/palettes", "description": "Theme palette semantic color maps (mocha/kanagawa/tokyonight/rosepine)." },
+    "palettes": { "path": "../../themes/palettes", "description": "Theme palette semantic color maps (mocha/kanagawa/tokyonight/rosepine/gruvbox)." },
     "skills": { "path": "../../.agents/skills", "description": "Installed agent skills (stripe, connect, find-skills)." }
   },
 

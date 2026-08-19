@@ -140,6 +140,7 @@ apply_wezterm() {
     kanagawa)   local name="Kanagawa Wave" ;;
     tokyonight) local name="Tokyo Night" ;;
     rosepine)   local name="Rosé Pine" ;;
+    gruvbox)    local name="Gruvbox Dark" ;;
     *)          local name="$theme" ;;
   esac
   rewrite_line "$HOME/.config/wezterm/wezterm.lua" 'color_scheme = ".*"' "color_scheme = \"$name\""
@@ -152,6 +153,7 @@ apply_helix() {
     mocha)      local name="catppuccin_mocha" ;;
     tokyonight) local name="tokyonight" ;;
     rosepine)   local name="rose_pine" ;;
+    gruvbox)    local name="gruvbox" ;;
     *)          local name="$theme" ;;
   esac
   rewrite_line "$HOME/.config/helix/config.toml" 'theme = ".*"' "theme = \"$name\""
@@ -159,7 +161,11 @@ apply_helix() {
 
 apply_zellij() {
   local theme="$1"
-  rewrite_line "$HOME/.config/zellij/config.kdl" 'theme ".*"' "theme \"$theme\""
+  case "$theme" in
+    gruvbox)    local name="gruvbox-dark" ;;
+    *)          local name="$theme" ;;
+  esac
+  rewrite_line "$HOME/.config/zellij/config.kdl" 'theme ".*"' "theme \"$name\""
 }
 
 apply_rofi() {
@@ -210,6 +216,7 @@ apply_zed() {
     mocha)      local name="Catppuccin Mocha - No Italics" ;;
     tokyonight) local name="Tokyo Night" ;;
     rosepine)   local name="Rosé Pine" ;;
+    gruvbox)    local name="Gruvbox Dark" ;;
     *)          local name="$theme" ;;
   esac
   rewrite_line "$HOME/.config/zed/settings.json" '"dark": ".*"' "\"dark\": \"$name\""
@@ -222,6 +229,7 @@ apply_vscode() {
     mocha)      local name="Catppuccin Mocha" ;;
     tokyonight) local name="Tokyo Night" ;;
     rosepine)   local name="Rosé Pine" ;;
+    gruvbox)    local name="Gruvbox Dark" ;;
     *)          local name="$theme" ;;
   esac
   # misc/vscode-settings.json is a settings fragment; edit in place
@@ -242,6 +250,7 @@ apply_opencode() {
     kanagawa)   local name="kanagawa" ;;
     tokyonight) local name="tokyonight" ;;
     rosepine)   local name="rosepine" ;;
+    gruvbox)    local name="gruvbox" ;;
     *)          local name="$theme" ;;
   esac
   if [ "${DRY:-0}" = "1" ]; then
@@ -262,6 +271,7 @@ apply_herdr() {
     kanagawa)   local name="kanagawa" ;;    mocha)    local name="catppuccin" ;;
     tokyonight) local name="tokyonight" ;;
     rosepine)   local name="rosepine" ;;
+    gruvbox)    local name="gruvbox" ;;
     *)          local name="$theme" ;;
   esac
   rewrite_line "$HOME/.config/herdr/config.toml" '^name = ".*"' "name = \"$name\""
@@ -344,6 +354,7 @@ apply_starship() {
     kanagawa)   local pal="kanagawa" ;;
     tokyonight) local pal="tokyonight" ;;
     rosepine)   local pal="rosepine" ;;
+    gruvbox)    local pal="gruvbox" ;;
     *)          local pal="$theme" ;;
   esac
   rewrite_line "$HOME/.config/starship.toml" "^palette = .*" "palette = '$pal'"
@@ -471,7 +482,7 @@ apply_nvim_payload() {
   local found=""
   while IFS= read -r f; do
     [ -f "$f" ] || continue
-    if grep -qE 'catppuccin/nvim|rebelot/kanagawa.nvim|folke/tokyonight.nvim|rose-pine/neovim' "$f" 2>/dev/null; then
+    if grep -qE 'catppuccin/nvim|rebelot/kanagawa.nvim|folke/tokyonight.nvim|rose-pine/neovim|ellisonleao/gruvbox.nvim' "$f" 2>/dev/null; then
       found="$f"
       break
     fi
@@ -529,8 +540,9 @@ from_to_args() {
     esac
     args+=("-e" "s|${from_val}|${to_val}|g")
     if [ "$kind" = "hyprlock" ]; then
-      from_val="$(printf 'rgba(%d,%d,%d)' 0x${from_hex:0:2} 0x${from_hex:2:2} 0x${from_hex:4:2})"
-      to_val="$(printf 'rgba(%d,%d,%d)' 0x${to_hex:0:2} 0x${to_hex:2:2} 0x${to_hex:4:2})"
+      # rgb() form (hyprlock also uses rgba(r,g,b,a) with an alpha suffix)
+      from_val="$(printf 'rgba(%d,%d,%d,' 0x${from_hex:0:2} 0x${from_hex:2:2} 0x${from_hex:4:2})"
+      to_val="$(printf 'rgba(%d,%d,%d,' 0x${to_hex:0:2} 0x${to_hex:2:2} 0x${to_hex:4:2})"
       args+=("-e" "s|${from_val}|${to_val}|g")
     fi
   done
