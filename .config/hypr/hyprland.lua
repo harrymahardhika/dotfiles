@@ -176,6 +176,7 @@ hl.bind(kb(modShift, "T"), hl.dsp.exec_cmd("$HOME/.config/hypr/toggle-transparen
 hl.bind(kb(mainMod, "V"), hl.dsp.exec_cmd("$HOME/scripts/clipboard-history.sh"))
 hl.bind(kb(mainMod, "A"), hl.dsp.exec_cmd("$HOME/scripts/webapp-launcher.sh"))
 hl.bind(kb(mainMod, "slash"), hl.dsp.exec_cmd("$HOME/scripts/hypr-binds.sh"))
+hl.bind(kb(mainMod, "Y"), hl.dsp.exec_cmd("rofimoji"))
 
 -- === MOVE FOCUS ===
 hl.bind(kb(mainMod, "left"), hl.dsp.focus({ direction = "left" }))
