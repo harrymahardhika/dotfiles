@@ -39,11 +39,9 @@ git:
   ignoreWhitespaceInDiffView: true
   # Use delta for a better diff view. Requires delta to be installed.
   # https://github.com/dandavison/delta
-  diffRenderers:
+  pagers:
     - colorArg: always
       # pager: delta --dark --paging=never
-
-      type: rawGit
 refresher:
   # The default refresh interval is 10. 5 is a bit frequent and might
   # use unnecessary resources, but this is a personal preference.
