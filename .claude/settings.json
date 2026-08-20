@@ -1,6 +1,11 @@
 {
   "permissions": {
-    "defaultMode": "auto"
+    "defaultMode": "auto",
+    "deny": [
+      "Bash(git commit --amend*)",
+      "Bash(git push --force*)",
+      "Bash(git push -f*)"
+    ]
   },
   "statusLine": {
     "type": "command",
