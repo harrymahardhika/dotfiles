@@ -19,6 +19,7 @@ sep=" ${overlay0} ${reset} "
 
 # Nerd Font icons (Font Awesome codepoints)
 icon_dir=$'󰇐'
+icon_branch=$'󰘬'
 icon_model=$'󰧑'
 icon_ctx=$'󰮰'
 icon_5h=$''
@@ -44,6 +45,14 @@ fi
 
 # Directory segment
 printf "${blue}${icon_dir} %s${reset}" "$short_dir"
+
+# Git branch segment (only when inside a work tree)
+if [ -n "$cwd" ] && git -C "$cwd" rev-parse --is-inside-work-tree &>/dev/null; then
+  branch=$(git -C "$cwd" symbolic-ref --quiet --short HEAD 2>/dev/null || git -C "$cwd" rev-parse --short HEAD 2>/dev/null)
+  if [ -n "$branch" ]; then
+    printf "${sep}${lavender}${icon_branch} %s${reset}" "$branch"
+  fi
+fi
 
 # Model segment
 printf "${sep}${sapphire}${icon_model} %s${reset}" "$model"
