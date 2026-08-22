@@ -253,6 +253,13 @@ if command -v uv &> /dev/null; then
     uv tool upgrade --all --quiet || echo "⚠️  uv tool upgrade failed, skipping..."
 fi
 
+# Update antidote (zsh plugin manager)
+if [ -r "$HOME/.antidote/antidote.zsh" ]; then
+    echo "🐚 Updating antidote..."
+    zsh -lc "source \"$HOME/.antidote/antidote.zsh\" && antidote update" \
+        || echo "⚠️  antidote update failed, skipping..."
+fi
+
 echo ""
 echo "✅ All updates completed!"
 echo ""
