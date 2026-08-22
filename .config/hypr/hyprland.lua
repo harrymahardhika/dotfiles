@@ -172,6 +172,7 @@ hl.bind(kb(mainMod, "G"), hl.dsp.window.fullscreen({ mode = "maximized", action 
 hl.bind(kb(modShift, "W"), hl.dsp.exec_cmd("$HOME/.config/hypr/set-wallpaper.sh"))
 hl.bind(kb(mainMod, "S"), hl.dsp.exec_cmd("$HOME/scripts/theme-pick.sh"))
 hl.bind(kb(mainMod, "B"), hl.dsp.exec_cmd("~/.config/waybar/scripts/toggle.sh"))
+hl.bind(kb(modShift, "B"), hl.dsp.exec_cmd("$HOME/scripts/waybar-style.sh toggle"))
 hl.bind(kb(modShift, "T"), hl.dsp.exec_cmd("$HOME/.config/hypr/toggle-transparency.sh"))
 hl.bind(kb(mainMod, "V"), hl.dsp.exec_cmd("$HOME/scripts/clipboard-history.sh"))
 hl.bind(kb(mainMod, "A"), hl.dsp.exec_cmd("$HOME/scripts/webapp-launcher.sh"))

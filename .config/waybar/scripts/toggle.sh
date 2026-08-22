@@ -1,6 +1,5 @@
 #!/bin/bash
 STATE_FILE="${XDG_RUNTIME_DIR}/waybar-visible"
-AUTO_HIDE_DELAY=8
 
 hide_bar() {
   rm -f "$STATE_FILE"
@@ -14,7 +13,6 @@ case "${1:-toggle}" in
     else
       touch "$STATE_FILE"
       pkill -SIGUSR1 waybar
-      (sleep "$AUTO_HIDE_DELAY"; [ -f "$STATE_FILE" ] && hide_bar) &
     fi
     ;;
   hide)

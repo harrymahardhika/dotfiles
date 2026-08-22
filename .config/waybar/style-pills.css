@@ -1,0 +1,149 @@
+@import "kanagawa.css";
+
+* {
+  font-family: "JetBrainsMono Nerd Font Propo";
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: none;
+  min-height: 0;
+}
+
+#waybar {
+  /* background: @base; */
+  /* background: alpha(@surface0, 0.9); */
+  background: transparent;
+  color: @text;
+}
+
+#backlight,
+#battery,
+#clock,
+#cpu,
+#custom-cpu_temp,
+#memory,
+#mode,
+#network,
+#pulseaudio,
+#submap,
+#window,
+#workspaces {
+  padding: 0.1rem 0.6rem;
+  margin: 0.15rem;
+  background: alpha(@surface0, 0.9);
+  border-radius: 0.2rem;
+}
+
+/* Color-coded modules */
+#workspaces {
+  color: @blue;
+}
+
+#window {
+  color: @sapphire;
+}
+
+#network {
+  color: @green;
+}
+
+#pulseaudio {
+  color: @mauve;
+}
+
+#battery {
+  color: @peach;
+}
+
+#battery.charging {
+  color: @green;
+}
+
+#battery.warning:not(.charging) {
+  color: @yellow;
+}
+
+#battery.critical:not(.charging) {
+  color: @red;
+}
+
+#backlight {
+  color: @yellow;
+}
+
+#memory {
+  color: @sky;
+}
+
+#cpu {
+  color: @pink;
+}
+
+#custom-cpu_temp {
+  color: @flamingo;
+}
+
+#clock {
+  color: @lavender;
+}
+
+#mode {
+  color: @red;
+  font-weight: bold;
+}
+
+#submap {
+  color: @red;
+  font-weight: bold;
+}
+
+#clock.time {
+  margin-right: 0;
+  border-radius: 0.2rem 0 0 0.2rem;
+}
+
+#clock.date {
+  margin-left: 0;
+  border-radius: 0 0.2rem 0.2rem 0;
+  /* border-radius: 0.2rem; */
+}
+
+#workspaces {
+  padding-left: 0.4rem;
+  padding-right: 0;
+  margin-right: 0;
+  border-radius: 0.2rem 0 0 0.2rem;
+}
+
+#workspaces button {
+  color: @text;
+  border: none;
+  padding: 0.1rem 0.2rem;
+}
+
+#workspaces button.focused,
+#workspaces button.active {
+  color: @blue;
+}
+
+#workspaces button:hover {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+#window {
+  margin-left: 0;
+  border-radius: 0 0.2rem 0.2rem 0;
+  color: @text;
+}
+
+#cpu {
+  border-radius: 0.2rem 0 0 0.2rem;
+  margin-right: 0;
+}
+
+#custom-cpu_temp {
+  border-radius: 0 0.2rem 0.2rem 0;
+  margin-left: 0;
+  padding-left: 0;
+}

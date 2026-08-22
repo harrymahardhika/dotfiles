@@ -179,7 +179,7 @@ apply_waybar() {
   local theme="$1"
   local dest="$HOME/.config/waybar"
   install_payload "$theme" "waybar.css" "$dest/$theme.css"
-  for style in style.css sway-style.css sway-style-solid.css sway-style-transparent.css; do
+  for style in style.css style-pills.css style-flat.css sway-style.css sway-style-solid.css sway-style-transparent.css; do
     rewrite_line "$dest/$style" '@import "[^"]*";' "@import \"$theme.css\";"
   done
   # calendar span colors are hardcoded hex in config.jsonc

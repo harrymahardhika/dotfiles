@@ -1,0 +1,111 @@
+@import "kanagawa.css";
+
+* {
+  font-family: "JetBrainsMono Nerd Font Propo";
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: none;
+  min-height: 0;
+}
+
+#waybar {
+  background: alpha(@surface0, 0.9);
+  color: @text;
+}
+
+#backlight,
+#battery,
+#clock,
+#cpu,
+#custom-cpu_temp,
+#memory,
+#mode,
+#network,
+#pulseaudio,
+#submap,
+#window,
+#workspaces {
+  padding: 0.1rem 0.6rem;
+  margin: 0;
+  border-radius: 0;
+}
+
+/* Color-coded modules */
+#workspaces {
+  color: @blue;
+}
+
+#window {
+  color: @sapphire;
+}
+
+#network {
+  color: @green;
+}
+
+#pulseaudio {
+  color: @mauve;
+}
+
+#battery {
+  color: @peach;
+}
+
+#battery.charging {
+  color: @green;
+}
+
+#battery.warning:not(.charging) {
+  color: @yellow;
+}
+
+#battery.critical:not(.charging) {
+  color: @red;
+}
+
+#backlight {
+  color: @yellow;
+}
+
+#memory {
+  color: @sky;
+}
+
+#cpu {
+  color: @pink;
+}
+
+#custom-cpu_temp {
+  color: @flamingo;
+}
+
+#clock {
+  color: @lavender;
+}
+
+#mode {
+  color: @red;
+  font-weight: bold;
+}
+
+#submap {
+  color: @red;
+  font-weight: bold;
+}
+
+#workspaces button {
+  color: @text;
+  border: none;
+  padding: 0.1rem 0.4rem;
+}
+
+#workspaces button.focused,
+#workspaces button.active {
+  color: @blue;
+}
+
+#workspaces button:hover {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}

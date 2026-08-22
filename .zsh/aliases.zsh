@@ -63,6 +63,7 @@ alias battery_limit="$HOME/scripts/battery_limit.sh"
 alias trash-cleanup="$HOME/scripts/trash-cleanup.sh"
 alias theme-switch="$HOME/scripts/theme-switch.sh"
 alias theme-pick="$HOME/scripts/theme-pick.sh"
+alias waybar-style="$HOME/scripts/waybar-style.sh"
 
 # Git
 alias gs='git status'
