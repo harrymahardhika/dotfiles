@@ -151,6 +151,15 @@ end)
 hl.env("XCURSOR_SIZE", "20")
 hl.env("HYPRCURSOR_SIZE", "20")
 hl.env("XCURSOR_THEME", "catppuccin-mocha")
+hl.env("MOZ_ENABLE_WAYLAND", "1")
+
+-- Zen Browser Wayland blur fix
+local zen_rules = {
+	{ match = { class = "zen" }, opacity = 0.99999 },
+}
+for _, rule in ipairs(zen_rules) do
+	hl.window_rule(rule)
+end
 
 -- kb(mod, key) returns "mod + key"
 local function kb(mod, key)
