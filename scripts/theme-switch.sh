@@ -11,7 +11,7 @@
 #   theme-switch apply <name>         # apply a theme everywhere + reload
 #   theme-switch apply <name> --dry   # preview what would change
 #   theme-switch pick                 # rofi frontend (see theme-pick.sh)
-#   theme-switch sync-masters         # re-sync mocha masters for inline files
+#   theme-switch sync-masters [--force]  # re-sync mocha masters (mocha state required)
 #
 # Inline (non-payload) configs are rendered from mocha masters under
 # themes/mocha/inline/ (see sync-masters), so switching back and forth is
@@ -26,11 +26,9 @@ STATE_FILE="${THEME_STATE:-$HOME/.cache/theme-current}"
 . "$DOTFILES/scripts/tmux/reload-tmux-theme.sh"
 
 DEFAULT_THEME="mocha"
-ACTIVE_CFG="$HOME/.config/nvim"
-ZEN_PROFILE="oct5ov6c.Default (release)"
 
 usage() {
-  sed -n '2,12p' "$0" | sed 's/^# \{0,1\}//'
+  sed -n '2,14p' "$0" | sed 's/^# \{0,1\}//'
   exit 0
 }
 
@@ -95,7 +93,9 @@ write_file() {
 
 # rewrite a single line in a file (pointer swap)
 rewrite_line() {
-  local file="$(resolve_file "$1")" pattern="$2" replacement="$3"
+  local file pattern replacement
+  file="$(resolve_file "$1")"
+  pattern="$2" replacement="$3"
   if [ "${DRY:-0}" = "1" ]; then
     echo "  DRY: sed -i 's|$pattern|$replacement|' $file"
     return
@@ -234,11 +234,13 @@ apply_vscode() {
   esac
   # misc/vscode-settings.json is a settings fragment; edit in place
   local f="$DOTFILES/misc/vscode-settings.json"
-  sed -i "s/\"workbench.colorTheme\": \".*\"/\"workbench.colorTheme\": \"$name\"/" "$f"
-  sed -i "s/\"workbench.preferredDarkColorTheme\": \".*\"/\"workbench.preferredDarkColorTheme\": \"$name\"/" "$f"
+  [ -f "$f" ] || return 0
   if [ "${DRY:-0}" = "1" ]; then
     echo "  DRY: sed vscode-settings.json -> $name"
+    return
   fi
+  sed -i "s/\"workbench.colorTheme\": \".*\"/\"workbench.colorTheme\": \"$name\"/" "$f"
+  sed -i "s/\"workbench.preferredDarkColorTheme\": \".*\"/\"workbench.preferredDarkColorTheme\": \"$name\"/" "$f"
 }
 
 # opencode TUI theme lives in tui.json (string name; built-ins: catppuccin, kanagawa)
@@ -411,7 +413,8 @@ tmux_conf_file() {
 }
 
 remove_tmux_thm() {
-  local file="$(tmux_conf_file)"
+  local file
+  file="$(tmux_conf_file)"
   local marker="# THEME-SWITCH @thm_* OVERRIDES"
   [ -f "$file" ] || return 0
   if [ "${DRY:-0}" = "1" ]; then
@@ -428,7 +431,8 @@ remove_tmux_thm() {
 # @thm_* hex overrides. mocha needs none (plugin provides them natively).
 inject_tmux_thm() {
   local theme="$1"
-  local file="$(tmux_conf_file)"
+  local file
+  file="$(tmux_conf_file)"
   local marker="# THEME-SWITCH @thm_* OVERRIDES"
   local mocha_palette="$PALETTES_DIR/mocha.palette"
   local theme_palette="$PALETTES_DIR/$theme.palette"
@@ -440,7 +444,7 @@ inject_tmux_thm() {
 
   local lines=("" "$marker")
   local name mocha_hex theme_hex
-  while IFS== read -r name mocha_hex; do
+  while IFS='=' read -r name mocha_hex; do
     [ -n "$name" ] || continue
     [[ "$name" == \#* ]] && continue
     mocha_hex="${mocha_hex%%[[:space:]]*}"
@@ -452,12 +456,14 @@ inject_tmux_thm() {
   # catppuccin/tmux uses snake_case for a few names; emit both forms
   for n in surface0 surface1 surface2 overlay0 overlay1 overlay2 subtext0 subtext1; do
     local stem="${n//[0-9]/}"
-    local hex="$(grep -m1 "^${n}=" "$theme_palette" | cut -d= -f2 | awk '{print $1}')"
+    local hex
+    hex="$(grep -m1 "^${n}=" "$theme_palette" | cut -d= -f2 | awk '{print $1}')" || true
     [ -n "$hex" ] && lines+=("set -g @thm_${stem}_${n##*[a-z]} \"#${hex}\"")
   done
   # plugin's canonical bg/fg names come from base/text palette keys
-  local base_hex="$(grep -m1 '^base=' "$theme_palette" | cut -d= -f2 | awk '{print $1}')"
-  local text_hex="$(grep -m1 '^text=' "$theme_palette" | cut -d= -f2 | awk '{print $1}')"
+  local base_hex text_hex
+  base_hex="$(grep -m1 '^base=' "$theme_palette" | cut -d= -f2 | awk '{print $1}')" || true
+  text_hex="$(grep -m1 '^text=' "$theme_palette" | cut -d= -f2 | awk '{print $1}')" || true
   lines+=("set -g @thm_bg \"#${base_hex}\"")
   lines+=("set -g @thm_fg \"#${text_hex}\"")
   lines+=("# END THEME-SWITCH" "")
@@ -492,11 +498,33 @@ apply_nvim_payload() {
   fi
 }
 
+# locate the Zen Browser profile dir that owns userChrome.css.
+# Profiles live at ~/.zen/<hash>.Default*/; prefer one with an existing chrome/.
+# Replaces the old hardcoded profile name so this survives new profiles/machines.
+zen_profile_dir() {
+  local d
+  for d in "$HOME"/.zen/*.Default*/chrome; do
+    if [ -d "$d" ]; then
+      printf '%s' "${d%/chrome}"
+      return 0
+    fi
+  done
+  for d in "$HOME"/.zen/*.Default*; do
+    if [ -d "$d" ]; then
+      printf '%s' "$d"
+      return 0
+    fi
+  done
+  return 1
+}
+
 # Zen Browser userChrome.css (payloads themes/{theme}/zen.css)
 apply_zen() {
   local theme="$1"
-  local dest="$HOME/.zen/$ZEN_PROFILE/chrome/userChrome.css"
   [ -f "$THEMES_DIR/$theme/zen.css" ] || { echo "  warn: no zen payload for $theme" >&2; return 0; }
+  local prof dest
+  prof="$(zen_profile_dir)" || { echo "  warn: no Zen profile found (~/.zen), skipping zen.css" >&2; return 0; }
+  dest="$prof/chrome/userChrome.css"
   mkdir -p "$(dirname "$dest")"
   install_payload "$theme" "zen.css" "$dest"
 }
@@ -516,7 +544,7 @@ from_to_args() {
   local from_palette="$1" to_palette="$2" kind="$3"
   local args=() name from_hex to_hex from_val to_val
   local -A map=()
-  while IFS== read -r name from_hex; do
+  while IFS='=' read -r name from_hex; do
     # skip empty lines and comments
     [ -n "$name" ] || continue
     [[ "$name" == \#* ]] && continue
@@ -551,7 +579,8 @@ from_to_args() {
 
 # map a live config path to its repo-relative mocha master under themes/mocha/inline
 inline_master() {
-  local path="$(resolve_file "$1")"
+  local path
+  path="$(resolve_file "$1")"
   local rel="${path#$DOTFILES/}"
   if [ "$rel" = "$path" ]; then
     case "$path" in
@@ -640,8 +669,12 @@ fixup_inline_semantics() {
 # copy the mocha master over the live file, then apply mocha->theme sed.
 # masters are authoritative, so round-trips are lossless (no current-state sed).
 apply_theme_inline() {
-  local file="$(resolve_file "$1")" theme="$2" kind="$3"
-  local master="$(inline_master "$file")"
+  local file theme kind
+  file="$(resolve_file "$1")" theme="$2" kind="$3"
+  local master
+  # || true: inline_master returns 1 for paths outside $DOTFILES/$HOME; the
+  # [ -f ] check below handles the empty result.
+  master="$(inline_master "$file")" || true
   [ -f "$master" ] || return 0
   [ -f "$PALETTES_DIR/$theme.palette" ] || return 0
   if [ "${DRY:-0}" = "1" ]; then
@@ -782,6 +815,13 @@ apply_theme() {
 # copy the current live configs (in mocha state) into themes/mocha/inline/
 # so apply can always regenerate losslessly. Run after editing a config.
 sync_masters() {
+  # Masters must reflect mocha state; syncing under another theme would bake
+  # that theme's colors into the masters and break lossless switching.
+  local cur
+  cur="$(current_theme)"
+  if [ "$cur" != "$DEFAULT_THEME" ] && [ "${SYNC_FORCE:-0}" != "1" ]; then
+    die "refusing to sync masters: active theme is '$cur' (expected '$DEFAULT_THEME'). Apply mocha first, or pass --force."
+  fi
   local target
   for target in \
     "$HOME/.config/mako/config" \
@@ -803,7 +843,8 @@ sync_masters() {
     "$HOME/.claude/statusline-command.sh"
   do
     [ -f "$target" ] || continue
-    local master="$(inline_master "$target")"
+    local master
+    master="$(inline_master "$target")" || true
     [ -n "$master" ] || continue
     mkdir -p "$(dirname "$master")"
     cp -f "$target" "$master"
@@ -829,6 +870,10 @@ case "$CMD" in
     exec "$(dirname "$0")/theme-pick.sh"
     ;;
   sync-masters)
+    if [ "${1:-}" = "--force" ]; then
+      SYNC_FORCE=1
+      shift || true
+    fi
     sync_masters
     ;;
   *) usage ;;

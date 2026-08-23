@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 # Generate themed payload files for every theme in themes/palettes/
 # by hex-substituting the mocha masters using each theme's palette.
+#
+# NOTE: only top-level masters are regenerated. Per-config nvim payload files
+# (themes/<theme>/nvim/<config>.lua) are hand-maintained — they're consumed by
+# apply_nvim_payload() in scripts/theme-switch.sh.
 set -euo pipefail
 
 THEMES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/themes"
@@ -24,7 +28,7 @@ build_sed() {
   local target_palette="$1"
   local name mocha_hex theme_hex
   local -A rule=()
-  while IFS== read -r name mocha_hex; do
+  while IFS='=' read -r name mocha_hex; do
     [ -n "$name" ] || continue
     [[ "$name" == \#* ]] && continue
     mocha_hex="${mocha_hex%%[[:space:]]*}"
