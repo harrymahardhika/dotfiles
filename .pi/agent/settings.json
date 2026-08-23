@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.83.0",
+  "lastChangelogVersion": "0.84.2",
   "defaultProvider": "openrouter",
   "defaultModel": "openrouter/free",
   "defaultThinkingLevel": "medium",
