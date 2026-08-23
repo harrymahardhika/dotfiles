@@ -6,11 +6,11 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME=""
 zstyle ':omz:update' mode disabled
 plugins=(git)
-# Shadow compinit while OMZ loads so its completion lib skips its own full
-# (slow) scan — exactly one cached compinit runs below.
-compinit() { :; }
+# OMZ's lib/completion.zsh runs the one-and-only compinit here. It defines
+# compdef before directories.zsh/plugins need it and keeps the compdump fresh.
+# Do NOT stub or defer this — plugins call compdef at load time (learned the
+# hard way: a no-op stub breaks every OMZ completion registration).
 source $ZSH/oh-my-zsh.sh
-unfunction compinit
 
 # Load Antidote and plugins
 if [[ -r "$HOME/.antidote/antidote.zsh" ]]; then
@@ -20,11 +20,7 @@ else
   print -u2 "antidote: missing $HOME/.antidote/antidote.zsh; run scripts/antidote-bootstrap.sh"
 fi
 
-# Initialize completion
-ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-${HOST}-${ZSH_VERSION}"
-mkdir -p "${ZSH_COMPDUMP:h}"
-autoload -Uz compinit
-compinit -C -d "$ZSH_COMPDUMP"
+# (compinit already ran inside oh-my-zsh above — no second run needed)
 
 # Load custom configuration (before syntax highlighting per AGENTS.md order)
 for config_file in ~/.zsh/*.zsh; do
