@@ -1,54 +1,8 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+All repository guidance lives in [AGENTS.md](AGENTS.md) — that file is the single
+source of truth for stow layout, zsh loading order, scripts, and the theme system.
+This pointer exists so Claude Code loads the same instructions without a
+duplicated (drifting) copy.
 
-## Symlink Management
-
-This repo is managed with **GNU Stow**. Running `stow .` from `~/dotfiles` creates symlinks in `~/` mirroring the repo structure. `.stow-local-ignore` excludes `.antidote` and `.git` from being stowed.
-
-```bash
-stow .          # apply all symlinks
-stow -D .       # remove all symlinks
-stow -R .       # restow (remove then re-apply)
-```
-
-After editing any config file, changes are live immediately since `~/.config/foo` is already a symlink into this repo — no re-stow required.
-
-## ZSH Loading Order
-
-`.zshrc` loads in this order:
-
-1. Oh-My-Zsh (git plugin only; theme disabled)
-2. Antidote plugins from `.zsh_plugins.txt` (syntax-highlighting excluded here, loaded last)
-3. All `~/.zsh/*.zsh` modules (alphabetical: aliases, config, exports, functions, history, prompt)
-4. FZF key bindings (loaded last to keep `Ctrl+R` bound)
-
-To add a ZSH plugin: append to `.zsh_plugins.txt`, then run `scripts/antidote-bootstrap.sh`.
-
-To reload ZSH config in the current shell: `reload` (alias for `source ~/.zshrc`).
-
-## Neovim Configs
-
-Two configs live under `nvim-configs/`: `twelve`, `twenty-six`. The active one is a symlink at `~/.config/nvim`.
-
-```bash
-nvim-switch      # interactive picker (alias for scripts/nvim-switch.sh)
-```
-
-`nvim-configs/stylua.toml` is the shared Lua formatter config. `lazy-lock.json` files are gitignored per config.
-
-## Key Scripts
-
-- `updateall` — full system update (pacman/apt + AUR + flatpak + snap + composer + npm/pnpm + uv). Run as non-root; handles sudo internally.
-- `scripts/nvim-switch.sh` — switches active Neovim config by re-symlinking `~/.config/nvim`
-- `scripts/php-switch.sh` — switches active PHP version via `update-alternatives`
-- `scripts/tmux/tmux-pick.sh` — fzf-based tmux session picker (bound to `prefix+s` in tmux)
-- `scripts/antidote-bootstrap.sh` — installs/updates Antidote and compiles the plugin bundle
-
-## Theme
-
-The system is multi-theme — **mocha** (default), kanagawa, tokyonight, rosepine, gruvbox — switched via `scripts/theme-switch.sh` (alias `theme-switch`). Edit configs in **mocha** state, then run `theme-switch sync-masters` so mocha masters under `themes/mocha/inline/` stay authoritative. FZF colors in `.zsh/config.zsh` are palette-inlined per theme (not a static reference); the active theme is tracked in `~/.cache/theme-current`.
-
-## Gitignore Notes
-
-`nvim-configs/*/lazy-lock.json` and `*.log` are gitignored. `.config/btop/*.conf` is also excluded since btop overwrites it at runtime.
+@AGENTS.md

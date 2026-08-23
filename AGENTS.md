@@ -16,7 +16,7 @@ New plugin: append to `.zsh_plugins.txt`, run `scripts/antidote-bootstrap.sh`. R
 
 ## Neovim
 
-Two configs under `nvim-configs/`: `twelve`, `twenty-six`. Active one is a symlink at `~/.config/nvim`. Switch with `nvim-switch` (alias for `scripts/nvim-switch.sh`).
+Two configs under `nvim-configs/`: `twelve`, `twenty-six`. Active one is a symlink at `~/.config/nvim`. Switch with `nvim-switch` (alias for `scripts/nvim-switch.sh`) — pass a name (`nvim-switch twenty-six`) or run bare for an interactive picker.
 
 `nvim-configs/stylua.toml` is the shared Lua formatter config. `lazy-lock.json` files gitignored per config.
 
@@ -27,7 +27,7 @@ Multi-theme, **mocha** is the default (see Theme Switching below). FZF colors in
 ## Key Scripts
 
 - `updateall` — full system update (pacman/apt + AUR + flatpak + snap + composer + npm/pnpm + uv). Run as non-root; sudo handled internally.
-- `scripts/php-switch.sh` — PHP version via `update-alternatives` (8.2/8.3/8.4)
+- `scripts/php-switch.sh` — switches user-level PHP shims (`~/.local/bin/php`, `pecl`, …) between installed versions (8.3/8.4). Ubuntu variant using `update-alternatives`: `scripts/php-switch-ubuntu.sh`
 - `scripts/tmux/tmux-pick.sh` — fzf tmux session picker (bound to `prefix+s`)
 - `scripts/nvim-switch.sh` — switches Neovim config symlink
 - `scripts/hypr-binds.sh` — rofi keybind picker (parses `hyprland.lua`, executes the selected bind via `hyprctl dispatch`). Bound to `SUPER + /`. `--list` prints entries without launching rofi.
@@ -48,6 +48,8 @@ Multi-theme, **mocha** is the default (see Theme Switching below). FZF colors in
 ## Tmux
 
 Prefix is `Ctrl+A` (not `Ctrl+B`). TPM plugins: clone `tmux-plugins/tpm` to `~/.tmux/plugins/tpm`, then `prefix+I` to install.
+
+Popup/status scripts are called as `~/scripts/tmux/...` — that relies on a manual symlink outside stow: `ln -s dotfiles/scripts ~/scripts`.
 
 ## Gitignore
 

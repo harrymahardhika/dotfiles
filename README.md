@@ -29,7 +29,6 @@ dotfiles/
 │   ├── lazygit/         # Git TUI
 │   ├── rofi/            # App launcher (X11)
 │   ├── sway/            # Sway (Wayland WM)
-│   ├── tmux/            # Tmux config
 │   ├── waybar/          # Status bar (Wayland)
 │   ├── yazi/            # File manager TUI
 │   └── ...              # 30+ other configs
@@ -114,7 +113,7 @@ Multiple options, all following the active theme:
 
 #### PHP/Laravel
 
-- PHP version switcher (8.2, 8.3, 8.4)
+- PHP version switcher (8.3, 8.4)
 - Laravel artisan aliases
 - Pest, PHPStan, Rector, Pint shortcuts
 - Nginx config templates
@@ -142,7 +141,7 @@ Multiple options, all following the active theme:
   sudo preflight, error handling (continues on tool failure), and OS-specific
   summary.
 - **`nvim-switch.sh`** - Switch between Neovim configurations
-- **`php-switch.sh`** - Change PHP version system-wide
+- **`php-switch.sh`** - Switch PHP tool versions via user-level shims (`~/.local/bin/php`, `pecl`, …); Ubuntu variant uses `update-alternatives`
 
 ### Web Apps
 
@@ -162,7 +161,7 @@ Launch web applications as desktop apps via `scripts/webapps/`:
 
 ## Technology Stack
 
-**Languages**: PHP (8.2-8.4), Node.js, Python, Go, Rust **Shells**: ZSH
+**Languages**: PHP (8.3-8.4), Node.js, Python, Go, Rust **Shells**: ZSH
 (primary), Fish **Editors**: Neovim, Helix, Zed **Terminals**: Kitty, Alacritty,
 Ghostty, Foot, WezTerm **WM**: Hyprland, Sway, i3wm **Theme**: mocha
 (default), kanagawa, tokyonight, rosepine, gruvbox (switched via `theme-switch`)
@@ -202,6 +201,15 @@ stow -D .
 
 **Note**: GNU Stow will create symlinks from `~/dotfiles/*` to `~/*`. Ensure no
 conflicting files exist in your home directory before stowing.
+
+### Expected Home Symlinks
+
+Two references live outside the stowed tree and need manual symlinks:
+
+```bash
+ln -s dotfiles/scripts ~/scripts             # required by .tmux.conf popups/status
+ln -s dotfiles/nvim-configs ~/nvim-configs   # optional; nvim-switch falls back to ~/dotfiles/nvim-configs
+```
 
 ### ZSH Setup
 
