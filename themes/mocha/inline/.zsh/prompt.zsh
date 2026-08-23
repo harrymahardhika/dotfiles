@@ -44,7 +44,7 @@ update_git_prompt_info() {
   new_files=$(git status --porcelain --untracked-files=normal 2>/dev/null \
     | awk 'substr($0,1,2)=="??"{c++} END{print c+0}')
 
-  # --- catppuccin mocha colors ---
+  # --- semantic token colors; hex values are palette-managed by theme-switch ---
   local ref_color="%F{#b4befe}"     # lavender
   local dirty_color="%F{#f38ba8}"   # red
   local ahead_color="%F{#fab387}"   # peach
@@ -70,10 +70,22 @@ set_prompt() {
   PROMPT="${hostname_color}%m%f ${path_color}%~%f${GIT_PROMPT_CACHE:+ $GIT_PROMPT_CACHE} ${arrow_color}❯%f "
 }
 
-autoload -Uz add-zsh-hook
+# Throttle git-info refreshes: the ~7 git subprocesses in
+# update_git_prompt_info only run when the directory changed or GIT_PROMPT_TTL
+# seconds elapsed. Inside the window the status line may lag up to TTL.
+typeset -g _PROMPT_GIT_DIR=""
+typeset -gi _PROMPT_GIT_TS=0
+GIT_PROMPT_TTL="${GIT_PROMPT_TTL:-3}"
+
 prompt_precmd() {
-  update_git_prompt_info
+  local ts="$SECONDS"
+  if [[ "$PWD" != "$_PROMPT_GIT_DIR" ]] || (( ts - _PROMPT_GIT_TS >= GIT_PROMPT_TTL )); then
+    update_git_prompt_info
+    _PROMPT_GIT_DIR="$PWD"
+    _PROMPT_GIT_TS="$ts"
+  fi
   set_prompt
 }
 
+autoload -Uz add-zsh-hook
 add-zsh-hook precmd prompt_precmd

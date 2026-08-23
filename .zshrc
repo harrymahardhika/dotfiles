@@ -6,7 +6,11 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME=""
 zstyle ':omz:update' mode disabled
 plugins=(git)
+# Shadow compinit while OMZ loads so its completion lib skips its own full
+# (slow) scan — exactly one cached compinit runs below.
+compinit() { :; }
 source $ZSH/oh-my-zsh.sh
+unfunction compinit
 
 # Load Antidote and plugins
 if [[ -r "$HOME/.antidote/antidote.zsh" ]]; then
@@ -22,15 +26,15 @@ mkdir -p "${ZSH_COMPDUMP:h}"
 autoload -Uz compinit
 compinit -C -d "$ZSH_COMPDUMP"
 
-# Load syntax highlighting last so it can hook the final widget state.
-if [[ -r "$HOME/.cache/antidote/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh" ]]; then
-  source "$HOME/.cache/antidote/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh"
-fi
-
-# Load custom configuration
+# Load custom configuration (before syntax highlighting per AGENTS.md order)
 for config_file in ~/.zsh/*.zsh; do
   source "$config_file"
 done
+
+# Load syntax highlighting last among plugins so it can hook the final widget state.
+if [[ -r "$HOME/.cache/antidote/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh" ]]; then
+  source "$HOME/.cache/antidote/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh"
+fi
 
 # Load FZF key bindings last so reverse search stays bound.
 if [[ -f "$HOME/.fzf/shell/key-bindings.zsh" ]]; then
@@ -40,5 +44,5 @@ elif [[ -f "$HOME/.fzf.zsh" ]]; then
 fi
 
 
-# Added by Antigravity CLI installer
-export PATH="/home/harry/.local/bin:$PATH"
+# Added by Antigravity CLI installer (made portable; deduped by typeset -U in exports.zsh)
+export PATH="$HOME/.local/bin:$PATH"

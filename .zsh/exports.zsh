@@ -4,9 +4,9 @@ export VISUAL="nvim"
 export PAGER="less"
 export XDG_CONFIG_HOME="$HOME/.config"
 
-# Language/Locale
-export LC_ALL="en_US.UTF-8"
-export LANG="$LC_ALL"
+# Language/Locale — LANG only; leave LC_ALL unset (it overrides every other
+# locale category and is meant for short-lived, deliberate use).
+export LANG="en_US.UTF-8"
 
 # Android SDK
 export ANDROID_HOME="$HOME/Android/Sdk"
