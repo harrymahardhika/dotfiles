@@ -4,8 +4,6 @@
 
 set -euo pipefail
 
-BATTERY_PATH="/sys/class/power_supply/BAT0"
-
 # Check if on AC power (detect any mains adapter: AC0/ADP0/etc.)
 is_on_ac() {
   local online name

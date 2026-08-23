@@ -15,6 +15,12 @@ PILLS_CSS="$WAYBAR_DIR/style-pills.css"
 FLAT_CSS="$WAYBAR_DIR/style-flat.css"
 LOCK_FILE="${XDG_RUNTIME_DIR:-/tmp}/waybar-style.lock"
 
+# Opt-in debug trace: WAYBAR_STYLE_DEBUG=1 waybar-style.sh ... (writes /tmp log)
+debug() {
+  [ -n "${WAYBAR_STYLE_DEBUG:-}" ] || return 0
+  echo "$(date '+%F %T') $*" >> /tmp/waybar-style.log
+}
+
 # serialize: a restart in flight takes ~1s to reach "Bar configured"; a
 # second press landing mid-restart kills that process before it ever draws,
 # which is what leaves the bar missing until another press. Queue instead.
@@ -66,11 +72,11 @@ apply_style() {
   # lock, so a queued second press restarts a running bar instead of a
   # mid-startup one (systemd reports "active" well before the bar surface is up)
   sleep 0.6
-  echo "waybar style: $target" >> /tmp/waybar-style.log
+  debug "waybar style: $target"
 }
 
 cmd="${1:-toggle}"
-echo "$(date): waybar-style.sh called with '$cmd' from PID $$" >> /tmp/waybar-style.log
+debug "called with '$cmd' from PID $$"
 case "$cmd" in
   toggle)
     current="$(detect_style)"

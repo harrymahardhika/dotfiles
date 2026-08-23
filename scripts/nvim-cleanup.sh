@@ -54,10 +54,10 @@ do_rm() {
 cleanup_dir() {
   local dir="$1"
   local desc="$2"
-  local skip_hidden="${3:-false}"
 
   if [ -d "$dir" ]; then
-    local size=$(get_dir_size "$dir")
+    local size
+    size=$(get_dir_size "$dir")
     echo -e "${YELLOW}Cleaning:${NC} $desc"
     echo -e "  Path: $dir"
     echo -e "  Size: $size"
@@ -65,17 +65,16 @@ cleanup_dir() {
     if $DRY_RUN; then
       echo -e "  ${BLUE}[dry-run]${NC} Would delete contents"
     else
+      # dotglob so hidden entries (dotfiles) are removed too; nullglob for safety
       shopt -s nullglob dotglob
       local entries=("$dir"/*)
-      shopt -u nullglob dotglob
       if [ ${#entries[@]} -gt 0 ]; then
-        do_rm "${dir:?}"/*
-        if ! $DRY_RUN; then
-          echo -e "  ${GREEN}✓ Cleaned${NC}"
-        fi
+        do_rm "${entries[@]}"
+        echo -e "  ${GREEN}✓ Cleaned${NC}"
       else
         echo -e "  ${YELLOW}(empty)${NC}"
       fi
+      shopt -u nullglob dotglob
     fi
     echo ""
     return 0
@@ -125,8 +124,9 @@ if ! $DRY_RUN; then
 fi
 
 # --- Cache ---
-cleanup_dir "$NVIM_CACHE_DIR" "Cache directory"
+# luac first: cleaning the parent cache dir would remove it too
 cleanup_dir "$NVIM_CACHE_DIR/luac" "Lua bytecode cache"
+cleanup_dir "$NVIM_CACHE_DIR" "Cache directory"
 
 # --- State ---
 cleanup_dir "$NVIM_STATE_DIR/swap" "Swap files"
