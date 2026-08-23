@@ -173,3 +173,25 @@ menuitem:hover {
   background-color: var(--zen-surface0) !important;
   color: var(--zen-text) !important;
 }
+
+/* ---- zen tab folders: folder art → twisty chevron ---- */
+zen-folder .tab-group-folder-icon svg {
+  background-color: var(--zen-accent);
+  mask: url("chrome://browser/skin/zen-icons/arrow-down.svg") center / 14px 14px no-repeat;
+  transition: transform 0.15s ease;
+}
+
+/* strip zen's built-in animated folder shapes */
+zen-folder .tab-group-folder-icon svg :is(path, rect, g, image) {
+  display: none !important;
+}
+
+/* closed → chevron points right */
+zen-folder .tab-group-folder-icon svg:not([state="open"]) {
+  transform: rotate(-90deg) !important;
+}
+
+/* open → chevron points down */
+zen-folder .tab-group-folder-icon svg[state="open"] {
+  transform: rotate(0deg) !important;
+}
