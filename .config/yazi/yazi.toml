@@ -9,25 +9,25 @@ show_hidden    = true
 
 [opener]
 edit = [
-  { run = 'nvim "$@"', block = true, desc = "Edit" },
+  { run = 'nvim %s', block = true, desc = "Edit" },
 ]
 doxx = [
-  { run = 'doxx "$@"', desc = "doxx", block = true },
+  { run = 'doxx %s', desc = "doxx", block = true },
 ]
 xleak = [
-  { run = 'xleak -i "$@"', desc = "xleak", block = true },
+  { run = 'xleak -i %s', desc = "xleak", block = true },
 ]
 open = [
-  { run = 'xdg-open "$@"', desc = "Open" },
+  { run = 'xdg-open %s', desc = "Open" },
 ]
 image = [
-  { run = 'swayimg "$@"', desc = "swayimg", block = false, orphan = true },
+  { run = 'swayimg %s', desc = "swayimg", block = false, orphan = true },
 ]
 pdf = [
-  { run = 'zathura "$@"', desc = "zathura", orphan = true, for = "unix" },
+  { run = 'zathura %s', desc = "zathura", orphan = true, for = "unix" },
 ]
 trash = [
-  { run = 'gio trash "$@"', desc = "Trash" },
+  { run = 'gio trash %s', desc = "Trash" },
 ]
 
 [open]
