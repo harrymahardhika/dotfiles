@@ -1,13 +1,6 @@
 # General
 alias cl="clear"
 
-# Better defaults
-alias ls='ls --color=auto'
-alias grep='grep --color=auto'
-alias mkdir='mkdir -p'
-alias cp='cp -i'
-alias mv='mv -i'
-
 # Laravel
 alias getrekt="vendor/bin/rector"
 alias mig="pa migrate"
