@@ -66,6 +66,7 @@ hl.config({
 	},
 	scrolling = {
 		column_width = 0.75,
+		explicit_column_widths = "0.25, 0.5, 0.75, 1.0",
 	},
 })
 
@@ -187,6 +188,7 @@ hl.bind(kb(mainMod, "V"), hl.dsp.exec_cmd("$HOME/scripts/clipboard-history.sh"))
 hl.bind(kb(mainMod, "A"), hl.dsp.exec_cmd("$HOME/scripts/webapp-launcher.sh"))
 hl.bind(kb(mainMod, "slash"), hl.dsp.exec_cmd("$HOME/scripts/hypr-binds.sh"))
 hl.bind(kb(mainMod, "Y"), hl.dsp.exec_cmd("rofimoji"))
+hl.bind(kb(mainMod, "N"), hl.dsp.exec_cmd("$HOME/scripts/notif-center.sh"))
 
 -- === MOVE FOCUS ===
 hl.bind(kb(mainMod, "left"), hl.dsp.focus({ direction = "left" }))
