@@ -83,19 +83,19 @@ for _, rule in ipairs(floating_dialogs) do
 end
 
 -- === CURVES ===
-hl.curve("snap", { type = "bezier", points = { { 0.05, 0.9 }, { 0.1, 1 } } })
+hl.curve("snap", { type = "bezier", points = { { 0.15, 0.85 }, { 0.25, 1 } } })
 hl.curve("easeOutQuint", { type = "bezier", points = { { 0.23, 1 }, { 0.32, 1 } } })
 hl.curve("linear", { type = "bezier", points = { { 0, 0 }, { 1, 1 } } })
 
 -- === ANIMATIONS ===
-local anim_speed = 1.0
+local anim_speed = 1.6
 local animations = {
 	{ leaf = "global", speed = 8 * anim_speed, bezier = "default" },
 	{ leaf = "border", speed = 8 * anim_speed, bezier = "snap" },
 	{ leaf = "windows", speed = 8 * anim_speed, bezier = "snap" },
 	{ leaf = "windowsIn", speed = 8 * anim_speed, bezier = "snap", style = "popin 87%" },
 	{ leaf = "windowsOut", speed = 4 * anim_speed, bezier = "snap", style = "popin 87%" },
-	{ leaf = "fadeIn", speed = 4 * anim_speed, bezier = "snap" },
+	{ leaf = "fadeIn", speed = 8 * anim_speed, bezier = "snap" },
 	{ leaf = "fadeOut", speed = 4 * anim_speed, bezier = "snap" },
 	{ leaf = "fade", speed = 7 * anim_speed, bezier = "snap" },
 	{ leaf = "layers", speed = 7 * anim_speed, bezier = "snap" },
