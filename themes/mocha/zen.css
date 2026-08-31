@@ -51,16 +51,16 @@
 
 .tab-background {
   background-color: var(--zen-surface0) !important;
-  border-radius: 8px !important;
+  border-radius: 4px !important;
   border: 1px solid transparent !important;
 }
 
-.tab-background[selected="true"] {
+.tab-background[selected] {
   background-color: var(--zen-surface1) !important;
   border-color: var(--zen-surface2) !important;
 }
 
-.tabbrowser-tab:hover > .tab-stack > .tab-background:not([selected="true"]) {
+.tabbrowser-tab:hover > .tab-stack > .tab-background:not([selected]) {
   background-color: var(--zen-surface0) !important;
 }
 
@@ -68,7 +68,7 @@
   color: var(--zen-subtext0) !important;
 }
 
-.tabbrowser-tab[selected="true"] .tab-content {
+.tabbrowser-tab[selected] .tab-content {
   color: var(--zen-text) !important;
 }
 
