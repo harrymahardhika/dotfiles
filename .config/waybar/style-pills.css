@@ -109,9 +109,7 @@
 
 #workspaces {
   padding-left: 0.4rem;
-  padding-right: 0;
-  margin-right: 0;
-  border-radius: 0.2rem 0 0 0.2rem;
+  border-radius: 0.2rem;
 }
 
 #workspaces button {
