@@ -38,8 +38,10 @@ build_sed() {
     rule["#${mocha_hex}"]="#${theme_hex}"
   done < "$PALETTES_DIR/mocha.palette"
   sed_args=()
+  bare_sed_args=()
   for mocha_hex in "${!rule[@]}"; do
     sed_args+=("-e" "s|${mocha_hex}|${rule[$mocha_hex]}|g")
+    bare_sed_args+=("-e" "s|${mocha_hex#\#}|${rule[$mocha_hex]#\#}|g")
   done
 }
 
@@ -66,6 +68,10 @@ for theme in "${themes[@]}"; do
     [ -f "$master" ] || continue
     base="$(basename "$master")"
     case "$base" in
+      # foot requires bare hex (no '#') throughout [colors-dark]
+      foot)
+        sed "${bare_sed_args[@]}" "$master" > "$target_dir/$base"
+        ;;
       # ghostty uses bare hex (no '#') for background/foreground/cursor;
       # derive those from the palette (base/text/cursor_color/surface1)
       ghostty)

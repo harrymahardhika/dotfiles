@@ -1,0 +1,33 @@
+[colors-dark]
+foreground=e0def4
+background=191724
+
+regular0=403d52
+regular1=eb6f92
+regular2=9ccfd8
+regular3=f6c177
+regular4=31748f
+regular5=c4a7e7
+regular6=9ccfd8
+regular7=908caa
+
+bright0=524f67
+bright1=eb6f92
+bright2=9ccfd8
+bright3=f6c177
+bright4=31748f
+bright5=c4a7e7
+bright6=9ccfd8
+bright7=908caa
+
+16=f6c177
+17=ebbcba
+
+selection-foreground=e0def4
+selection-background=414356
+
+search-box-no-match=13111e eb6f92
+search-box-match=e0def4 26233a
+
+jump-labels=13111e f6c177
+urls=31748f

@@ -133,6 +133,13 @@ apply_alacritty() {
   rewrite_line "$dest/alacritty.toml" 'import = \["~/.config/alacritty/.*\.toml"\]' "import = [\"~/.config/alacritty/$theme.toml\"]"
 }
 
+apply_foot() {
+  local theme="$1"
+  local dest="$HOME/.config/foot"
+  install_payload "$theme" "foot" "$dest/$theme.ini"
+  rewrite_line "$dest/foot.ini" '^include=.*' "include=~/.config/foot/$theme.ini"
+}
+
 apply_wezterm() {
   local theme="$1"
   case "$theme" in
@@ -771,6 +778,7 @@ apply_theme() {
   apply_kitty "$theme" || true
   apply_ghostty "$theme" || true
   apply_alacritty "$theme" || true
+  apply_foot "$theme" || true
   apply_wezterm "$theme" || true
   apply_helix "$theme" || true
   apply_zellij "$theme" || true
