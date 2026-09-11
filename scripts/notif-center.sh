@@ -29,7 +29,8 @@ done
 set +e
 sel=$(printf '%s\n' "${LABELS[@]}" | rofi -dmenu -i -no-custom -p "Notifications" \
 	-format i \
-	-theme-str 'window {height: 520px;}' -theme-str 'listview {columns: 1; lines: 12;}')
+	-theme-str 'window {width: 1000px; height: 520px;}' \
+	-theme-str 'listview {columns: 1; lines: 12;}')
 status=$?
 set -e
 
