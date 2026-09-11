@@ -23,6 +23,7 @@ icon_model=$'󰧑'
 icon_ctx=$'󰮰'
 icon_5h=$''
 icon_7d=$''
+icon_git=$''
 
 # Single jq call for all fields (avoids five separate forks per render)
 IFS=$'\t' read -r cwd model used_pct five_hour_pct seven_day_pct <<< "$(jq -r '
@@ -44,6 +45,15 @@ fi
 
 # Directory segment
 printf "${blue}${icon_dir} %s${reset}" "$short_dir"
+
+# Git branch segment (only inside a work tree)
+branch=$(git -C "$cwd" symbolic-ref --quiet --short HEAD 2>/dev/null || git -C "$cwd" rev-parse --short HEAD 2>/dev/null)
+if [ -n "$branch" ]; then
+  dirty=""
+  git -C "$cwd" diff --quiet 2>/dev/null || dirty="*"
+  git -C "$cwd" diff --cached --quiet 2>/dev/null || dirty="${dirty}+"
+  printf "${sep}${peach}${icon_git} %s${reset}" "${branch}${dirty}"
+fi
 
 # Model segment
 printf "${sep}${sapphire}${icon_model} %s${reset}" "$model"
