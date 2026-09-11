@@ -20,6 +20,7 @@
 #clock,
 #cpu,
 #custom-cpu_temp,
+#custom-keyd_mods,
 #memory,
 #mode,
 #network,
@@ -94,6 +95,17 @@
 #submap {
   color: @red;
   font-weight: bold;
+}
+
+#custom-keyd_mods {
+  color: @red;
+  font-weight: bold;
+}
+
+#custom-keyd_mods.idle {
+  padding: 0;
+  margin: 0;
+  background: transparent;
 }
 
 #clock.time {

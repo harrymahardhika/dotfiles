@@ -32,15 +32,23 @@ current_theme() {
 }
 
 detect_style() {
+  # prefer the persisted state (set by apply_style) — content-sniffing the
+  # CSS is fragile since per-module rules (e.g. an idle-collapse rule) can
+  # legitimately contain "margin: 0;" in the pills variant too
+  if [ -f "$STATE_FILE" ]; then
+    cat "$STATE_FILE"
+    return
+  fi
   if [ ! -f "$STYLE_CSS" ]; then
     echo "pills"
     return
   fi
-  # flat style has no margin on modules (margin: 0)
-  if grep -q 'margin: 0;' "$STYLE_CSS" 2>/dev/null; then
-    echo "flat"
-  else
+  # fallback heuristic: only the pills variant gives modules their pill
+  # spacing (margin: 0.15rem in the base rule); flat always uses margin: 0
+  if grep -q 'margin: 0\.15rem;' "$STYLE_CSS" 2>/dev/null; then
     echo "pills"
+  else
+    echo "flat"
   fi
 }
 
