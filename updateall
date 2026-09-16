@@ -241,7 +241,7 @@ fi
 # Update pnpm
 if command -v pnpm &> /dev/null; then
     echo "📦 Updating pnpm global packages..."
-    pnpm update -g --no-optional || echo "⚠️  pnpm global update failed, skipping..."
+    pnpm update -g --no-optional --reporter=silent || echo "⚠️  pnpm global update failed, skipping..."
 fi
 
 # Update uv
@@ -251,6 +251,26 @@ if command -v uv &> /dev/null; then
 
     echo "🔧 Updating uv tools..."
     uv tool upgrade --all --quiet || echo "⚠️  uv tool upgrade failed, skipping..."
+fi
+
+# Update tmux plugins (tpm) — headless equivalent of prefix + U
+if [ -d "$HOME/.tmux/plugins/tpm" ]; then
+    echo "🪟 Updating tmux plugins..."
+    # Update tpm itself first (belt-and-braces in case its update script changes)
+    git -C "$HOME/.tmux/plugins/tpm" pull --ff-only --quiet \
+        || echo "⚠️  tpm self-update failed, skipping..."
+    # Install any new plugins from .tmux.conf, then update all installed ones
+    "$HOME/.tmux/plugins/tpm/bin/install_plugins" \
+        || echo "⚠️  tmux plugin install failed, skipping..."
+    "$HOME/.tmux/plugins/tpm/bin/update_plugins" all \
+        || echo "⚠️  tmux plugin update failed, skipping..."
+    # Reload running tmux server so updates take effect immediately
+    if tmux info &>/dev/null; then
+        tmux source-file "$HOME/.tmux.conf" 2>/dev/null \
+            || echo "⚠️  tmux reload failed, restart tmux or press prefix + r..."
+    fi
+else
+    echo "⚠️  tpm not found at ~/.tmux/plugins/tpm, skipping tmux plugins..."
 fi
 
 # Update antidote (zsh plugin manager)
