@@ -114,13 +114,16 @@ describe_command() {
 		"$BROWSER") echo "Open browser" ;;
 		"$MENU_CMD") echo "Application launcher" ;;
 		*reload.sh*) echo "Reload Hyprland" ;;
-		hyprlock) echo "Lock screen" ;;
+		hyprlock|*swaylock.sh*) echo "Lock screen" ;;
 		*set-wallpaper.sh*) echo "Random wallpaper" ;;
 		*theme-pick.sh*) echo "Pick theme" ;;
 		*waybar*toggle*) echo "Toggle waybar" ;;
 		*toggle-transparency.sh*) echo "Toggle window transparency" ;;
 		*clipboard-history.sh*) echo "Clipboard history" ;;
+		"$TERMINAL_CMD -e btop") echo "Task manager (btop)" ;;
+		"systemctl suspend") echo "Suspend" ;;
 		*webapp-launcher.sh*) echo "Webapp launcher" ;;
+		*notif-center.sh*) echo "Notification center" ;;
 		*hypr-binds.sh*) echo "Keybind picker" ;;
 		*hyprshot\ -m\ window*) echo "Screenshot window" ;;
 		*hyprshot\ -m\ output*) echo "Screenshot output" ;;

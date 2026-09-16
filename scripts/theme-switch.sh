@@ -301,6 +301,11 @@ apply_hyprlock() {
   apply_hyprlock_inline "$HOME/.config/hypr/hyprlock.conf" "$theme"
 }
 
+apply_swaylock() {
+  local theme="$1"
+  apply_plain_hex_inline "$HOME/.config/hypr/swaylock.sh" "$theme"
+}
+
 apply_hyprland() {
   local theme="$1"
   # toggle-transparency.sh writes themed borders into /tmp/hypr-opacity.lua
@@ -572,6 +577,7 @@ from_to_args() {
       hyprlock) from_val="$(printf 'rgb(%d,%d,%d)' 0x${from_hex:0:2} 0x${from_hex:2:2} 0x${from_hex:4:2})"
                 to_val="$(printf 'rgb(%d,%d,%d)' 0x${to_hex:0:2} 0x${to_hex:2:2} 0x${to_hex:4:2})" ;;
       hyprland) from_val="rgb(${from_hex})"; to_val="rgb(${to_hex})" ;;
+      plain)    from_val="$from_hex"; to_val="$to_hex" ;;
     esac
     args+=("-e" "s|${from_val}|${to_val}|g")
     if [ "$kind" = "hyprlock" ]; then
@@ -718,6 +724,11 @@ apply_hyprland_inline() {
   apply_theme_inline "$1" "$2" hyprland
 }
 
+# swaylock CLI flags take bare hex, no '#' and no rgb() wrapper
+apply_plain_hex_inline() {
+  apply_theme_inline "$1" "$2" plain
+}
+
 # ---- apply ----------------------------------------------------------------
 
 reload_apps() {
@@ -794,6 +805,7 @@ apply_theme() {
   apply_mako "$theme" || true
   apply_dunst "$theme" || true
   apply_hyprlock "$theme" || true
+  apply_swaylock "$theme" || true
   apply_hyprland "$theme" || true
   apply_gtk "$theme" || true
   apply_lazygit "$theme" || true
@@ -835,6 +847,7 @@ sync_masters() {
     "$HOME/.config/mako/config" \
     "$HOME/.config/dunst/dunstrc" \
     "$HOME/.config/hypr/hyprlock.conf" \
+    "$HOME/.config/hypr/swaylock.sh" \
     "$HOME/.config/hypr/toggle-transparency.sh" \
     "$HOME/.config/gtk-3.0/gtk.css" \
     "$HOME/.config/gtk-4.0/gtk.css" \

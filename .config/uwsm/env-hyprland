@@ -1,0 +1,8 @@
+# Sourced by uwsm before Hyprland/aquamarine start.
+#
+# AQ_NO_ATOMIC: disables atomic DRM commits in aquamarine. Mitigates a known
+# aquamarine bug class on Intel i915 around suspend/resume DRM connector
+# teardown (segfaults, wedged panel after lid resume) — see
+# https://github.com/hyprwm/aquamarine/issues/307. No fix upstream yet as of
+# aquamarine 0.15.0 / Hyprland 0.56.2. Revisit and drop once fixed.
+export AQ_NO_ATOMIC=1

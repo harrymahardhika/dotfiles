@@ -53,6 +53,12 @@ hl.config({
 	device = {
 		{ name = "epic-mouse-v1", sensitivity = -0.5 },
 	},
+	cursor = {
+		-- Paired with AQ_NO_ATOMIC=1 (see ~/.config/uwsm/env-hyprland): mitigates
+		-- an aquamarine DRM bug on Intel i915 around suspend/resume teardown.
+		-- https://github.com/hyprwm/aquamarine/issues/307
+		no_hardware_cursors = true,
+	},
 	misc = {
 		force_default_wallpaper = -1,
 		disable_hyprland_logo = true,
@@ -174,7 +180,8 @@ hl.bind(kb(mainMod, "E"), hl.dsp.exec_cmd(terminal .. " -e yazi"))
 hl.bind(kb(mainMod, "M"), hl.dsp.exec_cmd(browser))
 hl.bind(kb(modShift, "R"), hl.dsp.exec_cmd("$HOME/.config/hypr/reload.sh"))
 hl.bind(kb(modShift, "Q"), hl.dsp.exit())
-hl.bind(kb(modShift, "X"), hl.dsp.exec_cmd("hyprlock"))
+hl.bind(kb(modShift, "X"), hl.dsp.exec_cmd("$HOME/.config/hypr/swaylock.sh"))
+hl.bind(kb(mainMod, "ESCAPE"), hl.dsp.exec_cmd("systemctl suspend"))
 hl.bind(kb(modShift, "SPACE"), hl.dsp.window.float({ action = "toggle" }))
 hl.bind(kb(mainMod, "D"), hl.dsp.exec_cmd(menu))
 hl.bind(kb(mainMod, "F"), hl.dsp.window.fullscreen({ action = "toggle" }))
@@ -189,6 +196,7 @@ hl.bind(kb(mainMod, "A"), hl.dsp.exec_cmd("$HOME/scripts/webapp-launcher.sh"))
 hl.bind(kb(mainMod, "slash"), hl.dsp.exec_cmd("$HOME/scripts/hypr-binds.sh"))
 hl.bind(kb(mainMod, "Y"), hl.dsp.exec_cmd("rofimoji"))
 hl.bind(kb(mainMod, "N"), hl.dsp.exec_cmd("$HOME/scripts/notif-center.sh"))
+hl.bind(kb(modShift, "ESCAPE"), hl.dsp.exec_cmd(terminal .. " -e btop"))
 
 -- === MOVE FOCUS ===
 hl.bind(kb(mainMod, "left"), hl.dsp.focus({ direction = "left" }))
