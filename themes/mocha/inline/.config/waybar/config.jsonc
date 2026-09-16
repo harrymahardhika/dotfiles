@@ -6,7 +6,8 @@
     "backlight",
     "pulseaudio",
     "network",
-    "hyprland/submap"
+    "hyprland/submap",
+    "custom/keyd_mods"
   ],
   "modules-center": ["hyprland/workspaces"],
   "modules-right": [
@@ -103,6 +104,11 @@
     "exec": "~/.config/waybar/scripts/cpu-temp.sh",
     "interval": 5,
     "tooltip-format": "CPU Temperature (Package)"
+  },
+  "custom/keyd_mods": {
+    "exec": "~/.config/waybar/scripts/keyd-mods.sh",
+    "return-type": "json",
+    "tooltip": true
   },
   "network": {
     "format-wifi": "󰖩 {essid}",
