@@ -31,6 +31,7 @@ Multi-theme, **mocha** is the default (see Theme Switching below). FZF colors in
 - `scripts/tmux/tmux-pick.sh` — fzf tmux session picker (bound to `prefix+s`)
 - `scripts/nvim-switch.sh` — switches Neovim config symlink
 - `scripts/hypr-binds.sh` — rofi keybind picker (parses `hyprland.lua`, executes the selected bind via `hyprctl dispatch`). Bound to `SUPER + /`. `--list` prints entries without launching rofi.
+- `scripts/power-pick.sh` — rofi picker for `power-profiles-daemon` schemes (performance/balanced/power-saver). Bound to `SUPER + I`. Notifies on change and signals waybar (`RTMIN+8`) to refresh `custom/power_scheme` (`.config/waybar/scripts/power-scheme.sh`) immediately.
 - `scripts/trash-cleanup.sh` — removes FreeDesktop trash items older than 7 days. Runs daily via `trash-cleanup.timer` (systemd --user). Accepts `--dry-run`. Alias: `trash-cleanup`.
 
 ## Theme Switching

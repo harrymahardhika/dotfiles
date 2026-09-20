@@ -117,6 +117,7 @@ describe_command() {
 		hyprlock|*swaylock.sh*) echo "Lock screen" ;;
 		*set-wallpaper.sh*) echo "Random wallpaper" ;;
 		*theme-pick.sh*) echo "Pick theme" ;;
+		*power-pick.sh*) echo "Pick power scheme" ;;
 		*waybar*toggle*) echo "Toggle waybar" ;;
 		*toggle-transparency.sh*) echo "Toggle window transparency" ;;
 		*clipboard-history.sh*) echo "Clipboard history" ;;

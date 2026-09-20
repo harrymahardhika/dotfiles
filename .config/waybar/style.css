@@ -19,6 +19,7 @@
 #cpu,
 #custom-cpu_temp,
 #custom-keyd_mods,
+#custom-power_scheme,
 #memory,
 #mode,
 #network,
@@ -61,6 +62,18 @@
 }
 
 #battery.critical:not(.charging) {
+  color: @red;
+}
+
+#custom-power_scheme {
+  color: @peach;
+}
+
+#custom-power_scheme.power-saver {
+  color: @green;
+}
+
+#custom-power_scheme.performance {
   color: @red;
 }
 
