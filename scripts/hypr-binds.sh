@@ -118,11 +118,11 @@ describe_command() {
 		*set-wallpaper.sh*) echo "Random wallpaper" ;;
 		*theme-pick.sh*) echo "Pick theme" ;;
 		*power-pick.sh*) echo "Pick power scheme" ;;
+		*power-menu.sh*) echo "Power menu (lock/suspend/logout/reboot/shutdown)" ;;
 		*waybar*toggle*) echo "Toggle waybar" ;;
 		*toggle-transparency.sh*) echo "Toggle window transparency" ;;
 		*clipboard-history.sh*) echo "Clipboard history" ;;
 		"$TERMINAL_CMD -e btop") echo "Task manager (btop)" ;;
-		"systemctl suspend") echo "Suspend" ;;
 		*webapp-launcher.sh*) echo "Webapp launcher" ;;
 		*notif-center.sh*) echo "Notification center" ;;
 		*hypr-binds.sh*) echo "Keybind picker" ;;
