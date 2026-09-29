@@ -22,7 +22,7 @@ sel=$(printf '%s\n' "${ORDER[@]}" | rofi -dmenu -p " Power " -i -no-custom)
 [ -n "$sel" ] || exit 0
 
 case "${ACTIONS[$sel]:-}" in
-	lock) exec "$HOME/.config/hypr/swaylock.sh" ;;
+	lock) exec hyprlock ;;
 	suspend) exec systemctl suspend ;;
 	logout) exec hyprctl dispatch exit ;;
 	reboot) exec systemctl reboot ;;

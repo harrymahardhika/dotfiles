@@ -29,8 +29,14 @@ pkill hyprpaper >/dev/null 2>&1 || true
 
 if ! pgrep -x awww-daemon >/dev/null 2>&1; then
   awww-daemon >/dev/null 2>&1 &
-  sleep 0.2
 fi
+
+# At Hyprland startup the daemon is launched in parallel with this script,
+# so wait (up to ~3s) until it answers before sending it an image.
+for _ in $(seq 30); do
+  awww query >/dev/null 2>&1 && break
+  sleep 0.1
+done
 
 MONITORS=$(hyprctl monitors -j | jq -r '.[].name')
 

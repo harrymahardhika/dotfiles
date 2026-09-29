@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
-# hypr-unstick.sh — detect and clear a lock-session race (formerly hyprlock's
-# "onLockFinished called. Seems we got yeeten."; swaylock is used now but the
-# same class of race is checked for) where the locker loses its lock surface
-# (commonly on suspend/resume) but Hyprland still thinks the session is
+# hypr-unstick.sh — detect and clear a lock-session race (hyprlock's
+# "onLockFinished called. Seems we got yeeten.") where the locker loses its
+# lock surface (commonly on suspend/resume) but Hyprland still thinks the session is
 # locked, leaving the built-in crashed-lockscreen fallback painted on screen
 # with no way to unlock normally.
 #
@@ -41,8 +40,8 @@ fi
 # A stuck lock is usually paired with a zombie lock process that still holds
 # the old (now-invalid) lock surface. Terminate it gracefully; hypridle's
 # own lock_cmd/before_sleep_cmd will start a fresh one next time it's needed.
-# Check both swaylock (current) and hyprlock (former, kept as a fallback).
-for locker in swaylock hyprlock; do
+# Check both hyprlock (current) and swaylock (former, kept as a fallback).
+for locker in hyprlock swaylock; do
   if pgrep -x "$locker" >/dev/null 2>&1; then
     log "terminating stale $locker process(es)"
     pkill -x "$locker" 2>/dev/null

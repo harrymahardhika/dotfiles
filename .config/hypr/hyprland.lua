@@ -63,6 +63,12 @@ hl.config({
 		force_default_wallpaper = -1,
 		disable_hyprland_logo = true,
 		mouse_move_enables_dpms = true,
+		-- Trial (2026-09-29): let a fresh hyprlock re-take the session when
+		-- the previous locker died around suspend/resume instead of wedging
+		-- on the crashed-lockscreen fallback. Paired with hypr-unstick.sh
+		-- in hypridle.conf's after_sleep_cmd. See memory:
+		-- hypr-suspend-resume-crash.
+		allow_session_lock_restore = true,
 	},
 	dwindle = {
 		preserve_split = true,
@@ -144,14 +150,14 @@ hl.gesture({
 -- === AUTOSTART ===
 hl.on("hyprland.start", function()
 	hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
-	hl.exec_cmd(terminal .. " -e $HOME/scripts/set-gtk-dark-mode.sh")
+	hl.exec_cmd("$HOME/scripts/set-gtk-dark-mode.sh")
 	hl.exec_cmd("dropbox")
 	hl.exec_cmd("wl-paste --watch cliphist store")
 	hl.exec_cmd("awww-daemon --format xrgb")
 	hl.exec_cmd(
 		"bash -c 'while true; do \"$HOME/.config/i3/battery-warning.sh\" >> /tmp/battery-warning.log 2>&1; sleep 60; done'"
 	)
-	hl.exec_cmd(terminal .. " -e $HOME/.config/hypr/set-wallpaper.sh")
+	hl.exec_cmd("$HOME/.config/hypr/set-wallpaper.sh")
 end)
 
 -- === ENVIRONMENT ===

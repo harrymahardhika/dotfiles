@@ -165,7 +165,11 @@ return {
       if not target then
         return nil
       end
-      return vim.fn.fnamemodify(vim.fn.trim(target), ":h:h")
+      -- NOTE: pnpm shims embed targets like
+      -- `.../node_modules/<pkg>/./bin/<bin>.js`. The `/./` must be normalized
+      -- lexically (no symlink resolution) before `:h:h`, otherwise the result
+      -- keeps a trailing `/.` and every later `:h:h` is off by one directory.
+      return vim.fs.normalize(vim.fn.fnamemodify(vim.fn.trim(target), ":h:h"))
     end
 
     local npm_global = vim.fn.trim(vim.fn.system("npm root -g 2>/dev/null"))
@@ -176,6 +180,9 @@ return {
     -- @vue/typescript-plugin must be resolvable from `location`. With npm it sits
     -- as a sibling in node_modules/@vue/; with pnpm it lands in .pnpm/node_modules.
     local function find_vue_ts_plugin(vue_ls_path)
+      -- Defensive: callers may pass a path with `/./` or trailing `/.`
+      -- (see pnpm_global_root note above); normalize before `:h:h`.
+      vue_ls_path = vim.fs.normalize(vue_ls_path):gsub("/$", "")
       local node_modules = vim.fn.fnamemodify(vue_ls_path, ":h:h")
       local pnpm_path = node_modules .. "/.pnpm/node_modules/@vue/typescript-plugin"
       if vim.uv.fs_stat(pnpm_path) then
@@ -184,6 +191,11 @@ return {
       local npm_path = node_modules .. "/@vue/typescript-plugin"
       if vim.uv.fs_stat(npm_path) then
         return npm_path
+      end
+      -- Sibling under the same @vue scope (some npm layouts).
+      local sibling = vim.fn.fnamemodify(vue_ls_path, ":h") .. "/typescript-plugin"
+      if vim.uv.fs_stat(sibling) then
+        return vim.fs.normalize(sibling)
       end
       return vue_ls_path
     end
