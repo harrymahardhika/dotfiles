@@ -2,7 +2,6 @@
   // Prefer waybar-git on Hyprland so workspace clicks keep working.
   "position": "top",
   "modules-left": [
-    "custom/power_scheme",
     "battery",
     "backlight",
     "pulseaudio",
@@ -110,14 +109,6 @@
     "exec": "~/.config/waybar/scripts/keyd-mods.sh",
     "return-type": "json",
     "tooltip": true
-  },
-  "custom/power_scheme": {
-    "exec": "~/.config/waybar/scripts/power-scheme.sh",
-    "return-type": "json",
-    "tooltip": true,
-    "interval": 30,
-    "signal": 8,
-    "on-click": "~/scripts/power-pick.sh"
   },
   "network": {
     "format-wifi": "󰖩 {essid}",

@@ -19,7 +19,7 @@ auto_switch = false
 [ui]
 show_agent_labels_on_pane_borders = true
 
-status_indicators = "symbols"
+status_indicators = "dots"
 [experimental]
 pane_history = false
 

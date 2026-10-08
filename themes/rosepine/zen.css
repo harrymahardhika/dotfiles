@@ -60,7 +60,20 @@
   border-color: var(--zen-surface2) !important;
 }
 
-.tabbrowser-tab:hover > .tab-stack > .tab-background:not([selected]) {
+/* multiselected (Ctrl/Cmd+click group) — accent tint so the group is visible */
+.tabbrowser-tab[multiselected="true"] > .tab-stack > .tab-background:not([selected]),
+.tab-background[multiselected]:not([selected]) {
+  background-color: color-mix(in srgb, var(--zen-accent) 22%, var(--zen-surface0)) !important;
+  border-color: var(--zen-accent) !important;
+}
+
+.tabbrowser-tab[selected][multiselected="true"] > .tab-stack > .tab-background,
+.tab-background[selected][multiselected] {
+  background-color: color-mix(in srgb, var(--zen-accent) 30%, var(--zen-surface1)) !important;
+  border-color: var(--zen-accent) !important;
+}
+
+.tabbrowser-tab:hover > .tab-stack > .tab-background:not([selected]):not([multiselected]) {
   background-color: var(--zen-surface0) !important;
 }
 
@@ -68,7 +81,8 @@
   color: var(--zen-subtext0) !important;
 }
 
-.tabbrowser-tab[selected] .tab-content {
+.tabbrowser-tab[selected] .tab-content,
+.tabbrowser-tab[multiselected="true"] .tab-content {
   color: var(--zen-text) !important;
 }
 
