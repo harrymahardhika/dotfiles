@@ -50,31 +50,31 @@
 }
 
 .tab-background {
-  background-color: var(--zen-surface0) !important;
+  background-color: var(--zen-base) !important;
   border-radius: 4px !important;
   border: 1px solid transparent !important;
 }
 
 .tab-background[selected] {
-  background-color: var(--zen-surface1) !important;
-  border-color: var(--zen-surface2) !important;
+  background-color: var(--zen-surface0) !important;
+  border-color: var(--zen-surface1) !important;
 }
 
 /* multiselected (Ctrl/Cmd+click group) — accent tint so the group is visible */
 .tabbrowser-tab[multiselected="true"] > .tab-stack > .tab-background:not([selected]),
 .tab-background[multiselected]:not([selected]) {
-  background-color: color-mix(in srgb, var(--zen-accent) 22%, var(--zen-surface0)) !important;
+  background-color: color-mix(in srgb, var(--zen-accent) 18%, var(--zen-base)) !important;
   border-color: var(--zen-accent) !important;
 }
 
 .tabbrowser-tab[selected][multiselected="true"] > .tab-stack > .tab-background,
 .tab-background[selected][multiselected] {
-  background-color: color-mix(in srgb, var(--zen-accent) 30%, var(--zen-surface1)) !important;
+  background-color: color-mix(in srgb, var(--zen-accent) 26%, var(--zen-surface0)) !important;
   border-color: var(--zen-accent) !important;
 }
 
 .tabbrowser-tab:hover > .tab-stack > .tab-background:not([selected]):not([multiselected]) {
-  background-color: var(--zen-surface0) !important;
+  background-color: color-mix(in srgb, var(--zen-base) 60%, var(--zen-surface0)) !important;
 }
 
 .tab-content {
