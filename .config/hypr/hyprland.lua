@@ -17,7 +17,7 @@ hl.config({
 	},
 	decoration = {
 		rounding = 4,
-		active_opacity = 0.90,
+		active_opacity = 0.94,
 		inactive_opacity = 0.80,
 		shadow = {
 			enabled = true,
@@ -279,6 +279,18 @@ hl.bind(kb(modShift, "N"), hl.dsp.layout("promote"))
 hl.bind(kb(modShift, "F"), hl.dsp.layout("fit expand"))
 hl.bind(kb(modShift, "V"), hl.dsp.layout("fit_into_view"))
 hl.bind(kb(modShift, "I"), hl.dsp.layout("inhibit_scroll"))
+
+-- === LID SWITCH ===
+-- Lock the moment the lid closes: the compositor sees the switch before
+-- logind suspends, giving hyprlock a head start that before_sleep_cmd alone
+-- can't (lid suspend lands in the same second). loginctl, not raw hyprlock,
+-- so hypridle's lock_cmd pidof-guard prevents duplicate instances.
+hl.bind("switch:on:Lid Switch", hl.dsp.exec_cmd("loginctl lock-session"), { locked = true })
+hl.bind(
+	"switch:off:Lid Switch",
+	hl.dsp.exec_cmd("hyprctl dispatch 'hl.dsp.dpms({ action = \"on\" })'"),
+	{ locked = true }
+)
 
 -- === MEDIA KEYS ===
 hl.bind(

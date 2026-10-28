@@ -31,6 +31,13 @@ if echo "$result" | grep -q "session is not locked"; then
   exit 0
 fi
 
+if echo "$result" | grep -q "locked with a client"; then
+  # Healthy locked session with a live locker ("session is locked with a
+  # client, refusing to unlock") — nothing stuck, leave it alone. Without
+  # this, every healthy resume would fall through and kill the good locker.
+  exit 0
+fi
+
 if echo "$result" | grep -qi "^ok\|^$"; then
   log "cleared a stuck crashed-lockscreen state"
 else
