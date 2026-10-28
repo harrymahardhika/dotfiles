@@ -17,3 +17,4 @@ nvim-configs/*/lazy-lock.json
 
 # systemd user timers (managed by systemctl, not stow)
 .config/systemd/user/timers.target.wants/
+.config/opencode/service.json
